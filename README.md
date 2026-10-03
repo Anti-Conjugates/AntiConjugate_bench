@@ -57,6 +57,15 @@ uv venv -p 3.12 .venv && uv pip install -p .venv -e '.[dev]'
 ```
 Wheels include the KB's data, knowledge and thresholds under `share/adc-guardrail`.
 Benchmark inputs and runner scripts remain in the source checkout.
+
+### Continuous integration
+GitHub Actions runs tests, Ruff and mypy on Python 3.11 and 3.12 for pull requests and pushes to `main`.
+A separate job builds the wheel, installs it with locked and hash-checked runtime dependencies into a fresh
+environment, and checks packaged KB resources, the writable cache and high-risk withholding from outside the
+checkout. The smoke check uses `python -I scripts/check_installed_wheel.py` with the installed environment's Python.
+CI uses read-only repository permissions and pinned action revisions; it needs no saved credentials or model.
+It does not refresh clinical sources or run performance benchmarks. Passing CI is not clinical validation.
+
 LLM (default for our results): free open model via [Ollama](https://ollama.com), CPU-only is fine (~5 GB RAM):
 ```bash
 ollama serve &            # or the desktop app
