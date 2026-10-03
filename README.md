@@ -7,6 +7,10 @@ clinician-written mini benchmark.
 
 > Decision support for a qualified prescriber only. All clinical content is a draft until the team pharmacist signs it off. No real patient data.
 
+## Conjugate (claim audit app)
+
+`conjugate/` holds a separate TypeScript app that checks claims about HER2 ADCs against the imported ADC workbook and dated UK label summaries. Claude (`claude-opus-5-5`, optional) plans and drafts citation ids only; an independent verifier decides supported, contradicted or not enough evidence. Software evals (fault tests, source withholding, scripted strategies) are in `conjugate/evals/results.json` and on its Evals page. It does not score or read `benchmark/`. Live Space: https://huggingface.co/spaces/Ryukijano/conjugate. Setup and limits: `conjugate/README.md`.
+
 ## Layout
 | path | what |
 |---|---|

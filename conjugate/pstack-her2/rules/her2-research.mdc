@@ -1,0 +1,8 @@
+---
+description: Synthetic HER2 research and evidence boundaries override general shipping/autonomy workflows.
+alwaysApply: true
+---
+
+Synthetic inputs only. All clinical evidence/flags are unapproved research drafts. No prescribing doses, treatment selection, eligibility certification, real patient data, clinical storage or calibrated probabilities.
+Use exact product/source registries and trusted templates. Claude Opus5.5 credentials remain server-side. External deterministic coverage checks are not clinical validation or a calibrated omission estimator. Show omissions and unknowns, never silently repair/model-wash them.
+Never access/create/change clinician benchmark cases, test sets, answer keys or scoring scripts. Software contract tests are permitted. No public deployment/merge/clinical release without explicit authorization.

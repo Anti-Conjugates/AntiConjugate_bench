@@ -1,0 +1,31 @@
+{
+  "name": "her2-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm run dev -w @her2/api\" \"npm run dev -w @her2/web\"",
+    "build": "npm run build -w @her2/web && npm run build -w @her2/api",
+    "start": "npm run start -w @her2/api",
+    "typecheck": "npm run typecheck --workspaces --if-present && tsc --noEmit -p tsconfig.scripts.json",
+    "lint": "eslint apps packages scripts",
+    "test": "node --import tsx --test apps/api/src/*.test.ts && vitest run apps/web/src",
+    "smoke": "tsx scripts/smoke.ts",
+    "eval": "tsx scripts/eval.ts",
+    "check": "npm run typecheck && npm run lint && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.1",
+    "@types/node": "22.19.1",
+    "concurrently": "9.2.4",
+    "eslint": "9.39.1",
+    "globals": "16.5.0",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.71.0",
+    "vite": "6.4.3",
+    "vitest": "4.1.11"
+  }
+}
