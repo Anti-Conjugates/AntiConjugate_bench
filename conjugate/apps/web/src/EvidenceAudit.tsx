@@ -5,6 +5,8 @@ import { describeFailure } from './boundaries';
 import { AuditResult } from './AuditResult';
 import { initialResearchInputs, RequestEpoch, researchRequest, streamResearchRun, type ResearchInputs } from './researchBoundaries';
 import { faultTests, productLabel, questionTitles } from './labels';
+import { presets, type Preset } from './auditSummary';
+import type { CompareChange } from './CompareRuns';
 
 type Failure = ReturnType<typeof describeFailure>;
 
@@ -16,33 +18,36 @@ export function EvidenceAudit({ catalog }: { catalog: ResearchCatalog }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<Failure | null>(null);
   const [status, setStatus] = useState('Nothing run yet.');
+  const [compare, setCompare] = useState<ResearchResult | null>(null);
+  const [compareBusy, setCompareBusy] = useState(false);
   const epoch = useRef(new RequestEpoch());
   const catalogRef = useRef(catalog);
   // A replaced catalog can never inherit a result based on a previous snapshot.
   useEffect(() => {
     if (catalogRef.current !== catalog) {
       catalogRef.current = catalog;
-      epoch.current.invalidate(); setResult(null); setAcceptedRequest(null); setTrace([]); setBusy(false); setError(null);
+      epoch.current.invalidate(); setResult(null); setAcceptedRequest(null); setTrace([]); setBusy(false); setError(null); setCompare(null); setCompareBusy(false);
       setStatus('Catalog changed. Previous result cleared.');
     }
   }, [catalog]);
   useEffect(() => { const current = epoch.current; return () => current.invalidate(); }, []);
 
   function invalidate(message: string) {
-    epoch.current.invalidate(); setResult(null); setAcceptedRequest(null); setTrace([]); setBusy(false); setError(null); setStatus(message);
+    epoch.current.invalidate(); setResult(null); setAcceptedRequest(null); setTrace([]); setBusy(false); setError(null); setCompare(null); setCompareBusy(false); setStatus(message);
   }
   function change<K extends keyof ResearchInputs>(field: K, value: ResearchInputs[K]) {
     invalidate('Inputs changed. Previous result cleared.');
     setInputs((current) => ({ ...current, [field]: value, ...(field === 'engine' ? { synthetic_confirmed: false } : {}) }));
   }
   function reset() { invalidate('Inputs reset.'); setInputs(initialResearchInputs()); }
-  async function run(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (busy) return;
+  async function run(event: FormEvent<HTMLFormElement>) { event.preventDefault(); await execute(inputs); }
+  function applyPreset(preset: Preset) { if (busy || compareBusy) return; setInputs(preset.request); void execute(preset.request); }
+  async function execute(candidate: ResearchInputs) {
+    if (busy || compareBusy) return;
     invalidate('Checking inputs.');
     let request: ResearchRequest;
-    try { request = researchRequest(inputs, catalog); } catch (cause: unknown) {
-      const parsed = ResearchRequestSchema.safeParse(inputs);
+    try { request = researchRequest(candidate, catalog); } catch (cause: unknown) {
+      const parsed = ResearchRequestSchema.safeParse(candidate);
       setError(parsed.success ? describeFailure(cause) : { code: 'INPUT_VALIDATION', message: 'Pick a product and a question, then tick the confirmation. Nothing was sent.' });
       setStatus('Not sent.'); return;
     }
@@ -66,10 +71,35 @@ export function EvidenceAudit({ catalog }: { catalog: ResearchCatalog }) {
       }
     } finally { if (epoch.current.current(ticket)) setBusy(false); }
   }
+  /** Second run for the side-by-side table. Shares the epoch so any input change or cancel also drops it. */
+  async function runCompare(change: CompareChange) {
+    if (!acceptedRequest || !result || busy || compareBusy) return;
+    let request: ResearchRequest;
+    try { request = researchRequest({ ...acceptedRequest, ...change }, catalog); } catch (cause: unknown) { setError(describeFailure(cause)); return; }
+    const ticket = epoch.current.begin();
+    setCompare(null); setCompareBusy(true); setError(null); setStatus('Second run started.');
+    try {
+      const returned = await streamResearchRun(request, catalog, AbortSignal.any([ticket.signal, AbortSignal.timeout(90000)]), () => undefined);
+      if (epoch.current.current(ticket)) { setCompare(returned); setStatus('Second run returned.'); }
+    } catch (cause: unknown) {
+      if (epoch.current.current(ticket)) { setError(describeFailure(cause)); setStatus('Second run failed. The first result is unchanged.'); }
+    } finally { if (epoch.current.current(ticket)) setCompareBusy(false); }
+  }
   const products = catalog.dataset.records.filter((record) => record.clinical_enabled && (record.id === 'DRG0CYMEB' || record.id === 'DRG0ERKBH'));
   const question = catalog.questions.find((option) => option.id === inputs.question_id);
+  const starters = presets.filter((preset) => products.some((product) => product.id === preset.request.product_id));
+  const showStarters = !result && !busy && !trace.length && !error;
   return <>
     <header className="view-heading"><h1>Check a claim</h1><p>Pick a product and a question. The verifier checks each claim against the workbook row and the label summary, then reports what it rests on.</p></header>
+    {showStarters && starters.length > 0 && <section className="start-here" aria-labelledby="start-here-heading">
+      <h2 id="start-here-heading">Start here</h2>
+      <p className="field-hint">Three runs, rules only, one click each. They cover the three things the verifier can say.</p>
+      <div className="start-here-grid">{starters.map((preset) => <button className="preset-card" type="button" key={preset.id} onClick={() => applyPreset(preset)}>
+        <span className="preset-title">{preset.title}</span>
+        <span className="preset-why">{preset.why}</span>
+        {preset.last_eval && <span className="preset-eval">Last eval run: {preset.last_eval}</span>}
+      </button>)}</div>
+    </section>}
     <div className="audit-layout">
       <section className="audit-input" aria-labelledby="audit-scope-heading">
         <h2 id="audit-scope-heading">Claim</h2>
@@ -91,13 +121,13 @@ export function EvidenceAudit({ catalog }: { catalog: ResearchCatalog }) {
           <label className="check-row confirm-row" htmlFor="research-confirmed"><input id="research-confirmed" type="checkbox" checked={inputs.synthetic_confirmed} required onChange={(event) => change('synthetic_confirmed', event.target.checked)} /><span>This is synthetic research use. No patient data.</span></label>
           {inputs.engine === 'claude' && <p className="field-hint">The product id, question id and local source text go to Anthropic through this server.</p>}
           <button className="button button-primary run-button" type="submit" disabled={busy || !inputs.synthetic_confirmed || !products.length || !question}><Play size={14} aria-hidden="true" />{busy ? 'Running' : 'Run check'}</button>
-          <div className="scope-actions"><button className="button button-secondary" type="button" disabled={!busy} onClick={() => invalidate('Run cancelled.')}><Square size={12} aria-hidden="true" />Cancel</button><button className="button button-secondary" type="button" onClick={reset}><RotateCcw size={13} aria-hidden="true" />Reset</button></div>
+          <div className="scope-actions"><button className="button button-secondary" type="button" disabled={!busy && !compareBusy} onClick={() => invalidate('Run cancelled.')}><Square size={12} aria-hidden="true" />Cancel</button><button className="button button-secondary" type="button" onClick={reset}><RotateCcw size={13} aria-hidden="true" />Reset</button></div>
         </form>
       </section>
       <div className="audit-results-region">
         <p className="run-status" role="status" aria-live="polite" aria-atomic="true">{status}</p>
         {error && <div className="error-alert" role="alert"><strong>Run failed.</strong><p>{error.message}</p><code>{error.code}</code></div>}
-        <AuditResult result={result} request={acceptedRequest} catalog={catalog} trace={trace} busy={busy} onExportError={(cause) => setError(describeFailure(cause))} />
+        <AuditResult result={result} request={acceptedRequest} catalog={catalog} trace={trace} busy={busy} compare={compare} compareBusy={compareBusy} onCompare={(change) => { void runCompare(change); }} onExportError={(cause) => setError(describeFailure(cause))} />
       </div>
     </div>
   </>;

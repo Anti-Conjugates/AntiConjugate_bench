@@ -5,9 +5,11 @@ import { z } from 'zod';
 import { safeSourceUrl } from './boundaries';
 import { downloadResearchResult } from './researchBoundaries';
 import { productLabel, verdictLabels } from './labels';
+import { actorLabels, outcomeLabels, outcomeMeaning, outcomeOf } from './auditSummary';
+import { StageStepper } from './StageStepper';
+import { CompareRuns, type CompareChange } from './CompareRuns';
 
 const sourceKinds = { workbook: 'Workbook row', label: 'Label summary', derived: 'Derived note (not from ADCdb)' } as const;
-const actorLabels = { controller: 'controller', local_tool: 'local tool', claude: 'Claude', deterministic_verifier: 'verifier' } as const;
 const receiptAnchor = (id: string) => `source-${encodeURIComponent(id)}`;
 const cellsSchema = z.array(WorkbookCellSchema);
 
@@ -62,25 +64,28 @@ function Receipt({ receipt, catalog }: { receipt: ResearchReceipt; catalog: Rese
   </article>;
 }
 
-export function AuditResult({ result, request, catalog, trace, busy, onExportError }: {
-  result: ResearchResult | null; request: ResearchRequest | null; catalog: ResearchCatalog; trace: ResearchTrace[]; busy: boolean; onExportError: (error: unknown) => void;
+export function AuditResult({ result, request, catalog, trace, busy, compare, compareBusy, onCompare, onExportError }: {
+  result: ResearchResult | null; request: ResearchRequest | null; catalog: ResearchCatalog; trace: ResearchTrace[]; busy: boolean;
+  compare: ResearchResult | null; compareBusy: boolean; onCompare: (change: CompareChange) => void; onExportError: (error: unknown) => void;
 }) {
   if (!result) return <div className="audit-output">
+    <StageStepper trace={trace} busy={busy} />
     <section className="result-empty" aria-labelledby="audit-output-heading">
       <h2 id="audit-output-heading">Result</h2>
       <p>{busy ? 'Waiting for the server.' : 'Run a check to see the verdict, the sources it rests on and the verifier checks.'}</p>
     </section>
     <AuditTrace steps={trace} receipts={[]} busy={busy} />
   </div>;
-  const verdict = result.claims.some((claim) => claim.verdict === 'contradicted') ? 'contradicted'
-    : !result.claims.length || result.claims.some((claim) => claim.verdict === 'insufficient') ? 'insufficient' : 'supported';
+  const outcome = outcomeOf(result);
   const product = catalog.dataset.records.find((record) => record.id === result.product_id);
   const faultOn = result.integrity_drill !== 'none';
   return <div className="audit-output">
+    <StageStepper trace={trace} busy={busy} />
     <section className="result" aria-labelledby="audit-output-heading">
       <div className="section-heading"><h2 id="audit-output-heading">Result</h2><button className="button button-secondary export-button" type="button" onClick={() => { if (request) { try { downloadResearchResult(result, request, catalog); } catch (error: unknown) { onExportError(error); } } }} disabled={!request}><ArrowDownToLine size={14} aria-hidden="true" />Export JSON</button></div>
       <p className="result-scope">{product ? productLabel(product) : result.product_id}. {result.engine === 'evidence' ? 'Rules only' : result.model}. Sources: {result.evidence_policy === 'all' ? 'all' : 'workbook only'}.</p>
-      <div className="verdict-row"><span className={`verdict-badge verdict-${verdict}`}>{verdictLabels[verdict]}</span><span className={`gate-badge`}><LockKeyhole size={12} aria-hidden="true" />Clinical release blocked</span><span className={`integrity-badge ${result.draft_integrity === 'rejected' ? 'uncertainty' : ''}`}>Citations {result.draft_integrity}</span></div>
+      <div className="verdict-row"><span className={'verdict-badge verdict-' + outcome}>{outcomeLabels[outcome]}</span><span className={`gate-badge`}><LockKeyhole size={12} aria-hidden="true" />Clinical release blocked</span><span className={`integrity-badge ${result.draft_integrity === 'rejected' ? 'uncertainty' : ''}`}>Citations {result.draft_integrity}</span></div>
+      <p className="result-meaning">{outcomeMeaning[outcome]}</p>
       {faultOn && <p className="fault-note">Fault test <code>{result.integrity_drill}</code>: a bad citation was injected after drafting.</p>}
       {result.claims.map((claim) => <article className="claim" key={claim.id}>
         <h3>{claim.statement}</h3>
@@ -91,6 +96,8 @@ export function AuditResult({ result, request, catalog, trace, busy, onExportErr
       </article>)}
       {!result.claims.length && <p className="empty-section-note">{result.draft_integrity === 'rejected' ? 'The verifier rejected the draft, so no claim was accepted.' : 'No claim was accepted.'}</p>}
       {result.draft_integrity === 'rejected' && <section className="rejected-draft" aria-labelledby="rejected-heading"><h3 id="rejected-heading">Rejected draft</h3><p>Ids the verifier refused, shown as text only.</p><code>product_id: {result.draft.product_id}</code><ul>{result.draft.claims.map((claim, index) => <li key={index}><code>{claim.claim_id}</code> cites <code>{claim.source_ids.join(', ') || '(no sources)'}</code></li>)}</ul></section>}
+
+      {request && <CompareRuns request={request} result={result} compare={compare} busy={compareBusy} onCompare={onCompare} />}
 
       <section className="result-section" aria-labelledby="sources-heading"><h3 id="sources-heading">Sources used <span className="mono-label">{result.receipts.length}</span></h3>
         {result.receipts.map((receipt) => <Receipt key={receipt.id} receipt={receipt} catalog={catalog} />)}

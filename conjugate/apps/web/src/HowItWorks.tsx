@@ -21,6 +21,11 @@ const checks = [
   { code: 'uncalibrated_confidence', what: 'Always unknown. No probability is computed.' },
 ] as const;
 
+const planReturns = { product_id: 'DRG0ERKBH', tool_ids: ['read_workbook', 'read_label'] };
+const draftReturns = { product_id: 'DRG0ERKBH', claims: [{ claim_id: 'linker_release', source_ids: ['UK-ENHERTU-SMPC'] }] };
+const toolReturns = { id: 'UK-ENHERTU-SMPC', kind: 'label', product_id: 'DRG0ERKBH', section: '4.4, 5.1', excerpt: '(paraphrase of the local label summary)', eligible_for_claim: true };
+const verifierReturns = { draft_integrity: 'accepted', challenges: [{ code: 'source_allowlist', outcome: 'passed' }, { code: 'exact_source_claim_pairing', outcome: 'passed' }, { code: 'uncalibrated_confidence', outcome: 'unknown' }], claims: [{ id: 'linker_release', verdict: 'contradicted' }] };
+
 const boxWidth = 112;
 const gap = 20;
 const diagramWidth = stages.length * (boxWidth + gap) + gap;
@@ -66,6 +71,39 @@ export function HowItWorks() {
           {stages.map((stage, index) => <li key={stage.id}><code>{stage.id}</code> <span className="pipeline-list-actor">{stage.actor}</span><span>{stage.note}</span>{index === 2 && <span className="field-hint">Each tool reads one local file: the workbook, the label summaries or the derived sheet.</span>}</li>)}
         </ol>
         <p>Rules only mode runs every stage without a model call. When Claude is selected, it returns ids for plan and draft; its text is kept in the trace and nowhere else. If the Claude call fails, the run fails. It does not switch to rules only on its own.</p>
+      </section>
+
+      <section aria-labelledby="who-sees-heading">
+        <h2 id="who-sees-heading">Who sees what</h2>
+        <p>The model and the verifier never share a channel. Claude gets ids and local text and returns ids. The verifier gets ids and the server's own expected mapping, and never reads the model's text. The shapes below are the real ones, trimmed.</p>
+        <div className="who-sees-grid">
+          <article className="party-model">
+            <h3>Claude, when selected</h3>
+            <h4>Gets</h4>
+            <p>The product id, question id and source setting; the allowed tool ids; the local skill files; and, for the draft, the text of each source read plus the claim id under audit with its expected source ids.</p>
+            <h4>Returns for plan</h4>
+            <pre><code>{JSON.stringify(planReturns, null, 2)}</code></pre>
+            <h4>Returns for draft</h4>
+            <pre><code>{JSON.stringify(draftReturns, null, 2)}</code></pre>
+            <p className="field-hint">Anything else it writes stays in the trace and is read by nothing downstream.</p>
+          </article>
+          <article className="party-tools">
+            <h3>Local tools</h3>
+            <h4>Get</h4>
+            <p>One tool id and the product id. Each tool reads one local file: the workbook, the label summaries or the derived sheet. No network.</p>
+            <h4>Return</h4>
+            <pre><code>{JSON.stringify(toolReturns, null, 2)}</code></pre>
+            <p className="field-hint">These records are the sources shown under Sources used. Derived notes come back with <code>eligible_for_claim: false</code>.</p>
+          </article>
+          <article className="party-verifier">
+            <h3>Verifier</h3>
+            <h4>Gets</h4>
+            <p>The draft ids, the records the tools returned, and the server's own expected claim and source mapping for the question. Not the model's text.</p>
+            <h4>Returns</h4>
+            <pre><code>{JSON.stringify(verifierReturns, null, 2)}</code></pre>
+            <p className="field-hint">One <code>caught</code> rejects the whole draft. The verdict per claim comes from the sources read, not from the model.</p>
+          </article>
+        </div>
       </section>
 
       <section aria-labelledby="checks-list-heading">

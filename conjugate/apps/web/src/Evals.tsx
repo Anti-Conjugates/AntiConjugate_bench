@@ -29,21 +29,34 @@ function groupDrills(rows: DrillRow[]) {
   });
 }
 
-function StrategyBars({ rows }: { rows: StrategySummary[] }) {
-  const width = 560, rowHeight = 26, labelWidth = 150, barWidth = width - labelWidth - 60;
-  return <svg className="bar-chart" width={width} height={rows.length * rowHeight + 8} viewBox={`0 0 ${width} ${rows.length * rowHeight + 8}`} role="img" aria-labelledby="strategy-chart-title">
-    <title id="strategy-chart-title">Scripted drafts accepted by the verifier, out of 16 scopes each</title>
-    {rows.map((row, index) => {
-      const y = index * rowHeight + 4;
-      const filled = row.total ? (row.accepted / row.total) * barWidth : 0;
-      return <g key={row.strategy}>
-        <text x={labelWidth - 8} y={y + 16} textAnchor="end" className="bar-label">{row.strategy}</text>
-        <rect x={labelWidth} y={y + 4} width={barWidth} height={16} className="bar-track" />
-        <rect x={labelWidth} y={y + 4} width={Math.max(filled, 0)} height={16} className={row.strategy === 'honest_expected' ? 'bar-fill bar-ok' : 'bar-fill'} />
-        <text x={labelWidth + barWidth + 8} y={y + 16} className="bar-value">{row.accepted}/{row.total}</text>
-      </g>;
-    })}
-  </svg>;
+interface Scope { key: string; short: string; long: string }
+interface GridCell { ok: boolean; note: string }
+interface GridRow { key: string; label: string; cells: Record<string, GridCell> }
+const questionIds = Object.keys(questionTitles) as QuestionId[];
+const policies: Policy[] = ['all', 'workbook_only'];
+const scopeKey = (row: { product_id: string; question_id: QuestionId; evidence_policy: Policy }) => row.product_id + '|' + row.question_id + '|' + row.evidence_policy;
+function buildScopes(productIds: string[], name: (id: string) => string): Scope[] {
+  return productIds.flatMap((product) => questionIds.flatMap((question, index) => policies.map((policy) => ({
+    key: scopeKey({ product_id: product, question_id: question, evidence_policy: policy }),
+    short: name(product).charAt(0) + (index + 1) + ' ' + (policy === 'all' ? 'all' : 'wb'),
+    long: name(product) + ', ' + questionTitles[question] + ', ' + policyLabel(policy),
+  }))));
+}
+const cellsFor = <Row extends { product_id: string; question_id: QuestionId; evidence_policy: Policy }>(rows: Row[], cell: (row: Row) => GridCell): Record<string, GridCell> =>
+  Object.fromEntries(rows.map((row) => [scopeKey(row), cell(row)]));
+
+/** One square per scope. Blue means the verifier did what that eval expects; copper means it did not. */
+function ScopeGrid({ caption, scopes, rows, okLabel, badLabel, axisNote }: { caption: string; scopes: Scope[]; rows: GridRow[]; okLabel: string; badLabel: string; axisNote: string }) {
+  return <>
+    <div className="trace-table-wrap"><table className="scope-grid"><caption className="sr-only">{caption}</caption>
+      <thead><tr><th scope="col"><span className="sr-only">Row</span></th>{scopes.map((scope) => <th scope="col" key={scope.key}><abbr title={scope.long}>{scope.short}</abbr></th>)}</tr></thead>
+      <tbody>{rows.map((row) => <tr key={row.key}><th scope="row"><code>{row.label}</code></th>{scopes.map((scope) => {
+        const cell = row.cells[scope.key];
+        return <td key={scope.key} className={cell ? (cell.ok ? 'grid-ok' : 'grid-bad') : 'grid-none'} title={cell ? scope.long + ': ' + cell.note : scope.long + ': not run'}><span className="sr-only">{cell ? cell.note : 'not run'}</span></td>;
+      })}</tr>)}</tbody>
+    </table></div>
+    <p className="grid-legend"><span className="legend-ok">{okLabel}</span><span className="legend-bad">{badLabel}</span><span className="legend-axis">{axisNote}</span></p>
+  </>;
 }
 
 export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
@@ -53,6 +66,22 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
   const leaks = data.strategies.rows.filter((row) => row.accepted && row.strategy !== 'honest_expected');
   const strategiesCaughtEverywhere = data.strategies.by_strategy.filter((row) => row.strategy !== 'honest_expected' && row.accepted === 0).length;
   const strategiesTotal = data.strategies.by_strategy.filter((row) => row.strategy !== 'honest_expected').length;
+  const productIds = [...new Set(data.strategies.rows.map((row) => row.product_id))].sort();
+  const scopes = buildScopes(productIds, name);
+  const axisNote = productIds.map((id) => name(id).charAt(0) + ' = ' + name(id)).join(', ') + '; 1 to 4 = the four questions in the order above; all / wb = all sources / workbook only.';
+  const strategyGrid: GridRow[] = data.strategies.by_strategy.map((summary) => ({
+    key: summary.strategy, label: summary.strategy,
+    cells: cellsFor(data.strategies.rows.filter((row) => row.strategy === summary.strategy), (row) => ({
+      ok: summary.strategy === 'honest_expected' ? row.accepted : !row.accepted,
+      note: row.accepted ? 'accepted' : 'rejected, caught by ' + row.caught_by.join(', '),
+    })),
+  }));
+  const drillGrid: GridRow[] = drills.map((group) => ({
+    key: group.drill, label: group.drill,
+    cells: cellsFor(data.drills.rows.filter((row) => row.drill === group.drill), (row) => ({
+      ok: row.rejected, note: row.rejected ? 'rejected, caught by ' + row.caught_by.join(', ') : 'accepted, fault not caught',
+    })),
+  }));
   return <section className="evals-view" aria-labelledby="evals-heading">
     <header className="view-heading">
       <h1 id="evals-heading">Evals</h1>
@@ -88,12 +117,13 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
         <thead><tr><th scope="col">Fault</th><th scope="col">Rejected</th><th scope="col">Caught by</th></tr></thead>
         <tbody>{drills.map((row) => <tr key={row.drill}><th scope="row">{faultTests[row.drill]}</th><td>{row.rejected}/{row.total}</td><td>{row.caught_by.map((code) => <code key={code}>{code} </code>)}</td></tr>)}</tbody>
       </table>
+      <ScopeGrid caption="Fault tests by scope" scopes={scopes} rows={drillGrid} okLabel="rejected" badLabel="accepted, fault not caught" axisNote={axisNote} />
     </section>
 
     <section aria-labelledby="strategies-heading">
       <h2 id="strategies-heading">Scripted strategies</h2>
       <p>Drafts written by us, not by a model, to see what the verifier lets through. Each one is tried on all 16 product, question and source-policy scopes. <code>honest_expected</code> is the control and should always pass.</p>
-      <div className="chart-scroll" tabIndex={0} role="region" aria-label="Strategy chart, scrollable"><StrategyBars rows={data.strategies.by_strategy} /></div>
+      <ScopeGrid caption="Scripted strategies by scope" scopes={scopes} rows={strategyGrid} okLabel="rejected the scripted draft, or accepted the honest control" badLabel="accepted a scripted draft" axisNote={axisNote} />
       <table className="checks-table"><caption className="sr-only">Scripted strategies</caption>
         <thead><tr><th scope="col">Strategy</th><th scope="col">What it does</th><th scope="col">Accepted</th><th scope="col">Caught by</th></tr></thead>
         <tbody>{data.strategies.by_strategy.map((row) => <tr key={row.strategy}><th scope="row"><code>{row.strategy}</code></th><td>{row.description}</td><td>{row.accepted}/{row.total}</td><td>{row.caught_by.map((code) => <code key={code}>{code} </code>)}</td></tr>)}</tbody>

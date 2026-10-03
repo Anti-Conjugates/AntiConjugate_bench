@@ -78,7 +78,7 @@ test('all three developer-controlled post-draft drills are actually caught for b
     assert.equal(result.draft_integrity, 'rejected'); assert.deepEqual(result.claims, []);
     assert.deepEqual(result.omitted_claim_ids, ['linker_release']);
     assert.ok(result.challenges.some(check => check.outcome === 'caught'));
-    assert.match(result.answer, /intentionally developer-controlled software drill/);
+    assert.match(result.answer, /A fault was injected on purpose after drafting/);
     assert.match(result.trace.find(step => step.stage === 'draft')!.detail, /after normal drafting/);
     const badIds = result.draft.claims[0]!.source_ids;
     assert.ok(badIds.length > 0); assert.ok(badIds.every(id => /^[A-Za-z0-9_-]{1,120}$/.test(id)));
