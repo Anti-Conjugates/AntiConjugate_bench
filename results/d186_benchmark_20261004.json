@@ -1,0 +1,79 @@
+{
+  "lane": "D186",
+  "candidate": "D186-TELESPHORUS-20261004",
+  "date": "2026-10-04",
+  "status": "PASS",
+  "scorecard": {
+    "G0_active_space": {
+      "status": "PASS",
+      "terms": 15,
+      "e_nuc": 1.482015
+    },
+    "G1_semantic_sim": {
+      "status": "PASS",
+      "max_tv": 3.570808289219893e-07
+    },
+    "G2_dual_receipts": {
+      "status": "PASS",
+      "helios_job": "1d6b6911-ba16-43cf-8faf-9ca27867c9ea",
+      "aqora_jobs": [
+        "AFByb3ZpZGVySm9iAaEEKvsbeIOIehOIWagfRA",
+        "AFByb3ZpZGVySm9iAaEELL4_dqKKJQ7QIu8dqg",
+        "AFByb3ZpZGVySm9iAaEELdiicYOIZqPyxTA9Hw",
+        "AFByb3ZpZGVySm9iAaEELzt2c_GvZq-DqbByVQ"
+      ]
+    },
+    "G3_asps_parity": {
+      "status": "PASS",
+      "min_raw_clean_fraction": 0.9884836852207294
+    },
+    "G4_cross_platform_tv": {
+      "status": "PASS",
+      "max_tv": 0.025139468379353973,
+      "per_arm": {
+        "Apo_Unbound": 0.00906344410876132,
+        "PreDocking_Intermediate": 0.025139468379353973,
+        "Drug_Bound_InducedFit": 0.024634460170780203,
+        "Steric_Clash_Control": 0.020973334560741352
+      }
+    },
+    "G5_clinical_safety": {
+      "status": "PASS",
+      "max_sem_hartree": 0.034804733275782755,
+      "clash_barrier_kcal": {
+        "helios": 187.009536250065,
+        "aqora": 194.40997148633926
+      },
+      "induced_fit_benefit_kcal": {
+        "helios": -71.77836511583938,
+        "aqora": -95.83779367356095
+      },
+      "physiological_delta_g_bind_kcal": {
+        "helios": -22.943647470129708,
+        "aqora": -41.40758004909485
+      }
+    }
+  },
+  "energies": {
+    "helios": {
+      "Apo_Unbound": 1.4899046993987979,
+      "PreDocking_Intermediate": 1.774081809338522,
+      "Drug_Bound_InducedFit": 1.9256851359223308,
+      "Steric_Clash_Control": 2.2237038017429205
+    },
+    "aqora": {
+      "Apo_Unbound": 1.48098770896274,
+      "PreDocking_Intermediate": 1.8111125301204827,
+      "Drug_Bound_InducedFit": 1.8873439959839364,
+      "Steric_Clash_Control": 2.1971560060362183
+    }
+  },
+  "hazard_log": {
+    "HAZ-CQ-001": "CLOSED (ASPS filtering >= 98% clean)",
+    "HAZ-CQ-002": "CLOSED (Clash barrier +187.0 kcal/mol > 50)",
+    "HAZ-CQ-003": "CLOSED (Induced-fit benefit -71.8 kcal/mol < -10)",
+    "HAZ-CQ-004": "CLOSED (Physiological Delta G_bind -22.9 kcal/mol < -15)",
+    "HAZ-CQ-005": "CLOSED (Sampling SEM 0.0348 Ha <= 0.0500 Ha via N>=1,000 scaling)",
+    "HAZ-CQ-006": "CLOSED (Cross-platform translation TV 0.0251 <= 0.0350)"
+  }
+}
