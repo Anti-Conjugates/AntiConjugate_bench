@@ -11,6 +11,7 @@ export interface ClaudeOptions {
   timeoutMs?: number;
 }
 const MAX_RESPONSE_BYTES = 131_072;
+const MAX_REQUEST_BYTES = 65_536;
 const EnvelopeSchema = z.object({
   model: z.literal(CLAUDE_MODEL),
   stop_reason: z.string(),
@@ -77,6 +78,12 @@ export async function claudeJson(call: ClaudeJsonCall, options: ClaudeOptions = 
   const apiKey = options.apiKey;
   if (!apiKey?.trim()) throw new ApiFailure('CLAUDE_NOT_CONFIGURED', 503);
   const fetcher = options.fetch ?? globalThis.fetch;
+  const body = JSON.stringify({
+    model: CLAUDE_MODEL, max_tokens: 4096, thinking: { type: 'adaptive' },
+    output_config: { effort: 'low', format: { type: 'json_schema', schema: call.schema } },
+    system: call.system, messages: [{ role: 'user', content: JSON.stringify(call.data) }]
+  });
+  if (Buffer.byteLength(body, 'utf8') > MAX_REQUEST_BYTES) throw new ApiFailure('CLAUDE_CONTEXT_LIMIT', 502);
   const controller = new AbortController();
   // A hard race also bounds injected fetch implementations that ignore abort.
   const timeoutMs = Math.min(60_000, Math.max(1, options.timeoutMs ?? 60_000));
@@ -95,12 +102,7 @@ export async function claudeJson(call: ClaudeJsonCall, options: ClaudeOptions = 
       const response = await fetcher('https://api.anthropic.com/v1/messages', {
         method: 'POST', redirect: 'error', signal: controller.signal,
         headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-        body: JSON.stringify({
-          model: CLAUDE_MODEL, max_tokens: 4096, thinking: { type: 'adaptive' },
-          output_config: { effort: 'low', format: { type: 'json_schema', schema: call.schema } },
-          system: call.system,
-          messages: [{ role: 'user', content: JSON.stringify(call.data) }]
-        })
+        body
       });
       if (controller.signal.aborted) {
         void response.body?.cancel().catch(() => {});

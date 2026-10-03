@@ -1,5 +1,6 @@
 import type { ResearchCatalog } from '@her2/shared';
 import results from '../../../evals/results.json';
+import harnessChecks from '../../../evals/harness.json';
 import { faultTests, productLabel, questionTitles, verdictLabels } from './labels';
 
 type Verdict = keyof typeof verdictLabels;
@@ -68,7 +69,7 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
   const strategiesTotal = data.strategies.by_strategy.filter((row) => row.strategy !== 'honest_expected').length;
   const productIds = [...new Set(data.strategies.rows.map((row) => row.product_id))].sort();
   const scopes = buildScopes(productIds, name);
-  const axisNote = productIds.map((id) => name(id).charAt(0) + ' = ' + name(id)).join(', ') + '; 1 to 4 = the four questions in the order above; all / wb = all sources / workbook only.';
+  const axisNote = productIds.map((id) => name(id).charAt(0) + ' = ' + name(id)).join(', ') + '; 1 to 5 = the five questions in the order above; all / wb = all sources / workbook only.';
   const strategyGrid: GridRow[] = data.strategies.by_strategy.map((summary) => ({
     key: summary.strategy, label: summary.strategy,
     cells: cellsFor(data.strategies.rows.filter((row) => row.strategy === summary.strategy), (row) => ({
@@ -88,17 +89,31 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       <p>Software checks on the pipeline, run by <code>scripts/eval.ts</code> against the same server code the app uses. They test whether the verifier enforces its rules. They are not a clinical benchmark and say nothing about whether the sources themselves are right.</p>
     </header>
 
+    <section aria-labelledby="harness-checks-heading">
+      <h2 id="harness-checks-heading">Harness checks</h2>
+      <p><strong>{harnessChecks.passed}/{harnessChecks.total}</strong> checks passed across both products, five questions and two source settings. This suite edits source records and replays the verifier. It makes no model calls.</p>
+      <table className="checks-table"><caption className="sr-only">Harness check results</caption>
+        <thead><tr><th scope="col">Check</th><th scope="col">Passed</th></tr></thead>
+        <tbody>{harnessChecks.checks.map(check => <tr key={check.name}><th scope="row">{check.name}</th><td>{check.passed}/{check.total}</td></tr>)}</tbody>
+      </table>
+      <details className="run-record"><summary>Reproduce this run</summary>
+        <p><code>npm run eval:harness</code> reruns these checks. <code>npm run replay -- export.json</code> checks an exported research result with the same code and sources.</p>
+        <p>Generated {harnessChecks.generated_at}. Code SHA-256 <code>{harnessChecks.code_sha256}</code>.</p>
+        <p>Source edits are deliberate software faults. Replay does not reproduce Claude’s choices or establish scientific correctness.</p>
+      </details>
+    </section>
+
     <dl className="atlas-totals">
       <div><dt>Injected bad citations rejected</dt><dd>{data.drills.rejected_count}/{data.drills.total}</dd></div>
       <div><dt>Scripted strategies caught in every scope</dt><dd>{strategiesCaughtEverywhere}/{strategiesTotal}</dd></div>
       <div><dt>Honest control accepted</dt><dd>{honest ? `${honest.accepted}/${honest.total}` : 'n/a'}</dd></div>
-      <div><dt>Verdicts that changed without the label</dt><dd>{data.verdicts.changed_count}/{data.verdicts.total}</dd></div>
+      <div><dt>Verdicts that changed with workbook only</dt><dd>{data.verdicts.changed_count}/{data.verdicts.total}</dd></div>
       <div><dt>Claude drafts accepted</dt><dd>{data.claude.skipped ? 'not run' : `${data.claude.accepted}/${data.claude.total}`}</dd></div>
     </dl>
 
     <section aria-labelledby="shifts-heading">
       <h2 id="shifts-heading">Source withholding</h2>
-      <p>Each product and question run twice in rules only mode: once with all sources, once with the label summary withheld. A verdict that changes shows what it rested on.</p>
+      <p>Each product and question run twice in rules only mode: once with all sources, once with only the workbook. A verdict that changes shows what it rested on.</p>
       <table className="checks-table"><caption className="sr-only">Verdict with all sources against workbook only</caption>
         <thead><tr><th scope="col">Product</th><th scope="col">Question</th><th scope="col">All sources</th><th scope="col">Workbook only</th><th scope="col">Changed</th></tr></thead>
         <tbody>{data.verdicts.shifts.map((row) => <tr key={row.product_id + row.question_id} className={row.changed ? 'row-changed' : ''}>
@@ -112,7 +127,7 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
 
     <section aria-labelledby="drills-heading">
       <h2 id="drills-heading">Fault tests</h2>
-      <p>After a normal draft, one citation is swapped for a bad one. The verifier has to reject the draft. {data.drills.total} runs: 2 products, 4 questions, 2 source policies, 3 faults.</p>
+      <p>After a normal draft, one citation is swapped for a bad one. The verifier has to reject the draft. {data.drills.total} runs: 2 products, 5 questions, 2 source policies, 3 faults.</p>
       <table className="checks-table"><caption className="sr-only">Fault tests by fault type</caption>
         <thead><tr><th scope="col">Fault</th><th scope="col">Rejected</th><th scope="col">Caught by</th></tr></thead>
         <tbody>{drills.map((row) => <tr key={row.drill}><th scope="row">{faultTests[row.drill]}</th><td>{row.rejected}/{row.total}</td><td>{row.caught_by.map((code) => <code key={code}>{code} </code>)}</td></tr>)}</tbody>

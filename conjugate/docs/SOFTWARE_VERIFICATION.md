@@ -1,5 +1,42 @@
 # Software verification — 2026-10-03
 
+## Latest: harness and frozen US identity
+
+Supersedes the earlier counts and connection status below; those entries are
+retained as the development history.
+
+- Strict typecheck, lint, 67 API + 56 frontend tests, production build, HTTP smoke,
+  verifier replay and dependency audit (zero vulnerabilities) pass.
+- `npm run eval:harness`: 360/360 software checks across 20 scopes, including
+  receipt metadata edits, recomputed hashes, missing/mispaired/duplicate tool
+  executions, source withholding and clinical-gate literals.
+- `npm run eval`: 60/60 deliberately injected citation faults rejected; honest
+  control 20/20 accepted; abstain-all and invalid citation/identity strategies
+  accepted in 0/20 scopes. Cite-everything remains accepted in 2/20 where the
+  workbook is the only retrieved and required source. Source withholding changes
+  three of ten product/question verdicts, including both US identity questions.
+- Latest live `claude-opus-5-5` grid: 20/20 scopes accepted, no failures,
+  median wall time 5,034 ms. Claude receives the expected citation mapping; this
+  is contract-following, not independent source discovery or clinical correctness.
+- The separate reviewer reproduced three provenance gaps. Fixes: block every
+  non-workbook receipt under workbook-only; link receipts to unique allowed tool
+  executions; label browser hashes as server-reported and use replay to check
+  their contents. Regression tests cover each reproduction.
+- Skill-pack repair is a separate patch, not part of this app or its runtime.
+  Its 22 standard-library tests pass; 823 Devin and 836 Cursor files validate,
+  and repeat normalization changes zero files. Repository write access is absent.
+- The prior Hugging Face Space is live. This harness update is not deployed;
+  fresh approval is required. Public Claude stays off. Modal remote execution
+  and Google Antigravity remain unverified/unconnected.
+- Browser rendering, accessibility and interaction testing remain unverified:
+  browser automation is excluded. No independent clinical cases, keys or scoring
+  files were accessed, created or changed.
+
+Development follows pstack-her2 contracts → scoped source tools → independent
+verifier → source/trace checks → software verification → read-only review. The
+generic Python release checklist is adapted to this Node/Docker app: no Python
+wheel, release tag or package publication is needed for an app PR.
+
 ## Passed
 - Clean `npm ci` on Node 24.19.0 / npm 10.8.3: installed the pinned lockfile, zero reported audit vulnerabilities.
 - `npm run typecheck`: strict API/web/shared and HTTP-smoke-script typechecks.

@@ -23,7 +23,7 @@ test('research catalog/JSON/NDJSON satisfy frozen shared schemas and existing cl
   assert.equal(catalog.dataset.sha256, DATASET_SHA256); assert.equal(catalog.dataset.records.length, catalog.dataset.record_count);
   assert.equal(catalog.dataset.records.length, 31); assert.equal(catalog.dataset.derived_records.length, 4);
   assert.ok(!JSON.stringify(catalog).includes('mg/kg')); assert.ok(!JSON.stringify(catalog).includes('Prescribing flags (DRAFT'));
-  assert.deepEqual(catalog.questions.map(question => question.id), ['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety']);
+  assert.deepEqual(catalog.questions.map(question => question.id), ['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety', 'label_identity']);
   const response = await app.inject(post(input));
   assert.equal(response.statusCode, 200); const result = ResearchResultSchema.parse(response.json());
   assert.equal(result.claims[0]!.verdict, 'contradicted'); assert.equal(result.guardrail.status, 'blocked');
@@ -120,7 +120,7 @@ test('NDJSON publishes only executed steps before each pending mock call and clo
   assert.deepEqual(harness.observed.map(event => event.type === 'trace' ? event.step.stage : event.type), ['scope']);
   resolvePlan(modelResponse({ product_id: input.product_id, tool_ids: ['read_workbook', 'read_label', 'read_derived'] }));
   await enteredDraft;
-  assert.deepEqual(harness.observed.map(event => event.type === 'trace' ? event.step.stage : event.type), ['scope', 'plan', 'retrieve', 'retrieve', 'retrieve']);
+  assert.deepEqual(harness.observed.map(event => event.type === 'trace' ? event.step.stage : event.type), ['scope', 'plan', 'retrieve', 'retrieve', 'retrieve', 'retrieve']);
   const done = once(harness.stream, 'end');
   resolveDraft(modelResponse({ product_id: input.product_id, claims: [{ claim_id: 'linker_release', source_ids: ['UK-ENHERTU-SMPC'] }] }));
   await done;

@@ -9,7 +9,7 @@ import { actorLabels, outcomeLabels, outcomeMeaning, outcomeOf } from './auditSu
 import { StageStepper } from './StageStepper';
 import { CompareRuns, type CompareChange } from './CompareRuns';
 
-const sourceKinds = { workbook: 'Workbook row', label: 'Label summary', derived: 'Derived note (not from ADCdb)' } as const;
+const sourceKinds = { workbook: 'Workbook row', label: 'UK label summary', derived: 'Derived note (not from ADCdb)', openfda: 'US openFDA identity' } as const;
 const receiptAnchor = (id: string) => `source-${encodeURIComponent(id)}`;
 const cellsSchema = z.array(WorkbookCellSchema);
 
@@ -35,6 +35,10 @@ export function AuditTrace({ steps, receipts, busy }: { steps: ResearchTrace[]; 
 }
 
 function Excerpt({ receipt }: { receipt: ResearchReceipt }) {
+  if (receipt.kind === 'openfda') {
+    try { return <pre className="identity-fields">{JSON.stringify(JSON.parse(receipt.excerpt), null, 2)}</pre>; }
+    catch { return <p className="receipt-excerpt">{receipt.excerpt}</p>; }
+  }
   if (receipt.kind !== 'label') {
     try {
       const cells = cellsSchema.parse(JSON.parse(receipt.excerpt));
@@ -53,7 +57,7 @@ function Receipt({ receipt, catalog }: { receipt: ResearchReceipt; catalog: Rese
     <h4>{receipt.title}</h4>
     <dl className="source-meta">
       <div><dt>Product</dt><dd>{product ? productLabel(product) : receipt.product_id}</dd></div>
-      <div><dt>{receipt.kind === 'label' ? 'Sections' : 'Cells'}</dt><dd>{receipt.section}</dd></div>
+      <div><dt>{receipt.kind === 'label' || receipt.kind === 'openfda' ? 'Record' : 'Cells'}</dt><dd>{receipt.section}</dd></div>
       <div><dt>{receipt.kind === 'label' ? 'Label revision' : 'Data date'}</dt><dd>{receipt.revision_date ?? 'Unknown'}</dd></div>
       <div><dt>Can support a claim</dt><dd>{receipt.eligible_for_claim ? 'Yes' : 'No'}</dd></div>
     </dl>
@@ -129,6 +133,23 @@ export function AuditResult({ result, request, catalog, trace, busy, compare, co
         <div><dt>Dataset SHA-256</dt><dd><code>{result.dataset_sha256}</code></dd></div>
         <div><dt>Probabilities</dt><dd>correctness {String(result.answer_correctness_probability)}, omission {String(result.omission_probability)}</dd></div>
       </dl>
+      <details className="run-record">
+        <summary>Run record</summary>
+        <p>Server-reported fingerprints, not recomputed by this browser. Use replay to check the exported request and sources. Hashes are not signatures, proof of execution or evidence of scientific correctness.</p>
+        <dl className="result-provenance">
+          <div><dt>Model calls</dt><dd>{result.harness.model_calls} / {result.harness.limits.max_model_calls}</dd></div>
+          <div><dt>Tool calls</dt><dd>{result.harness.tool_calls} / {result.harness.limits.max_tool_calls}</dd></div>
+          <div><dt>Time limit</dt><dd>{result.harness.limits.deadline_ms / 1000} seconds total</dd></div>
+          <div><dt>Retries</dt><dd>{result.harness.limits.retries}</dd></div>
+          <div><dt>Network retrieval</dt><dd>Off</dd></div>
+          <div><dt>Expected citation mapping</dt><dd>Given to Claude; verifier checks compliance</dd></div>
+          <div><dt>Code SHA-256</dt><dd><code>{result.harness.code_sha256}</code></dd></div>
+          <div><dt>Request SHA-256</dt><dd><code>{result.harness.request_sha256}</code></dd></div>
+          {result.harness.sources.map(source => <div key={source.id}><dt>{source.id}</dt><dd><code>{source.sha256}</code></dd></div>)}
+          {result.harness.skills.map(skill => <div key={skill.name}><dt>{skill.name} @{skill.version}</dt><dd><code>{skill.sha256}</code></dd></div>)}
+        </dl>
+        <p className="field-hint">Included in the JSON export. Replay needs this code and the same source snapshot.</p>
+      </details>
     </section>
     <AuditTrace steps={result.trace} receipts={result.receipts} busy={false} />
   </div>;

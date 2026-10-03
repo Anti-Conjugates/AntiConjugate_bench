@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { ApiErrorSchema, CatalogSchema, RunRequestSchema, RunResultSchema, ResearchCatalogSchema, ResearchRequestSchema, ResearchResultSchema, ResearchEventSchema } from '@her2/shared';
+import { ApiErrorSchema, CatalogSchema, RunRequestSchema, RunResultSchema, ResearchCatalogSchema, ResearchRequestSchema, ResearchResultSchema, ResearchEventSchema, researchExecutionIsConsistent } from '@her2/shared';
 
 const base = process.env.SMOKE_BASE_URL ?? 'http://127.0.0.1:5173';
 async function get(path: string) {
@@ -86,6 +86,8 @@ for (const product_id of ['DRG0CYMEB', 'DRG0ERKBH'] as const) {
     const result = ResearchResultSchema.parse(await response.json());
     assert.equal(result.product_id, product_id);
     assert.equal(result.model, null);
+    assert.equal(result.harness.model_calls, 0);
+    assert.ok(researchExecutionIsConsistent(result));
     assert.equal(result.draft_integrity, 'accepted');
     assert.equal(result.clinical_status, 'draft_pending_pharmacist');
     assert.equal(result.needs_human, true);
@@ -99,6 +101,14 @@ for (const product_id of ['DRG0CYMEB', 'DRG0ERKBH'] as const) {
     assert.ok(result.trace.some(step => step.stage === 'challenge'));
     if (question.id === 'composition') assert.ok(result.claims.some(claim => claim.verdict === 'supported'));
     if (question.id === 'linker_release' && product_id === 'DRG0ERKBH') assert.ok(result.claims.some(claim => claim.verdict === 'contradicted'));
+    if (question.id === 'label_identity') {
+      assert.deepEqual(result.claims[0]?.source_ids, [`US-OPENFDA-${product_id}-IDENTITY`]);
+      assert.equal(result.claims[0]?.verdict, 'supported');
+      const withheld = ResearchResultSchema.parse(await (await researchPost({ ...researchInput, product_id, question_id: question.id, evidence_policy: 'workbook_only' })).json());
+      assert.ok(researchExecutionIsConsistent(withheld));
+      assert.equal(withheld.claims[0]?.verdict, 'insufficient');
+      assert.ok(withheld.receipts.every(receipt => receipt.kind === 'workbook'));
+    }
   }
   const withheldResponse = await researchPost({ ...researchInput, product_id, evidence_policy: 'workbook_only' });
   const withheld = ResearchResultSchema.parse(await withheldResponse.json());

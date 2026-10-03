@@ -90,7 +90,7 @@ export function EvidenceAudit({ catalog }: { catalog: ResearchCatalog }) {
   const starters = presets.filter((preset) => products.some((product) => product.id === preset.request.product_id));
   const showStarters = !result && !busy && !trace.length && !error;
   return <>
-    <header className="view-heading"><h1>Check a claim</h1><p>Pick a product and a question. The verifier checks each claim against the workbook row and the label summary, then reports what it rests on.</p></header>
+    <header className="view-heading"><h1>Check a claim</h1><p>Pick a product and a question. The verifier checks each claim against the workbook row and UK summary and US identity, then reports what it rests on.</p></header>
     {showStarters && starters.length > 0 && <section className="start-here" aria-labelledby="start-here-heading">
       <h2 id="start-here-heading">Start here</h2>
       <p className="field-hint">Three runs, rules only, one click each. They cover the three things the verifier can say.</p>
@@ -108,7 +108,7 @@ export function EvidenceAudit({ catalog }: { catalog: ResearchCatalog }) {
           <fieldset className="question-options"><legend>Question</legend>{catalog.questions.map((option) => <label className={`option-row ${inputs.question_id === option.id ? 'selected' : ''}`} key={option.id}><input type="radio" name="research-question" checked={inputs.question_id === option.id} value={option.id} onChange={() => change('question_id', ResearchQuestionSchema.parse(option.id))} /><span>{questionTitles[option.id]}</span></label>)}</fieldset>
           <fieldset className="inline-options"><legend>Sources</legend>
             <div className="inline-option-row">{EvidencePolicySchema.options.map((policy) => <label key={policy} className={`option-chip ${inputs.evidence_policy === policy ? 'selected' : ''}`}><input type="radio" name="research-sources" checked={inputs.evidence_policy === policy} onChange={() => change('evidence_policy', policy)} aria-describedby="research-sources-help" /><span>{policy === 'all' ? 'All' : 'Workbook only'}</span></label>)}</div>
-            <p id="research-sources-help" className="field-hint">Workbook only withholds the label summary so you can see what the verdict rests on.</p>
+            <p id="research-sources-help" className="field-hint">Workbook only withholds UK summary and US identity so you can see what the verdict rests on.</p>
           </fieldset>
           <fieldset className="inline-options"><legend>Drafting</legend>
             <div className="inline-option-row">{(['evidence', 'claude'] as Engine[]).map((engine) => <label key={engine} className={`option-chip ${inputs.engine === engine ? 'selected' : ''}`}><input type="radio" name="research-engine" checked={inputs.engine === engine} disabled={engine === 'claude' && !catalog.claude_configured} onChange={() => change('engine', engine)} aria-describedby={engine === 'claude' ? 'research-claude-status' : undefined} /><span>{engine === 'evidence' ? 'Rules only' : 'Claude (claude-opus-5-5)'}</span></label>)}</div>

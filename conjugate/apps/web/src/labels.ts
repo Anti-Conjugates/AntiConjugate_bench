@@ -5,6 +5,7 @@ export const questionTitles: Record<ResearchRequest['question_id'], string> = {
   linker_release: 'Does a cleavable linker mean release in blood?',
   payload_risk_transfer: 'Does the payload alone tell you the patient risk?',
   workbook_safety: 'Can the workbook alone tell you it is safe?',
+  label_identity: 'Does the US label record match this product?',
 };
 
 export const faultTests: Record<ResearchRequest['integrity_drill'], string> = {

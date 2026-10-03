@@ -14,7 +14,7 @@ export function CompareRuns({ request, result, compare, busy, onCompare }: {
     <p className="field-hint">Same product and question. The second run goes through the whole pipeline and lands next to the first.</p>
     <div className="compare-actions">
       <button className="button button-secondary" type="button" disabled={busy} onClick={() => onCompare({ evidence_policy: withheld ? 'all' : 'workbook_only' })}>
-        {withheld ? 'Allow the label summary' : 'Withhold the label summary'}
+      {withheld ? 'Allow all sources' : 'Keep only the workbook'}
       </button>
       <button className="button button-secondary" type="button" disabled={busy} onClick={() => onCompare({ integrity_drill: faulted ? 'none' : 'invented_source' })}>
         {faulted ? 'Remove the fault' : 'Inject an invented source id'}

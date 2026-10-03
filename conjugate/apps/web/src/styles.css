@@ -484,6 +484,13 @@ input[aria-invalid='true'], select[aria-invalid='true'], textarea[aria-invalid='
 .evals-view > section > p { margin: 8px 0 14px; color: var(--muted); max-width: 720px; }
 .evals-view .atlas-totals dt { color: var(--muted); font-size: 13px; }
 .row-changed td { background: var(--copper-wash); }
+.harness-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; margin: 20px 0; }
+.harness-controls article { border: 1px solid var(--line); padding: 16px; }
+.harness-controls h3 { margin-top: 0; }
+.run-record { margin-top: 24px; padding: 16px; border: 1px solid var(--line); }
+.run-record summary { cursor: pointer; font-weight: 600; }
+.run-record code { overflow-wrap: anywhere; }
+.identity-fields { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; line-height: 1.65; }
 .chart-scroll { overflow-x: auto; margin-bottom: 12px; }
 
 /* Antibody map */

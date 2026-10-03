@@ -94,7 +94,7 @@ const preset = (id: string, title: string, why: string, scope: Scope): Preset =>
 /** Three rules-only runs that show the three things the verifier can say. Products are the two allowlisted ids. */
 export const presets: Preset[] = [
   preset('agree', 'Enhertu: what is it made of?',
-    'The workbook row and the label summary both give the payload and the drug-to-antibody ratio.',
+    'The workbook row records the payload and drug-to-antibody ratio. This check reports that row, not an independent comparison.',
     { product_id: 'DRG0ERKBH', question_id: 'composition', evidence_policy: 'all', integrity_drill: 'none' }),
   preset('contradict', 'Enhertu: does a cleavable linker mean release in blood?',
     'The label summary says the opposite. Run it again with the label withheld to see what the verdict rested on.',

@@ -16,7 +16,9 @@ The best fit is the epistemological-agent description supplied by the organiser.
 
 If time is short, do steps 1 and 2 and open the trace. Do not call rules only mode an LLM run.
 
-6. Show the checks. Open Evals. The numbers come from `scripts/eval.ts` running the real pipeline: how many injected bad citations the verifier rejected, which scripted strategies it caught everywhere, the one verdict that changes when the label is withheld, and the Claude grid with timings. Say what they are: software checks on the verifier, not a clinical benchmark.
+6. Check US identity. Select the US label identity question. It matches only brand, generic name and application number against a frozen openFDA record. Keep only the workbook and it becomes Not enough evidence. The US source is separate from the UK summary; it does not verify approval or current clinical labeling.
+7. Show the checks. Open Evals. The numbers come from the real pipeline: citation faults, scripted strategies, source-withholding changes, the Claude grid and the harness receipt/replay checks. Say what they are: software checks on the verifier, not a clinical benchmark.
+8. Open Run record under a result. It shows call counts, deadline, zero retries and source/skill/code fingerprints. Export JSON and use `npm run replay -- export.json` to rerun the verifier with the same code and sources. This does not rerun the model or authenticate the original execution.
 
 How it works shows the seven-stage pipeline, the ten verifier codes and what the app does not do. The antibody sequence map at the bottom of ADC table is exploratory ESM-2 structure data; say so if you show it.
 

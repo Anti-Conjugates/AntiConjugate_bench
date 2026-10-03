@@ -1,4 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { AuditResult } from './AuditResult';
 import { ResearchCatalogSchema, ResearchResultSchema } from '@her2/shared';
 import { createResearchEventParser, fetchResearchCatalog, initialResearchInputs, RequestEpoch, researchRequest, serializeResearchExport, streamResearchRun, validateResearchResult } from './researchBoundaries';
 
@@ -18,7 +21,7 @@ function compositionRecords(count: number) {
 }
 function catalogWith(records: ReturnType<typeof compositionRecords>) {
   return ResearchCatalogSchema.parse({
-    questions: ['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety'].map((id) => ({ id, title: `Contract ${id}`, description: 'Software sentinel only.' })),
+    questions: ['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety', 'label_identity'].map((id) => ({ id, title: `Contract ${id}`, description: 'Software sentinel only.' })),
     claude_configured: false, model: 'claude-opus-5-5',
     dataset: { filename: 'adc_table_adcdb.xlsx', sha256: 'a'.repeat(64), imported_at: '2026-01-01T00:00:00Z',
       record_count: records.length, derived_record_count: 4, provenance: 'user_uploaded_unverified', limitations: ['Contract only.'], derived_notice: 'Contract only.', records,
@@ -36,6 +39,9 @@ function cleanResult() {
     id: 'contract-result', created_at: '2026-01-01T00:00:00Z', ...fields,
     model: null, draft: { product_id: request.product_id, claims: [] }, draft_integrity: 'accepted', answer: 'Software sentinel only.',
     claims: [], omitted_claim_ids: [], receipts: [], challenges: [], unknowns: [], next_actions: [], trace: [step],
+    harness: { version: 'conjugate-harness-1', code_sha256: 'a'.repeat(64), request_sha256: 'b'.repeat(64),
+      limits: { deadline_ms: 60000, max_model_calls: 2, max_tool_calls: 4, retries: 0, max_request_bytes: 65536, max_response_bytes: 131072,
+        network_during_retrieval: false, model_receives_expected_mapping: true }, model_calls: 0, tool_calls: 0, sources: [], skills: [] },
     dataset_sha256: catalog.dataset.sha256, clinical_status: 'draft_pending_pharmacist', eligibility: 'not_assessed', needs_human: true,
     guardrail: { status: 'blocked', reasons: ['Contract gate.'] }, answer_correctness_probability: null, omission_probability: null,
   });
@@ -184,5 +190,56 @@ describe('request invalidation', () => {
     epoch.invalidate();
     expect(second.signal.aborted).toBe(true);
     expect(epoch.current(second)).toBe(false);
+  });
+});
+
+describe('harness and US identity contracts', () => {
+  it('labels hashes as server-reported, not locally verified', () => {
+    const markup = renderToStaticMarkup(createElement(AuditResult, { result: cleanResult(), request, catalog,
+      trace: [step], busy: false, compare: null, compareBusy: false, onCompare: () => {}, onExportError: () => {} }));
+    expect(markup).toContain('Server-reported fingerprints, not recomputed by this browser.');
+    expect(markup).toContain('Use replay to check the exported request and sources.');
+  });
+  it('rejects fabricated call counts, skill lists and retry/network limits', () => {
+    const clean = cleanResult();
+    for (const harness of [
+      { ...clean.harness, model_calls: 2 }, { ...clean.harness, tool_calls: 1 },
+      { ...clean.harness, sources: [{ id: 'invented', sha256: 'a'.repeat(64) }] },
+      { ...clean.harness, skills: [{ name: 'evidence-retrieval', version: '1', sha256: 'a'.repeat(64) }] },
+      { ...clean.harness, limits: { ...clean.harness.limits, retries: 1 } },
+      { ...clean.harness, limits: { ...clean.harness.limits, network_during_retrieval: true } },
+    ]) expect(() => validateResearchResult({ ...clean, harness }, request, catalog)).toThrow();
+  });
+  it('requires a manifest even when a result otherwise matches the contract', () => {
+    const result: Partial<ReturnType<typeof cleanResult>> = cleanResult(); delete result.harness;
+    expect(() => validateResearchResult(result, request, catalog)).toThrow('validation');
+  });
+  it('accepts an identity-only record and rejects wrong provenance, product and source settings', () => {
+    const identityRequest = { ...request, question_id: 'label_identity' as const };
+    const id = `US-OPENFDA-${identityRequest.product_id}-IDENTITY`;
+    const receipt = { id, product_id: identityRequest.product_id, kind: 'openfda' as const, title: 'Software sentinel', url: 'https://api.fda.gov/drug/label.json',
+      section: 'Contract metadata', revision_date: null, excerpt: '{"brand_name":["Contract value"]}', provenance: 'openfda_identity_snapshot' as const,
+      eligible_for_claim: true, limitations: ['Software contract only.'] };
+    const result = { ...cleanResult(), question_id: identityRequest.question_id, receipts: [receipt],
+      trace: [step, { ...step, id: 'read-identity', stage: 'retrieve' as const, actor: 'local_tool' as const, tool: 'read_openfda' as const, source_ids: [id] }],
+      harness: { ...cleanResult().harness, tool_calls: 1, sources: [{ id, sha256: 'a'.repeat(64) }] } };
+    expect(validateResearchResult(result, identityRequest, catalog).receipts[0]?.kind).toBe('openfda');
+    expect(() => validateResearchResult({ ...result, trace: [step], harness: { ...result.harness, tool_calls: 0 } }, identityRequest, catalog)).toThrow('citations');
+    expect(() => validateResearchResult({ ...result, trace: [...result.trace, { ...result.trace[1]!, id: 'duplicate-retrieval' }], harness: { ...result.harness, tool_calls: 2 } }, identityRequest, catalog)).toThrow('citations');
+    for (const changed of [{ ...receipt, provenance: 'label_paraphrase_pending_review' }, { ...receipt, product_id: 'DRG0CYMEB' }, { ...receipt, eligible_for_claim: false }]) {
+      expect(() => validateResearchResult({ ...result, receipts: [changed] }, identityRequest, catalog)).toThrow('citations');
+    }
+    expect(() => validateResearchResult({ ...result, evidence_policy: 'workbook_only' }, { ...identityRequest, evidence_policy: 'workbook_only' }, catalog)).toThrow('citations');
+  });
+  it('rejects derived receipts under workbook-only even when the manifest and tool event match', () => {
+    const limited = { ...request, evidence_policy: 'workbook_only' as const };
+    const id = `DERIVED-${limited.product_id}-NOT-ADCDB`;
+    const receipt = { id, product_id: limited.product_id, kind: 'derived' as const, title: 'Software sentinel', url: null,
+      section: 'Contract', revision_date: null, excerpt: 'Contract only', provenance: 'derived_not_adcdb' as const,
+      eligible_for_claim: false, limitations: ['Contract only'] };
+    const result = { ...cleanResult(), evidence_policy: limited.evidence_policy, receipts: [receipt],
+      trace: [{ ...step, stage: 'retrieve' as const, tool: 'read_derived' as const, actor: 'local_tool' as const, source_ids: [id] }],
+      harness: { ...cleanResult().harness, tool_calls: 1, sources: [{ id, sha256: 'a'.repeat(64) }] } };
+    expect(() => validateResearchResult(result, limited, catalog)).toThrow('citations');
   });
 });

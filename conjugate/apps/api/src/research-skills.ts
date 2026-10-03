@@ -32,7 +32,7 @@ async function boundedLocalRead(path: URL): Promise<Uint8Array> {
   } finally { await handle.close(); }
 }
 export async function loadRuntimeSkills(question: ResearchRequest['question_id'], read: RuntimeSkillReader = boundedLocalRead): Promise<RuntimeSkill[]> {
-  const selected: RuntimeSkillName[] = question === 'composition'
+  const selected: RuntimeSkillName[] = question === 'composition' || question === 'label_identity'
     ? ['evidence-retrieval', 'provenance-review']
     : ['evidence-retrieval', 'counter-evidence', 'provenance-review'];
   const result: RuntimeSkill[] = [];

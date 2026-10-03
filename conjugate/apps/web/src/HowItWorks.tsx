@@ -1,7 +1,7 @@
 const stages = [
   { id: 'scope', actor: 'controller', note: 'Validates the request against the shared schema.' },
   { id: 'plan', actor: 'controller, or Claude if selected', note: 'Picks which sources to read.' },
-  { id: 'retrieve', actor: 'local tools', note: 'read_workbook, read_label, read_derived' },
+  { id: 'retrieve', actor: 'local tools', note: 'Workbook, UK summary, derived notes, US identity.' },
   { id: 'draft', actor: 'controller, or Claude if selected', note: 'Chooses claim ids and source ids.' },
   { id: 'challenge', actor: 'deterministic verifier', note: 'Tries to break each citation.' },
   { id: 'verify', actor: 'deterministic verifier', note: 'Accepts or rejects the draft.' },
@@ -41,7 +41,7 @@ export function HowItWorks() {
       <section aria-labelledby="pipeline-heading">
         <h2 id="pipeline-heading">Pipeline</h2>
         <div className="pipeline-scroll" tabIndex={0} role="region" aria-label="Pipeline diagram, scrollable">
-          <svg className="pipeline-svg" width={diagramWidth} height={176} viewBox={`0 0 ${diagramWidth} 176`} role="img" aria-labelledby="pipeline-title pipeline-desc">
+          <svg className="pipeline-svg" width={diagramWidth} height={196} viewBox={`0 0 ${diagramWidth} 196`} role="img" aria-labelledby="pipeline-title pipeline-desc">
             <title id="pipeline-title">Seven pipeline stages from scope to handoff</title>
             <desc id="pipeline-desc">Scope, plan, retrieve, draft, challenge, verify, handoff, in a row. The controller runs scope, plan, draft and handoff. Claude replaces the controller for plan and draft only when selected. Local tools run retrieve. The deterministic verifier runs challenge and verify and receives only claim ids and source ids.</desc>
             <defs><marker id="pipeline-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" /></marker></defs>
@@ -61,6 +61,7 @@ export function HowItWorks() {
                   <text className="pipeline-tool" x={x + boxWidth / 2} y={136} textAnchor="middle">read_workbook</text>
                   <text className="pipeline-tool" x={x + boxWidth / 2} y={150} textAnchor="middle">read_label</text>
                   <text className="pipeline-tool" x={x + boxWidth / 2} y={164} textAnchor="middle">read_derived</text>
+                  <text className="pipeline-tool" x={x + boxWidth / 2} y={178} textAnchor="middle">read_openfda</text>
                 </>}
                 {(stage.id === 'plan' || stage.id === 'draft') && <text className="pipeline-tool" x={x + boxWidth / 2} y={136} textAnchor="middle">or Claude</text>}
               </g>;
@@ -68,9 +69,20 @@ export function HowItWorks() {
           </svg>
         </div>
         <ol className="pipeline-list">
-          {stages.map((stage, index) => <li key={stage.id}><code>{stage.id}</code> <span className="pipeline-list-actor">{stage.actor}</span><span>{stage.note}</span>{index === 2 && <span className="field-hint">Each tool reads one local file: the workbook, the label summaries or the derived sheet.</span>}</li>)}
+          {stages.map((stage, index) => <li key={stage.id}><code>{stage.id}</code> <span className="pipeline-list-actor">{stage.actor}</span><span>{stage.note}</span>{index === 2 && <span className="field-hint">All four tools read frozen local data. US identity fields stay separate from UK summaries.</span>}</li>)}
         </ol>
-        <p>Rules only mode runs every stage without a model call. When Claude is selected, it returns ids for plan and draft; its text is kept in the trace and nowhere else. If the Claude call fails, the run fails. It does not switch to rules only on its own.</p>
+        <p>Rules only mode makes no model calls. Claude returns ids for plan and draft. Raw model prose is discarded, not logged in the trace. If a Claude call fails, the run fails without switching engines.</p>
+      </section>
+
+      <section aria-labelledby="run-controls-heading">
+        <h2 id="run-controls-heading">What keeps a run in scope</h2>
+        <div className="harness-controls">
+          <article><h3>Two model calls</h3><p>One plan, one draft. No retries or open-ended loop. Both share a 60-second deadline.</p></article>
+          <article><h3>Four local tools</h3><p>Each runs at most once. Workbook only blocks the other three before execution.</p></article>
+          <article><h3>Checked at each boundary</h3><p>Requests, tool selections, drafts and exports use strict schemas. Model requests are capped at 64 KiB and responses at 128 KiB.</p></article>
+          <article><h3>Repeatable verification</h3><p>Every result records code, input, source and skill hashes. Export its JSON and replay the verifier without calling Claude.</p></article>
+        </div>
+        <p className="field-hint">Claude receives the expected citation mapping. This tests contract compliance, not independent citation discovery. Fingerprints are not signatures.</p>
       </section>
 
       <section aria-labelledby="who-sees-heading">
@@ -85,12 +97,12 @@ export function HowItWorks() {
             <pre><code>{JSON.stringify(planReturns, null, 2)}</code></pre>
             <h4>Returns for draft</h4>
             <pre><code>{JSON.stringify(draftReturns, null, 2)}</code></pre>
-            <p className="field-hint">Anything else it writes stays in the trace and is read by nothing downstream.</p>
+            <p className="field-hint">Only validated identifiers continue downstream. Raw prose is discarded.</p>
           </article>
           <article className="party-tools">
             <h3>Local tools</h3>
             <h4>Get</h4>
-            <p>One tool id and the product id. Each tool reads one local file: the workbook, the label summaries or the derived sheet. No network.</p>
+            <p>One tool id, product id and question id. Each tool reads its product-specific local record. No network.</p>
             <h4>Return</h4>
             <pre><code>{JSON.stringify(toolReturns, null, 2)}</code></pre>
             <p className="field-hint">These records are the sources shown under Sources used. Derived notes come back with <code>eligible_for_claim: false</code>.</p>
@@ -123,7 +135,7 @@ export function HowItWorks() {
           <li>It does not give a dose.</li>
           <li>It does not assess eligibility. <code>eligibility</code> is always <code>not_assessed</code>.</li>
           <li>It does not produce calibrated probabilities. <code>answer_correctness_probability</code> and <code>omission_probability</code> are always <code>null</code>.</li>
-          <li>It does not fetch anything from the web during a run. It reads the imported workbook and the local label summaries only.</li>
+          <li>It does not fetch anything from the web during a run. openFDA is imported separately; runs read its frozen identity records.</li>
         </ul>
         <p>Every result is <code>draft_pending_pharmacist</code> with <code>needs_human: true</code> and a blocked clinical gate.</p>
       </section>
@@ -131,6 +143,7 @@ export function HowItWorks() {
       <section aria-labelledby="credits-heading">
         <h2 id="credits-heading">Credits</h2>
         <p>The engineering workflow in this repository is adapted from pstack by poteto under the MIT license. That workflow builds the app; it is not the runtime agent.</p>
+        <p>Harness design follows <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener noreferrer">simple, composable agent patterns</a> and <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener noreferrer">separate execution and evaluation harnesses</a>. <a href="https://open.fda.gov/apis/drug/label/" target="_blank" rel="noopener noreferrer">openFDA documents its data limits</a>.</p>
       </section>
     </section>
   );
