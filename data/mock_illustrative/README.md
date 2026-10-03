@@ -1,6 +1,6 @@
 # Illustrative mock-up: NOT model results
 
-These four files were produced by `agent_guardrail.py`, which does not call any language model:
+These four files were produced by `agent_guardrail.py` (removed here; still in Anti-Conjugates/adc-guardrail), which does not call any language model:
 
 - `results_baseline.json` comes from `BaselinePlainLLM`. It is a simulator that returns hand-written answers chosen by item ID or by phrases in the question, and some of those answers contain deliberately invented citations.
 - `results_anticonjugate.json` comes from `AntiConjugateAgent`. It is hand-written rules, and some of them match exact phrases from the 30 benchmark questions. It was written with the benchmark in view.

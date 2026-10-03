@@ -126,7 +126,7 @@ Qwen2.5-7B, 2026-10-03 (development only, not clinically validated): baseline to
 
 ### ILLUSTRATIVE MOCK-UP (not model results)
 
-The table below came from `agent_guardrail.py`, which calls no language model. Its baseline is a simulator that returns hand-written answers per item, and its agent is hand-written rules that match phrases from the benchmark questions. It shows the intended shape of the result only. Do not present it as evidence. Files: `data/mock_illustrative/`.
+The table below came from `agent_guardrail.py` (removed here; still in Anti-Conjugates/adc-guardrail), which calls no language model. Its baseline is a simulator that returns hand-written answers per item, and its agent is hand-written rules that match phrases from the benchmark questions. It shows the intended shape of the result only. Do not present it as evidence. Files: `data/mock_illustrative/`.
 
 ```
 ========================================================================================
@@ -177,7 +177,7 @@ Fake / Fabricated Citations Caught                     13                       
 │
 ├── data/                           # Grounded Datasets
 │   ├── adcdb_curated_table.json    # Curated ADCdb records (UNVERIFIED)
-│   ├── mock_illustrative/          # Mock outputs from agent_guardrail.py (NOT results)
+│   ├── mock_illustrative/          # Mock outputs from removed agent_guardrail.py (NOT results)
 │   ├── fda_adcs_labels.json        # openFDA drug labels & boxed warnings
 │   ├── hpa_target_expression.json  # Human Protein Atlas RNA & protein expression
 │   └── payload_class_rules.json    # Payload-class SOP notes (UNVERIFIED until pharmacist sign-off)
@@ -195,7 +195,6 @@ Fake / Fabricated Citations Caught                     13                       
 │   ├── run_external_benchmark.py   # 30-item runner (real LLM) + scorer.py
 │   └── split_benchmark.py          # Split benchmark into public inputs / private gold
 │
-├── agent_guardrail.py              # Mock-up only: no LLM, benchmark-specific rules (see warning)
 ├── fetch_fda_and_hpa.py            # Automated ingestion from openFDA / HPA
 └── scorer.py                       # Self-contained scoring harness with live API check
 ```

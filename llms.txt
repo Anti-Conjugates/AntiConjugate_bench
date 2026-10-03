@@ -10,4 +10,4 @@
 - [Core Package](adcg/): Modular Python package (`adcg.agent`, `adcg.guardrail`, `adcg.rules`, `adcg.score`, `adcg.kb`).
 - [Development Results](results/RESULTS_dev.md): Score breakdowns and performance comparisons against plain LLMs.
 - [30-item results (real LLM)](results/RESULTS_30item.md)
-- [Mock-up only, not results](data/mock_illustrative/README.md): `agent_guardrail.py` (no LLM)
+- [Mock-up only, not results](data/mock_illustrative/README.md): from the removed `agent_guardrail.py` (no LLM)

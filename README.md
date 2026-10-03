@@ -23,7 +23,7 @@ clinician-written mini benchmark.
 | `data/fda_adcs_labels.json`, `data/payload_class_rules.json`, `data/hpa_target_expression.json`, `data/adcdb_curated_table.json` | team-curated label / SOP / expression / ADCdb records fed to the agent as `REFERENCE_JSON` (**UNVERIFIED**) |
 | `adcg/external.py`, `scripts/run_external_benchmark.py` | adapter + runner for the 30-item benchmark, scored by `scorer.py` |
 | `scripts/split_benchmark.py` | split a benchmark into public inputs and private gold |
-| `agent_guardrail.py`, `data/mock_illustrative/` | **mock-up only**: no LLM, benchmark-specific rules; not results |
+| `data/mock_illustrative/` | **mock-up only**: outputs of the removed `agent_guardrail.py` (no LLM, benchmark-specific rules); not results |
 
 ## Card format
 ```json
