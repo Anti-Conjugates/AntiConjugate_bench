@@ -13,7 +13,7 @@
 
 ## Ownership (handover section 9)
 - Single owner of `benchmark/test/`, `benchmark/splits.json`, `adcg/score.py`: **TBD (team to name)**.
-- Agents (AI) never read `benchmark/test/`. Dev items in `benchmark/dev/` are AI-drafted and UNVERIFIED.
+- A new hidden set must be owned and withheld by the team. The existing public test inputs were seen during development. Dev items in `benchmark/dev/` are AI-drafted and UNVERIFIED.
 
 ## Assumptions / log
 - Knowledge tables (`knowledge/*.json`) are UNVERIFIED drafts until pharmacist sign-off.
@@ -22,7 +22,8 @@
 
 ## 30-item team benchmark (added later)
 - `benchmark/test/items_public.json` holds the inputs only (`id, query, target_adc, patient_profile`). The gold file (category, trap and unanswerable labels, expected verdicts, must-flags, evidence) is kept outside the repo by the test owner and passed to `scorer.py`. The original `data/benchmark_30_items.json` is still in git history from commit f117a8d.
-- Scored with the team's `scorer.py`, not with `adcg/score.py`. The rules differ: a missed must-flag costs -1.0 per flag (not -0.5), overconfidence means conf > 0.70 (not >= 0.8), accuracy counts every item, and must-flags are matched by keywords in `reason` + flag text, not by flag id. `scorer.py` only checks NCT and PMID citations against live APIs; other citation prefixes are never counted as fake.
+- Scored with the team's `scorer.py`, not with `adcg/score.py`. The rules differ: a missed must-flag costs -1.0 per flag (not -0.5), overconfidence means conf > 0.70 (not >= 0.8), and must-flags are matched by keywords in `reason` + flag text, not by flag id.
+- Review remediation introduces `external_v2_verified_citations`: local references are resolved against the KB; negated risk statements do not count as positive flags; processing failures are reported separately and excluded from completed-item metric denominators. Historical results are preserved, not recomputed or directly comparable to this protocol.
 - `agent_guardrail.py` (removed here; still in Anti-Conjugates/adc-guardrail) and `data/mock_illustrative/` are a mock-up: no LLM, and rules written with the benchmark questions in view. They are not results.
 - Adapter (`adcg/external.py`) was written from the input schema only: unit conversions (platelets /µL to 10^9/L, bilirubin mg/dL to xULN with ULN 1.2, AST/ALT U/L to xULN with ULN 40), keyword mapping of comorbidities onto rule conditions, and drug-name extraction against `knowledge/drug_lists.json`. Unmapped fields go to the LLM as `OTHER_PATIENT_INFO`.
 - The 30 inputs were seen by the developer agent (the trap phrases were also visible in the removed `agent_guardrail.py`), so this is not a hidden test. No rule or prompt was written for a specific item.

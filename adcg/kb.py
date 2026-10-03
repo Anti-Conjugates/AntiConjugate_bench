@@ -1,9 +1,10 @@
-"""Load the ADC table and the (pharmacist-reviewed) knowledge base."""
+"""Load the ADC table and draft knowledge base (pharmacist review required)."""
 
 from __future__ import annotations
 
 import json
 import re
+import sysconfig
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
@@ -11,6 +12,8 @@ from pathlib import Path
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
+if not (ROOT / "knowledge" / "payload_classes.json").exists():
+    ROOT = Path(sysconfig.get_path("data")) / "share" / "adc-guardrail"
 DATA = ROOT / "data"
 
 # Team-curated reference files (UNVERIFIED until pharmacist review), keyed by citation prefix.
@@ -18,7 +21,51 @@ SOURCE_FILES = {"fda": "fda_adcs_labels.json", "hpa": "hpa_target_expression.jso
                 "sop": "payload_class_rules.json", "curated": "adcdb_curated_table.json"}
 # Our payload-class ids -> keys in payload_class_rules.json
 SOP_KEY = {"topo1_dxd": "DXd", "topo1_sn38": "SN-38", "maytansinoid_dm1": "DM1", "auristatin_mmae": "MMAE"}
-LABEL_CHARS = 700
+LABEL_CHARS = 4000
+POPULATION_HEADINGS = {
+    "Pregnancy": "pregnancy", "Lactation": "lactation",
+    "Females and Males of Reproductive Potential": "reproductive_potential",
+    "Pediatric Use": "pediatric_use", "Geriatric Use": "geriatric_use",
+    "Renal Impairment": "renal_impairment", "Hepatic Impairment": "hepatic_impairment",
+}
+
+
+def normalise_label_sections(lab: dict) -> dict:
+    sections = dict(lab.get("label_sections") or {})
+    legacy = sections.get("renal_impairment", [])
+    if any("USE IN SPECIFIC POPULATIONS" in text.upper() for text in legacy):
+        sections["use_in_specific_populations"] = sections.pop("renal_impairment")
+    pattern = r"\b8\.\d+\s+(" + "|".join(POPULATION_HEADINGS) + r")\b"
+    for text in sections.get("use_in_specific_populations", []):
+        matches = list(re.finditer(pattern, text, re.I))
+        for i, match in enumerate(matches):
+            heading = next(k for k in POPULATION_HEADINGS if k.lower() == match[1].lower())
+            end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+            key = POPULATION_HEADINGS[heading]
+            if key not in sections:
+                sections[key] = []
+            excerpt = text[match.start():end].strip()
+            if excerpt not in sections[key]:
+                sections[key].append(excerpt)
+    return sections
+
+
+def normalise_hpa(record: dict) -> dict:
+    raw = record.get("hpa_summary", record)
+    aliases = {
+        "rna_tissue_specificity": "RNA tissue specificity",
+        "rna_tissue_distribution": "RNA tissue distribution",
+        "protein_tissue_distribution": "Protein tissue distribution",
+        "protein_expression_summary": "Tissue expression",
+        "description": "Gene description",
+    }
+    out = {key: raw.get(key) or raw.get(alias) for key, alias in aliases.items()}
+    if record.get("biophysics_implication"):
+        out["biophysics_implication"] = record["biophysics_implication"]
+    out = {key: value for key, value in out.items() if value}
+    if out:
+        out["_status"] = "UNVERIFIED: expression observations do not establish ADC toxicity"
+    return out
 
 
 def as_list(ev) -> list[str]:
@@ -65,7 +112,8 @@ class KB:
 
     def without(self, adc_ids: set[str]) -> KB:
         """Retrieval view with held-out ADCs removed (fair split)."""
-        return KB(self.adc_table, self.payload_kb, self.drug_lists, self.thresholds, set(adc_ids), self.sources)
+        return KB(self.adc_table, self.payload_kb, self.drug_lists, self.thresholds,
+                  self.excluded_ids | set(adc_ids), self.sources)
 
     @property
     def visible(self) -> pd.DataFrame:
@@ -121,21 +169,53 @@ class KB:
             if key in self._row_names(row):
                 return None if row["adc_id"] in self.excluded_ids else row.to_dict()
         for row in self.extra_rows:
-            if key in self._row_names(row) and not (self._row_names(row) & self._excluded_names):
+            if (key in self._row_names(row) and row.get("adc_id") not in self.excluded_ids
+                    and not (self._row_names(row) & self._excluded_names)):
                 return dict(row)
         return None
 
-    def find_adc_in_text(self, text: str) -> dict | None:
-        """Resolve the ADC named in free text (longest name match), respecting the split."""
-        rows = [r.to_dict() for _, r in self.adc_table.iterrows()] + self.extra_rows
-        best = ""
+    def adc_mentions(self, text: str) -> list[dict]:
+        """Resolve non-overlapping aliases from the current retrieval view only."""
+        rows = [r.to_dict() for _, r in self.visible.iterrows()] + [
+            r for r in self.extra_rows if r.get("adc_id") not in self.excluded_ids
+            and not (self._row_names(r) & self._excluded_names)
+        ]
+        matches = []
         for row in rows:
             names = [row.get("adc_name", ""), row.get("brand_name", "")] + row.get("synonyms", "").split(";")
             for n in names:
                 n = n.strip()
-                if len(n) >= 4 and len(n) > len(best) and re.search(rf"(?<![\w-]){re.escape(n)}(?![\w-])", text, re.I):
-                    best = n
-        return self.find_adc(best) if best else None
+                if len(n) >= 4:
+                    for match in re.finditer(rf"(?<![\w-]){re.escape(n)}(?![\w-])", text, re.I):
+                        matches.append({"start": match.start(), "end": match.end(), "name": n, "row": row})
+        selected: list[dict] = []
+        for candidate in sorted(matches, key=lambda m: (-(m["end"] - m["start"]), m["start"])):
+            if not any(
+                candidate["start"] < m["end"] and m["start"] < candidate["end"] and not (
+                    (candidate["start"], candidate["end"]) == (m["start"], m["end"])
+                    and self.adc_cite(candidate["row"]) != self.adc_cite(m["row"])
+                ) for m in selected
+            ):
+                selected.append(candidate)
+        return sorted(selected, key=lambda m: m["start"])
+
+    def excluded_adc_mentioned(self, text: str) -> bool:
+        """A holdout rejection filter, never a source of facts for an answer."""
+        rows = [r.to_dict() for _, r in self.adc_table.iterrows() if r["adc_id"] in self.excluded_ids]
+        rows += [r for r in self.extra_rows if r.get("adc_id") in self.excluded_ids
+                 or self._row_names(r) & self._excluded_names]
+        for row in rows:
+            names = [row.get("adc_name", ""), row.get("brand_name", "")] + row.get("synonyms", "").split(";")
+            if any(len(n.strip()) >= 4 and re.search(
+                rf"(?<![\w-]){re.escape(n.strip())}(?![\w-])", text, re.I
+            ) for n in names):
+                return True
+        return False
+
+    def find_adc_in_text(self, text: str) -> dict | None:
+        """Only resolve unambiguous single-ADC text, respecting the retrieval split."""
+        rows = {self.adc_cite(m["row"]): m["row"] for m in self.adc_mentions(text)}
+        return next(iter(rows.values())) if len(rows) == 1 else None
 
     @staticmethod
     def adc_cite(adc: dict) -> str:
@@ -156,9 +236,9 @@ class KB:
         if hit:
             brand, lab = hit
             gene = lab.get("meta", {}).get("target_gene", "")
-            for sec, texts in lab.get("label_sections", {}).items():
-                if texts:
-                    out[f"FDA:{brand}:{sec}"] = [str(t)[:LABEL_CHARS] for t in texts]
+            for sec, texts in normalise_label_sections(lab).items():
+                if texts and sum(len(t) for t in texts) <= LABEL_CHARS:
+                    out[f"FDA:{brand}:{sec}"] = texts
         sop_key = SOP_KEY.get(self.payload_class(adc.get("payload", "")) or "")
         sop = (self.sources.get("sop") or {}).get("payload_classes", {})
         if sop_key in sop:
@@ -167,10 +247,18 @@ class KB:
         if not gene and "her2" in adc.get("antigen", "").lower():
             gene = "ERBB2"
         if gene in hpa:
-            h = hpa[gene]
-            out[f"HPA:{gene}"] = {k: h.get(k) for k in ("rna_tissue_specificity", "protein_tissue_distribution",
-                                                         "biophysics_implication") if h.get(k)}
+            h = normalise_hpa(hpa[gene])
+            if h:
+                out[f"HPA:{gene}"] = h
         return out
+
+    def reference_omissions(self, adc: dict) -> list[str]:
+        hit = self.fda_label(adc)
+        if not hit:
+            return []
+        brand, lab = hit
+        return [f"FDA:{brand}:{sec}" for sec, texts in normalise_label_sections(lab).items()
+                if texts and sum(len(t) for t in texts) > LABEL_CHARS]
 
     def payload_class(self, payload: str) -> str | None:
         hits = [
@@ -186,7 +274,7 @@ class KB:
         kind = kind.strip().upper()
         ref = ref.strip()
         if kind == "ADCDB":
-            return ref in self.all_ids
+            return ref in self.all_ids and ref not in self.excluded_ids
         if kind == "KB":
             head, _, sub = ref.partition(":")
             if head == "drug_lists":
@@ -199,12 +287,13 @@ class KB:
         if kind == "FDA":
             brand, _, sec = ref.partition(":")
             lab = (self.sources.get("fda") or {}).get(brand)
-            return lab is not None and (not sec or bool(lab.get("label_sections", {}).get(sec)))
+            return lab is not None and (not sec or bool(normalise_label_sections(lab).get(sec)))
         if kind == "SOP":
             sop = self.sources.get("sop") or {}
             return ref in sop.get("payload_classes", {}) or ref in sop.get("general_prescribing_rules", {})
         if kind == "HPA":
-            return ref in (self.sources.get("hpa") or {})
+            record = (self.sources.get("hpa") or {}).get(ref)
+            return record is not None and bool(normalise_hpa(record))
         return False
 
 

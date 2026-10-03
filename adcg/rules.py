@@ -242,16 +242,25 @@ def run_rules(adc: dict, patient: dict, kb) -> tuple[str | None, RuleResult]:
         return None, r
     c = kb.payload_kb["classes"][cls]
     for tox in c["toxicities"]:
-        r.add(TOX_TO_FLAG[tox], "monitor", f"Class toxicity of {c['label']}: {tox}.", adc_ev + [f"KB:{cls}"])
+        if tox not in TOX_TO_FLAG:
+            r.unknown(f"unmapped class toxicity '{tox}'; pharmacist review required")
+        else:
+            r.add(TOX_TO_FLAG[tox], "monitor", f"Class toxicity of {c['label']}: {tox}.", adc_ev + [f"KB:{cls}"])
     checks = list(c["checks"])
     for ab_key, eff in kb.payload_kb["antibody_class_effects"].items():
         if re.search(ab_key, adc.get("antigen", "") + " " + adc.get("adc_name", ""), flags=re.I):
             for tox in eff["toxicities"]:
-                r.add(TOX_TO_FLAG[tox], "monitor", eff["note"], adc_ev + [f"KB:{ab_key}"])
+                if tox not in TOX_TO_FLAG:
+                    r.unknown(f"unmapped antibody toxicity '{tox}'; pharmacist review required")
+                else:
+                    r.add(TOX_TO_FLAG[tox], "monitor", eff["note"], adc_ev + [f"KB:{ab_key}"])
             checks += eff["checks"]
     checks += kb.payload_kb["always_check"] + ["elderly_polypharmacy"]
     for name in dict.fromkeys(checks):
-        RULES[name](patient, kb, r, [f"RULE:{name}"])
+        if name not in RULES:
+            r.unknown(f"unmapped check '{name}'; pharmacist review required")
+        else:
+            RULES[name](patient, kb, r, [f"RULE:{name}"])
     r.notes += biophysics_notes(adc, kb)
     return cls, r
 
@@ -262,10 +271,10 @@ _UNIT_TO_NM = {"pm": 1e-3, "nm": 1.0, "um": 1e3, "μm": 1e3, "m": 1e9}
 
 
 def kd_nm(binding_affinity: str) -> float | None:
-    m = re.search(r"Kd\)?\s*\|.*?\|\s*([<>≈~]?\s*[\d.]+(?:e-?\d+)?)\s*(pM|nM|uM|μM|M|ng/mL)\b", binding_affinity or "", flags=re.I)
+    m = re.search(r"Kd\)?\s*\|.*?\|\s*(\d+(?:\.\d+)?(?:e[+-]?\d+)?)\s*(pM|nM|uM|μM|M|ng/mL)\b", binding_affinity or "", flags=re.I)
     if not m:
         return None
-    val = float(re.sub(r"[^\d.e-]", "", m.group(1)))
+    val = float(m.group(1))
     unit = m.group(2).lower()
     if unit == "ng/ml":
         return val / 150.0  # IgG ~150 kDa: 1 ng/mL ~ 0.00667 nM

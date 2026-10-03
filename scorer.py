@@ -20,11 +20,14 @@ import json
 import re
 import ssl
 import sys
-import urllib.request
 import urllib.parse
-from typing import Dict, List, Any, Tuple
+import urllib.request
+from typing import Any
 
-SSL_CTX = ssl._create_unverified_context()
+from adcg.kb import KB, as_list
+from adcg.validation import confidence as validate_confidence
+
+SSL_CTX = ssl.create_default_context()
 
 
 def verify_nct_id(nct_id: str) -> bool:
@@ -61,15 +64,17 @@ def verify_pmid(pmid: str) -> bool:
         return False
 
 
-def check_citations(evidence_list: List[str]) -> Tuple[List[str], List[str]]:
+def check_citations(evidence_list: list[str], kb: KB | None = None,
+                    patient: dict | None = None) -> tuple[list[str], list[str]]:
     """
     Check all citations in evidence. Returns (valid_citations, fake_citations).
     Identifies fake NCT IDs, fake PMIDs, or ungrounded assertions.
     """
     valid = []
     fake = []
+    kb = kb or KB.load()
     
-    for item in evidence_list:
+    for item in dict.fromkeys(as_list(evidence_list)):
         # Check for NCT IDs
         nct_matches = re.findall(r"NCT\d{8}", item, re.IGNORECASE)
         for nct in nct_matches:
@@ -87,15 +92,18 @@ def check_citations(evidence_list: List[str]) -> Tuple[List[str], List[str]]:
                 fake.append(f"FAKE_PMID:{pmid}")
                 
         # Check for verified local FDA/ADCDB references
-        if item.startswith("FDA:") or item.startswith("ADCDB:") or item.startswith("rule:"):
-            valid.append(item)
+        if not nct_matches and not pmid_matches:
+            if kb.citation_ok(item, patient):
+                valid.append(item)
+            else:
+                fake.append(f"UNRESOLVED:{item}")
             
     return valid, fake
 
 
-def check_must_flags(agent_reason: str, agent_flags: List[str], must_flags: List[str]) -> Tuple[List[str], List[str]]:
+def check_must_flags(agent_reason: str, agent_flags: list[str], must_flags: list[str]) -> tuple[list[str], list[str]]:
     """Determine which must-flag clinical risks were captured vs missed."""
-    combined_text = (agent_reason + " " + " ".join(agent_flags)).lower()
+    combined_text = (agent_reason + " " + " ".join(agent_flags)).lower().replace("_", " ")
     
     captured = []
     missed = []
@@ -130,7 +138,19 @@ def check_must_flags(agent_reason: str, agent_flags: List[str], must_flags: List
         else:
             keywords = [w for w in flag_lower.split() if len(w) > 4][:3]
 
-        if any(kw in combined_text for kw in keywords):
+        def positive_keyword(keyword, specification=flag_lower):
+            for clause in re.split(r"[.!?;\n]", combined_text):
+                for match in re.finditer(rf"\b{re.escape(keyword)}\b", clause):
+                    before = clause[:match.start()]
+                    after = clause[match.end():]
+                    if "false premise" in specification or not (
+                        re.search(r"\b(no|not|without|denies|negative)\b", before)
+                        or re.search(r"\b(absent|ruled out|not present)\b", after)
+                    ):
+                        return True
+            return False
+
+        if any(positive_keyword(kw) for kw in keywords):
             captured.append(flag)
         else:
             missed.append(flag)
@@ -138,14 +158,27 @@ def check_must_flags(agent_reason: str, agent_flags: List[str], must_flags: List
     return captured, missed
 
 
-def score_single_case(item: Dict[str, Any], agent_output: Dict[str, Any]) -> Dict[str, Any]:
+def score_single_case(item: dict[str, Any], agent_output: dict[str, Any], kb: KB | None = None) -> dict[str, Any]:
     """Score a single agent response against ground truth."""
+    failure = agent_output.get("error")
+    try:
+        confidence = validate_confidence(agent_output.get("confidence", 0.5))
+    except ValueError:
+        failure = "invalid_confidence"
+        confidence = 0.0
+    if agent_output.get("verdict") not in ("supported", "not_supported", "dont_know"):
+        failure = failure or "invalid_verdict"
+    if failure:
+        return {"item_id": item["id"], "category": item.get("category"), "expected_verdict": item.get("expected_verdict"),
+                "agent_verdict": "error", "confidence": confidence, "is_correct": False, "score": None,
+                "brier_component": None, "missed_must_flags": [], "fake_citations": [], "valid_citations": [],
+                "breakdown": ["Processing failure: excluded from completed-item metrics"],
+                "runtime_failure": True, "error": failure}
     expected_verdict = item.get("expected_verdict", "dont_know")
     is_unanswerable = item.get("is_unanswerable", False)
     must_flags = item.get("must_flag_risks", [])
     
     agent_verdict = agent_output.get("verdict", "dont_know")
-    confidence = float(agent_output.get("confidence", 0.5))
     reason = agent_output.get("reason", "")
     flags = agent_output.get("flags", [])
     evidence = agent_output.get("evidence", [])
@@ -181,7 +214,12 @@ def score_single_case(item: Dict[str, Any], agent_output: Dict[str, Any]) -> Dic
         breakdown.append(f"-{penalty:.1f} (Missed {len(missed_flags)} clinician must-flag risks: {missed_flags})")
         
     # 3. Citation Verification & Fake-Citation Penalties
-    valid_cites, fake_cites = check_citations(evidence)
+    patient = item.get("patient")
+    if patient is None and item.get("patient_profile") is not None:
+        from adcg.external import map_patient
+
+        patient, _ = map_patient(item["patient_profile"], kb or KB.load())
+    valid_cites, fake_cites = check_citations(evidence, kb, patient)
     if fake_cites:
         citation_penalty = 3.0 * len(fake_cites)
         score -= citation_penalty
@@ -207,7 +245,7 @@ def score_single_case(item: Dict[str, Any], agent_output: Dict[str, Any]) -> Dic
     }
 
 
-def evaluate_run(benchmark: List[Dict[str, Any]], agent_responses: List[Dict[str, Any]]) -> Dict[str, Any]:
+def evaluate_run(benchmark: list[dict[str, Any]], agent_responses: list[dict[str, Any]]) -> dict[str, Any]:
     """Evaluate full run across all items."""
     results = []
     total_score = 0.0
@@ -218,6 +256,10 @@ def evaluate_run(benchmark: List[Dict[str, Any]], agent_responses: List[Dict[str
     missed_must_flag_count = 0
     
     resp_map = {r["item_id"]: r for r in agent_responses}
+    if len(resp_map) != len(agent_responses) or len({item["id"] for item in benchmark}) != len(benchmark):
+        raise ValueError("duplicate benchmark or response IDs")
+    kb = KB.load()
+    runtime_failures = 0
     
     for item in benchmark:
         iid = item["id"]
@@ -226,10 +268,14 @@ def evaluate_run(benchmark: List[Dict[str, Any]], agent_responses: List[Dict[str
             "confidence": 0.0,
             "reason": "No response generated",
             "flags": [],
-            "evidence": []
+            "evidence": [],
+            "error": "missing_response"
         })
-        case_res = score_single_case(item, resp)
+        case_res = score_single_case(item, resp, kb)
         results.append(case_res)
+        if case_res.get("runtime_failure"):
+            runtime_failures += 1
+            continue
         
         total_score += case_res["score"]
         total_brier += case_res["brier_component"]
@@ -242,12 +288,17 @@ def evaluate_run(benchmark: List[Dict[str, Any]], agent_responses: List[Dict[str
         if case_res["missed_must_flags"]:
             missed_must_flag_count += len(case_res["missed_must_flags"])
             
-    n = len(benchmark)
+    n = len(benchmark) - runtime_failures
     brier_score = total_brier / n if n > 0 else 0.0
     accuracy = correct_count / n if n > 0 else 0.0
     
     return {
-        "num_items": n,
+        "num_items": len(benchmark),
+        "completed_items": n,
+        "runtime_failures": runtime_failures,
+        "evaluation_complete": runtime_failures == 0,
+        "metric_denominator": "completed_items",
+        "score_protocol": "external_v2_verified_citations",
         "total_score": round(total_score, 2),
         "mean_score": round(total_score / n, 2) if n > 0 else 0.0,
         "accuracy": round(accuracy, 3),
@@ -272,9 +323,9 @@ if __name__ == "__main__":
         if idx + 1 < len(sys.argv):
             out_file = sys.argv[idx + 1]
             
-    with open(bench_file, "r") as f:
+    with open(bench_file) as f:
         benchmark = json.load(f)
-    with open(resp_file, "r") as f:
+    with open(resp_file) as f:
         responses = json.load(f)
         
     report = evaluate_run(benchmark, responses)

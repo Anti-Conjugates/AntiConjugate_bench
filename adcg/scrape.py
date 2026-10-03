@@ -12,6 +12,7 @@ import json
 import re
 import time
 from pathlib import Path
+from urllib.parse import quote
 
 import pandas as pd
 import requests
@@ -81,10 +82,11 @@ def parse_search_page(page: str) -> list[dict]:
 
 
 def search(term: str, max_pages: int = 1000) -> list[dict]:
-    out, seen = [], set()
+    out: list[dict] = []
+    seen: set[str] = set()
     slug = re.sub(r"\W+", "_", term)
     for p in range(max_pages):
-        url = f"{BASE}/search/result/adc?search_api_fulltext={requests.utils.quote(term)}&page={p}"
+        url = f"{BASE}/search/result/adc?search_api_fulltext={quote(term)}&page={p}"
         rows = parse_search_page(fetch(url, RAW / "search" / f"{slug}_p{p}.html"))
         new = [r for r in rows if r["adc_id"] not in seen]
         if not new:
@@ -144,7 +146,7 @@ def _section(lines: list[str], head: str, stop: set[str], max_len: int = 40) -> 
 
 def parse_detail(page: str) -> dict:
     lines = _text_lines(page)
-    d = {v: _after(lines, k) for k, v in DETAIL_LABELS.items()}
+    d: dict = {v: _after(lines, k) for k, v in DETAIL_LABELS.items()}
     stop = SECTION_HEADS | {"Absorption", "Distribution", "Metabolism", "Excretion"}
     for head, key in [
         ("Bystander Killing Effect", "bystander"),

@@ -21,13 +21,14 @@ from adcg.guardrail import Guardrail  # noqa: E402
 from adcg.kb import KB  # noqa: E402
 from adcg.llm import get_llm  # noqa: E402
 from adcg.score import load_jsonl, reliability_plot, score_item, summarise  # noqa: E402
+from adcg.validation import failure_card  # noqa: E402
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--items", nargs="+", required=True)
     ap.add_argument("--llm", default="mock", help="mock | ollama:<model> | claude:<model>")
-    ap.add_argument("--systems", nargs="+", default=["baseline", "agent"])
+    ap.add_argument("--systems", nargs="+", choices=["baseline", "agent"], default=["baseline", "agent"])
     ap.add_argument("--split", choices=["fair", "leaky"], default="fair",
                     help="fair: held-out ADCs are removed from the agent's table for fact items")
     ap.add_argument("--splits-file", default=str(ROOT / "benchmark" / "splits.json"))
@@ -54,9 +55,8 @@ def main() -> None:
                 runner = Agent(view, llm) if sysname == "agent" else Baseline(kb, llm)
                 try:
                     card = runner.run(it)
-                except Exception as e:  # a crash counts as an abstention, and is logged
-                    card = {"verdict": "dont_know", "confidence": 0.0, "flags": [], "evidence": [],
-                            "fake_citations": [], "error": str(e)[:300]}
+                except Exception as error:
+                    card = failure_card(f"processing_failure:{type(error).__name__}")
                 gr = guard.review(it, card) if it["type"] == "case" else None
                 row = score_item(it, card, kb)
                 rows.append(row)

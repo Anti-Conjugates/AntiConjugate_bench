@@ -1,12 +1,12 @@
 # AntiConjugate
 
-> Calibrated, Abstaining, Falsification-Minded Prescribing Guardrails for Antibody-Drug Conjugates in Elderly Oncology (AIXScience Track 2: Originator)
+> Abstaining ADC prescribing-risk research prototype. Confidence and guardrail scores are not clinically calibrated; pharmacist review and fresh hidden validation are required.
 
 - [Full Documentation](llms-full.txt): Complete clinical, architectural, and benchmark specifications.
 - [Agent package](adcg/): rules + ADCdb/FDA/SOP/HPA lookup + LLM drafting + abstention + guardrail: LawZero generator + neutral estimator implementation.
-- [Curated ADCdb Table](data/adcdb_curated_table.json): Verified clinical & biophysical dataset.
+- [Curated ADCdb Table](data/adcdb_curated_table.json): Draft clinical & biophysical dataset, requiring verification.
 - [Benchmark inputs](benchmark/test/items_public.json): 30 items, inputs only (gold answers are kept private by the test owner).
-- [TruthRL Scorer](scorer.py): Automated Brier calibration, must-flag, and live API citation verification.
+- [TruthRL Scorer](scorer.py): Brier measurement, must-flag checks, loaded-KB citation validation and live API identifier checks; not proof of claim entailment.
 - [Core Package](adcg/): Modular Python package (`adcg.agent`, `adcg.guardrail`, `adcg.rules`, `adcg.score`, `adcg.kb`).
 - [Development Results](results/RESULTS_dev.md): Score breakdowns and performance comparisons against plain LLMs.
 - [30-item results (real LLM)](results/RESULTS_30item.md)

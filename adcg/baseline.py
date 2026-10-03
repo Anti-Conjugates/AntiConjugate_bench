@@ -1,4 +1,4 @@
-"""Plain-LLM baseline: same output schema and flag vocabulary, no table, no rules, no validator."""
+"""Plain-LLM baseline: structural validation only, no retrieval or clinical safety gates."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import json
 
 from adcg.kb import as_list
 from adcg.rules import FLAG_IDS
+from adcg.validation import failure_card, validate_response
 
 BASELINE_SYSTEM = """MODE: baseline
 You are a clinical pharmacology assistant. Answer the question about an antibody-drug conjugate.
@@ -29,7 +30,14 @@ class Baseline:
         patient = item.get("patient_raw") or item.get("patient")
         if patient:
             prompt += f"PATIENT_JSON: {json.dumps(patient)}\n"
-        out = self.llm.complete(BASELINE_SYSTEM.format(vocab=", ".join(FLAG_IDS)), prompt)
+        try:
+            out = self.llm.complete(BASELINE_SYSTEM.format(vocab=", ".join(FLAG_IDS)), prompt)
+        except Exception as error:
+            return failure_card(f"model_runtime_failure:{type(error).__name__}")
+        try:
+            validate_response(out)
+        except ValueError:
+            return failure_card("invalid_model_output")
         flags = [f for f in out.get("flags") or [] if isinstance(f, dict) and f.get("id") in FLAG_IDS]
         ev = as_list(out.get("evidence"))
         verdict = out.get("verdict", "dont_know")
