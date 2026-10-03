@@ -228,4 +228,6 @@ def to_scorer(item_id: str, card: dict, guard: dict | None = None) -> dict:
             "evidence": card_citations(card), "unknowns": card.get("unknowns") or [],
             "needs_human": bool(card.get("needs_human")) or bool(guard and guard.get("blocked")),
             "delivery_status": card.get("delivery_status", "research_only"),
+            "premise": card.get("premise"), "decision_source": card.get("decision_source"),
+            "confidence_kind": card.get("confidence_kind"),
             "guardrail": guard, "error": card.get("error")}

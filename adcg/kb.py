@@ -112,7 +112,8 @@ class KB:
 
     def without(self, adc_ids: set[str]) -> KB:
         """Retrieval view with held-out ADCs removed (fair split)."""
-        return KB(self.adc_table, self.payload_kb, self.drug_lists, self.thresholds, set(adc_ids), self.sources)
+        return KB(self.adc_table, self.payload_kb, self.drug_lists, self.thresholds,
+                  self.excluded_ids | set(adc_ids), self.sources)
 
     @property
     def visible(self) -> pd.DataFrame:
@@ -168,21 +169,53 @@ class KB:
             if key in self._row_names(row):
                 return None if row["adc_id"] in self.excluded_ids else row.to_dict()
         for row in self.extra_rows:
-            if key in self._row_names(row) and not (self._row_names(row) & self._excluded_names):
+            if (key in self._row_names(row) and row.get("adc_id") not in self.excluded_ids
+                    and not (self._row_names(row) & self._excluded_names)):
                 return dict(row)
         return None
 
-    def find_adc_in_text(self, text: str) -> dict | None:
-        """Resolve the ADC named in free text (longest name match), respecting the split."""
-        rows = [r.to_dict() for _, r in self.adc_table.iterrows()] + self.extra_rows
-        best = ""
+    def adc_mentions(self, text: str) -> list[dict]:
+        """Resolve non-overlapping aliases from the current retrieval view only."""
+        rows = [r.to_dict() for _, r in self.visible.iterrows()] + [
+            r for r in self.extra_rows if r.get("adc_id") not in self.excluded_ids
+            and not (self._row_names(r) & self._excluded_names)
+        ]
+        matches = []
         for row in rows:
             names = [row.get("adc_name", ""), row.get("brand_name", "")] + row.get("synonyms", "").split(";")
             for n in names:
                 n = n.strip()
-                if len(n) >= 4 and len(n) > len(best) and re.search(rf"(?<![\w-]){re.escape(n)}(?![\w-])", text, re.I):
-                    best = n
-        return self.find_adc(best) if best else None
+                if len(n) >= 4:
+                    for match in re.finditer(rf"(?<![\w-]){re.escape(n)}(?![\w-])", text, re.I):
+                        matches.append({"start": match.start(), "end": match.end(), "name": n, "row": row})
+        selected: list[dict] = []
+        for candidate in sorted(matches, key=lambda m: (-(m["end"] - m["start"]), m["start"])):
+            if not any(
+                candidate["start"] < m["end"] and m["start"] < candidate["end"] and not (
+                    (candidate["start"], candidate["end"]) == (m["start"], m["end"])
+                    and self.adc_cite(candidate["row"]) != self.adc_cite(m["row"])
+                ) for m in selected
+            ):
+                selected.append(candidate)
+        return sorted(selected, key=lambda m: m["start"])
+
+    def excluded_adc_mentioned(self, text: str) -> bool:
+        """A holdout rejection filter, never a source of facts for an answer."""
+        rows = [r.to_dict() for _, r in self.adc_table.iterrows() if r["adc_id"] in self.excluded_ids]
+        rows += [r for r in self.extra_rows if r.get("adc_id") in self.excluded_ids
+                 or self._row_names(r) & self._excluded_names]
+        for row in rows:
+            names = [row.get("adc_name", ""), row.get("brand_name", "")] + row.get("synonyms", "").split(";")
+            if any(len(n.strip()) >= 4 and re.search(
+                rf"(?<![\w-]){re.escape(n.strip())}(?![\w-])", text, re.I
+            ) for n in names):
+                return True
+        return False
+
+    def find_adc_in_text(self, text: str) -> dict | None:
+        """Only resolve unambiguous single-ADC text, respecting the retrieval split."""
+        rows = {self.adc_cite(m["row"]): m["row"] for m in self.adc_mentions(text)}
+        return next(iter(rows.values())) if len(rows) == 1 else None
 
     @staticmethod
     def adc_cite(adc: dict) -> str:

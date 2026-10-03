@@ -41,7 +41,20 @@ def main() -> None:
     assert card["needs_human"] is True
     assert card["delivery_status"] == "review_required"
     assert card["guardrail"]["blocked"] is True
-    print("Installed wheel: KB resources, writable cache, helper modules and high-risk withholding passed.")
+
+    class NoLLM:
+        def complete(self, system, prompt):
+            raise AssertionError("Premise checks must precede inference in the installed wheel.")
+
+    enhertu = kb.find_adc("Enhertu")
+    assert enhertu is not None
+    view = kb.without({enhertu["adc_id"]})
+    heldout = Agent(view, NoLLM()).run({"type": "claim", "adc": "Enhertu", "claim": "What is its payload?"})
+    mismatch = Agent(kb, NoLLM()).run({"type": "claim", "adc": "Enhertu", "claim": "Enhertu carries MMAE."})
+    assert not heldout.get("error") and heldout["verdict"] == "dont_know" and not heldout["evidence"]
+    assert not mismatch.get("error") and mismatch["draft_verdict"] == "not_supported"
+    assert mismatch["verdict"] == "dont_know" and mismatch["needs_human"]
+    print("Installed wheel: KB resources, cache, helpers, high-risk withholding and premise holdouts passed.")
 
 
 if __name__ == "__main__":

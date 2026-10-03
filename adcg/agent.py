@@ -6,6 +6,7 @@ import copy
 import json
 
 from adcg.kb import KB, as_list
+from adcg.premise import Premise, review_card
 from adcg.rules import FLAG_IDS, PATIENT_FIELDS, run_rules
 from adcg.validation import failure_card, validate_patient, validate_response
 
@@ -86,6 +87,20 @@ class Agent:
                         reason=rr.unknowns[0])
             return card
 
+        premise = Premise(self.kb).analyse(case.get("question") or "", case.get("adc", ""))
+        if premise.decided:
+            from adcg.guardrail import Guardrail
+
+            card.update(review_card(premise, self.kb) | {"flags": card["flags"], "notes": card["notes"],
+                        "unknowns": list(dict.fromkeys(card["unknowns"] + [f.text for f in premise.unverifiable])),
+                        "evidence": list(dict.fromkeys(card["evidence"] + [
+                            e for f in card["flags"] for e in f["evidence"]
+                        ] + [e for f in premise.contradicted for e in f.evidence]))})
+            card["counterfactual"] = self.counterfactual(adc, patient, cls) if counterfactual else None
+            card["guardrail"] = Guardrail(self.kb.thresholds).review(case, card)
+            return card
+        card["premise"] = premise.summary(self.kb)
+
         reference = self.kb.reference(adc)
         allowed = set(reference) | set(card["evidence"]) | {f"KB:{cls}"}
         allowed |= {e for flag in card["flags"] for e in flag["evidence"]}
@@ -164,7 +179,10 @@ class Agent:
 
     # ---------------- factual claims ----------------
     def judge_claim(self, item: dict) -> dict:
-        row = self.kb.find_adc(item.get("adc", "")) if item.get("adc") else None
+        premise = Premise(self.kb).analyse(item["claim"], item.get("adc", ""))
+        if premise.decided:
+            return review_card(premise, self.kb)
+        row = premise.rows[0] if len(premise.rows) == 1 else None
         reference = self.kb.reference(row) if row else {}
         allowed = set(reference) | ({self.kb.adc_cite(row)} if row else set())
         prompt = (f"CLAIM: {item['claim']}\nADC_ROW_JSON: {json.dumps(_row_view(row))}\n"
@@ -197,7 +215,8 @@ class Agent:
                 "verdict": verdict, "confidence": round(conf, 3),
                 "reason": out.get("reason", ""), "flags": [], "evidence": good, "unknowns": unknowns,
                 "delivery_status": "review_required" if verdict == "dont_know" else "released",
-                "needs_human": verdict == "dont_know" or bool(fake), "rejected_citations": fake}
+                "needs_human": verdict == "dont_know" or bool(fake), "rejected_citations": fake,
+                "premise": premise.summary(self.kb)}
 
     def run(self, item: dict) -> dict:
         try:

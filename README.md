@@ -14,7 +14,8 @@ development mini benchmark (not an independently hidden clinical validation set)
 | `knowledge/` | payload-class toxicity/check table + drug lists (**UNVERIFIED**, pharmacist to review) |
 | `config/thresholds.json` | clinician-set thresholds (guardrail block threshold, organ-function cut-offs) |
 | `adcg/rules.py` | deterministic organ-function / interaction / payload-class checks + biophysics notes |
-| `adcg/agent.py` | agent: table lookup → rules → LLM drafting → citation validation → abstain → counterfactual check |
+| `adcg/premise.py` | conservative entity / reference / structural-claim checks, scoped to the current retrieval view |
+| `adcg/agent.py` | agent: table lookup → rules → premise checks → LLM drafting → citation validation → abstain → counterfactual check |
 | `adcg/guardrail.py` | uncalibrated heuristic review score plus mandatory human-review gates |
 | `adcg/baseline.py` | plain LLM baseline with the same output schema |
 | `adcg/score.py` | reward, Brier, reliability plot, abstention, missed must-flags, fake citations, guardrail stats |
@@ -44,6 +45,26 @@ The compatibility field `guardrail.p_miss` is a heuristic score, not an empirica
 Citation checks establish loaded-source identity, not clinical claim entailment. Agent drafts may cite only
 references provided for the current ADC/patient. Oversized FDA sections are explicitly recorded as omitted,
 not silently truncated; HPA expression does not prove off-target toxicity.
+
+### Premise checks (research only)
+Before calling the model, the agent checks explicitly named ADCs/constructs, unresolved external
+reference identifiers, and narrow affirmative payload-class, target and linker-cleavability statements.
+It uses only records resolved in the current retrieval view, never a separate table of known-drug answers.
+Multiple ADCs, conflicting requested/named identities and unresolved references require review.
+Unresolved information takes precedence over a source-record mismatch. An identifier absent from our
+context is **unresolved**, not proven fictitious; source existence would not establish claim entailment.
+
+Premise-decided cards skip model inference and remain `dont_know` / `review_required`. A structural mismatch
+may be retained as `draft_verdict: not_supported` for the reviewer, never as an autonomous prescribing veto.
+Case safety flags, unknowns and counterfactual checks are preserved. Confidence is **unestimated**:
+the numeric schema placeholder is `0.0`, not a calibrated estimate or copied hand-set confidence.
+Cards expose `premise` diagnostics; the external adapter preserves them for audit.
+
+These are deliberately narrow parsing rules, not a general natural-language or literature validator.
+Negated and compound statements are not deterministically refuted; single-ADC questions outside the
+recognised grammar still pass through the existing model and citation checks. Passing a premise check
+does not establish clinical safety, approve draft knowledge, or release a high-risk card.
+No benchmark-specific phrases or item IDs are used, and no performance improvement is claimed.
 
 ## Setup
 ```bash
