@@ -47,7 +47,8 @@ test('injected allowlisted skill metadata is in the actual planner; instructions
     return modelResponse({ product_id: input.product_id, claims: [{ claim_id: input.question_id, source_ids: [] }] });
   } } });
   assert.equal(calls, 2); assert.equal(paths.length, 3);
-  assert.ok(paths.every(path => path.pathname.startsWith('/home/ubuntu/repos/her2-agent/runtime-skills/') && path.pathname.endsWith('/SKILL.md')));
+  const skillsRoot = new URL('../../../runtime-skills/', import.meta.url).pathname;
+  assert.ok(paths.every(path => path.pathname.startsWith(skillsRoot) && path.pathname.endsWith('/SKILL.md')));
   assert.equal(result.claims[0]!.verdict, 'insufficient');
   for (const stage of ['plan', 'draft'] as const) {
     const trace = result.trace.find(step => step.stage === stage)!;
