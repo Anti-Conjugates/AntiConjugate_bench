@@ -210,7 +210,7 @@ def main() -> int:
 
     # typesafe-jev
     p_jev = subparsers.add_parser("typesafe-jev", help="TypeSafe AI Jev System One evaluator")
-    p_jev.add_argument("action", choices=["status", "triage", "verify"], default="status", nargs="?")
+    p_jev.add_argument("action", choices=["status", "triage", "verify", "run"], default="status", nargs="?")
 
     # test
     subparsers.add_parser("test", help="Run automated self-tests across scientific services")

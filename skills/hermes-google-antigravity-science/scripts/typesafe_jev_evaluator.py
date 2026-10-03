@@ -166,18 +166,18 @@ def run_sample_query(state_text: Optional[str] = None) -> int:
         # Choice output
         choice_ans = response.choices["primary_organ_risk"]
         print(f"\n2. [Choice] Primary Organ Risk:")
-        print(f"   Selection:  {choice_ans.choice}")
-        print(f"   Confidence: {choice_ans.confidence:.4f}")
-        if choice_ans.distribution:
-            print(f"   Distribution: {choice_ans.distribution}")
+        print(f"   Selection:   {choice_ans.choice}")
+        print(f"   Confidence:  {choice_ans.confidence:.4f}")
+        if getattr(choice_ans, "probabilities", None):
+            print(f"   Probabilities: {choice_ans.probabilities}")
             
         # Score output
         score_ans = response.scores["urgency_score"]
         print(f"\n3. [Score] Urgency Score:")
         print(f"   Level (0-based): {score_ans.score:.2f}")
         print(f"   Confidence:      {score_ans.confidence:.4f}")
-        if score_ans.distribution:
-            print(f"   Distribution:    {score_ans.distribution}")
+        if getattr(score_ans, "probabilities", None):
+            print(f"   Probabilities:   {score_ans.probabilities}")
             
         print("=" * 80)
         return 0
