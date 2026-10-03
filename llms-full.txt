@@ -1,7 +1,7 @@
-# AntiConjugate: Calibrated, Abstaining, Falsification-Minded Prescribing Guardrails for Antibody-Drug Conjugates
+# AntiConjugate: Abstaining ADC Prescribing-Risk Research Prototype
 
 > **AIXScience Hackathon · Track 2: Originator**  
-> **Repository:** https://github.com/Anti-Conjugates/adc-guardrail  
+> **Repository:** https://github.com/Anti-Conjugates/AntiConjugate-Devin
 > **Team:** AntiConjugate  
 > **Lead Domain:** Clinical Oncology & Pharmacovigilance / Oncology Pharmacy  
 
@@ -16,7 +16,10 @@ Standard generative Large Language Models (LLMs) suffer from three fatal failure
 2. **Hallucinated Citations:** Fabricating non-existent NCT trial identifiers, PubMed PMIDs, or misattributing safety data.
 3. **Safety-Blindness:** Failing to enforce hard physiological cutoffs (e.g. LVEF < 50%, eGFR < 30 mL/min, baseline ANC < 1,500/µL) or formulation interchangeability rules (confusing fixed-dose subcutaneous antibodies with ADC payloads).
 
-**AntiConjugate** solves this by implementing a **LawZero-style Dual-Stage Architecture** (Generator + Neutral Estimator) coupled with **TruthRL / RLCR calibration scoring**, grounded in verified openFDA drug labels, Human Protein Atlas (HPA) target expression, official British National Formulary (BNF) / NICE technology appraisals, and real NHS chemotherapy Standard Operating Procedures (SOPs).
+**AntiConjugate** investigates these risks with deterministic rules, LLM drafting, source-identity checks
+and an uncalibrated heuristic review score. Clinical content and curated rules require pharmacist review.
+It does not establish clinical safety, empirical calibration or citation claim entailment.
+The README defines the implemented delivery and scoring policies; the design diagram below is conceptual.
 
 ---
 
@@ -41,8 +44,8 @@ The prescribing engine separates draft generation from safety verification:
                                                    ▼
                     ┌──────────────────────────────────────────────────────────────┐
                     │          Stage 2: Neutral Estimator & API Verifier           │
-                    │  - Estimates P(Missed Must-Flag Risk)                        │
-                    │  - If P(Miss) > 0.20 → Blocks & flags "needs_human: true"    │
+                    │  - Uncalibrated heuristic risk score                        │
+                    │  - Mandatory safety gates → pharmacist review               │
                     │  - Real-time API verification of all NCT IDs & PMIDs         │
                     │  - Traps & chimera construct detection                       │
                     └──────────────┬───────────────────────────────┬───────────────┘
@@ -51,22 +54,23 @@ The prescribing engine separates draft generation from safety verification:
                                    │                               │
                                    ▼                               ▼
                    ┌───────────────────────────────┐ ┌───────────────────────────┐
-                   │    Calibrated Risk Card       │ │  Abstain & Route to Human │
-                   │  - Verdict & Brier-calibrated │ │  - "dont_know" Verdict    │
+                   │    Research Risk Card         │ │  Abstain & Route to Human │
+                   │  - Verdict & stated          │ │  - "dont_know" Verdict    │
                    │    confidence (0.0 - 1.0)     │ │  - Clear escalation rationale│
-                   │  - Prescriber + Patient Flags │ │  - Zero hallucinated advice│
+                   │  - Prescriber + Patient Flags │ │  - Recommendation withheld│
                    └───────────────────────────────┘ └───────────────────────────┘
 ```
 
 ### Structured Output Schema
 Every prescribing query returns a strict, machine-readable JSON structure:
 * `verdict`: `"supported"`, `"not_supported"`, or `"dont_know"` (honest abstention).
-* `confidence`: Float between `0.0` and `1.0`, calibrated against true empirical correctness.
+* `confidence`: Finite float between `0.0` and `1.0`, stated by the model and not empirically calibrated.
 * `needs_human`: Boolean flag triggering mandatory oncologist / oncology pharmacist review.
-* `summary`: Clinically actionable synthesis of the safety recommendation.
-* `must_flag_risks`: Array of critical patient-specific contraindications identified.
-* `evidence`: Array of grounded, API-verified citations (e.g. `openFDA:Enhertu:boxed_warning`, `ADCDB:DRG0ERKBH`, `NCT02574481`).
-* `counterfactual_check`: Sensitivity check demonstrating how the recommendation changes under parameter shifts (falsification mechanism).
+* `answer` / `reason`: Research draft or neutral review-withholding message.
+* `flags`: Patient-specific review triggers, not automatic contraindications.
+* `evidence`: Loaded-source references (e.g. `FDA:Enhertu:boxed_warning`, `ADCDB:DRG0ERKBH`).
+* `counterfactuals`: Limited deterministic-rule sensitivity checks, not clinical falsification.
+* `delivery_status`: `released` or `review_required` for patient cards.
 
 ---
 

@@ -29,6 +29,11 @@ def card_citations(card: dict) -> list[str]:
 def score_item(item: dict, card: dict, kb=None) -> dict:
     """With kb, fake citations are re-checked on the final card shown to the user (both systems alike)."""
     gold = item["gold_verdict"]
+    if card.get("error"):
+        return {"id": item["id"], "type": item["type"], "category": item.get("category", item["type"]),
+                "gold": item.get("gold_verdict", "dont_know"), "verdict": "error", "confidence": 0.0,
+                "outcome": "error", "points": 0.0, "missed_must_flags": [], "fake_citations": [],
+                "runtime_failure": True, "error": card["error"]}
     verdict = card.get("verdict", "dont_know")
     conf = float(card.get("confidence", 0.5))
     flags = {f.get("id") for f in card.get("flags") or []}
@@ -54,7 +59,12 @@ def score_item(item: dict, card: dict, kb=None) -> dict:
             "rejected_citations": list(card.get("rejected_citations") or []), "split": item.get("split", "")}
 
 
-def summarise(rows: list[dict], guard: list[dict] | None = None) -> dict:
+def summarise(rows: list[dict], guard: list[dict | None] | None = None) -> dict:
+    requested = len(rows)
+    failures = sum(bool(row.get("runtime_failure")) for row in rows)
+    if guard is not None:
+        guard = [gr for gr, row in zip(guard, rows, strict=True) if not row.get("runtime_failure")]
+    rows = [row for row in rows if not row.get("runtime_failure")]
     n = len(rows)
     answered = [r for r in rows if r["verdict"] != "dont_know"]
     unans = [r for r in rows if r["gold"] == "dont_know"]
@@ -63,6 +73,8 @@ def summarise(rows: list[dict], guard: list[dict] | None = None) -> dict:
              if answered else None)
     out = {
         "n_items": n,
+        "requested_items": requested, "runtime_failures": failures, "evaluation_complete": failures == 0,
+        "score_protocol": "development_v1", "metric_denominator": "completed_items",
         "total_points": round(sum(r["points"] for r in rows), 2),
         "mean_points": round(sum(r["points"] for r in rows) / n, 3) if n else None,
         "accuracy_all": round(sum(r["outcome"] == "correct" for r in rows) / n, 3) if n else None,
@@ -106,7 +118,7 @@ def reliability_plot(runs: dict[str, list[dict]], path: Path, bins: int = 5) -> 
     ax.plot([0, 1], [0, 1], "k--", lw=1, label="perfect calibration")
     edges = np.linspace(0, 1, bins + 1)
     for name, rows in runs.items():
-        ans = [r for r in rows if r["verdict"] != "dont_know"]
+        ans = [r for r in rows if r["verdict"] not in ("dont_know", "error")]
         if not ans:
             continue
         c = np.array([r["confidence"] for r in ans])

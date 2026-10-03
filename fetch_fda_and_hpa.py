@@ -9,15 +9,19 @@ import json
 import os
 import ssl
 import sys
+import tempfile
 import time
-import urllib.request
 import urllib.parse
+import urllib.request
+from datetime import UTC, datetime
+from pathlib import Path
 
-# Resolve macOS Python SSL certificate verification issue
-SSL_CONTEXT = ssl._create_unverified_context()
+from adcg.kb import normalise_hpa, normalise_label_sections
+
+SSL_CONTEXT = ssl.create_default_context()
 
 OPENFDA_LABEL_URL = "https://api.fda.gov/drug/label.json"
-HPA_SEARCH_URL = "https://www.proteinatlas.org/api/search_download.php"
+HPA_URL = "https://www.proteinatlas.org"
 
 TARGET_ADCS = [
     {
@@ -95,11 +99,13 @@ def fetch_openfda_label(drug_name):
                 res = data["results"][0]
                 return {
                     "boxed_warning": res.get("boxed_warning", []),
-                    "warnings_and_precautions": res.get("warnings_and_precautions", []),
+                    "warnings_and_precautions": res.get("warnings_and_cautions", res.get("warnings", [])),
                     "contraindications": res.get("contraindications", []),
                     "drug_interactions": res.get("drug_interactions", []),
                     "geriatric_use": res.get("geriatric_use", []),
-                    "renal_impairment": res.get("use_in_specific_populations", []),
+                    "use_in_specific_populations": res.get("use_in_specific_populations", []),
+                    "renal_impairment": res.get("renal_impairment", []),
+                    "hepatic_impairment": res.get("hepatic_impairment", []),
                     "adverse_reactions": res.get("adverse_reactions", [])
                 }
     except Exception as e:
@@ -110,15 +116,10 @@ def fetch_openfda_label(drug_name):
 def fetch_hpa_data(ensembl_id, gene_symbol):
     """Fetch tissue expression summary from Human Protein Atlas API."""
     import gzip
-    params = {
-        "search": gene_symbol,
-        "format": "json",
-        "columns": "g,eg,gs,gd,pe,sc,t_RNA_any,t_RNA_tissue,t_IHC_tissue"
-    }
-    url = f"{HPA_SEARCH_URL}?{urllib.parse.urlencode(params)}"
+    url = f"{HPA_URL}/{ensembl_id}.json"
     headers = {
         "User-Agent": "AntiConjugate-Agent/1.0 (Hackathon Research; HPA API)",
-        "Accept-Encoding": "gzip, deflate"
+        "Accept-Encoding": "gzip"
     }
     req = urllib.request.Request(url, headers=headers)
     
@@ -130,18 +131,34 @@ def fetch_hpa_data(ensembl_id, gene_symbol):
             content = raw_bytes.decode('utf-8')
             data = json.loads(content)
             if data:
+                entries = data if isinstance(data, list) else [data]
                 # Find exact match
-                for entry in data:
-                    if entry.get("Gene", "").lower() == gene_symbol.lower():
+                for entry in entries:
+                    if entry.get("Gene", "").lower() == gene_symbol.lower() and entry.get("Ensembl") == ensembl_id:
                         return entry
-                return data[0]
     except Exception as e:
         print(f"Warning: Failed to fetch HPA data for {gene_symbol}: {e}", file=sys.stderr)
     return {}
 
 
-def main():
-    os.makedirs("data", exist_ok=True)
+def write_snapshot(path: Path, data: dict) -> None:
+    with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, delete=False) as handle:
+        temporary = Path(handle.name)
+        try:
+            json.dump(data, handle, indent=2)
+        except BaseException:
+            temporary.unlink(missing_ok=True)
+            raise
+    try:
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def main(data_dir: Path | None = None):
+    data_dir = data_dir or Path(__file__).resolve().parent / "data"
+    failures = []
+    fetched_at = datetime.now(UTC).isoformat()
     
     # 1. Fetch FDA Labels
     print("--- [1/2] Fetching openFDA Drug Labels ---")
@@ -150,15 +167,16 @@ def main():
         bname = adc["brand_name"]
         print(f"Fetching FDA label for {bname} ({adc['generic_name']})...")
         label_data = fetch_openfda_label(bname)
+        if not any(label_data.values()):
+            failures.append(f"FDA:{bname}")
         fda_results[bname] = {
             "meta": adc,
-            "label_sections": label_data
+            "label_sections": normalise_label_sections({"label_sections": label_data}),
+            "provenance": {"source": OPENFDA_LABEL_URL, "fetched_at": fetched_at,
+                           "schema_version": 1, "reviewed_by": None}
         }
         time.sleep(0.5)  # rate limit respect
         
-    with open("data/fda_adcs_labels.json", "w") as f:
-        json.dump(fda_results, f, indent=2)
-    print(f"Saved FDA labels to data/fda_adcs_labels.json (Total ADCs: {len(fda_results)})")
     
     # 2. Fetch HPA Target Tissue Expression
     print("\n--- [2/2] Fetching Human Protein Atlas Tissue Expression ---")
@@ -168,14 +186,22 @@ def main():
         ensembl = item["ensembl"]
         print(f"Fetching HPA data for {gene} ({item['target']}) [{ensembl}]...")
         hpa_data = fetch_hpa_data(ensembl, gene)
-        hpa_results[gene] = {
+        normalized = normalise_hpa(hpa_data)
+        if not normalized:
+            failures.append(f"HPA:{gene}")
+        hpa_results[gene] = normalized | {
             "meta": item,
-            "hpa_summary": hpa_data
+            "hpa_summary": hpa_data,
+            "provenance": {"source": f"{HPA_URL}/{ensembl}.json", "fetched_at": fetched_at,
+                           "schema_version": 1, "reviewed_by": None}
         }
         time.sleep(0.5)
         
-    with open("data/hpa_target_expression.json", "w") as f:
-        json.dump(hpa_results, f, indent=2)
+    if failures:
+        raise RuntimeError(f"Refresh failed; existing snapshots left untouched: {', '.join(failures)}")
+    data_dir.mkdir(parents=True, exist_ok=True)
+    write_snapshot(data_dir / "fda_adcs_labels.json", fda_results)
+    write_snapshot(data_dir / "hpa_target_expression.json", hpa_results)
     print(f"Saved HPA data to data/hpa_target_expression.json (Total genes: {len(hpa_results)})")
 
 

@@ -1,12 +1,31 @@
+[build-system]
+requires = ["setuptools>=68,<81"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "adc-guardrail"
 version = "0.1.0"
-description = "AntiConjugate: calibrated, abstaining ADC prescribing-risk agent + clinician mini-benchmark"
+description = "AntiConjugate: abstaining ADC prescribing-risk research prototype"
 requires-python = ">=3.11"
-dependencies = ["requests", "pandas", "numpy", "matplotlib", "scikit-learn"]
+dependencies = [
+    "requests>=2.32,<2.33", "pandas>=2.2,<2.3", "numpy>=1.26,<2.2",
+    "matplotlib>=3.8,<3.10", "scikit-learn>=1.4,<1.6",
+]
 
 [project.optional-dependencies]
-dev = ["pytest", "ruff"]
+dev = ["pytest>=8,<9", "ruff>=0.8,<0.10", "mypy>=1.11,<1.15", "types-requests>=2.32,<2.33"]
+
+[tool.setuptools]
+packages = ["adcg"]
+py-modules = ["scorer", "fetch_fda_and_hpa"]
+
+[tool.setuptools.data-files]
+"share/adc-guardrail/data" = [
+    "data/adc_her2_table.csv", "data/fda_adcs_labels.json",
+    "data/hpa_target_expression.json", "data/payload_class_rules.json", "data/adcdb_curated_table.json",
+]
+"share/adc-guardrail/knowledge" = ["knowledge/payload_classes.json", "knowledge/drug_lists.json"]
+"share/adc-guardrail/config" = ["config/thresholds.json"]
 
 [tool.ruff]
 line-length = 120
@@ -18,3 +37,7 @@ ignore = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.mypy]
+ignore_missing_imports = true
+check_untyped_defs = true

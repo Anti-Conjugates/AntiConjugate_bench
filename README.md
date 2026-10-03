@@ -3,7 +3,7 @@
 **AntiConjugate** (AIXScience Track 2: Originator). Given an ADC and a synthetic elderly patient, the agent returns a short
 prescribing-risk card with flags, a confidence, evidence that resolves against our own data, and an explicit
 "I don't know". A separate guardrail estimator blocks risky cards for pharmacist review. We compare it to a plain LLM on a
-clinician-written mini benchmark.
+development mini benchmark (not an independently hidden clinical validation set).
 
 > Decision support for a qualified prescriber only. All clinical content is a draft until the team pharmacist signs it off. No real patient data.
 
@@ -15,7 +15,7 @@ clinician-written mini benchmark.
 | `config/thresholds.json` | clinician-set thresholds (guardrail block threshold, organ-function cut-offs) |
 | `adcg/rules.py` | deterministic organ-function / interaction / payload-class checks + biophysics notes |
 | `adcg/agent.py` | agent: table lookup → rules → LLM drafting → citation validation → abstain → counterfactual check |
-| `adcg/guardrail.py` | neutral estimator of P(card misses a must-flag); blocks above threshold |
+| `adcg/guardrail.py` | uncalibrated heuristic review score plus mandatory human-review gates |
 | `adcg/baseline.py` | plain LLM baseline with the same output schema |
 | `adcg/score.py` | reward, Brier, reliability plot, abstention, missed must-flags, fake citations, guardrail stats |
 | `benchmark/dev/` | AI-drafted dev items (for debugging only) |
@@ -33,11 +33,30 @@ clinician-written mini benchmark.
 ```
 Evidence must be `ADCDB:<id>`, `FDA:<brand>[:<label_section>]`, `SOP:<payload>`, `HPA:<gene>`, `KB:<class>`, `KB:drug_lists:<list>`, `RULE:<name>` or `PATIENT:<field>`; anything else is a fake citation (-3).
 
+### Delivery policy (research only)
+Malformed responses, invalid confidence/input, unresolved unknowns, missing evidence, failed counterfactuals,
+high-severity flags and required human review cannot be released by the agent. The final card abstains
+(`dont_know`, `needs_human: true`, `delivery_status: review_required`); the draft is retained for review.
+High severity is a review trigger, **not** an automatic clinical contraindication. Clinical thresholds are unchanged
+and remain unverified. The plain baseline is intentionally not safety-gated and must never be used for prescribing.
+The compatibility field `guardrail.p_miss` is a heuristic score, not an empirical probability.
+
+Citation checks establish loaded-source identity, not clinical claim entailment. Agent drafts may cite only
+references provided for the current ADC/patient. Oversized FDA sections are explicitly recorded as omitted,
+not silently truncated; HPA expression does not prove off-target toxicity.
+
 ## Setup
 ```bash
+# Reproducible development environment (Python 3.12):
+uv sync --locked --extra dev --python 3.12
+# Editable installation also works:
 uv venv -p 3.12 .venv && uv pip install -p .venv -e '.[dev]'
 .venv/bin/python -m pytest -q
+.venv/bin/ruff check .
+.venv/bin/mypy adcg scripts scorer.py fetch_fda_and_hpa.py
 ```
+Wheels include the KB's data, knowledge and thresholds under `share/adc-guardrail`.
+Benchmark inputs and runner scripts remain in the source checkout.
 LLM (default for our results): free open model via [Ollama](https://ollama.com), CPU-only is fine (~5 GB RAM):
 ```bash
 ollama serve &            # or the desktop app
@@ -58,6 +77,15 @@ Optional: Claude via Claude Code CLI (`claude setup-token`, export `CLAUDE_CODE_
 # 30-item team benchmark (inputs only); the test owner scores with the private gold file:
 .venv/bin/python scripts/run_external_benchmark.py --llm ollama:qwen2.5:7b-instruct --gold ~/adcg_private/benchmark_30_gold.json
 ```
+Patient adapters accept explicit units (for example `{"value": 90, "unit": "10^9/L"}` or `"20 umol/L"`).
+Legacy numeric counts retain the documented magnitude convention; ambiguous units and missing histories
+remain unknown and trigger review. Use explicit units and lab-specific ULNs for new data.
+
+Per-item processing failures are marked with `error`, not rewarded as successful `dont_know` answers.
+Summaries report `runtime_failures`, `completed_items`, `evaluation_complete` and the metric denominator.
+Incomplete runs are not comparable validation results. The external scorer protocol is
+`external_v2_verified_citations`; historical scores are unchanged and use the earlier implementation.
+Development scoring (`development_v1`) remains a separate protocol with different penalties.
 
 ## Writing clinician cases (pharmacist)
 One JSON object per line in `benchmark/test/items.jsonl`, same shape as `benchmark/dev/items.jsonl`.

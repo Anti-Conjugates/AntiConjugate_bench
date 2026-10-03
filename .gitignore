@@ -9,3 +9,7 @@ benchmark/test/answers*.jsonl
 results/cache/
 data/benchmark_30_items.json
 *gold*.json
+build/
+dist/
+*.egg-info/
+.mypy_cache/

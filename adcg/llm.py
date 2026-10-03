@@ -19,6 +19,8 @@ import requests
 
 ROOT = Path(__file__).resolve().parent.parent
 CACHE = ROOT / "results" / "cache"
+if not (ROOT / "knowledge" / "payload_classes.json").exists():
+    CACHE = Path.home() / ".cache" / "adc-guardrail"
 
 
 def parse_json(text: str) -> dict:
@@ -28,7 +30,7 @@ def parse_json(text: str) -> dict:
         text = m.group(1)
     start, end = text.find("{"), text.rfind("}")
     if start < 0 or end < 0:
-        raise ValueError(f"no JSON object in LLM output: {text[:200]}")
+        raise ValueError("no JSON object in LLM output")
     return json.loads(text[start : end + 1])
 
 
@@ -117,6 +119,7 @@ class MockLLM:
         if "MODE: draft_card" in system:
             flags = json.loads(prompt.split("RULE_FLAGS_JSON:", 1)[1].split("\n", 1)[0])
             return {
+                "verdict": "supported",
                 "answer": "Risk card: " + ", ".join(f"{f['id']} ({f['severity']})" for f in flags),
                 "reason": "Summarised the rule-engine flags.",
                 "confidence": 0.85,

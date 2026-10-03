@@ -26,7 +26,7 @@ def render(case: dict, card: dict, gr: dict) -> str:
              f"**Patient:** `{json.dumps(case['patient'])}`", "",
              f"**Verdict:** {card['verdict']}  |  **confidence:** {card['confidence']}  |  "
              f"**needs_human:** {card['needs_human']}", "",
-             f"**Guardrail:** P(miss)={gr['p_miss']} vs threshold {gr['threshold']} -> **{gr['action']}**"
+             f"**Guardrail:** heuristic risk score={gr['p_miss']} (not calibrated) vs threshold {gr['threshold']} -> **{gr['action']}**"
              + (f" (uncovered: {', '.join(gr['uncovered_domains'])})" if gr["uncovered_domains"] else ""), "",
              f"**Summary:** {card['answer']}", "", "| flag | severity | why | evidence |", "|---|---|---|---|"]
     order = {"high": 0, "moderate": 1, "monitor": 2}
