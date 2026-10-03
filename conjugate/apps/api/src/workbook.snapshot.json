@@ -1,0 +1,3516 @@
+{
+  "filename": "adc_table_adcdb.xlsx",
+  "sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+  "imported_at": "2026-10-03T15:41:38.597968Z",
+  "record_count": 31,
+  "derived_record_count": 4,
+  "provenance": "user_uploaded_unverified",
+  "limitations": [
+    "User-uploaded snapshot, not a live ADCdb query; the original extraction date and primary assay provenance are unverified.",
+    "Missing cells are unknown, never zero risk. Workbook status and pharmacology summaries are not current regulatory approvals or clinical guidance.",
+    "Repeated text lengths suggest possible truncation; full source completeness has not been established.",
+    "Derived_NOT_ADCdb is author-derived material, not an ADCdb row or an approved prescribing source. Bystander entries are only reported as ADCdb fields in the workbook.",
+    "Only Kadcyla and Enhertu have local UK label paraphrases. All clinical content remains pending pharmacist approval."
+  ],
+  "derived_notice": "DERIVED - NOT FROM ADCdb, except 'Bystander potential', which is ADCdb's own yes/no field. Mechanistic classification and DRAFT prescribing flags for the 4 original ADCs only. Pharmacist must verify. Do not cite as an ADCdb row.",
+  "records": [
+    {
+      "id": "DRG0CYMEB",
+      "name": "Trastuzumab emtansine",
+      "brand": "Kadcyla",
+      "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+      "payload": "DM1",
+      "linker": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)",
+      "dar": "3.5",
+      "clinical_enabled": true,
+      "row": 2,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A2",
+          "value": "DRG0CYMEB"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B2",
+          "value": "Trastuzumab emtansine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C2",
+          "value": "Kadcyla"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D2",
+          "value": "Trastuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E2",
+          "value": "Receptor tyrosine-protein kinase erbB-2 (HER2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F2",
+          "value": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)"
+        },
+        {
+          "field": "Payload",
+          "cell": "G2",
+          "value": "DM1"
+        },
+        {
+          "field": "Indication",
+          "cell": "H2",
+          "value": "Unspecific non-hodgkin lymphoma; Multiple myeloma; Unspecific hematological malignancies; Oral cavity cancer; Gastric cancer; Colorectal cancer; Pancreatic cancer; Liver cancer; Biliary tract cancer; Lung cancer; Breast cancer; Penile cancer; Urothelial cancer; Extramammary paget's disease; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I2",
+          "value": "Approved in 2013"
+        },
+        {
+          "field": "Organization",
+          "cell": "J2",
+          "value": "ImmunoGen (Originator);Genentech (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K2",
+          "value": "3.5"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L2",
+          "value": "Random Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M2",
+          "value": "emtansine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N2",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O2",
+          "value": "The FDA label includes a black box warning of serious side effects such as hepatotoxicity, embryo-fetal toxicity, and cardiac toxicity."
+        },
+        {
+          "field": "Absorption",
+          "cell": "P2",
+          "value": "Maximum Observed Concentration (Cmax) 83.4 ug/mL The maximum concentrations (Cmax) of trastuzumab emtansine was observed close to the end of infusion, with mean values of 83.4 ug/"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q2",
+          "value": "Volume of Distribution (Vd) 3.13 L The central volume of distribution of trastuzumab emtansine was 3.13 L [1] Volume of Distribution (Vd) 3.21 L Final model estimates for the volum"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R2",
+          "value": "Trastuzumab emtansine undergoes lysosomal degradation to MCC-DM1, Lys-MCC-DM1, and DM1. All of these products are detected at low levels in the plasma. DM1 undergoes further degradation by CYP3A4 and CYP3A5, but DM1 does"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0ERKBH",
+      "name": "Trastuzumab deruxtecan",
+      "brand": "Enhertu",
+      "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+      "payload": "DXd",
+      "linker": "Mc-Gly-Gly-Phe-Gly",
+      "dar": "8",
+      "clinical_enabled": true,
+      "row": 3,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A3",
+          "value": "DRG0ERKBH"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B3",
+          "value": "Trastuzumab deruxtecan"
+        },
+        {
+          "field": "Brand",
+          "cell": "C3",
+          "value": "Enhertu"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D3",
+          "value": "Trastuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E3",
+          "value": "Receptor tyrosine-protein kinase erbB-2 (HER2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F3",
+          "value": "Mc-Gly-Gly-Phe-Gly"
+        },
+        {
+          "field": "Payload",
+          "cell": "G3",
+          "value": "DXd"
+        },
+        {
+          "field": "Indication",
+          "cell": "H3",
+          "value": "Brain cancer; Sarcoma; Oral cavity cancer; Oesophageal cancer; Gastroesophageal junction adenocarcinoma; Gastric cancer; Colorectal cancer; Pancreatic cancer; Biliary tract cancer; Lung cancer; Melanoma; Breast cancer; Ovarian cancer; Endometrial cancer; Cervical cancer; Prostate cancer; Urothelial cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I3",
+          "value": "Approved in 2019"
+        },
+        {
+          "field": "Organization",
+          "cell": "J3",
+          "value": "Daiichi Sankyo (Originator);AstraZeneca (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K3",
+          "value": "8"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L3",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M3",
+          "value": "deruxtecan"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N3",
+          "value": "DNA topoisomerase 1 (TOP1)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O3",
+          "value": "LD50 and overdose information are not currently available, but effects of an overdose are likely to impact the lungs, heart, and circulatory system, leading to significant toxicity. [10]"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P3",
+          "value": "Maximum Observed Concentration (Cmax) 133 ug/mL At the recommended dosage of ENHERTU for patients with metastatic breast cancer, the geometric mean (coefficient of variation [CV]%)"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q3",
+          "value": "Volume of Distribution (Vd) 75.2 mL/kg At the recommended dose of 5.4 mg/kg, the volume of distribution at steady state was 75.2 ml/kg [1] Volume of Distribution (Vd) 45.3±6.73 mL/"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R3",
+          "value": "Trastuzumab deruxtecan is likely broken down into small peptides and amino acids through catabolism, just as the metabolism of endogenous IgG. Cathepsin B and L enzymes are thought to be involved in the cleavage of the p"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0EKTUN",
+      "name": "Sacituzumab govitecan",
+      "brand": "Trodelvy",
+      "target": "Tumor-associated calcium signal transducer 2 (TACSTD2)",
+      "payload": "SN-38",
+      "linker": "CL2A",
+      "dar": "7.6~8",
+      "clinical_enabled": false,
+      "row": 4,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A4",
+          "value": "DRG0EKTUN"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B4",
+          "value": "Sacituzumab govitecan"
+        },
+        {
+          "field": "Brand",
+          "cell": "C4",
+          "value": "Trodelvy"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D4",
+          "value": "Sacituzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E4",
+          "value": "Tumor-associated calcium signal transducer 2 (TACSTD2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F4",
+          "value": "CL2A"
+        },
+        {
+          "field": "Payload",
+          "cell": "G4",
+          "value": "SN-38"
+        },
+        {
+          "field": "Indication",
+          "cell": "H4",
+          "value": "Brain cancer; Oral cavity cancer; Oesophageal cancer; Gastroesophageal junction adenocarcinoma; Gastric cancer; Colorectal cancer; Pancreatic cancer; Liver cancer; Biliary tract cancer; Lung cancer; Pleura mesothelioma; Thymus cancer; Peritoneal cancer; Breast cancer; Ovarian cancer; Fallopian tube cancer; Endometrial cancer; Cervical cancer; Penile cancer; Prostate cancer; Kidney cancer; Urothelial cancer; Thyroid cancer; Head and neck cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I4",
+          "value": "Approved in 2020"
+        },
+        {
+          "field": "Organization",
+          "cell": "J4",
+          "value": "Immunomedics (Originator);Seagen;Everest Medicines"
+        },
+        {
+          "field": "DAR",
+          "cell": "K4",
+          "value": "7.6~8"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L4",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M4",
+          "value": "govitecan"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N4",
+          "value": "DNA topoisomerase 1 (TOP1)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O4",
+          "value": "Toxicity information regarding sacituzumab govitecan is not readily available. Patients experiencing an overdose are at an increased risk of severe adverse effects such as neutropenia, diarrhea, hypersensitivity, nausea/vomiting, and other systemic effects related to cytotoxic drugs. Symptomatic and"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P4",
+          "value": "Maximum Observed Concentration (Cmax) 239000 ng/mL Based on population pharmacokinetic analysis, the mean maximum serum concentration (Cmax) of sacituzumab govitecan was 239,000 ng"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q4",
+          "value": "Volume of Distribution (Vd) 3.6 L The steady-state volume of distribution for sacituzumab govitecan was 3.6 L. [1] Volume of Distribution (Vd) 35.7±12.6 mL/kg Patients who had mult"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R4",
+          "value": "The metabolism of sacituzumab govitecan has not been extensively studied. The SN-38 moiety is known to undergo O-glucuronidation by UGT1A1, presumably in the liver, and the SN-38 glucuronide metabolite SN-38G is found in"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0ZOYQV",
+      "name": "Datopotamab deruxtecan",
+      "brand": "Datroway",
+      "target": "Tumor-associated calcium signal transducer 2 (TACSTD2)",
+      "payload": "DXd",
+      "linker": "Mc-Gly-Gly-Phe-Gly",
+      "dar": "4",
+      "clinical_enabled": false,
+      "row": 5,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A5",
+          "value": "DRG0ZOYQV"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B5",
+          "value": "Datopotamab deruxtecan"
+        },
+        {
+          "field": "Brand",
+          "cell": "C5",
+          "value": "Datroway"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D5",
+          "value": "Datopotamab"
+        },
+        {
+          "field": "Target",
+          "cell": "E5",
+          "value": "Tumor-associated calcium signal transducer 2 (TACSTD2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F5",
+          "value": "Mc-Gly-Gly-Phe-Gly"
+        },
+        {
+          "field": "Payload",
+          "cell": "G5",
+          "value": "DXd"
+        },
+        {
+          "field": "Indication",
+          "cell": "H5",
+          "value": "Gastroesophageal junction adenocarcinoma; Gastric cancer; Colorectal cancer; Biliary tract cancer; Lung cancer; Breast cancer; Ovarian cancer; Endometrial cancer; Prostate cancer; Urothelial cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I5",
+          "value": "Approved in 2025"
+        },
+        {
+          "field": "Organization",
+          "cell": "J5",
+          "value": "Daiichi Sankyo (Originator);AstraZeneca (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K5",
+          "value": "4"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L5",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M5",
+          "value": "deruxtecan"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N5",
+          "value": "DNA topoisomerase 1 (TOP1)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O5",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P5",
+          "value": "Maximum Observed Concentration (Cmax) 166 ug/mL Cycle 1, in Triple-Negative Breast Cancer patients [1] Area Under the Concentration-Time Curve (AUC) 774 day·ug/mL Cycle 1, in Tripl"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q5",
+          "value": "Volume of Distribution (Vd) 2.983 L Parameter estimates of the final PopPK model for Dato-DXd, central volume [2] Clearance (CL) 0.342 L/day Parameter estimates of the final PopPK"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R5",
+          "value": "Following internalization into the target cell, datopotamab deruxtecan is cleaved by lysosomal enzymes to release DXd, which itself is further metabolized by CYP3A4. As with endogenous IgG, the antibody component (datopo"
+        }
+      ],
+      "missing_fields": [
+        "Toxicity (verbatim)"
+      ]
+    },
+    {
+      "id": "DRG0JWBNH",
+      "name": "Brentuximab vedotin",
+      "brand": "Adcetris",
+      "target": "Tumor necrosis factor receptor superfamily member 8 (TNFRSF8)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "4",
+      "clinical_enabled": false,
+      "row": 6,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A6",
+          "value": "DRG0JWBNH"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B6",
+          "value": "Brentuximab vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C6",
+          "value": "Adcetris"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D6",
+          "value": "Brentuximab"
+        },
+        {
+          "field": "Target",
+          "cell": "E6",
+          "value": "Tumor necrosis factor receptor superfamily member 8 (TNFRSF8)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F6",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G6",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H6",
+          "value": "Mastocytosis; Myelodysplastic syndrome; Acute myeloid leukaemia; Unspecific non-hodgkin lymphoma; Diffuse large B-cell lymphoma; Mature T-cell lymphoma; Mycosis fungoides; Sezary syndrome"
+        },
+        {
+          "field": "Status",
+          "cell": "I6",
+          "value": "Approved in 2011"
+        },
+        {
+          "field": "Organization",
+          "cell": "J6",
+          "value": "Seagen (Top20 MNC) (Originator);Millennium Pharmaceuticals (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K6",
+          "value": "4"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L6",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M6",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N6",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O6",
+          "value": "The most severe toxic reaction seen in patients is progressive multifocal leukoencephalopathy.Common adverse effects of Adcetris may include: neutropenia, anemia, peripheral neuropathy, nausea, fatigue, constipation, diarrhea, vomiting, and fever. MMAE was found to be genotoxic in the rat bone marro"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P6",
+          "value": "Maximum Observed Concentration (Cmax) 31.98 ug/mL Typical Cmax and AUC of ADC after a single 1.8 mg/kg in a phase 1 study was approximately 31.98ug/ mL and 79.41 ug/mL x day respec"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q6",
+          "value": "Volume of Distribution (Vd) 4.29 L ADC PK was described by a linear, 3-compartment model with first-order elimination. The estimated typical values for a 75-kg male patient were 1."
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R6",
+          "value": "Data in both animals and humans suggest that only a small fraction of MMAE released from brentuximab vedotin is metabolized. In vitro data indicate that the MMAE metabolism that occurs is primarily via oxidation by CYP3A"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0JOHND",
+      "name": "Gemtuzumab ozogamicin",
+      "brand": "Mylotarg",
+      "target": "Myeloid cell surface antigen CD33 (CD33)",
+      "payload": "N-acetyl-gamma-calicheamicin",
+      "linker": "AcButDMH",
+      "dar": "2~3",
+      "clinical_enabled": false,
+      "row": 7,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A7",
+          "value": "DRG0JOHND"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B7",
+          "value": "Gemtuzumab ozogamicin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C7",
+          "value": "Mylotarg"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D7",
+          "value": "Gemtuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E7",
+          "value": "Myeloid cell surface antigen CD33 (CD33)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F7",
+          "value": "AcButDMH"
+        },
+        {
+          "field": "Payload",
+          "cell": "G7",
+          "value": "N-acetyl-gamma-calicheamicin"
+        },
+        {
+          "field": "Indication",
+          "cell": "H7",
+          "value": "Coronavirus disease 2019; Myelodysplastic syndrome; Acute myeloid leukaemia; Chronic myeloid leukemia; Acute lymphoblastic leukemia; Haemophagocytic lymphohistiocytosis; Macrophage activation syndrome; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I7",
+          "value": "Approved in 2000 (withdrawn in 2010, approved again in 2017)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J7",
+          "value": "Celltech (Originator) (No Rights);Wyeth (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K7",
+          "value": "2~3"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L7",
+          "value": "Random Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M7",
+          "value": "ozogamicin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N7",
+          "value": "Human deoxyribonucleic acid (hDNA)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O7",
+          "value": "The most frequently reported toxicities are myelosuppression and hepatic veno-occlusive disorder."
+        },
+        {
+          "field": "Absorption",
+          "cell": "P7",
+          "value": "Area Under the Concentration-Time Curve (AUC) 132±136 h/liter After i.v. administration of the 9 mg/m2 dose,Corresponding AUCs were 132±136 and 243±198 mg h/liter for dose periods"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q7",
+          "value": "Volume of Distribution (Vd) 20.95 L Summary of hP67.6 Pharmacokinetic Parameters in Patients Receiving 9 mg/m2 Intravenous Infusion Doses of Gemtuzumab Ozogamicin, Dose period 1 (n"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R7",
+          "value": "Metabolic studies indicate hydrolytic release of the calicheamicin derivative from gemtuzumab ozogamicin. The drug is most likely removed by opsonization via the reticuloendothelial system."
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0SXFSY",
+      "name": "Inotuzumab ozogamicin",
+      "brand": "Besponsa",
+      "target": "B-cell receptor CD22 (CD22)",
+      "payload": "N-acetyl-gamma-calicheamicin",
+      "linker": "AcButDMH",
+      "dar": "6",
+      "clinical_enabled": false,
+      "row": 8,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A8",
+          "value": "DRG0SXFSY"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B8",
+          "value": "Inotuzumab ozogamicin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C8",
+          "value": "Besponsa"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D8",
+          "value": "Inotuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E8",
+          "value": "B-cell receptor CD22 (CD22)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F8",
+          "value": "AcButDMH"
+        },
+        {
+          "field": "Payload",
+          "cell": "G8",
+          "value": "N-acetyl-gamma-calicheamicin"
+        },
+        {
+          "field": "Indication",
+          "cell": "H8",
+          "value": "Lymphoblastic lymphoma; Unspecific non-hodgkin lymphoma; Acute lymphoblastic leukemia"
+        },
+        {
+          "field": "Status",
+          "cell": "I8",
+          "value": "Approved in 2017"
+        },
+        {
+          "field": "Organization",
+          "cell": "J8",
+          "value": "Celltech (Originator) (No Rights);Wyeth (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K8",
+          "value": "6"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L8",
+          "value": "Random Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M8",
+          "value": "ozogamicin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N8",
+          "value": "Human deoxyribonucleic acid (hDNA)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O8",
+          "value": "There is limited clinical experience regarding the acute toxicity of inotuzumab ozogamicin. Overdoses may result in adverse reactions that are consistent with the reactions observed at the recommended therapeutic dose. In the event of an overdose, drug infusion should be temporarily interrupted, and"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P8",
+          "value": "Maximum Observed Concentration (Cmax) 308 ng/mL Inotuzumab ozogamicin is intended to be administered in cycles that each run for 3 to 4 weeks.7 The mean Cmax of inotuzumab ozogamic"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q8",
+          "value": "Volume of Distribution (Vd) 12 L In humans, the total volume of distribution of inotuzumab ozogamicin was approximately 12 L. [1] Volume of Distribution (Vd) 6.24 L Pharmacokinetic"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R8",
+          "value": "In vitro, N-acetyl-gamma-calicheamicin dimethylhydrazide was primarily metabolized via nonenzymatic reduction. In humans, N acetyl-gamma-calicheamicin dimethylhydrazide serum levels were typically below the limit of quan"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0BBQSE",
+      "name": "Enfortumab vedotin",
+      "brand": "Padcev",
+      "target": "Nectin-4 (NECTIN4)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "3.8~4",
+      "clinical_enabled": false,
+      "row": 9,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A9",
+          "value": "DRG0BBQSE"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B9",
+          "value": "Enfortumab vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C9",
+          "value": "Padcev"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D9",
+          "value": "Enfortumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E9",
+          "value": "Nectin-4 (NECTIN4)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F9",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G9",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H9",
+          "value": "Oral cavity cancer; Oesophageal cancer; Gastroesophageal junction adenocarcinoma; Gastric cancer; Small bowel cancer; Colorectal cancer; Pancreatic cancer; Liver cancer; Lung cancer; Breast cancer; Endometrial cancer; Testicular cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I9",
+          "value": "Approved in 2019"
+        },
+        {
+          "field": "Organization",
+          "cell": "J9",
+          "value": "Seagen (Top20 MNC) (Originator);Agensys (Top20 MNC) (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K9",
+          "value": "3.8~4"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L9",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M9",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N9",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O9",
+          "value": "Toxicity information regarding sacituzumab govitecan is not readily available. Patients experiencing an overdose are at an increased risk of severe adverse effects such as neutropenia, diarrhea, hypersensitivity, nausea/vomiting, and other systemic effects related to cytotoxic drugs. Symptomatic and"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P9",
+          "value": "Maximum Observed Concentration (Cmax) 28 ug/mL For enfortumab vedotin (1.25 mg/kg), mean Cmax was 28 (ug/mL) and mean AUC was 111 (ug x day/mL) following the first treatment cycle"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q9",
+          "value": "Volume of Distribution (Vd) 11 L The estimated steady-state volume of distribution is 11 L. [1] Volume of Distribution (Vd) 78.1 mL/kg Single bolus injection 10 mg/kg Enfortumab Ve"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R9",
+          "value": "The catabolism of enfortumab vedotin has not been studied in humans. Given its structure, it is expected to be catabolized to smaller peptides, amino acids, unconjugated MMAE, and MMAE metabolites. MMAE is released from"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0QWZIT",
+      "name": "Polatuzumab vedotin",
+      "brand": "Polivy",
+      "target": "B-cell antigen receptor complex-associated protein beta chain (CD79B)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "3.5",
+      "clinical_enabled": false,
+      "row": 10,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A10",
+          "value": "DRG0QWZIT"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B10",
+          "value": "Polatuzumab vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C10",
+          "value": "Polivy"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D10",
+          "value": "Polatuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E10",
+          "value": "B-cell antigen receptor complex-associated protein beta chain (CD79B)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F10",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G10",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H10",
+          "value": "Follicular lymphoma; Unspecific non-hodgkin lymphoma; Diffuse large B-cell lymphoma; Chronic lymphocytic leukemia; Mantle cell lymphoma; Hodgkin lymphoma; Oesophageal cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I10",
+          "value": "Approved in 2019"
+        },
+        {
+          "field": "Organization",
+          "cell": "J10",
+          "value": "Genentech (Top20 MNC) (Originator);Seagen (Top20 MNC) (No Rights)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K10",
+          "value": "3.5"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L10",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M10",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N10",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O10",
+          "value": "Data regarding overdoses and LD50 are not readily available."
+        },
+        {
+          "field": "Absorption",
+          "cell": "P10",
+          "value": "Maximum Observed Concentration (Cmax) 803±233 ng/mL After the first polatuzumab vedotin dose of 1.8 mg/kg, the mean (±SD) Cmax of antibody-conjugated MMAE and unconjugated MMAE wer"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q10",
+          "value": "Volume of Distribution (Vd) 3.15 L The estimated central volume of distribution of polatuzumab vedotin based on population PK analysis is 3.15 L. [1] Volume of Distribution (Vd) 57"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R10",
+          "value": "Polatuzumab vedotin is expected to undergo catabolism into small peptides, amino acids, unconjugated MMAE, and unconjugated MMAE-related catabolites. MMAE is metabolized by CYP3A4/5. [6]"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0TKVCB",
+      "name": "Loncastuximab tesirine",
+      "brand": "Zynlonta",
+      "target": "B-lymphocyte antigen CD19 (CD19)",
+      "payload": "SG3199 (SC-DR002)",
+      "linker": "Mal-PEG8-Val-Ala-PABC",
+      "dar": "2.3",
+      "clinical_enabled": false,
+      "row": 11,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A11",
+          "value": "DRG0TKVCB"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B11",
+          "value": "Loncastuximab tesirine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C11",
+          "value": "Zynlonta"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D11",
+          "value": "Loncastuximab"
+        },
+        {
+          "field": "Target",
+          "cell": "E11",
+          "value": "B-lymphocyte antigen CD19 (CD19)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F11",
+          "value": "Mal-PEG8-Val-Ala-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G11",
+          "value": "SG3199 (SC-DR002)"
+        },
+        {
+          "field": "Indication",
+          "cell": "H11",
+          "value": "Follicular lymphoma; Unspecific non-hodgkin lymphoma; Diffuse large B-cell lymphoma; Chronic lymphocytic leukemia; Mantle cell lymphoma; Acute lymphoblastic leukemia"
+        },
+        {
+          "field": "Status",
+          "cell": "I11",
+          "value": "Approved in 2021"
+        },
+        {
+          "field": "Organization",
+          "cell": "J11",
+          "value": "ADC Therapeutics (Originator);Tanabe Pharma Corporation;Swedish Orphan Biovitrum;Spirogen (Top20 MNC"
+        },
+        {
+          "field": "DAR",
+          "cell": "K11",
+          "value": "2.3"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L11",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M11",
+          "value": "tesirine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N11",
+          "value": "Human deoxyribonucleic acid (hDNA)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O11",
+          "value": "LD50 information for loncastuximab tesirine is not readily available in the literature. Toxicity is increased at higher doses, and may lead to discontinuation. [4]"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P11",
+          "value": "Maximum Observed Concentration (Cmax) 1776 ng/mL After loncastuximab tesirine treatment with the recommended dose regimen, the Cmax are 2911 ng/mL; the Cmax at steady state are 177"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q11",
+          "value": "Volume of Distribution (Vd) 7.11 L The mean volume of distribution is 7.11 L. [1], [2] Volume of Distribution (Vd) 6.37 L 150 Ug/kg Q3W,Dose-related exposure. Administered to patie"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R11",
+          "value": "The monoclonal antibody portion of loncastuximab tesirine-lpyl is catabolized into small peptides. In vitro studies show that the small molecule cytotoxin portion, SG3199, is metabolized by CYP3A4/5."
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0PNJIT",
+      "name": "Tisotumab vedotin",
+      "brand": "Tivdak",
+      "target": "Tissue factor (F3)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "4",
+      "clinical_enabled": false,
+      "row": 12,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A12",
+          "value": "DRG0PNJIT"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B12",
+          "value": "Tisotumab vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C12",
+          "value": "Tivdak"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D12",
+          "value": "Tisotumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E12",
+          "value": "Tissue factor (F3)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F12",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G12",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H12",
+          "value": "Oesophageal cancer; Colorectal cancer; Pancreatic cancer; Lung cancer; Peritoneal cancer; Ovarian cancer; Fallopian tube cancer; Endometrial cancer; Cervical cancer; Prostate cancer; Urothelial cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I12",
+          "value": "Approved in 2021"
+        },
+        {
+          "field": "Organization",
+          "cell": "J12",
+          "value": "Genmab (Originator);Zai Lab;Seagen (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K12",
+          "value": "4"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L12",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M12",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N12",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O12",
+          "value": "There is no information on the LD50 values and overdose profile of tisotumab vedotin. Tisotumab vedotin is associated with a risk for ocular toxicity. In clinical trials, ocular adverse reactions occurred in 60% of patients with cervical cancer. The most common reactions were conjunctival adverse re"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P12",
+          "value": "Maximum Observed Concentration (Cmax) 40.8 ug/mL Following administration of one 3-week cycle of tisotumab vedotin-tftv 2 mg/kg to patients, Cmax is 40.8ug/mL. [1] Area Under the C"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q12",
+          "value": "Volume of Distribution (Vd) 7.83 L The tisotumab vedotin-tftv steady state volume of distribution is 7.83 L. [1] Clearance (CL) 4.01 L/day Intercompartmental CL, Two-compartment mo"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R12",
+          "value": "Tisotumab vedotin-tftv most likely undergoes catabolism to form small peptides, amino acids, unconjugated MMAE, and unconjugated MMAE-related catabolites. Via proteolytic cleavage, tisotumab vedotin-tftv releases unconju"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0JEVIM",
+      "name": "Disitamab vedotin",
+      "brand": "Aidixi",
+      "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "4",
+      "clinical_enabled": false,
+      "row": 13,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A13",
+          "value": "DRG0JEVIM"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B13",
+          "value": "Disitamab vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C13",
+          "value": "Aidixi"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D13",
+          "value": "Hertuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E13",
+          "value": "Receptor tyrosine-protein kinase erbB-2 (HER2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F13",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G13",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H13",
+          "value": "Oral cavity cancer; Gastric cancer; Pancreatic cancer; Biliary tract cancer; Lung cancer; Melanoma; Peritoneal cancer; Breast cancer; Vulvar cancer; Vaginal cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I13",
+          "value": "Approved in 2021"
+        },
+        {
+          "field": "Organization",
+          "cell": "J13",
+          "value": "RemeGen (Originator);Seagen (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K13",
+          "value": "4"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L13",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M13",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N13",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O13",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P13",
+          "value": "Maximum Observed Concentration (Cmax) 66.07 ug/mL After monkeys were intravenously infused with Disitamab vedotin (3 mg/kg, n=6), the exposure levels of ADC was positively correlat"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q13",
+          "value": "Volume of Distribution (Vd) 124.73-340.8 mL/kg The apparent volume of distribution of MMAE-bound antibody at steady state is 124.7-340.8 mL/kg and that of total antibody is 72.1-87"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R13",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Toxicity (verbatim)",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0GKOZH",
+      "name": "Mirvetuximab soravtansine",
+      "brand": "Elahere",
+      "target": "Folate receptor alpha (FOLR1)",
+      "payload": "DM4",
+      "linker": "Sulfo-SPDB",
+      "dar": "3.5",
+      "clinical_enabled": false,
+      "row": 14,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A14",
+          "value": "DRG0GKOZH"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B14",
+          "value": "Mirvetuximab soravtansine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C14",
+          "value": "Elahere"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D14",
+          "value": "Mirvetuximab"
+        },
+        {
+          "field": "Target",
+          "cell": "E14",
+          "value": "Folate receptor alpha (FOLR1)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F14",
+          "value": "Sulfo-SPDB"
+        },
+        {
+          "field": "Payload",
+          "cell": "G14",
+          "value": "DM4"
+        },
+        {
+          "field": "Indication",
+          "cell": "H14",
+          "value": "Peritoneal cancer; Breast cancer; Ovarian cancer; Fallopian tube cancer; Endometrial cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I14",
+          "value": "Approved in 2022"
+        },
+        {
+          "field": "Organization",
+          "cell": "J14",
+          "value": "ImmunoGen (Top20 MNC) (Originator);Takeda Pharmaceuticals (Top20 MNC);Huadong Medicine"
+        },
+        {
+          "field": "DAR",
+          "cell": "K14",
+          "value": "3.5"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L14",
+          "value": "Random Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M14",
+          "value": "soravtansine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N14",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O14",
+          "value": "Toxicity information regarding mirvetuximab soravtansine-gynx is not readily available. Patients experiencing an overdose are at an increased risk of severe adverse effects such as ocular toxicity, pneumonitis and peripheral neuropathy. Symptomatic and supportive measures are recommended. Carcinogen"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P14",
+          "value": "Area Under the Concentration-Time Curve (AUC) 165 umol·h/L Model-predicted exposure of Mirv and probability of responses for patients receiving different dose regimens by their tot"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q14",
+          "value": "Volume of Distribution (Vd) 2.63±2.98 L The mean (±SD) steady state volume of distribution of mirvetuximab soravtansine-gynx was 2.63 (±2.98) L. [1], [2], [3] Volume of Distributio"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R14",
+          "value": "After mirvetuximab soravtansine-gynx binds the folate receptor alpha (FRa) and is internalized via antigen-mediated endocytosis, the DM4 agent is released via proteolytic cleavage. The monoclonal antibody portion of this"
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0NDXRU",
+      "name": "Belantamab mafodotin",
+      "brand": "Blenrep",
+      "target": "Tumor necrosis factor receptor superfamily member 17 (TNFRSF17)",
+      "payload": "Monomethyl auristatin F",
+      "linker": "Maleimido-caproyl",
+      "dar": "4",
+      "clinical_enabled": false,
+      "row": 15,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A15",
+          "value": "DRG0NDXRU"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B15",
+          "value": "Belantamab mafodotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C15",
+          "value": "Blenrep"
+        },
+        {
+          "field": "Antibody",
+          "cell": "D15",
+          "value": "Belantamab"
+        },
+        {
+          "field": "Target",
+          "cell": "E15",
+          "value": "Tumor necrosis factor receptor superfamily member 17 (TNFRSF17)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F15",
+          "value": "Maleimido-caproyl"
+        },
+        {
+          "field": "Payload",
+          "cell": "G15",
+          "value": "Monomethyl auristatin F"
+        },
+        {
+          "field": "Indication",
+          "cell": "H15",
+          "value": "Diffuse large B-cell lymphoma; Multiple myeloma; Immune thrombocytopenic purpura; Amyloidosis"
+        },
+        {
+          "field": "Status",
+          "cell": "I15",
+          "value": "Approved in 2020 (withdrawn in 2022, approved again in 2025)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J15",
+          "value": "Seagen (Top20 MNC) (Originator) (No Rights);GSK (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K15",
+          "value": "4"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L15",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M15",
+          "value": "mafodotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N15",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O15",
+          "value": "Data regarding overdose is not readily available. However, keratopathy was seen in 71% of patients.However, keratopathy was seen in 71% of patients. [7], [8], [9], [10]"
+        },
+        {
+          "field": "Absorption",
+          "cell": "P15",
+          "value": "Maximum Observed Concentration (Cmax) 42 ug/mL Belantamab mafodotin at a dose of 2.5mg/kg reaches a Cmax of 42 ug/mL, with a Tmax of 0.78 hours [1] Area Under the Concentration-Tim"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q15",
+          "value": "Volume of Distribution (Vd) 11 L The mean steady state volume of distribution of belantamab mafodotin was 11 L. [1] Volume of Distribution (Vd) 7.5 L Eight patients with RRMM were"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R15",
+          "value": "Monoclonal antibodies are expected to be metabolized to smaller peptides and amino acids. MMAF is expected to be metabolized by oxidation and demethylation, however further data is not readily available."
+        }
+      ],
+      "missing_fields": []
+    },
+    {
+      "id": "DRG0COMTY",
+      "name": "Telisotuzumab vedotin",
+      "brand": null,
+      "target": "Hepatocyte growth factor receptor (MET)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "3.1",
+      "clinical_enabled": false,
+      "row": 16,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A16",
+          "value": "DRG0COMTY"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B16",
+          "value": "Telisotuzumab vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C16",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D16",
+          "value": "Telisotuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E16",
+          "value": "Hepatocyte growth factor receptor (MET)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F16",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G16",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H16",
+          "value": "Lung cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I16",
+          "value": "Approved in 2025"
+        },
+        {
+          "field": "Organization",
+          "cell": "J16",
+          "value": "AbbVie (Top20 MNC) (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K16",
+          "value": "3.1"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L16",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M16",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N16",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O16",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P16",
+          "value": "Maximum Observed Concentration (Cmax) 57 ug/mL Preliminary Pharmacokinetic Parameters (Geometric Mean [%CV]) for Teliso-V Conjugate Following 2.7-mg/kg Q3W Dose in Combination With"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q16",
+          "value": "Volume of Distribution (Vd) 3.4 L The volume of distribution of telisotuzumab vedotin is 3.4 liters. [4]"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R16",
+          "value": "Telisotuzumab vedotin metabolism has not been studied in humans. The antibody component is likely broken down to smaller peptides and amino acids, while the drug component is metabolized primarily by CYP3A4."
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)"
+      ]
+    },
+    {
+      "id": "DRG0RIPVI",
+      "name": "Becotatug vedotin",
+      "brand": null,
+      "target": "Epidermal growth factor receptor (EGFR)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "3.8",
+      "clinical_enabled": false,
+      "row": 17,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A17",
+          "value": "DRG0RIPVI"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B17",
+          "value": "Becotatug vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C17",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D17",
+          "value": "Becotatug"
+        },
+        {
+          "field": "Target",
+          "cell": "E17",
+          "value": "Epidermal growth factor receptor (EGFR)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F17",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G17",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H17",
+          "value": "Oral cavity cancer; Nasopharyngeal cancer; Gastroesophageal junction adenocarcinoma; Gastric cancer; Colorectal cancer; Biliary tract cancer; Lung cancer; Head and neck cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I17",
+          "value": "Approved in 2025"
+        },
+        {
+          "field": "Organization",
+          "cell": "J17",
+          "value": "Miracogen (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K17",
+          "value": "3.8"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L17",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M17",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N17",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O17",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P17",
+          "value": null
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q17",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R17",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Absorption",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0PZSXJ",
+      "name": "Trastuzumab botidotin",
+      "brand": null,
+      "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+      "payload": "Duostatin 5",
+      "linker": "K-lock-Val-Cit-PABC",
+      "dar": "2",
+      "clinical_enabled": false,
+      "row": 18,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A18",
+          "value": "DRG0PZSXJ"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B18",
+          "value": "Trastuzumab botidotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C18",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D18",
+          "value": "Trastuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E18",
+          "value": "Receptor tyrosine-protein kinase erbB-2 (HER2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F18",
+          "value": "K-lock-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G18",
+          "value": "Duostatin 5"
+        },
+        {
+          "field": "Indication",
+          "cell": "H18",
+          "value": "Gastroesophageal junction adenocarcinoma; Gastric cancer; Lung cancer; Breast cancer; Urothelial cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I18",
+          "value": "Approved in 2025"
+        },
+        {
+          "field": "Organization",
+          "cell": "J18",
+          "value": "Levena Biopharma (Originator);Kelun Biotherapeutics"
+        },
+        {
+          "field": "DAR",
+          "cell": "K18",
+          "value": "2"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L18",
+          "value": "Reactive Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M18",
+          "value": "botidotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N18",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O18",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P18",
+          "value": "Maximum Observed Concentration (Cmax) 4.51 ug/mL Pharmacokinetic properties of A166 ADC, 0.3 mg/kg, n=3, Cycle 1 [1] Area Under the Concentration-Time Curve (AUC) 279 ug·h/mL Pharm"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q18",
+          "value": "Volume of Distribution (Vd) 3660 mL Pharmacokinetic properties of A166 ADC, 0.3 mg/kg, n=3, Cycle 1 [1] Volume of Distribution (Vd) 3160 mL Pharmacokinetic properties of A166 ADC,"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R18",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0CECRA",
+      "name": "Trastuzumab rezetecan",
+      "brand": null,
+      "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+      "payload": "SHR9265",
+      "linker": "Mc-Gly-Gly-Phe-Gly",
+      "dar": "5.3 to 6.4 (~6)",
+      "clinical_enabled": false,
+      "row": 19,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A19",
+          "value": "DRG0CECRA"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B19",
+          "value": "Trastuzumab rezetecan"
+        },
+        {
+          "field": "Brand",
+          "cell": "C19",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D19",
+          "value": "Trastuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E19",
+          "value": "Receptor tyrosine-protein kinase erbB-2 (HER2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F19",
+          "value": "Mc-Gly-Gly-Phe-Gly"
+        },
+        {
+          "field": "Payload",
+          "cell": "G19",
+          "value": "SHR9265"
+        },
+        {
+          "field": "Indication",
+          "cell": "H19",
+          "value": "Sarcoma; Oral cavity cancer; Gastroesophageal junction adenocarcinoma; Gastric cancer; Colorectal cancer; Pancreatic cancer; Biliary tract cancer; Lung cancer; Peritoneal cancer; Breast cancer; Ovarian cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I19",
+          "value": "Approved in 2025"
+        },
+        {
+          "field": "Organization",
+          "cell": "J19",
+          "value": "Jiangsu Hengrui Pharmaceuticals (Originator);Glenmark Specialty"
+        },
+        {
+          "field": "DAR",
+          "cell": "K19",
+          "value": "5.3 to 6.4 (~6)"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L19",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M19",
+          "value": "rezetecan"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N19",
+          "value": "DNA topoisomerase 1 (TOP1)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O19",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P19",
+          "value": "Maximum Observed Concentration (Cmax) 77 ug/mL Pharmacokinetic parameters after single dosing (cycle 1), 3.2 mg/kg. [1] Area Under the Concentration-Time Curve (AUC) 391 day·ug/mL"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q19",
+          "value": "Volume of Distribution (Vd) 3.6 L Pharmacokinetic parameters after single dosing (cycle 1), 3.2 mg/kg. [1] Volume of Distribution (Vd) 4 L Pharmacokinetic parameters after single d"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R19",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0BSQPI",
+      "name": "Sacituzumab tirumotecan",
+      "brand": null,
+      "target": "Tumor-associated calcium signal transducer 2 (TACSTD2)",
+      "payload": "KL610023",
+      "linker": "Pyrimidine CL2A carbonate linker",
+      "dar": "7.4",
+      "clinical_enabled": false,
+      "row": 20,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A20",
+          "value": "DRG0BSQPI"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B20",
+          "value": "Sacituzumab tirumotecan"
+        },
+        {
+          "field": "Brand",
+          "cell": "C20",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D20",
+          "value": "Sacituzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E20",
+          "value": "Tumor-associated calcium signal transducer 2 (TACSTD2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F20",
+          "value": "Pyrimidine CL2A carbonate linker"
+        },
+        {
+          "field": "Payload",
+          "cell": "G20",
+          "value": "KL610023"
+        },
+        {
+          "field": "Indication",
+          "cell": "H20",
+          "value": "Gastroesophageal junction adenocarcinoma; Gastric cancer; Colorectal cancer; Pancreatic cancer; Biliary tract cancer; Lung cancer; Thymus cancer; Peritoneal cancer; Breast cancer; Ovarian cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I20",
+          "value": "Apprpved in 2024"
+        },
+        {
+          "field": "Organization",
+          "cell": "J20",
+          "value": "Kelun Biotherapeutics (Originator);Merck & Co. (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K20",
+          "value": "7.4"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L20",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M20",
+          "value": "tirumotecan"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N20",
+          "value": "DNA topoisomerase 1 (TOP1)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O20",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P20",
+          "value": "Maximum Observed Concentration (Cmax) 25.2±6.03 ug/mL Single intravenous (i.v.) administration of SKB264 at 1 mg/kg in Cynomolgus. [1], [2] Maximum Observed Concentration (Cmax) 0."
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q20",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R20",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0IFWXM",
+      "name": "izalontamab brengitecan",
+      "brand": null,
+      "target": "Epidermal growth factor receptor (EGFR); Receptor tyrosine-protein kinase erbB-3 (HER3)",
+      "payload": "Ed-04",
+      "linker": "Gly-Mal-Gly-Gly-Phe-Gly",
+      "dar": "8",
+      "clinical_enabled": false,
+      "row": 21,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A21",
+          "value": "DRG0IFWXM"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B21",
+          "value": "izalontamab brengitecan"
+        },
+        {
+          "field": "Brand",
+          "cell": "C21",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D21",
+          "value": "Izalontamab"
+        },
+        {
+          "field": "Target",
+          "cell": "E21",
+          "value": "Epidermal growth factor receptor (EGFR); Receptor tyrosine-protein kinase erbB-3 (HER3)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F21",
+          "value": "Gly-Mal-Gly-Gly-Phe-Gly"
+        },
+        {
+          "field": "Payload",
+          "cell": "G21",
+          "value": "Ed-04"
+        },
+        {
+          "field": "Indication",
+          "cell": "H21",
+          "value": "Brain cancer; Nasopharyngeal cancer; Oesophageal cancer; Lung cancer; Peritoneal cancer; Breast cancer; Ovarian cancer; Fallopian tube cancer; Endometrial cancer; Cervical cancer; Prostate cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I21",
+          "value": "Apprpved in 2026"
+        },
+        {
+          "field": "Organization",
+          "cell": "J21",
+          "value": "Sichuan Biokin Pharmaceutical (Originator);Bristol-Myers Squibb (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K21",
+          "value": "8"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L21",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M21",
+          "value": "brengitecan"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N21",
+          "value": "DNA topoisomerase 1 (TOP1)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O21",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P21",
+          "value": null
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q21",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R21",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Absorption",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0WCTHL",
+      "name": "Pivekimab sunirine",
+      "brand": null,
+      "target": "Interleukin-3 receptor subunit alpha (IL3RA)",
+      "payload": "DGN549",
+      "linker": "Mal-adipamide-Ala-Ala",
+      "dar": "1.7~1.9",
+      "clinical_enabled": false,
+      "row": 22,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A22",
+          "value": "DRG0WCTHL"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B22",
+          "value": "Pivekimab sunirine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C22",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D22",
+          "value": "Pivekimab"
+        },
+        {
+          "field": "Target",
+          "cell": "E22",
+          "value": "Interleukin-3 receptor subunit alpha (IL3RA)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F22",
+          "value": "Mal-adipamide-Ala-Ala"
+        },
+        {
+          "field": "Payload",
+          "cell": "G22",
+          "value": "DGN549"
+        },
+        {
+          "field": "Indication",
+          "cell": "H22",
+          "value": "Acute myeloid leukaemia; Blastic plasmacytoid dendritic cell neoplasm; Mixed phenotype acute leukaemia; Acute lymphoblastic leukemia"
+        },
+        {
+          "field": "Status",
+          "cell": "I22",
+          "value": "Apprpved in 2026"
+        },
+        {
+          "field": "Organization",
+          "cell": "J22",
+          "value": "ImmunoGen (Top20 MNC) (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K22",
+          "value": "1.7~1.9"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L22",
+          "value": "Reactive Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M22",
+          "value": "sunirine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N22",
+          "value": "Human deoxyribonucleic acid (hDNA)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O22",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P22",
+          "value": "Maximum Observed Concentration (Cmax) 2830 ng/mL Participants in schedule A were dosed on day 1 of a 3-week cycle,0.09mg/kg [1] Area Under the Concentration-Time Curve (AUC) 13200"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q22",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R22",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0ULCEQ",
+      "name": "Rovalpituzumab tesirine",
+      "brand": null,
+      "target": "Delta-like protein 3 (DLL3)",
+      "payload": "SG3199 (SC-DR002)",
+      "linker": "Mal-PEG8-Val-Ala-PABC",
+      "dar": "2",
+      "clinical_enabled": false,
+      "row": 23,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A23",
+          "value": "DRG0ULCEQ"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B23",
+          "value": "Rovalpituzumab tesirine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C23",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D23",
+          "value": "Rovalpituzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E23",
+          "value": "Delta-like protein 3 (DLL3)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F23",
+          "value": "Mal-PEG8-Val-Ala-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G23",
+          "value": "SG3199 (SC-DR002)"
+        },
+        {
+          "field": "Indication",
+          "cell": "H23",
+          "value": "Brain cancer; Lung cancer; Melanoma; Prostate cancer; Thyroid cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I23",
+          "value": "Phase 3 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J23",
+          "value": "Stemcentrx (Top20 MNC) (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K23",
+          "value": "2"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L23",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M23",
+          "value": "tesirine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N23",
+          "value": "Human deoxyribonucleic acid (hDNA)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O23",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P23",
+          "value": null
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q23",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R23",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Absorption",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0PXQWR",
+      "name": "Depatuxizumab mafodotin",
+      "brand": null,
+      "target": "Epidermal growth factor receptor (EGFR)",
+      "payload": "Monomethyl auristatin F",
+      "linker": "Maleimido-caproyl",
+      "dar": "3.8",
+      "clinical_enabled": false,
+      "row": 24,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A24",
+          "value": "DRG0PXQWR"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B24",
+          "value": "Depatuxizumab mafodotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C24",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D24",
+          "value": "Depatuxizumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E24",
+          "value": "Epidermal growth factor receptor (EGFR)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F24",
+          "value": "Maleimido-caproyl"
+        },
+        {
+          "field": "Payload",
+          "cell": "G24",
+          "value": "Monomethyl auristatin F"
+        },
+        {
+          "field": "Indication",
+          "cell": "H24",
+          "value": "Brain cancer; Lung cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I24",
+          "value": "Phase 3 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J24",
+          "value": "AbbVie (Top20 MNC) (Originator);Life Science Pharmaceuticals (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K24",
+          "value": "3.8"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L24",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M24",
+          "value": "mafodotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N24",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O24",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P24",
+          "value": "Maximum Observed Concentration (Cmax) 21.6 ug/mL Geometric mean (Mean, % CV) pharmacokinetic (PK) parameters of depatux-m, total depatux, and Cys-mafodotin following first IV admin"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q24",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R24",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0WXQJL",
+      "name": "Vadastuximab talirine",
+      "brand": null,
+      "target": "Myeloid cell surface antigen CD33 (CD33)",
+      "payload": "SGD-1882",
+      "linker": "Mc-Val-Ala",
+      "dar": "2",
+      "clinical_enabled": false,
+      "row": 25,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A25",
+          "value": "DRG0WXQJL"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B25",
+          "value": "Vadastuximab talirine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C25",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D25",
+          "value": "Vadastuximab"
+        },
+        {
+          "field": "Target",
+          "cell": "E25",
+          "value": "Myeloid cell surface antigen CD33 (CD33)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F25",
+          "value": "Mc-Val-Ala"
+        },
+        {
+          "field": "Payload",
+          "cell": "G25",
+          "value": "SGD-1882"
+        },
+        {
+          "field": "Indication",
+          "cell": "H25",
+          "value": "Acute myeloid leukaemia"
+        },
+        {
+          "field": "Status",
+          "cell": "I25",
+          "value": "Phase 3 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J25",
+          "value": "Seagen (Top20 MNC) (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K25",
+          "value": "2"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L25",
+          "value": "Reactive Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M25",
+          "value": "talirine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N25",
+          "value": "Human deoxyribonucleic acid (hDNA)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O25",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P25",
+          "value": null
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q25",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R25",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Absorption",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0ELYWP",
+      "name": "Tusamitamab ravtansine",
+      "brand": null,
+      "target": "Carcinoembryonic antigen-related cell adhesion molecule 5 (CEACAM5)",
+      "payload": "DM4",
+      "linker": "N-succinimidyl 4-(2-pyridyldithio) butanoate (SPDB)",
+      "dar": "~3.8",
+      "clinical_enabled": false,
+      "row": 26,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A26",
+          "value": "DRG0ELYWP"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B26",
+          "value": "Tusamitamab ravtansine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C26",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D26",
+          "value": "Tusamitamab"
+        },
+        {
+          "field": "Target",
+          "cell": "E26",
+          "value": "Carcinoembryonic antigen-related cell adhesion molecule 5 (CEACAM5)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F26",
+          "value": "N-succinimidyl 4-(2-pyridyldithio) butanoate (SPDB)"
+        },
+        {
+          "field": "Payload",
+          "cell": "G26",
+          "value": "DM4"
+        },
+        {
+          "field": "Indication",
+          "cell": "H26",
+          "value": "Gastric cancer; Colorectal cancer; Pancreatic cancer; Biliary tract cancer; Lung cancer; Breast cancer; Ovarian cancer; Endometrial cancer; Cervical cancer; Urothelial cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I26",
+          "value": "Phase 3 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J26",
+          "value": "ImmunoGen (Top20 MNC) (Originator) (No Rights);Sanofi (Top20 MNC);Innovent Biologics"
+        },
+        {
+          "field": "DAR",
+          "cell": "K26",
+          "value": "~3.8"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L26",
+          "value": "Random Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M26",
+          "value": "ravtansine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N26",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O26",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P26",
+          "value": "Maximum Observed Concentration (Cmax) 4.58 ug/mL Plasma pharmacokinetics of tusamitamab ravtansine on Cycle 1, 10 mg/m2, N=1. [1] Maximum Observed Concentration (Cmax) 14.1 ug/mL P"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q26",
+          "value": "Volume of Distribution (Vd) 5.05 L Plasma pharmacokinetics of tusamitamab ravtansine on Cycle 1, 10 mg/m2, N=1. [1] Volume of Distribution (Vd) 3.97 L Plasma pharmacokinetics of tu"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R26",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0EPHMC",
+      "name": "Anetumab ravtansine",
+      "brand": null,
+      "target": "Mesothelin (MSLN)",
+      "payload": "DM4",
+      "linker": "N-succinimidyl 4-(2-pyridyldithio) butanoate (SPDB)",
+      "dar": "3.2",
+      "clinical_enabled": false,
+      "row": 27,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A27",
+          "value": "DRG0EPHMC"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B27",
+          "value": "Anetumab ravtansine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C27",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D27",
+          "value": "Anetumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E27",
+          "value": "Mesothelin (MSLN)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F27",
+          "value": "N-succinimidyl 4-(2-pyridyldithio) butanoate (SPDB)"
+        },
+        {
+          "field": "Payload",
+          "cell": "G27",
+          "value": "DM4"
+        },
+        {
+          "field": "Indication",
+          "cell": "H27",
+          "value": "Gastroesophageal junction adenocarcinoma; Gastric cancer; Pancreatic cancer; Biliary tract cancer; Lung cancer; Pleura mesothelioma; Thymus cancer; Peritoneal cancer; Breast cancer; Ovarian cancer; Fallopian tube cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I27",
+          "value": "Phase 2 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J27",
+          "value": "Bayer (Top20 MNC) (Originator);ImmunoGen (Top20 MNC);MorphoSys (Top20 MNC)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K27",
+          "value": "3.2"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L27",
+          "value": "Random Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M27",
+          "value": "ravtansine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N27",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O27",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P27",
+          "value": null
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q27",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R27",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Absorption",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0OZSZX",
+      "name": "Upifitamab rilsodotin",
+      "brand": null,
+      "target": "Sodium-dependent phosphate transport protein 2B (SLC34A2)",
+      "payload": "AF-HPA",
+      "linker": "Dolaflexin polymer",
+      "dar": "10~15",
+      "clinical_enabled": false,
+      "row": 28,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A28",
+          "value": "DRG0OZSZX"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B28",
+          "value": "Upifitamab rilsodotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C28",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D28",
+          "value": "Upifitamab"
+        },
+        {
+          "field": "Target",
+          "cell": "E28",
+          "value": "Sodium-dependent phosphate transport protein 2B (SLC34A2)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F28",
+          "value": "Dolaflexin polymer"
+        },
+        {
+          "field": "Payload",
+          "cell": "G28",
+          "value": "AF-HPA"
+        },
+        {
+          "field": "Indication",
+          "cell": "H28",
+          "value": "Lung cancer; Peritoneal cancer; Ovarian cancer; Fallopian tube cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I28",
+          "value": "Phase 3 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J28",
+          "value": "Mersana Therapeutics (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K28",
+          "value": "10~15"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L28",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M28",
+          "value": "rilsodotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N28",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O28",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P28",
+          "value": null
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q28",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R28",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Absorption",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0IRZIB",
+      "name": "Glembatumumab vedotin",
+      "brand": null,
+      "target": "Transmembrane glycoprotein NMB (GPNMB)",
+      "payload": "Monomethyl auristatin E",
+      "linker": "Mc-Val-Cit-PABC",
+      "dar": "2.7 (2 to 4)",
+      "clinical_enabled": false,
+      "row": 29,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A29",
+          "value": "DRG0IRZIB"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B29",
+          "value": "Glembatumumab vedotin"
+        },
+        {
+          "field": "Brand",
+          "cell": "C29",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D29",
+          "value": "Glembatumumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E29",
+          "value": "Transmembrane glycoprotein NMB (GPNMB)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F29",
+          "value": "Mc-Val-Cit-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G29",
+          "value": "Monomethyl auristatin E"
+        },
+        {
+          "field": "Indication",
+          "cell": "H29",
+          "value": "Sarcoma; Lung cancer; Melanoma; Breast cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I29",
+          "value": "Phase 2 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J29",
+          "value": "CuraGen (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K29",
+          "value": "2.7 (2 to 4)"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L29",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M29",
+          "value": "vedotin"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N29",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O29",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P29",
+          "value": "Maximum Observed Concentration (Cmax) 44.8 ug/mL Pharmacokinetic parameters for ADC at 1.88 mg/kg. [1] Area Under the Concentration-Time Curve (AUC) 2373 ug·h/mL Pharmacokinetic pa"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q29",
+          "value": "Volume of Distribution (Vd) 43 mL/kg Pharmacokinetic parameters for ADC at 1.88 mg/kg. [1] Volume of Distribution (Vd) 46.95 mL/kg Pharmacokinetic parameters for ADC at 1.88 mg/kg"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R29",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0SDZSF",
+      "name": "Lorvotuzumab mertansine",
+      "brand": null,
+      "target": "Neural cell adhesion molecule 1 (NCAM1)",
+      "payload": "DM1",
+      "linker": "N-succinimidyl 4-(2-pyridyldithio) pentanoate (SPP)",
+      "dar": "3.5",
+      "clinical_enabled": false,
+      "row": 30,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A30",
+          "value": "DRG0SDZSF"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B30",
+          "value": "Lorvotuzumab mertansine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C30",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D30",
+          "value": "Lorvotuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E30",
+          "value": "Neural cell adhesion molecule 1 (NCAM1)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F30",
+          "value": "N-succinimidyl 4-(2-pyridyldithio) pentanoate (SPP)"
+        },
+        {
+          "field": "Payload",
+          "cell": "G30",
+          "value": "DM1"
+        },
+        {
+          "field": "Indication",
+          "cell": "H30",
+          "value": "Multiple myeloma; Unspecified leukaemia; Sarcoma; Lung cancer; Merkel cell carcinoma; Ovarian cancer; Kidney cancer; Unspecific solid tumor"
+        },
+        {
+          "field": "Status",
+          "cell": "I30",
+          "value": "Phase 2 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J30",
+          "value": "ImmunoGen (Top20 MNC) (Originator);British Biotech"
+        },
+        {
+          "field": "DAR",
+          "cell": "K30",
+          "value": "3.5"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L30",
+          "value": "Random Lysines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M30",
+          "value": "mertansine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N30",
+          "value": "Microtubule (MT)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O30",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P30",
+          "value": "Maximum Observed Concentration (Cmax) 32.6 ug/mL Summary of Plasma Pharmacokinetic Parameters for Lorvotuzumab Mertansine After Infusion in Combination With Carboplatin and Etoposi"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q30",
+          "value": null
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R30",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Distribution",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0JBKMD",
+      "name": "Labetuzumab govitecan",
+      "brand": null,
+      "target": "Carcinoembryonic antigen-related cell adhesion molecule 5 (CEACAM5)",
+      "payload": "SN-38",
+      "linker": "CL2A",
+      "dar": "7.6~7.8",
+      "clinical_enabled": false,
+      "row": 31,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A31",
+          "value": "DRG0JBKMD"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B31",
+          "value": "Labetuzumab govitecan"
+        },
+        {
+          "field": "Brand",
+          "cell": "C31",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D31",
+          "value": "Labetuzumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E31",
+          "value": "Carcinoembryonic antigen-related cell adhesion molecule 5 (CEACAM5)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F31",
+          "value": "CL2A"
+        },
+        {
+          "field": "Payload",
+          "cell": "G31",
+          "value": "SN-38"
+        },
+        {
+          "field": "Indication",
+          "cell": "H31",
+          "value": "Colorectal cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I31",
+          "value": "Phase 2 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J31",
+          "value": "Immunomedics (Top20 MNC) (Originator)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K31",
+          "value": "7.6~7.8"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L31",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M31",
+          "value": "govitecan"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N31",
+          "value": "DNA topoisomerase 1 (TOP1)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O31",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P31",
+          "value": "Area Under the Concentration-Time Curve (AUC) 1606 ug·h/mL PK parameters of 4 mg/kg Labetuzumab Govitecan, AUClast. [1] Maximum Observed Concentration (Cmax) 63.7 ug/mL PK paramete"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q31",
+          "value": "Volume of Distribution (Vd) 55.7±13.4 mL/kg PK parameters of 4 mg/kg Labetuzumab Govitecan. [1] Volume of Distribution (Vd) 55.5 mL/kg PK parameters of 6 mg/kg Labetuzumab Goviteca"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R31",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Metabolism"
+      ]
+    },
+    {
+      "id": "DRG0FUFBP",
+      "name": "Camidanlumab tesirine",
+      "brand": null,
+      "target": "Interleukin-2 receptor subunit alpha (IL2RA)",
+      "payload": "SG3199 (SC-DR002)",
+      "linker": "Mal-PEG8-Val-Ala-PABC",
+      "dar": "2.25~2.3",
+      "clinical_enabled": false,
+      "row": 32,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A32",
+          "value": "DRG0FUFBP"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B32",
+          "value": "Camidanlumab tesirine"
+        },
+        {
+          "field": "Brand",
+          "cell": "C32",
+          "value": null
+        },
+        {
+          "field": "Antibody",
+          "cell": "D32",
+          "value": "Camidanlumab"
+        },
+        {
+          "field": "Target",
+          "cell": "E32",
+          "value": "Interleukin-2 receptor subunit alpha (IL2RA)"
+        },
+        {
+          "field": "Linker",
+          "cell": "F32",
+          "value": "Mal-PEG8-Val-Ala-PABC"
+        },
+        {
+          "field": "Payload",
+          "cell": "G32",
+          "value": "SG3199 (SC-DR002)"
+        },
+        {
+          "field": "Indication",
+          "cell": "H32",
+          "value": "Myelodysplastic syndrome; Acute myeloid leukaemia; Unspecific non-hodgkin lymphoma; Hodgkin lymphoma; Acute lymphoblastic leukemia; Oesophageal cancer; Gastric cancer; Colorectal cancer; Pancreatic cancer; Lung cancer; Melanoma; Breast cancer"
+        },
+        {
+          "field": "Status",
+          "cell": "I32",
+          "value": "Phase 2 (discontinued)"
+        },
+        {
+          "field": "Organization",
+          "cell": "J32",
+          "value": "ADC Therapeutics (Originator);Spirogen (Top20 MNC) (Originator) (No Rights);Genmab (No Rights)"
+        },
+        {
+          "field": "DAR",
+          "cell": "K32",
+          "value": "2.25~2.3"
+        },
+        {
+          "field": "Conjugate type",
+          "cell": "L32",
+          "value": "Random Cysteines"
+        },
+        {
+          "field": "Linker-payload",
+          "cell": "M32",
+          "value": "tesirine"
+        },
+        {
+          "field": "Payload target",
+          "cell": "N32",
+          "value": "Human deoxyribonucleic acid (hDNA)"
+        },
+        {
+          "field": "Toxicity (verbatim)",
+          "cell": "O32",
+          "value": null
+        },
+        {
+          "field": "Absorption",
+          "cell": "P32",
+          "value": "Maximum Observed Concentration (Cmax) 648 ug/L Summary of camidanlumab tesirine PK parameters in serum following the 45 ug/kg dose Q3W for the total study population, Cycle 1. [2]"
+        },
+        {
+          "field": "Distribution",
+          "cell": "Q32",
+          "value": "Volume of Distribution (Vd) 5.08 L Summary of camidanlumab tesirine PK parameters in serum following the 45 ug/kg dose Q3W for the total study population, Cycle 1. [2] Volume of Di"
+        },
+        {
+          "field": "Metabolism",
+          "cell": "R32",
+          "value": null
+        }
+      ],
+      "missing_fields": [
+        "Brand",
+        "Toxicity (verbatim)",
+        "Metabolism"
+      ]
+    }
+  ],
+  "derived_records": [
+    {
+      "id": "DRG0CYMEB",
+      "row": 3,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A3",
+          "value": "DRG0CYMEB"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B3",
+          "value": "Trastuzumab emtansine"
+        },
+        {
+          "field": "Linker class",
+          "cell": "C3",
+          "value": "Non-cleavable thioether"
+        },
+        {
+          "field": "Release behaviour",
+          "cell": "D3",
+          "value": "Requires full lysosomal proteolysis; releases lysine-MCC-DM1"
+        },
+        {
+          "field": "Payload class",
+          "cell": "E3",
+          "value": "Maytansinoid (antimitotic, tubulin)"
+        },
+        {
+          "field": "Bystander potential",
+          "cell": "F3",
+          "value": "no (ADCdb field)"
+        },
+        {
+          "field": "Released-payload clearance",
+          "cell": "G3",
+          "value": "CYP3A4/3A5 (hepatic)"
+        },
+        {
+          "field": "Prescribing flags (DRAFT - verify)",
+          "cell": "H3",
+          "value": "Thrombocytopenia; hepatotoxicity; reduced LVEF; caution with strong CYP3A4 inhibitors; caution with anticoagulants and antiplatelets"
+        }
+      ]
+    },
+    {
+      "id": "DRG0ERKBH",
+      "row": 4,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A4",
+          "value": "DRG0ERKBH"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B4",
+          "value": "Trastuzumab deruxtecan"
+        },
+        {
+          "field": "Linker class",
+          "cell": "C4",
+          "value": "Enzymatically cleavable tetrapeptide (cathepsin B/L)"
+        },
+        {
+          "field": "Release behaviour",
+          "cell": "D4",
+          "value": "Cleaved intracellularly; also partial extracellular release"
+        },
+        {
+          "field": "Payload class",
+          "cell": "E4",
+          "value": "Camptothecin / exatecan derivative (TOP1)"
+        },
+        {
+          "field": "Bystander potential",
+          "cell": "F4",
+          "value": "yes (ADCdb field)"
+        },
+        {
+          "field": "Released-payload clearance",
+          "cell": "G4",
+          "value": "CYP3A4 (hepatic); partial renal"
+        },
+        {
+          "field": "Prescribing flags (DRAFT - verify)",
+          "cell": "H4",
+          "value": "Interstitial lung disease / pneumonitis (boxed); neutropenia; nausea and vomiting; reduced LVEF; pulmonary monitoring"
+        }
+      ]
+    },
+    {
+      "id": "DRG0EKTUN",
+      "row": 5,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A5",
+          "value": "DRG0EKTUN"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B5",
+          "value": "Sacituzumab govitecan"
+        },
+        {
+          "field": "Linker class",
+          "cell": "C5",
+          "value": "Hydrolysable pH-sensitive carbonate (CL2A)"
+        },
+        {
+          "field": "Release behaviour",
+          "cell": "D5",
+          "value": "Substantial extracellular hydrolysis; high free-payload fraction"
+        },
+        {
+          "field": "Payload class",
+          "cell": "E5",
+          "value": "Camptothecin (TOP1)"
+        },
+        {
+          "field": "Bystander potential",
+          "cell": "F5",
+          "value": "yes (ADCdb field)"
+        },
+        {
+          "field": "Released-payload clearance",
+          "cell": "G5",
+          "value": "UGT1A1 glucuronidation; SN-38G renally eliminated"
+        },
+        {
+          "field": "Prescribing flags (DRAFT - verify)",
+          "cell": "H5",
+          "value": "Severe neutropenia (boxed); severe diarrhoea (boxed); UGT1A1*28 poor metabolisers at higher risk; renal impairment relevant"
+        }
+      ]
+    },
+    {
+      "id": "DRG0ZOYQV",
+      "row": 6,
+      "cells": [
+        {
+          "field": "ADCdb_ID",
+          "cell": "A6",
+          "value": "DRG0ZOYQV"
+        },
+        {
+          "field": "ADC name",
+          "cell": "B6",
+          "value": "Datopotamab deruxtecan"
+        },
+        {
+          "field": "Linker class",
+          "cell": "C6",
+          "value": "Enzymatically cleavable tetrapeptide (cathepsin B/L)"
+        },
+        {
+          "field": "Release behaviour",
+          "cell": "D6",
+          "value": "Cleaved intracellularly; also partial extracellular release"
+        },
+        {
+          "field": "Payload class",
+          "cell": "E6",
+          "value": "Camptothecin / exatecan derivative (TOP1)"
+        },
+        {
+          "field": "Bystander potential",
+          "cell": "F6",
+          "value": "(blank in ADCdb)"
+        },
+        {
+          "field": "Released-payload clearance",
+          "cell": "G6",
+          "value": "CYP3A4 (hepatic); partial renal"
+        },
+        {
+          "field": "Prescribing flags (DRAFT - verify)",
+          "cell": "H6",
+          "value": "Stomatitis / mucositis; ocular surface toxicity and dry eye; interstitial lung disease (lower than T-DXd); nausea"
+        }
+      ]
+    }
+  ]
+}

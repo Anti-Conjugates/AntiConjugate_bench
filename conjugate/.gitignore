@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.log
+coverage/
+.DS_Store
+.venv-modal/
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.ruff_cache/
+.modal.toml
+docs/agent-build-results.json
+docs/demo-build-results.json

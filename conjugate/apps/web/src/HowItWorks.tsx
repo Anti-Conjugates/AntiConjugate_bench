@@ -1,0 +1,99 @@
+const stages = [
+  { id: 'scope', actor: 'controller', note: 'Validates the request against the shared schema.' },
+  { id: 'plan', actor: 'controller, or Claude if selected', note: 'Picks which sources to read.' },
+  { id: 'retrieve', actor: 'local tools', note: 'read_workbook, read_label, read_derived' },
+  { id: 'draft', actor: 'controller, or Claude if selected', note: 'Chooses claim ids and source ids.' },
+  { id: 'challenge', actor: 'deterministic verifier', note: 'Tries to break each citation.' },
+  { id: 'verify', actor: 'deterministic verifier', note: 'Accepts or rejects the draft.' },
+  { id: 'handoff', actor: 'controller', note: 'Marks the result draft, blocked, needs human.' },
+] as const;
+
+const checks = [
+  { code: 'product_identity', what: 'The draft names the requested product and every cited source belongs to it.' },
+  { code: 'source_allowlist', what: 'Every cited source id is on the allowlist for this product and source setting.' },
+  { code: 'exact_source_claim_pairing', what: 'The claim id and its source set match the independent definition for the question. Nothing is repaired.' },
+  { code: 'source_eligibility', what: 'No derived note or other ineligible source is cited as primary evidence.' },
+  { code: 'evidence_availability', what: 'Every cited source was actually retrieved during the run.' },
+  { code: 'unique_claims', what: 'No claim id appears twice.' },
+  { code: 'omitted_claim_ids', what: 'The claim the question expects is present. If not, it is listed as omitted, not added.' },
+  { code: 'receipt_integrity', what: 'Each source record matches what the local tool read, with no duplicates.' },
+  { code: 'incomplete_provenance', what: 'Always unknown. The workbook has no extraction date or sheet name and the label summaries are paraphrases pending review.' },
+  { code: 'uncalibrated_confidence', what: 'Always unknown. No probability is computed.' },
+] as const;
+
+const boxWidth = 112;
+const gap = 20;
+const diagramWidth = stages.length * (boxWidth + gap) + gap;
+
+export function HowItWorks() {
+  return (
+    <section className="how-view" aria-labelledby="how-heading">
+      <header className="view-heading">
+        <h1 id="how-heading">How it works</h1>
+        <p>A run goes through seven stages. The model, when selected, only plans and drafts. The verifier never sees model prose, only claim ids and source ids.</p>
+      </header>
+
+      <section aria-labelledby="pipeline-heading">
+        <h2 id="pipeline-heading">Pipeline</h2>
+        <div className="pipeline-scroll" tabIndex={0} role="region" aria-label="Pipeline diagram, scrollable">
+          <svg className="pipeline-svg" width={diagramWidth} height={176} viewBox={`0 0 ${diagramWidth} 176`} role="img" aria-labelledby="pipeline-title pipeline-desc">
+            <title id="pipeline-title">Seven pipeline stages from scope to handoff</title>
+            <desc id="pipeline-desc">Scope, plan, retrieve, draft, challenge, verify, handoff, in a row. The controller runs scope, plan, draft and handoff. Claude replaces the controller for plan and draft only when selected. Local tools run retrieve. The deterministic verifier runs challenge and verify and receives only claim ids and source ids.</desc>
+            <defs><marker id="pipeline-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" /></marker></defs>
+            {[1, 3].map((index) => <rect key={index} className="pipeline-band pipeline-band-model" x={gap + index * (boxWidth + gap) - 6} y={6} width={boxWidth + 12} height={92} rx={3} />)}
+            <text className="pipeline-band-label" x={gap + 1 * (boxWidth + gap)} y={20}>Claude if selected: plan and draft only</text>
+            <rect className="pipeline-band pipeline-band-verifier" x={gap + 4 * (boxWidth + gap) - 8} y={6} width={2 * (boxWidth + gap) - gap + 16} height={92} rx={3} />
+            <text className="pipeline-band-label" x={gap + 4 * (boxWidth + gap)} y={20}>verifier: ids only, no prose</text>
+            {stages.map((stage, index) => {
+              const x = gap + index * (boxWidth + gap);
+              return <g key={stage.id} className={`pipeline-stage actor-${stage.actor.split(',')[0]?.replace(' ', '-')}`}>
+                {index < stages.length - 1 && <line x1={x + boxWidth} y1={62} x2={x + boxWidth + gap - 1} y2={62} markerEnd="url(#pipeline-arrow)" />}
+                <rect x={x} y={34} width={boxWidth} height={56} rx={3} />
+                <text className="pipeline-stage-name" x={x + boxWidth / 2} y={58} textAnchor="middle">{stage.id}</text>
+                <text className="pipeline-stage-step" x={x + boxWidth / 2} y={78} textAnchor="middle">{index + 1} of 7</text>
+                <text className="pipeline-actor" x={x + boxWidth / 2} y={118} textAnchor="middle">{stage.actor.split(',')[0]}</text>
+                {stage.id === 'retrieve' && <>
+                  <text className="pipeline-tool" x={x + boxWidth / 2} y={136} textAnchor="middle">read_workbook</text>
+                  <text className="pipeline-tool" x={x + boxWidth / 2} y={150} textAnchor="middle">read_label</text>
+                  <text className="pipeline-tool" x={x + boxWidth / 2} y={164} textAnchor="middle">read_derived</text>
+                </>}
+                {(stage.id === 'plan' || stage.id === 'draft') && <text className="pipeline-tool" x={x + boxWidth / 2} y={136} textAnchor="middle">or Claude</text>}
+              </g>;
+            })}
+          </svg>
+        </div>
+        <ol className="pipeline-list">
+          {stages.map((stage, index) => <li key={stage.id}><code>{stage.id}</code> <span className="pipeline-list-actor">{stage.actor}</span><span>{stage.note}</span>{index === 2 && <span className="field-hint">Each tool reads one local file: the workbook, the label summaries or the derived sheet.</span>}</li>)}
+        </ol>
+        <p>Rules only mode runs every stage without a model call. When Claude is selected, it returns ids for plan and draft; its text is kept in the trace and nowhere else. If the Claude call fails, the run fails. It does not switch to rules only on its own.</p>
+      </section>
+
+      <section aria-labelledby="checks-list-heading">
+        <h2 id="checks-list-heading">What the verifier checks</h2>
+        <p>Each run reports these codes in the Checks table with an outcome of <code>passed</code>, <code>caught</code> or <code>unknown</code>. One <code>caught</code> rejects the whole draft.</p>
+        <table className="checks-table"><caption className="sr-only">Verifier check codes</caption>
+          <thead><tr><th scope="col">Code</th><th scope="col">What it checks</th></tr></thead>
+          <tbody>{checks.map((check) => <tr key={check.code}><th scope="row"><code>{check.code}</code></th><td>{check.what}</td></tr>)}</tbody>
+        </table>
+        <p className="field-hint"><code>incomplete_provenance</code> and <code>uncalibrated_confidence</code> are always unknown. They are there so the result cannot read as fully provenanced or as a confidence score.</p>
+      </section>
+
+      <section aria-labelledby="not-heading">
+        <h2 id="not-heading">What it does not do</h2>
+        <ul className="plain-list">
+          <li>It does not choose a treatment.</li>
+          <li>It does not give a dose.</li>
+          <li>It does not assess eligibility. <code>eligibility</code> is always <code>not_assessed</code>.</li>
+          <li>It does not produce calibrated probabilities. <code>answer_correctness_probability</code> and <code>omission_probability</code> are always <code>null</code>.</li>
+          <li>It does not fetch anything from the web during a run. It reads the imported workbook and the local label summaries only.</li>
+        </ul>
+        <p>Every result is <code>draft_pending_pharmacist</code> with <code>needs_human: true</code> and a blocked clinical gate.</p>
+      </section>
+
+      <section aria-labelledby="credits-heading">
+        <h2 id="credits-heading">Credits</h2>
+        <p>The engineering workflow in this repository is adapted from pstack by poteto under the MIT license. That workflow builds the app; it is not the runtime agent.</p>
+      </section>
+    </section>
+  );
+}
