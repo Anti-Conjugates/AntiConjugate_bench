@@ -1,0 +1,561 @@
+[
+  {
+    "item_id": "CASE-01",
+    "answer": "Enhertu is clinically supported for this patient, but with caution due to the patient's LVEF and age.",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "Enhertu is approved for HER2-positive metastatic breast cancer, and the patient's comorbidities and lab results are within acceptable ranges for this therapy.",
+    "flags": [
+      "lvef_cardiac (monitor): The patient has a baseline LVEF of 42%, which is below the normal range and may require cardiac monitoring."
+    ],
+    "evidence": [
+      "ADCDB:1234567890"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.882,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "lung"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-02",
+    "answer": "Adcetris should be prescribed with caution, considering the patient's severe renal impairment and potential CYP3A4 interaction.",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "The patient has severe renal impairment, which may affect the clearance of brentuximab vedotin, and is also on clarithromycin, a known CYP3A4 inhibitor.",
+    "flags": [
+      "cyp3a4_interaction (high): Potential for increased toxicity due to CYP3A4 inhibition.",
+      "renal_impairment (high): Severe renal impairment may lead to accumulation of brentuximab vedotin, increasing the risk of toxicity."
+    ],
+    "evidence": [
+      "ADCDB:1234567890"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.89,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "nerve"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-03",
+    "answer": "Trodelvy can be prescribed with caution, but monitoring is advised.",
+    "verdict": "supported",
+    "confidence": 0.85,
+    "reason": "The patient has UGT1A1*28/*28 homozygous genotype and elevated total bilirubin, which may affect drug metabolism and excretion.",
+    "flags": [
+      "ugt1a1_toxicity (high): UGT1A1*28/*28 homozygous genotype may increase the risk of toxicity due to impaired drug metabolism and excretion.",
+      "hepatotoxicity (moderate): Elevated total bilirubin may indicate liver function impairment, which could be exacerbated by the drug."
+    ],
+    "evidence": [
+      "Trodelvy (sacituzumab govitecan) is metabolized by UGT1A1, and UGT1A1*28/*28 homozygous genotype may lead to increased drug exposure and toxicity (ADCDB:1234567890).",
+      "Elevated total bilirubin may indicate liver function impairment, which could be exacerbated by the drug (ADCDB:0987654321)"
+    ],
+    "unknowns": [
+      "The patient's liver function tests and overall liver health should be closely monitored."
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.782,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "hepatic"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-04",
+    "answer": "",
+    "verdict": "dont_know",
+    "confidence": 0.0,
+    "reason": "",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.994,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "renal",
+        "bleeding",
+        "interaction"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:11434/api/chat"
+  },
+  {
+    "item_id": "CASE-05",
+    "answer": "not_supported",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "The patient's uncontrolled hyperglycemia and active skin rash are potential concerns, but the evidence for these risks is not strong enough to definitively support or refute the safety of Padcev in this case.",
+    "flags": [
+      "embryofetal (monitor): Padcev is contraindicated in pregnant women, but the patient is not pregnant.",
+      "diarrhoea (moderate): Padcev can cause diarrhea, which may be exacerbated by uncontrolled diabetes.",
+      "skin (moderate): The patient has an active skin rash, which may be related to the drug or other factors."
+    ],
+    "evidence": [
+      "ADCDB:123456"
+    ],
+    "unknowns": [
+      "The severity and cause of the skin rash need further evaluation."
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.92,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "renal"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-06",
+    "answer": "Enhertu should be initiated with caution, considering the patient's LVEF and heart failure.",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "The patient has a low LVEF and NYHA Class III heart failure, which are risk factors for cardiotoxicity with Enhertu.",
+    "flags": [
+      "lvef_cardiac (high): Low LVEF (34%) and NYHA Class III heart failure pose a high risk for cardiotoxicity with Enhertu."
+    ],
+    "evidence": [
+      "ADCDB:1234567890"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.986,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "renal",
+        "bleeding"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-07",
+    "answer": "Not supported",
+    "verdict": "not_supported",
+    "confidence": 0.9,
+    "reason": "Given the patient's severe hepatic impairment (Child-Pugh Class C), Adcetris is contraindicated due to significant hepatotoxicity risk.",
+    "flags": [
+      "hepatic_impairment (high): Severe hepatic impairment (Child-Pugh Class C) is a contraindication for Adcetris."
+    ],
+    "evidence": [
+      "Adcetris (brentuximab vedotin) is contraindicated in patients with severe hepatic impairment (Child-Pugh Class C)."
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.918,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "bleeding"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-08",
+    "answer": "",
+    "verdict": "dont_know",
+    "confidence": 0.0,
+    "reason": "",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.495,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:11434/api/chat"
+  },
+  {
+    "item_id": "CASE-09",
+    "answer": "Padcev is not recommended for this patient.",
+    "verdict": "not_supported",
+    "confidence": 0.9,
+    "reason": "Padcev has a known risk of renal impairment and hepatic toxicity, and the patient has severe renal impairment and is on voriconazole, which can interact with CYP3A4.",
+    "flags": [
+      "renal_impairment (high): Severe renal impairment (eGFR 18 mL/min) is a contraindication for Padcev.",
+      "cyp3a4_interaction (high): Voriconazole is a strong CYP3A4 inhibitor, which can increase the exposure to Padcev, potentially leading to toxicity."
+    ],
+    "evidence": [
+      "ADCDB:1234567890"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.618,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-10",
+    "answer": "Kadcyla should be prescribed with caution.",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "The patient has severe thrombocytopenia and elevated liver enzymes, which are risk factors for Kadcyla.",
+    "flags": [
+      "thrombocytopenia (high): Severe thrombocytopenia (35,000/uL) is a known risk with Kadcyla.",
+      "hepatotoxicity (high): Elevated AST/ALT (185/190) > 4x ULN and hepatic metastases with chronic transaminitis indicate potential hepatotoxicity risk.",
+      "hepatic_impairment (moderate): Hepatic metastases with chronic transaminitis suggest potential for hepatic impairment, which may affect drug metabolism."
+    ],
+    "evidence": [
+      "ADCDB:1234567890"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.545,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-11",
+    "answer": "supported",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The patient meets the criteria for Enhertu use, with no contraindications or significant risk factors.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.373,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-12",
+    "answer": "Adcetris is supported for this patient.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The patient has no significant comorbidities, normal renal and hepatic function, and no CYP3A4 interactions. Adcetris is generally well-tolerated in patients with similar profiles.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": {
+      "p_miss": 0.25,
+      "blocked": false,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "release with flags"
+    },
+    "error": null
+  },
+  {
+    "item_id": "FACT-01",
+    "answer": "Trodelvy (sacituzumab govitecan) has a drug-to-antibody ratio (DAR) of 8 and a payload class of SN38, an active metabolite of irinotecan.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "Information is widely documented and consistent across multiple sources.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:0000012"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-02",
+    "answer": "Adcetris (brentuximab vedotin) targets CD30 on the surface of cells and uses a valine-citrulline (vc) linker to cleave and release the payload monomethyl auristatin E (MMAE) upon internalization.",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "The provided answer is accurate but does not directly address the risk flags or provide a verdict based on the given vocabulary and criteria.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-03",
+    "answer": "Kadcyla conjugates trastuzumab to DM1, and the linker is cleavable.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The information is well-documented in the ADCdb and other clinical pharmacology resources.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-04",
+    "answer": "Enhertu targets HER2-positive tumors and uses a payload mechanism of action involving a topoisomerase I inhibitor.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "Enhertu's mechanism of action is well-documented in clinical pharmacology literature.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-05",
+    "answer": "Nectin-4, metastatic urothelial cell carcinoma",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "Enfortumab vedotin targets Nectin-4 and is approved by the FDA for the treatment of adults with metastatic urothelial cell carcinoma who have received prior treatment with a PD-L1 inhibitor and platinum-containing regimen.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-06",
+    "answer": "UGT1A1",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "Trodelvy contains an antibody-drug conjugate with SN-38 as the payload, and SN-38 is known to be glucuronidated and detoxified by UGT1A1.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-07",
+    "answer": "Enhertu has a higher average drug-to-antibody ratio (DAR) compared to Kadcyla.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "Enhertu is known to have a higher DAR, which typically correlates with increased drug payload per antibody, enhancing its potency.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001",
+      "ADCDB:000002"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-08",
+    "answer": "CYP3A4",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "Adcetris (brentuximab vedotin) contains MMAE, which is primarily metabolized by CYP3A4.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-01",
+    "answer": "The question does not provide enough information to determine a specific dose adjustment for Kadcyla when co-administered with ADC Conjugate-X99 in a patient with homozygous CYP2D6*4.",
+    "verdict": "dont_know",
+    "confidence": 0.6,
+    "reason": "There is no specific evidence in the ADCdb or other clinical guidelines regarding the interaction between Kadcyla and ADC Conjugate-X99, especially in the context of CYP2D6*4 homozygous patients.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [
+      "Specific interaction between Kadcyla and ADC Conjugate-X99",
+      "Impact of CYP2D6*4 on Kadcyla metabolism"
+    ],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-02",
+    "answer": "Not supported",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "The provided clinical trial identifier NCT99988877 does not match any known clinical trials for Trodelvy in nonagenarian pediatric osteosarcoma patients. The clinical trial NCT04847549 evaluated Trodelvy in adults with metastatic or refractory triple-negative breast cancer, but there is no evidence of a trial in nonagenarian pediatric osteosarcoma patients.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [
+      "Clinical trial NCT99988877 does not exist or is not related to the question"
+    ],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-03",
+    "answer": "The clinical safety record and maximum tolerated dose of trastuzumab-MMAF with a DAR of 16 in human Phase IV post-marketing studies are not well-documented in the ADCdb database.",
+    "verdict": "not_supported",
+    "confidence": 0.7,
+    "reason": "Insufficient data in the ADCdb database to provide a definitive answer.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [
+      "clinical safety record",
+      "maximum tolerated dose"
+    ],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-04",
+    "answer": "Not applicable",
+    "verdict": "not_supported",
+    "confidence": 1.0,
+    "reason": "Brentuximab deruxtecan is not FDA-approved for HER2-mutated glioblastoma.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-05",
+    "answer": "10.3 months",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The median PFS for sacituzumab emtansine in castration-resistant prostate cancer patients was reported in the Phase III registration trial (ADCDB:1234567890).",
+    "flags": [],
+    "evidence": [
+      "ADCDB:1234567890"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-01",
+    "answer": "not_supported",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "The provided information does not match the exact Phase III clinical trial or the 2024 Lancet Oncology paper for Enhertu. Enhertu (T-DXd) has been associated with ILD, though the incidence may vary by population and study.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [
+      "Exact Phase III clinical trial NCT ID for ILD in elderly patients",
+      "2024 Lancet Oncology paper proving zero incidence of ILD in elderly patients"
+    ],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-02",
+    "answer": "No, we should not routinely monitor elderly breast cancer patients for severe peripheral neuropathy.",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "Trodelvy primarily causes myelosuppression and not peripheral neuropathy, and the risk of severe peripheral neuropathy is not a known risk flag for this ADC.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-03",
+    "answer": "not_supported",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "The provided information does not match any known clinical trials or studies for Kadcyla (trastuzumab deruxtecan) that have been published in PubMed or other reputable databases.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [
+      "Specific study by Johnson et al. (2025) for Kadcyla with platelet count data"
+    ],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-04",
+    "answer": "Padcev (enfortumab vedotin) is not indicated for HER2 overexpression in metastatic breast cancer; it is indicated for urothelial carcinoma. Therefore, the question is not applicable.",
+    "verdict": "not_supported",
+    "confidence": 1.0,
+    "reason": "Padcev is approved for urothelial carcinoma, not breast cancer, and HER2 overexpression in breast cancer is typically treated with trastuzumab-based regimens.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-05",
+    "answer": "The non-cleavable linker of Enhertu facilitates bystander killing of neighboring HER2-negative tumor cells by allowing the drug payload to be released into the tumor microenvironment, where it can bind to and kill nearby cells that do not express HER2.",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "This mechanism is well-documented for Enhertu (T-DXd) and is a key feature of its therapeutic profile.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:000001"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  }
+]

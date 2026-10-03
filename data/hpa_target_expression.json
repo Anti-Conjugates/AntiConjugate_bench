@@ -1,0 +1,104 @@
+{
+  "ERBB2": {
+    "target": "HER2",
+    "ensembl": "ENSG00000141736",
+    "uniprot": [
+      "P04626"
+    ],
+    "description": "Erb-b2 receptor tyrosine kinase 2",
+    "subcellular_location": [
+      "Plasma membrane"
+    ],
+    "rna_tissue_specificity": "Low tissue specificity",
+    "rna_tissue_distribution": "Detected in all",
+    "protein_tissue_specificity": "Tissue enriched",
+    "protein_tissue_distribution": "Detected in many",
+    "tissue_cell_type_enrichment": [
+      "Adrenal gland - Fibroblasts",
+      "Breast - Breast glandular cells",
+      "Lung - Alveolar cells type 1",
+      "Pituitary gland - Undifferentiated cells (Pituitary gland)",
+      "Spleen - Fibroblasts_1"
+    ],
+    "cell_line_expression": {
+      "breast cancer": "705.7",
+      "Esophageal cancer": "445.4",
+      "Gastric cancer": "199.3"
+    },
+    "biophysics_implication": "Basal expression in normal cardiomyocytes and lung alveolar cells; explains baseline cardiac/pulmonary monitoring requirements for HER2-directed ADCs."
+  },
+  "TACSTD2": {
+    "target": "TROP2",
+    "ensembl": "ENSG00000184292",
+    "uniprot": [
+      "P09758"
+    ],
+    "description": "Tumor associated calcium signal transducer 2",
+    "subcellular_location": [
+      "Plasma membrane"
+    ],
+    "rna_tissue_specificity": "Tissue enhanced",
+    "rna_tissue_distribution": "Detected in many",
+    "protein_tissue_specificity": "Tissue enhanced",
+    "protein_tissue_distribution": "Detected in many",
+    "tissue_cell_type_enrichment": [
+      "Liver - Cholangiocytes",
+      "Pancreas - Ductal cells",
+      "Skin - Keratinocyte (other)"
+    ],
+    "cell_line_expression": {
+      "Gallbladder cancer": "603.0",
+      "head and neck cancer": "792.6"
+    },
+    "biophysics_implication": "High expression across normal mucosal/epithelial tissues (esophagus, intestine, bladder, cornea); high on-target epithelial baseline explains mucosal toxicity & diarrhea."
+  },
+  "NECTIN4": {
+    "target": "Nectin-4",
+    "ensembl": "ENSG00000143217",
+    "uniprot": [
+      "Q96NY8"
+    ],
+    "description": "Nectin cell adhesion molecule 4",
+    "subcellular_location": [
+      "Plasma membrane"
+    ],
+    "rna_tissue_specificity": "Group enriched",
+    "rna_tissue_distribution": "Detected in many",
+    "protein_tissue_specificity": "Group enriched",
+    "protein_tissue_distribution": "Detected in some",
+    "tissue_cell_type_enrichment": [
+      "Lung - Alveolar cells type 2",
+      "Skin - Keratinocyte (other)",
+      "Stomach - Gastric mucous cells"
+    ],
+    "cell_line_expression": {
+      "breast cancer": "27.9"
+    },
+    "biophysics_implication": "Enriched in skin epidermal keratinocytes and bladder urothelium; explains severe cutaneous adverse reactions (SCAR/rash) and diabetic metabolic disruption."
+  },
+  "TNFRSF8": {
+    "target": "CD30",
+    "ensembl": "ENSG00000120949",
+    "uniprot": [
+      "P28908"
+    ],
+    "description": "TNF receptor superfamily member 8",
+    "subcellular_location": [
+      "Plasma membrane"
+    ],
+    "rna_tissue_specificity": "Tissue enhanced",
+    "rna_tissue_distribution": "Detected in some",
+    "protein_tissue_specificity": "Not detected",
+    "protein_tissue_distribution": "Not detected",
+    "tissue_cell_type_enrichment": [
+      "Adipose subcutaneous - Endothelial cells",
+      "Breast - Endothelial cells",
+      "Colon - Endothelial cells",
+      "Minor Salivary Gland - Endothelial cells"
+    ],
+    "cell_line_expression": {
+      "lymphoma": "49.3"
+    },
+    "biophysics_implication": "Restricted expression in activated T/B lymphocytes with negligible normal tissue expression outside lymphoid system; excellent biophysical therapeutic window."
+  }
+}

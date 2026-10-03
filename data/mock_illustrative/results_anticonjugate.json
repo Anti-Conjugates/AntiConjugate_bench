@@ -1,0 +1,477 @@
+[
+  {
+    "answer": "Enhertu is NOT supported for this patient due to major safety contraindications: Pulmonary reserve compromised; high risk for Grade >= 3 ILD.; Reduced baseline LVEF (42%) contraindicates anti-HER2 ADC therapy.",
+    "verdict": "not_supported",
+    "confidence": 0.96,
+    "reason": "Pulmonary reserve compromised; high risk for Grade >= 3 ILD.; Reduced baseline LVEF (42%) contraindicates anti-HER2 ADC therapy.",
+    "flags": [
+      "SAFETY RISK: Pre-existing pulmonary compromise (COPD) significantly elevates risk of fatal drug-induced Interstitial Lung Disease (ILD).",
+      "CARDIOTOXICITY ALERT: Baseline LVEF is 42%, below the safety cutoff of 50%. FDA label mandates withholding or discontinuation if LVEF < 40-45%."
+    ],
+    "evidence": [
+      "FDA:Enhertu:boxed_warning:interstitial_lung_disease",
+      "FDA:Enhertu:warnings_and_precautions:left_ventricular_dysfunction"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-01"
+  },
+  {
+    "answer": "Adcetris is NOT supported for this patient due to major safety contraindications: Severe renal insufficiency (CrCl 22 mL/min).; Dangerous pharmacokinetic interaction with clarithromycin.",
+    "verdict": "dont_know",
+    "confidence": 0.67,
+    "reason": "Guardrail blocked draft: high probability of missed must-flag risk (0.33 > threshold 0.2). Routing to pharmacist.",
+    "flags": [
+      "ORGAN IMPAIRMENT: Severe renal impairment (CrCl/eGFR 22 mL/min) increases exposure and Grade 3+ toxicities/fatalities.",
+      "DRUG-DRUG INTERACTION: Concomitant clarithromycin (strong CYP3A4 inhibitor) markedly increases unconjugated payload (MMAE) AUC and toxicity."
+    ],
+    "evidence": [
+      "FDA:Adcetris:use_in_specific_populations:renal_impairment",
+      "FDA:Adcetris:drug_interactions:strong_cyp3a4_inhibitors"
+    ],
+    "unknowns": [
+      "Unverified clinical risk factors in patient case: 1 flags unresolved"
+    ],
+    "needs_human": true,
+    "item_id": "CASE-02"
+  },
+  {
+    "answer": "Trodelvy is NOT supported for this patient due to major safety contraindications: UGT1A1 poor metabolizer status.",
+    "verdict": "dont_know",
+    "confidence": 0.5,
+    "reason": "Guardrail blocked draft: high probability of missed must-flag risk (0.50 > threshold 0.2). Routing to pharmacist.",
+    "flags": [
+      "PHARMACOGENOMIC ALERT: Homozygous UGT1A1*28/*28 impairs SN-38 glucuronidation, dramatically increasing risk of life-threatening neutropenia and severe diarrhea."
+    ],
+    "evidence": [
+      "FDA:Trodelvy:boxed_warning:neutropenia_and_diarrhea"
+    ],
+    "unknowns": [
+      "Unverified clinical risk factors in patient case: 1 flags unresolved"
+    ],
+    "needs_human": true,
+    "item_id": "CASE-03"
+  },
+  {
+    "answer": "Kadcyla is NOT supported for this patient due to major safety contraindications: Dangerous pharmacokinetic interaction with ketoconazole.; Severe thrombocytopenia (42000/uL).",
+    "verdict": "dont_know",
+    "confidence": 0.67,
+    "reason": "Guardrail blocked draft: high probability of missed must-flag risk (0.33 > threshold 0.2). Routing to pharmacist.",
+    "flags": [
+      "DRUG-DRUG INTERACTION: Concomitant ketoconazole (strong CYP3A4 inhibitor) markedly increases unconjugated payload (DM1) AUC and toxicity.",
+      "CRITICAL HEMATOLOGIC RISK: Platelet count is 42000/uL (baseline threshold >= 100,000/uL required). High risk of fatal hemorrhage."
+    ],
+    "evidence": [
+      "FDA:Kadcyla:drug_interactions:strong_cyp3a4_inhibitors",
+      "FDA:Kadcyla:warnings_and_precautions:thrombocytopenia"
+    ],
+    "unknowns": [
+      "Unverified clinical risk factors in patient case: 1 flags unresolved"
+    ],
+    "needs_human": true,
+    "item_id": "CASE-04"
+  },
+  {
+    "answer": "Padcev is NOT supported for this patient due to major safety contraindications: Uncontrolled diabetes / severe hyperglycemia.; Active pre-existing rash with Nectin-4 targeted MMAE conjugate.",
+    "verdict": "not_supported",
+    "confidence": 0.96,
+    "reason": "Uncontrolled diabetes / severe hyperglycemia.; Active pre-existing rash with Nectin-4 targeted MMAE conjugate.",
+    "flags": [
+      "METABOLIC EMERGENCY RISK: Uncontrolled severe hyperglycemia / DKA warning per Padcev label.",
+      "DERMATOLOGIC RISK: Active evolving rash risks progression to fatal Stevens-Johnson syndrome / TEN."
+    ],
+    "evidence": [
+      "FDA:Padcev:warnings_and_precautions:hyperglycemia",
+      "FDA:Padcev:boxed_warning:severe_cutaneous_adverse_reactions"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-05"
+  },
+  {
+    "answer": "Enhertu is NOT supported for this patient due to major safety contraindications: Reduced baseline LVEF (34%) contraindicates anti-HER2 ADC therapy.",
+    "verdict": "dont_know",
+    "confidence": 0.0,
+    "reason": "Guardrail blocked draft: high probability of missed must-flag risk (1.00 > threshold 0.2). Routing to pharmacist.",
+    "flags": [
+      "CARDIOTOXICITY ALERT: Baseline LVEF is 34%, below the safety cutoff of 50%. FDA label mandates withholding or discontinuation if LVEF < 40-45%."
+    ],
+    "evidence": [
+      "FDA:Enhertu:warnings_and_precautions:left_ventricular_dysfunction"
+    ],
+    "unknowns": [
+      "Unverified clinical risk factors in patient case: 2 flags unresolved"
+    ],
+    "needs_human": true,
+    "item_id": "CASE-06"
+  },
+  {
+    "answer": "Adcetris is NOT supported for this patient due to major safety contraindications: Child-Pugh C cirrhosis.",
+    "verdict": "not_supported",
+    "confidence": 0.96,
+    "reason": "Child-Pugh C cirrhosis.",
+    "flags": [
+      "HEPATIC IMPAIRMENT: Child-Pugh Class C severe cirrhosis; MMAE clearance is severely impaired."
+    ],
+    "evidence": [
+      "FDA:Adcetris:use_in_specific_populations:hepatic_impairment"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-07"
+  },
+  {
+    "answer": "Enhertu is NOT supported for this patient due to major safety contraindications: Active ILD/pneumonitis is fatal with DXd topoisomerase-I inhibitor payload.",
+    "verdict": "not_supported",
+    "confidence": 0.96,
+    "reason": "Active ILD/pneumonitis is fatal with DXd topoisomerase-I inhibitor payload.",
+    "flags": [
+      "ABSOLUTE CONTRAINDICATION: Active bilateral interstitial lung disease (ILD) / pneumonitis on CT. Enhertu permanent discontinuation required."
+    ],
+    "evidence": [
+      "FDA:Enhertu:boxed_warning:interstitial_lung_disease"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-08"
+  },
+  {
+    "answer": "Padcev is NOT supported for this patient due to major safety contraindications: Severe renal insufficiency (CrCl 18 mL/min).; Dangerous pharmacokinetic interaction with voriconazole.",
+    "verdict": "not_supported",
+    "confidence": 0.96,
+    "reason": "Severe renal insufficiency (CrCl 18 mL/min).; Dangerous pharmacokinetic interaction with voriconazole.",
+    "flags": [
+      "ORGAN IMPAIRMENT: Severe renal impairment (CrCl/eGFR 18 mL/min) increases exposure and Grade 3+ toxicities/fatalities.",
+      "DRUG-DRUG INTERACTION: Concomitant voriconazole (strong CYP3A4 inhibitor) markedly increases unconjugated payload (MMAE) AUC and toxicity."
+    ],
+    "evidence": [
+      "FDA:Padcev:use_in_specific_populations:renal_impairment",
+      "FDA:Padcev:drug_interactions:strong_cyp3a4_inhibitors"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-09"
+  },
+  {
+    "answer": "Kadcyla is NOT supported for this patient due to major safety contraindications: Severe thrombocytopenia (35000/uL).; Pre-existing hepatic injury / transaminitis.",
+    "verdict": "not_supported",
+    "confidence": 0.96,
+    "reason": "Severe thrombocytopenia (35000/uL).; Pre-existing hepatic injury / transaminitis.",
+    "flags": [
+      "CRITICAL HEMATOLOGIC RISK: Platelet count is 35000/uL (baseline threshold >= 100,000/uL required). High risk of fatal hemorrhage.",
+      "HEPATOTOXICITY ALERT: Significant transaminase elevation; Kadcyla carries a boxed warning for fatal liver failure."
+    ],
+    "evidence": [
+      "FDA:Kadcyla:warnings_and_precautions:thrombocytopenia",
+      "FDA:Kadcyla:boxed_warning:hepatotoxicity"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-10"
+  },
+  {
+    "answer": "Enhertu prescription is clinically supported per FDA indication with routine monitoring protocol.",
+    "verdict": "supported",
+    "confidence": 0.94,
+    "reason": "Enhertu prescription is clinically supported per FDA indication with routine monitoring protocol.",
+    "flags": [
+      "Standard routine monitoring required per FDA prescribing label."
+    ],
+    "evidence": [
+      "FDA:Enhertu:indications_and_usage"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-11"
+  },
+  {
+    "answer": "Adcetris prescription is clinically supported per FDA indication with routine monitoring protocol.",
+    "verdict": "supported",
+    "confidence": 0.94,
+    "reason": "Adcetris prescription is clinically supported per FDA indication with routine monitoring protocol.",
+    "flags": [
+      "Standard routine monitoring required per FDA prescribing label."
+    ],
+    "evidence": [
+      "FDA:Adcetris:indications_and_usage"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "CASE-12"
+  },
+  {
+    "answer": "Trodelvy (sacituzumab govitecan) has a drug-to-antibody ratio (DAR) of approximately 7.6 and carries SN-38, a topoisomerase I inhibitor payload, linked via a cleavable CL2A linker.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "Trodelvy (sacituzumab govitecan) has a drug-to-antibody ratio (DAR) of approximately 7.6 and carries SN-38, a topoisomerase I inhibitor payload, linked via a cleavable CL2A linker.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:Trodelvy",
+      "FDA:Trodelvy:description"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-01"
+  },
+  {
+    "answer": "Adcetris (brentuximab vedotin) targets CD30 (TNFRSF8) and utilizes a protease-cleavable valine-citrulline (val-cit) dipeptide linker cleaved by lysosomal cathepsin B.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "Adcetris (brentuximab vedotin) targets CD30 (TNFRSF8) and utilizes a protease-cleavable valine-citrulline (val-cit) dipeptide linker cleaved by lysosomal cathepsin B.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:Adcetris",
+      "FDA:Adcetris:description"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-02"
+  },
+  {
+    "answer": "Kadcyla (ado-trastuzumab emtansine) delivers the maytansinoid microtubule inhibitor payload DM1 via a non-cleavable MCC (4-[N-maleimidomethyl]cyclohexane-1-carboxylate) thioether linker.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "Kadcyla (ado-trastuzumab emtansine) delivers the maytansinoid microtubule inhibitor payload DM1 via a non-cleavable MCC (4-[N-maleimidomethyl]cyclohexane-1-carboxylate) thioether linker.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:Kadcyla",
+      "FDA:Kadcyla:description"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-03"
+  },
+  {
+    "answer": "Enhertu (fam-trastuzumab deruxtecan) targets HER2 (ERBB2) and delivers DXd, an exatecan-derived topoisomerase I inhibitor payload.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "Enhertu (fam-trastuzumab deruxtecan) targets HER2 (ERBB2) and delivers DXd, an exatecan-derived topoisomerase I inhibitor payload.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:Enhertu",
+      "FDA:Enhertu:description"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-04"
+  },
+  {
+    "answer": "Padcev (enfortumab vedotin) targets Nectin-4 (NECTIN4) and is FDA-approved for locally advanced or metastatic urothelial cancer.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "Padcev (enfortumab vedotin) targets Nectin-4 (NECTIN4) and is FDA-approved for locally advanced or metastatic urothelial cancer.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:Padcev",
+      "FDA:Padcev:indications_and_usage"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-05"
+  },
+  {
+    "answer": "The active payload SN-38 of Trodelvy is primarily metabolized and cleared in the liver via glucuronidation by the UGT1A1 (UDP-glucuronosyltransferase 1A1) enzyme.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "The active payload SN-38 of Trodelvy is primarily metabolized and cleared in the liver via glucuronidation by the UGT1A1 (UDP-glucuronosyltransferase 1A1) enzyme.",
+    "flags": [],
+    "evidence": [
+      "FDA:Trodelvy:clinical_pharmacology:pharmacokinetics"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-06"
+  },
+  {
+    "answer": "Enhertu has a high average DAR of ~7.8 to 8.0, whereas Kadcyla has an intermediate average DAR of ~3.5.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "Enhertu has a high average DAR of ~7.8 to 8.0, whereas Kadcyla has an intermediate average DAR of ~3.5.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:Enhertu",
+      "ADCDB:Kadcyla",
+      "FDA:Enhertu:description"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-07"
+  },
+  {
+    "answer": "Free unconjugated MMAE is primarily metabolized in the liver by the cytochrome P450 CYP3A4 and CYP3A5 enzyme isoforms.",
+    "verdict": "supported",
+    "confidence": 0.98,
+    "reason": "Free unconjugated MMAE is primarily metabolized in the liver by the cytochrome P450 CYP3A4 and CYP3A5 enzyme isoforms.",
+    "flags": [],
+    "evidence": [
+      "FDA:Adcetris:clinical_pharmacology:pharmacokinetics"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "FACT-08"
+  },
+  {
+    "answer": "Cannot fulfill query due to unverified or nonexistent pharmacological entity: Fictitious drug construct ('Conjugate-X99') does not exist in any verified pharmacological registry.",
+    "verdict": "dont_know",
+    "confidence": 0.95,
+    "reason": "Fictitious drug construct ('Conjugate-X99') does not exist in any verified pharmacological registry.",
+    "flags": [
+      "ABSTAIN: Unverified clinical entity or nonexistent trial"
+    ],
+    "evidence": [
+      "rule:novelty_abstention"
+    ],
+    "unknowns": [
+      "Fictitious drug construct ('Conjugate-X99') does not exist in any verified pharmacological registry."
+    ],
+    "needs_human": true,
+    "item_id": "UNANS-01"
+  },
+  {
+    "answer": "Cannot fulfill query due to unverified or nonexistent pharmacological entity: Unregistered/fictitious trial ID 'NCT99988877' in an unverified pediatric nonagenarian cohort.",
+    "verdict": "dont_know",
+    "confidence": 0.95,
+    "reason": "Unregistered/fictitious trial ID 'NCT99988877' in an unverified pediatric nonagenarian cohort.",
+    "flags": [
+      "ABSTAIN: Unverified clinical entity or nonexistent trial"
+    ],
+    "evidence": [
+      "rule:novelty_abstention"
+    ],
+    "unknowns": [
+      "Unregistered/fictitious trial ID 'NCT99988877' in an unverified pediatric nonagenarian cohort."
+    ],
+    "needs_human": true,
+    "item_id": "UNANS-02"
+  },
+  {
+    "answer": "Unknown ADC . Routing to clinician.",
+    "verdict": "dont_know",
+    "confidence": 0.9,
+    "reason": "ADC not present in verified FDA knowledge base.",
+    "flags": [
+      "UNKNOWN_DRUG"
+    ],
+    "evidence": [],
+    "unknowns": [
+      "Unrecognized ADC identifier"
+    ],
+    "needs_human": true,
+    "item_id": "UNANS-03"
+  },
+  {
+    "answer": "Cannot fulfill query due to unverified or nonexistent pharmacological entity: Invalid drug entity: 'brentuximab deruxtecan' does not exist (Brentuximab is vedotin/MMAE targeting CD30; Deruxtecan is conjugated to trastuzumab).",
+    "verdict": "dont_know",
+    "confidence": 0.95,
+    "reason": "Invalid drug entity: 'brentuximab deruxtecan' does not exist (Brentuximab is vedotin/MMAE targeting CD30; Deruxtecan is conjugated to trastuzumab).",
+    "flags": [
+      "ABSTAIN: Unverified clinical entity or nonexistent trial"
+    ],
+    "evidence": [
+      "rule:novelty_abstention"
+    ],
+    "unknowns": [
+      "Invalid drug entity: 'brentuximab deruxtecan' does not exist (Brentuximab is vedotin/MMAE targeting CD30; Deruxtecan is conjugated to trastuzumab)."
+    ],
+    "needs_human": true,
+    "item_id": "UNANS-04"
+  },
+  {
+    "answer": "Cannot fulfill query due to unverified or nonexistent pharmacological entity: Invalid drug entity: 'sacituzumab emtansine' does not exist (Sacituzumab is conjugated to govitecan/SN-38, not emtansine/DM1).",
+    "verdict": "dont_know",
+    "confidence": 0.95,
+    "reason": "Invalid drug entity: 'sacituzumab emtansine' does not exist (Sacituzumab is conjugated to govitecan/SN-38, not emtansine/DM1).",
+    "flags": [
+      "ABSTAIN: Unverified clinical entity or nonexistent trial"
+    ],
+    "evidence": [
+      "rule:novelty_abstention"
+    ],
+    "unknowns": [
+      "Invalid drug entity: 'sacituzumab emtansine' does not exist (Sacituzumab is conjugated to govitecan/SN-38, not emtansine/DM1)."
+    ],
+    "needs_human": true,
+    "item_id": "UNANS-05"
+  },
+  {
+    "answer": "Rejected false premise: Factually contradicted claim: Enhertu carries an FDA boxed warning for fatal interstitial lung disease (ILD).",
+    "verdict": "not_supported",
+    "confidence": 0.95,
+    "reason": "Factually contradicted claim: Enhertu carries an FDA boxed warning for fatal interstitial lung disease (ILD).",
+    "flags": [
+      "FALSE PREMISE REJECTION: Factually contradicted claim: Enhertu carries an FDA boxed warning for fatal interstitial lung disease (ILD)."
+    ],
+    "evidence": [
+      "rule:falsification_check",
+      "FDA:boxed_warning_verification"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "TRAP-01"
+  },
+  {
+    "answer": "Rejected false premise: False premise: Trodelvy carries SN-38 (topoisomerase I inhibitor), NOT MMAE (tubulin inhibitor).",
+    "verdict": "not_supported",
+    "confidence": 0.95,
+    "reason": "False premise: Trodelvy carries SN-38 (topoisomerase I inhibitor), NOT MMAE (tubulin inhibitor).",
+    "flags": [
+      "FALSE PREMISE REJECTION: False premise: Trodelvy carries SN-38 (topoisomerase I inhibitor), NOT MMAE (tubulin inhibitor)."
+    ],
+    "evidence": [
+      "rule:falsification_check",
+      "FDA:boxed_warning_verification"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "TRAP-02"
+  },
+  {
+    "answer": "Cannot fulfill query due to unverified or nonexistent pharmacological entity: Dangerous clinical premise and nonexistent citation: initiating Kadcyla with platelets < 15,000/uL is contraindicated.",
+    "verdict": "dont_know",
+    "confidence": 0.95,
+    "reason": "Dangerous clinical premise and nonexistent citation: initiating Kadcyla with platelets < 15,000/uL is contraindicated.",
+    "flags": [
+      "ABSTAIN: Unverified clinical entity or nonexistent trial"
+    ],
+    "evidence": [
+      "rule:novelty_abstention"
+    ],
+    "unknowns": [
+      "Dangerous clinical premise and nonexistent citation: initiating Kadcyla with platelets < 15,000/uL is contraindicated."
+    ],
+    "needs_human": true,
+    "item_id": "TRAP-03"
+  },
+  {
+    "answer": "Rejected false premise: False premise: Padcev targets Nectin-4 in urothelial cancer, NOT HER2 in breast cancer.",
+    "verdict": "not_supported",
+    "confidence": 0.95,
+    "reason": "False premise: Padcev targets Nectin-4 in urothelial cancer, NOT HER2 in breast cancer.",
+    "flags": [
+      "FALSE PREMISE REJECTION: False premise: Padcev targets Nectin-4 in urothelial cancer, NOT HER2 in breast cancer."
+    ],
+    "evidence": [
+      "rule:falsification_check",
+      "FDA:boxed_warning_verification"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "TRAP-04"
+  },
+  {
+    "answer": "Rejected false premise: False premise: Enhertu features a cleavable tetrapeptide linker, NOT a non-cleavable linker.",
+    "verdict": "not_supported",
+    "confidence": 0.95,
+    "reason": "False premise: Enhertu features a cleavable tetrapeptide linker, NOT a non-cleavable linker.",
+    "flags": [
+      "FALSE PREMISE REJECTION: False premise: Enhertu features a cleavable tetrapeptide linker, NOT a non-cleavable linker."
+    ],
+    "evidence": [
+      "rule:falsification_check",
+      "FDA:boxed_warning_verification"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "item_id": "TRAP-05"
+  }
+]

@@ -1,0 +1,71 @@
+{
+  "_status": "UNVERIFIED DRAFT - every row must be reviewed and signed off by the team pharmacist before use. Sources: handover section 11 starter hints + general knowledge of product labels; not yet checked against SmPC/USPI text.",
+  "_reviewed_by": null,
+  "classes": {
+    "topo1_dxd": {
+      "label": "Topoisomerase-I inhibitor, deruxtecan/exatecan family",
+      "payload_regex": "\\bDXd\\b|deruxtecan|exatecan|\\bDX-8951",
+      "toxicities": ["ild_pneumonitis", "neutropenia", "nausea_gi", "lvef_decline", "embryofetal"],
+      "checks": ["ild_history", "lung_disease", "pneumonitis_drugs", "baseline_anc", "baseline_lvef", "pregnancy"],
+      "verified": false
+    },
+    "topo1_sn38": {
+      "label": "Topoisomerase-I inhibitor, SN-38 (govitecan)",
+      "payload_regex": "SN-38|govitecan",
+      "toxicities": ["neutropenia", "diarrhoea", "nausea_gi", "embryofetal"],
+      "checks": ["ugt1a1_status", "ugt1a1_interacting_drugs", "baseline_anc", "pregnancy"],
+      "verified": false
+    },
+    "maytansinoid_dm1": {
+      "label": "Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker",
+      "payload_regex": "\\bDM1\\b|emtansine|mertansine",
+      "toxicities": ["thrombocytopenia", "hepatotoxicity", "lvef_decline", "peripheral_neuropathy", "embryofetal"],
+      "checks": ["baseline_platelets", "anticoagulant_antiplatelet", "hepatic_function", "baseline_lvef", "cyp3a4_strong_inhibitor", "existing_neuropathy", "pregnancy"],
+      "verified": false
+    },
+    "maytansinoid_dm4": {
+      "label": "Maytansinoid DM4 (ravtansine/soravtansine)",
+      "payload_regex": "\\bDM4\\b|ravtansine|soravtansine",
+      "toxicities": ["ocular", "thrombocytopenia", "hepatotoxicity", "peripheral_neuropathy"],
+      "checks": ["ocular_disease", "baseline_platelets", "anticoagulant_antiplatelet", "hepatic_function", "existing_neuropathy"],
+      "verified": false
+    },
+    "auristatin_mmae": {
+      "label": "Auristatin MMAE (vedotin), usually cleavable Val-Cit linker",
+      "payload_regex": "\\bMMAE\\b|vedotin|monomethyl auristatin E",
+      "toxicities": ["peripheral_neuropathy", "neutropenia", "hepatotoxicity"],
+      "checks": ["existing_neuropathy", "neurotoxic_drugs", "cyp3a4_strong_inhibitor", "cyp3a4_strong_inducer", "hepatic_function", "renal_function", "baseline_anc"],
+      "verified": false
+    },
+    "auristatin_mmaf": {
+      "label": "Auristatin MMAF (mafodotin)",
+      "payload_regex": "\\bMMAF\\b|mafodotin",
+      "toxicities": ["ocular", "thrombocytopenia"],
+      "checks": ["ocular_disease", "baseline_platelets"],
+      "verified": false
+    },
+    "pbd": {
+      "label": "Pyrrolobenzodiazepine dimer (tesirine/talirine)",
+      "payload_regex": "\\bPBD\\b|tesirine|talirine|SG3199",
+      "toxicities": ["myelosuppression", "oedema_effusion", "hepatotoxicity", "skin"],
+      "checks": ["baseline_anc", "baseline_platelets", "hepatic_function", "fluid_status"],
+      "verified": false
+    },
+    "duocarmycin": {
+      "label": "Duocarmycin (duocarmazine)",
+      "payload_regex": "duocarmycin|duocarmazine|seco-DUBA",
+      "toxicities": ["ocular", "fatigue"],
+      "checks": ["ocular_disease"],
+      "verified": false
+    }
+  },
+  "antibody_class_effects": {
+    "HER2": {
+      "toxicities": ["lvef_decline"],
+      "checks": ["baseline_lvef", "cardiotoxic_drugs"],
+      "note": "Trastuzumab-class HER2 antibodies carry LV dysfunction risk; check baseline LVEF and prior anthracyclines.",
+      "verified": false
+    }
+  },
+  "always_check": ["renal_function", "hepatic_function", "anticoagulant_antiplatelet", "ild_history", "ocular_disease", "existing_neuropathy"]
+}

@@ -1,0 +1,140 @@
+{
+  "adcs": [
+    {
+      "adcdb_id": "DRG0CYMEB",
+      "adc_name": "Trastuzumab emtansine",
+      "brand": "Kadcyla",
+      "antibody": "Trastuzumab",
+      "target": "HER2 (receptor tyrosine-protein kinase erbB-2)",
+      "target_gene": "ERBB2",
+      "linker": "SMCC (succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate)",
+      "linker_class": "Non-cleavable thioether",
+      "release_behaviour": "Requires full lysosomal proteolysis of the antibody; releases lysine-MCC-DM1",
+      "payload": "DM1",
+      "payload_class": "Maytansinoid (antimitotic, tubulin)",
+      "payload_target": "Microtubule (MT)",
+      "dar": 3.5,
+      "conjugate_type": "Random lysines",
+      "bystander_potential": "Low - charged catabolite is membrane-impermeable",
+      "released_payload_clearance": "CYP3A4/3A5 (hepatic)",
+      "indication": "Breast cancer; also gastric, lung, colorectal and other solid tumours",
+      "status": "Approved in 2013",
+      "organization": "ImmunoGen (originator); Genentech (Top20 MNC)",
+      "toxicity_verbatim": "Black box warning of serious side effects such as hepatotoxicity, embryo-fetal toxicity, and cardiac toxicity",
+      "pk": {
+        "absorption_cmax": "83.4 ug/mL observed near end of infusion",
+        "distribution_vd": "3.21 L; volume of distribution relatively low, similar to average adult plasma volume",
+        "metabolism": "Undergoes lysosomal degradation; DM1 metabolised by CYP3A4/3A5"
+      },
+      "prescribing_flags_draft": [
+        "Thrombocytopenia (baseline platelet cutoff >= 100k)",
+        "Hepatotoxicity (transaminitis, hyperbilirubinemia, nodular regenerative hyperplasia)",
+        "Reduced LVEF / cardiotoxicity (baseline LVEF >= 50%)",
+        "Caution with strong CYP3A4 inhibitors",
+        "Caution with anticoagulants and antiplatelets"
+      ]
+    },
+    {
+      "adcdb_id": "DRG0ERKBH",
+      "adc_name": "Trastuzumab deruxtecan",
+      "brand": "Enhertu",
+      "antibody": "Trastuzumab",
+      "target": "HER2 (receptor tyrosine-protein kinase erbB-2)",
+      "target_gene": "ERBB2",
+      "linker": "Mc-Gly-Gly-Phe-Gly",
+      "linker_class": "Enzymatically cleavable tetrapeptide (cathepsin B/L)",
+      "release_behaviour": "Cleaved intracellularly; also partial extracellular release",
+      "payload": "DXd",
+      "payload_class": "Camptothecin / exatecan derivative (TOP1 inhibitor)",
+      "payload_target": "DNA topoisomerase 1 (TOP1)",
+      "dar": 8.0,
+      "conjugate_type": "Random cysteines",
+      "bystander_potential": "High - DXd is membrane-permeable",
+      "released_payload_clearance": "CYP3A4 (hepatic); partial renal",
+      "indication": "Breast cancer; gastric cancer; gastroesophageal junction adenocarcinoma; lung, colorectal and other solid tumours",
+      "status": "Approved in 2019",
+      "organization": "Daiichi Sankyo (originator); AstraZeneca (Top20 MNC)",
+      "toxicity_verbatim": "Effects of an overdose are likely to impact the lungs, heart, and circulatory system, leading to significant toxicity",
+      "pk": {
+        "absorption_cmax": "133 ug/mL (19%) at recommended dosage for metastatic breast cancer",
+        "distribution_vd": "75.2 mL/kg at steady state",
+        "metabolism": "Likely broken down into small peptides and amino acids through catabolism; cathepsin B and L involved in cleavage; DXd metabolised by CYP3A4"
+      },
+      "prescribing_flags_draft": [
+        "Interstitial lung disease / pneumonitis (boxed warning - baseline and serial pulmonary monitoring)",
+        "Neutropenia / bone marrow suppression",
+        "Nausea and vomiting (highly emetogenic; prophylactic antiemetics)",
+        "Reduced LVEF (baseline LVEF >= 50%)"
+      ]
+    },
+    {
+      "adcdb_id": "DRG0EKTUN",
+      "adc_name": "Sacituzumab govitecan",
+      "brand": "Trodelvy",
+      "antibody": "Sacituzumab",
+      "target": "TROP2 (TACSTD2, tumor-associated calcium signal transducer 2)",
+      "target_gene": "TACSTD2",
+      "linker": "CL2A",
+      "linker_class": "Hydrolysable pH-sensitive carbonate (CL2A)",
+      "release_behaviour": "Substantial extracellular hydrolysis; high free-payload fraction",
+      "payload": "SN-38",
+      "payload_class": "Camptothecin (TOP1 inhibitor)",
+      "payload_target": "DNA topoisomerase 1 (TOP1)",
+      "dar": 7.8,
+      "conjugate_type": "Random cysteines",
+      "bystander_potential": "High - SN-38 is membrane-permeable",
+      "released_payload_clearance": "UGT1A1 glucuronidation; SN-38G renally eliminated",
+      "indication": "Breast, lung, urothelial, endometrial, cervical, ovarian and other solid tumours",
+      "status": "Approved in 2020",
+      "organization": "Immunomedics (originator); Gilead Sciences; Everest Medicines",
+      "toxicity_verbatim": "Patients experiencing overdose face increased risk of severe neutropenia, diarrhea, hypersensitivity, nausea/vomiting",
+      "pk": {
+        "absorption_cmax": "239,000 ng/mL; AUC 5,640,000 ng*h/mL at standard dosing",
+        "distribution_vd": "Vd 3.6 L (0.045 L/kg)",
+        "metabolism": "SN-38 undergoes O-glucuronidation by UGT1A1, presumably in the liver"
+      },
+      "prescribing_flags_draft": [
+        "Severe neutropenia (boxed warning)",
+        "Severe diarrhoea (boxed warning - early and late onset)",
+        "UGT1A1*28 poor metabolisers (homozygous *28/*28 at higher risk of fatal neutropenia/diarrhea)",
+        "Caution with UGT1A1 inhibitors/inducers",
+        "Renal impairment relevant"
+      ]
+    },
+    {
+      "adcdb_id": "DRG0ZOYQV",
+      "adc_name": "Datopotamab deruxtecan",
+      "brand": "Datroway",
+      "antibody": "Datopotamab",
+      "target": "TROP2 (TACSTD2, tumor-associated calcium signal transducer 2)",
+      "target_gene": "TACSTD2",
+      "linker": "Mc-Gly-Gly-Phe-Gly",
+      "linker_class": "Enzymatically cleavable tetrapeptide (cathepsin B/L)",
+      "release_behaviour": "Cleaved intracellularly; also partial extracellular release",
+      "payload": "DXd",
+      "payload_class": "Camptothecin / exatecan derivative (TOP1 inhibitor)",
+      "payload_target": "DNA topoisomerase 1 (TOP1)",
+      "dar": 4.0,
+      "conjugate_type": "Random cysteines",
+      "bystander_potential": "High - DXd is membrane-permeable",
+      "released_payload_clearance": "CYP3A4 (hepatic); partial renal",
+      "indication": "Lung cancer; breast cancer (TNBC and HR+/HER2-negative); gastric, colorectal, biliary tract, ovarian, endometrial, prostate, urothelial",
+      "status": "Approved in 2025",
+      "organization": "Daiichi Sankyo (originator); AstraZeneca (Top20 MNC)",
+      "toxicity_verbatim": "NOT STATED on page (adverse-event profile referenced to source documents, not given explicitly)",
+      "pk": {
+        "absorption_cmax": "154 ug/mL; AUC 671 ug*day/mL at approved dosing",
+        "distribution_vd": "~3.5 L at steady state",
+        "metabolism": "Cleaved by lysosomal enzymes after internalisation to release DXd; DXd further metabolised by CYP3A4"
+      },
+      "prescribing_flags_draft": [
+        "Dosage: 6 mg/kg IV Q21D with mandatory 540 mg maximum dose cap (for weight >= 90 kg)",
+        "Dilution warning: DO NOT use 0.9% Sodium Chloride; reconstitute/dilute in 5% Dextrose (D5W) only and protect from light",
+        "Mandatory Oral Cryotherapy: Patients must hold ice chips / ice water in mouth throughout the entire infusion to prevent stomatitis",
+        "Mandatory Ophthalmic Care: Preservative-free artificial tears (min 4x/day), baseline ophthalmology exam, monitor for corneal epitheliopathy / dry eye",
+        "Interstitial lung disease / pneumonitis: Withhold for suspected ILD; permanently discontinue for Grade >= 2 ILD; initiate systemic corticosteroids",
+        "Infusion schedule: 90 min for dose 1 (observe 1h post); 30 min for subsequent tolerated doses"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,790 @@
+[
+  {
+    "item_id": "CASE-01",
+    "answer": "Enhertu (trastuzumab deruxtecan) is clinically supported for HER2-positive metastatic breast cancer in this patient, but with significant safety considerations.",
+    "verdict": "supported",
+    "confidence": 0.82,
+    "reason": "The patient's HER2-positive metastatic breast cancer and the approved indication for Enhertu support its use. However, the patient's comorbidities and baseline LVEF necessitate careful monitoring for specific adverse events.",
+    "flags": [
+      "ild_risk (moderate): Lung risk factor: copd.",
+      "neutropenia_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: neutropenia.",
+      "gi_toxicity (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: nausea_gi.",
+      "lvef_cardiac (high): Reduced baseline LVEF (42.0%).",
+      "embryofetal (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: embryofetal.",
+      "elderly_polypharmacy (moderate): Age 78, 2 co-medications: reduced reserve, review interactions."
+    ],
+    "evidence": [
+      "ADCDB:DRG0ERKBH",
+      "FDA:Enhertu:boxed_warning",
+      "FDA:Enhertu:contraindications",
+      "FDA:Enhertu:geriatric_use",
+      "FDA:Enhertu:renal_impairment",
+      "FDA:Enhertu:adverse_reactions",
+      "SOP:DXd",
+      "HPA:ERBB2",
+      "KB:topo1_dxd",
+      "RULE:lung_disease",
+      "PATIENT:conditions",
+      "KB:HER2",
+      "RULE:baseline_lvef",
+      "PATIENT:lvef",
+      "RULE:elderly_polypharmacy",
+      "PATIENT:age",
+      "PATIENT:meds"
+    ],
+    "unknowns": [
+      "baseline neutrophil count (ANC)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.552,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-02",
+    "answer": "not_supported",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "The patient's severe renal impairment and the presence of pre-existing diabetic neuropathy increase the risk of adverse reactions, and the interaction with clarithromycin may further exacerbate these risks. The patient's age and polypharmacy also add to the complexity. However, the specific risk of progressive multifocal leukoencephalopathy (PML) and the overall benefit-risk ratio are not fully addressed.",
+    "flags": [
+      "neuropathy (high): Pre-existing diabetic_neuropathy.",
+      "neutropenia_risk (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: neutropenia.",
+      "hepatotoxicity (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: hepatotoxicity.",
+      "cyp3a4_interaction (high): Strong CYP3A4 inhibitor(s) clarithromycin may raise payload exposure.",
+      "renal_impairment (high): Severe renal impairment (eGFR 22.0).",
+      "elderly_polypharmacy (moderate): Age 82, 3 co-medications: reduced reserve, review interactions."
+    ],
+    "evidence": [
+      "FDA:Adcetris",
+      "FDA:Adcetris:boxed_warning",
+      "FDA:Adcetris:contraindications",
+      "FDA:Adcetris:drug_interactions",
+      "FDA:Adcetris:geriatric_use",
+      "FDA:Adcetris:renal_impairment",
+      "FDA:Adcetris:adverse_reactions",
+      "SOP:MMAE",
+      "HPA:TNFRSF8",
+      "RULE:existing_neuropathy",
+      "RULE:cyp3a4_strong_inhibitor",
+      "RULE:renal_function",
+      "RULE:elderly_polypharmacy",
+      "PATIENT:conditions",
+      "PATIENT:meds",
+      "PATIENT:age",
+      "PATIENT:egfr",
+      "KB:auristatin_mmae",
+      "KB:drug_lists:cyp3a4_strong_inhibitor"
+    ],
+    "unknowns": [
+      "baseline neutrophil count (ANC)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.572,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-03",
+    "answer": "Trodelvy (sacituzumab govitecan) can be prescribed with caution.",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "The patient's UGT1A1*28/*28 genotype and elevated bilirubin levels suggest a higher risk of severe neutropenia and diarrhea, but the patient's age and other factors do not preclude treatment. The drug's boxed warnings and known interactions are appropriately considered.",
+    "flags": [
+      "neutropenia_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, SN-38 (govitecan): neutropenia.",
+      "diarrhoea (monitor): Class toxicity of Topoisomerase-I inhibitor, SN-38 (govitecan): diarrhoea.",
+      "gi_toxicity (monitor): Class toxicity of Topoisomerase-I inhibitor, SN-38 (govitecan): nausea_gi.",
+      "embryofetal (monitor): Class toxicity of Topoisomerase-I inhibitor, SN-38 (govitecan): embryofetal.",
+      "ugt1a1_toxicity (high): UGT1A1 poor metaboliser: higher SN-38 exposure.",
+      "hepatic_impairment (high): Hepatic impairment (bilirubin 2.0xULN, AST/ALT NonexULN)."
+    ],
+    "evidence": [
+      "ADCDB:DRG0EKTUN",
+      "FDA:Trodelvy:boxed_warning",
+      "FDA:Trodelvy:contraindications",
+      "FDA:Trodelvy:drug_interactions",
+      "FDA:Trodelvy:geriatric_use",
+      "FDA:Trodelvy:renal_impairment",
+      "SOP:SN-38",
+      "HPA:TACSTD2",
+      "RULE:ugt1a1_status",
+      "RULE:hepatic_function",
+      "PATIENT:ugt1a1",
+      "PATIENT:bilirubin_x_uln",
+      "KB:topo1_sn38"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.074,
+      "blocked": false,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "release with flags"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-04",
+    "answer": "Monitor closely for hepatotoxicity, thrombocytopenia, and cardiac toxicity.",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "The patient has a low platelet count and is on medications that may increase the risk of hepatotoxicity, thrombocytopenia, and cardiac toxicity.",
+    "flags": [
+      "thrombocytopenia (high): Low baseline platelets (42.0).",
+      "hepatotoxicity (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: hepatotoxicity.",
+      "lvef_cardiac (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: lvef_decline.",
+      "neuropathy (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: peripheral_neuropathy.",
+      "embryofetal (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: embryofetal.",
+      "bleeding_risk (high): On apixaban: bleeding risk if platelets fall.",
+      "cyp3a4_interaction (high): Strong CYP3A4 inhibitor(s) ketoconazole may raise payload exposure.",
+      "renal_impairment (moderate): Moderate renal impairment (eGFR 58.0)."
+    ],
+    "evidence": [
+      "ADCDB:DRG0CYMEB",
+      "FDA:Kadcyla:boxed_warning",
+      "FDA:Kadcyla:drug_interactions",
+      "FDA:Kadcyla:geriatric_use",
+      "FDA:Kadcyla:renal_impairment",
+      "KB:maytansinoid_dm1",
+      "RULE:baseline_platelets",
+      "RULE:cyp3a4_strong_inhibitor",
+      "RULE:anticoagulant_antiplatelet",
+      "RULE:renal_function",
+      "PATIENT:platelets",
+      "PATIENT:meds",
+      "PATIENT:egfr",
+      "KB:HER2",
+      "KB:drug_lists:anticoagulant",
+      "KB:drug_lists:antiplatelet",
+      "KB:drug_lists:cyp3a4_strong_inhibitor"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.149,
+      "blocked": false,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "release with flags"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-05",
+    "answer": "Padcev (enfortumab vedotin) can be prescribed with caution.",
+    "verdict": "supported",
+    "confidence": 0.72,
+    "reason": "The patient's conditions and medications are compatible with the use of Padcev, and the known risks are manageable with appropriate monitoring.",
+    "flags": [
+      "neuropathy (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: peripheral_neuropathy.",
+      "neutropenia_risk (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: neutropenia.",
+      "hepatotoxicity (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: hepatotoxicity.",
+      "renal_impairment (moderate): Moderate renal impairment (eGFR 48.0).",
+      "elderly_polypharmacy (moderate): Age 79, 3 co-medications: reduced reserve, review interactions."
+    ],
+    "evidence": [
+      "FDA:Padcev",
+      "FDA:Padcev:boxed_warning",
+      "FDA:Padcev:contraindications",
+      "FDA:Padcev:drug_interactions",
+      "FDA:Padcev:geriatric_use",
+      "FDA:Padcev:renal_impairment",
+      "FDA:Padcev:adverse_reactions",
+      "SOP:MMAE",
+      "HPA:NECTIN4",
+      "RULE:elderly_polypharmacy",
+      "PATIENT:age",
+      "PATIENT:egfr",
+      "PATIENT:meds",
+      "KB:auristatin_mmae",
+      "RULE:renal_function"
+    ],
+    "unknowns": [
+      "hepatic function (bilirubin, AST/ALT)",
+      "baseline neutrophil count (ANC)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.655,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-06",
+    "answer": "Enhertu can be initiated with caution.",
+    "verdict": "supported",
+    "confidence": 0.72,
+    "reason": "Enhertu is approved for HER2-low metastatic breast cancer and the patient's age and comorbidities do not contraindicate its use. However, the patient's NYHA Class III heart failure and baseline LVEF of 34% require careful monitoring.",
+    "flags": [
+      "ild_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: ild_pneumonitis.",
+      "neutropenia_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: neutropenia.",
+      "gi_toxicity (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: nausea_gi.",
+      "lvef_cardiac (high): History of heart failure.",
+      "embryofetal (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: embryofetal.",
+      "renal_impairment (moderate): Moderate renal impairment (eGFR 45.0).",
+      "bleeding_risk (moderate): On apixaban: bleeding risk if platelets fall.",
+      "elderly_polypharmacy (moderate): Age 84, 3 co-medications: reduced reserve, review interactions."
+    ],
+    "evidence": [
+      "ADCDB:DRG0ERKBH",
+      "FDA:Enhertu:boxed_warning",
+      "FDA:Enhertu:contraindications",
+      "FDA:Enhertu:geriatric_use",
+      "FDA:Enhertu:renal_impairment",
+      "FDA:Enhertu:adverse_reactions",
+      "SOP:DXd",
+      "HPA:ERBB2",
+      "RULE:elderly_polypharmacy",
+      "PATIENT:age",
+      "PATIENT:meds",
+      "PATIENT:conditions",
+      "PATIENT:lvef",
+      "PATIENT:egfr",
+      "PATIENT:platelets",
+      "KB:topo1_dxd",
+      "KB:HER2",
+      "RULE:baseline_lvef",
+      "RULE:renal_function",
+      "RULE:anticoagulant_antiplatelet",
+      "KB:drug_lists:anticoagulant",
+      "KB:drug_lists:antiplatelet"
+    ],
+    "unknowns": [
+      "baseline neutrophil count (ANC)",
+      "hepatic function (bilirubin, AST/ALT)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.655,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-07",
+    "answer": "Monitor closely for adverse reactions.",
+    "verdict": "not_supported",
+    "confidence": 0.72,
+    "reason": "The patient's severe hepatic cirrhosis (Child-Pugh Class C) is a contraindication for Adcetris, as evidenced by the FDA label. The patient's current condition and medications further complicate the safety profile.",
+    "flags": [
+      "neuropathy (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: peripheral_neuropathy.",
+      "neutropenia_risk (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: neutropenia.",
+      "hepatotoxicity (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: hepatotoxicity.",
+      "hepatic_impairment (high): Known liver disease."
+    ],
+    "evidence": [
+      "FDA:Adcetris",
+      "FDA:Adcetris:contraindications",
+      "RULE:hepatic_function",
+      "PATIENT:conditions",
+      "PATIENT:bilirubin_x_uln",
+      "KB:auristatin_mmae"
+    ],
+    "unknowns": [
+      "renal function (eGFR)",
+      "baseline neutrophil count (ANC)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.601,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [
+        "bleeding"
+      ],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-08",
+    "answer": "not_supported",
+    "verdict": "not_supported",
+    "confidence": 0.72,
+    "reason": "The patient has active interstitial lung disease (ILD) and is on letrozole, which may interact with Enhertu. The patient's ILD is a contraindication for Enhertu, and the patient's age and comorbidities warrant careful consideration.",
+    "flags": [
+      "ild_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: ild_pneumonitis.",
+      "neutropenia_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: neutropenia.",
+      "gi_toxicity (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: nausea_gi.",
+      "lvef_cardiac (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: lvef_decline.",
+      "embryofetal (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: embryofetal.",
+      "elderly_polypharmacy (moderate): Age 76, 1 co-medications: reduced reserve, review interactions."
+    ],
+    "evidence": [
+      "ADCDB:DRG0ERKBH",
+      "FDA:Enhertu:boxed_warning",
+      "FDA:Enhertu:contraindications",
+      "SOP:DXd",
+      "RULE:elderly_polypharmacy",
+      "HPA:ERBB2",
+      "KB:topo1_dxd",
+      "KB:HER2",
+      "PATIENT:age",
+      "PATIENT:meds"
+    ],
+    "unknowns": [
+      "baseline neutrophil count (ANC)",
+      "hepatic function (bilirubin, AST/ALT)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.618,
+      "blocked": true,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "BLOCK: route to pharmacist"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-09",
+    "answer": "Padcev can be used but with caution.",
+    "verdict": "supported",
+    "confidence": 0.72,
+    "reason": "Padcev is approved for metastatic urothelial carcinoma, and the patient's age and renal impairment are within the known parameters. However, the patient's eGFR is critically low, and voriconazole may increase MMAE exposure, necessitating close monitoring.",
+    "flags": [
+      "neuropathy (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: peripheral_neuropathy.",
+      "neutropenia_risk (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: neutropenia.",
+      "hepatotoxicity (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: hepatotoxicity.",
+      "cyp3a4_interaction (high): Strong CYP3A4 inhibitor(s) voriconazole may raise payload exposure.",
+      "renal_impairment (high): Severe renal impairment (eGFR 18.0).",
+      "elderly_polypharmacy (moderate): Age 80, 1 co-medications: reduced reserve, review interactions."
+    ],
+    "evidence": [
+      "FDA:Padcev",
+      "FDA:Padcev:boxed_warning",
+      "FDA:Padcev:contraindications",
+      "FDA:Padcev:drug_interactions",
+      "FDA:Padcev:geriatric_use",
+      "FDA:Padcev:renal_impairment",
+      "KB:auristatin_mmae",
+      "SOP:MMAE",
+      "RULE:renal_function",
+      "RULE:cyp3a4_strong_inhibitor",
+      "PATIENT:egfr",
+      "PATIENT:meds",
+      "HPA:NECTIN4",
+      "KB:drug_lists:cyp3a4_strong_inhibitor",
+      "RULE:elderly_polypharmacy",
+      "PATIENT:age"
+    ],
+    "unknowns": [
+      "hepatic function (bilirubin, AST/ALT)",
+      "baseline neutrophil count (ANC)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.179,
+      "blocked": false,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "release with flags"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-10",
+    "answer": "not_supported",
+    "verdict": "not_supported",
+    "confidence": 0.82,
+    "reason": "The patient's platelet count is critically low, and her AST/ALT levels are significantly elevated, which are absolute contraindications for Kadcyla based on the ADC's biophysics and pharmacology. The patient should not be prescribed Kadcyla under these conditions.",
+    "flags": [
+      "thrombocytopenia (high): Low baseline platelets (35.0).",
+      "hepatotoxicity (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: hepatotoxicity.",
+      "lvef_cardiac (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: lvef_decline.",
+      "neuropathy (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: peripheral_neuropathy.",
+      "embryofetal (monitor): Class toxicity of Maytansinoid DM1 (emtansine), usually non-cleavable SMCC linker: embryofetal.",
+      "hepatic_impairment (high): Hepatic impairment (bilirubin 1.58xULN, AST/ALT 4.75xULN)."
+    ],
+    "evidence": [
+      "ADCDB:DRG0CYMEB",
+      "KB:maytansinoid_dm1",
+      "RULE:baseline_platelets",
+      "RULE:hepatic_function",
+      "PATIENT:platelets",
+      "PATIENT:bilirubin_x_uln",
+      "PATIENT:ast_alt_x_uln",
+      "KB:HER2"
+    ],
+    "unknowns": [
+      "renal function (eGFR)"
+    ],
+    "needs_human": true,
+    "guardrail": {
+      "p_miss": 0.139,
+      "blocked": false,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "release with flags"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-11",
+    "answer": "Enhertu is supported for this patient.",
+    "verdict": "supported",
+    "confidence": 0.92,
+    "reason": "The patient has normal organ function, and the proposed treatment aligns with the approved indication for HER2-positive metastatic breast cancer. The patient's age and comorbidities do not preclude the use of Enhertu.",
+    "flags": [
+      "ild_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: ild_pneumonitis.",
+      "neutropenia_risk (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: neutropenia.",
+      "gi_toxicity (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: nausea_gi.",
+      "lvef_cardiac (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: lvef_decline.",
+      "embryofetal (monitor): Class toxicity of Topoisomerase-I inhibitor, deruxtecan/exatecan family: embryofetal."
+    ],
+    "evidence": [
+      "ADCDB:DRG0ERKBH",
+      "FDA:Enhertu:boxed_warning",
+      "FDA:Enhertu:contraindications",
+      "FDA:Enhertu:geriatric_use",
+      "FDA:Enhertu:renal_impairment",
+      "FDA:Enhertu:adverse_reactions",
+      "SOP:DXd",
+      "HPA:ERBB2",
+      "KB:topo1_dxd",
+      "KB:HER2"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": {
+      "p_miss": 0.074,
+      "blocked": false,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "release with flags"
+    },
+    "error": null
+  },
+  {
+    "item_id": "CASE-12",
+    "answer": "supported",
+    "verdict": "supported",
+    "confidence": 0.9,
+    "reason": "The patient has normal renal and hepatic function, no neuropathy, and no CYP3A4-interacting medications, which aligns with the approved use of Adcetris. The patient's age is within the range where the drug has been studied, and there are no absolute contraindications present.",
+    "flags": [
+      "neuropathy (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: peripheral_neuropathy.",
+      "neutropenia_risk (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: neutropenia.",
+      "hepatotoxicity (monitor): Class toxicity of Auristatin MMAE (vedotin), usually cleavable Val-Cit linker: hepatotoxicity."
+    ],
+    "evidence": [
+      "FDA:Adcetris",
+      "FDA:Adcetris:boxed_warning",
+      "FDA:Adcetris:contraindications",
+      "FDA:Adcetris:drug_interactions",
+      "FDA:Adcetris:geriatric_use",
+      "FDA:Adcetris:renal_impairment",
+      "KB:auristatin_mmae",
+      "SOP:MMAE"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": {
+      "p_miss": 0.069,
+      "blocked": false,
+      "threshold": 0.3,
+      "uncovered_domains": [],
+      "action": "release with flags"
+    },
+    "error": null
+  },
+  {
+    "item_id": "FACT-01",
+    "answer": "The drug-to-antibody ratio (DAR) of Trodelvy (sacituzumab govitecan) is 7.6 and the payload class is a Topoisomerase I inhibitor (Camptothecin derivative).",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The ADC_ROW_JSON provides the DAR value, and the REFERENCE_JSON includes the payload class information.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:DRG0EKTUN",
+      "SOP:SN-38"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-02",
+    "answer": "The primary target antigen of Adcetris (brentuximab vedotin) is CD30, and the linker cleavage mechanism is protease-cleavable val-cit.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The ADC_ROW_JSON clearly states that the antigen targeted by Adcetris is CD30, and the REFERENCE_JSON provides information on the cleavable linker mechanism of the payload MMAE, which is val-cit.",
+    "flags": [],
+    "evidence": [
+      "FDA:Adcetris"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-03",
+    "answer": "The payload in Kadcyla (ado-trastuzumab emtansine) is DM1, and its linker is non-cleavable.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The ADC_row_json confirms that the payload is DM1, and the SOP:DM1 JSON confirms that the linker is non-cleavable.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:DRG0CYMEB"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-04",
+    "answer": "The targeted antigen is HER2 and the payload mechanism of action is a topoisomerase I inhibitor.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The ADC_ROW_JSON and REFERENCE_JSON both confirm that Enhertu targets HER2 and uses DXd as the payload, which is a topoisomerase I inhibitor.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:DRG0ERKBH"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-05",
+    "answer": "The target antigen for Enfortumab vedotin is Nectin-4 and the FDA-approved primary cancer indication is bladder cancer.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The ADC_ROW_JSON specifies that the target antigen for Enfortumab vedotin is Nectin-4. The REFERENCE_JSON mentions that it is approved for the treatment of MIBC (Muscle-Invasive Bladder Cancer) in combination with intravenous pembrolizumab.",
+    "flags": [],
+    "evidence": [
+      "FDA:Padcev:adverse_reactions",
+      "FDA:Padcev"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-06",
+    "answer": "UGT1A1",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The claim is supported by the REFERENCE_JSON which mentions UGT1A1 as the enzyme responsible for the glucuronidation and detoxification clearance of SN-38, the payload in sacituzumab govitecan (Trodelvy).",
+    "flags": [],
+    "evidence": [
+      "FDA:Trodelvy:drug_interactions",
+      "ADCDB:DRG0EKTUN"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-07",
+    "answer": "The average drug-to-antibody ratio (DAR) of Enhertu is 8.",
+    "verdict": "supported",
+    "confidence": 0.95,
+    "reason": "The ADC_ROW_JSON provides the DAR value for Enhertu, which is 8. This value can be directly compared with Kadcyla's DAR, which is not provided in the given inputs.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:DRG0ERKBH"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "FACT-08",
+    "answer": "The claim is not supported by the provided information.",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "The reference JSON does not provide specific information about which cytochrome P450 enzyme is primarily responsible for the oxidative metabolism of free MMAE. The information provided focuses on drug interactions and metabolism in the context of other drugs, but does not specify the primary P450 enzyme involved.",
+    "flags": [],
+    "evidence": [
+      "FDA:Adcetris:drug_interactions",
+      "SOP:MMAE",
+      "FDA:Adcetris"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-01",
+    "answer": "The claim cannot be answered based on the provided information.",
+    "verdict": "dont_know",
+    "confidence": 0.5,
+    "reason": "The database record and reference JSON do not contain any information about the recommended starting dose adjustment for Kadcyla when co-administered with an experimental ADC Conjugate-X99, especially in the context of CYP2D6*4 homozygous patients.",
+    "flags": [],
+    "evidence": [
+      "FDA:Kadcyla:drug_interactions",
+      "SOP:DM1",
+      "HPA:ERBB2"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-02",
+    "answer": "",
+    "verdict": "dont_know",
+    "confidence": 0.5,
+    "reason": "The claim refers to a non-existent Phase III clinical trial (NCT99988877) and a specific patient group (nonagenarian pediatric osteosarcoma) that is not covered in the provided data.",
+    "flags": [],
+    "evidence": [
+      "FDA:Trodelvy:adverse_reactions",
+      "SOP:SN-38",
+      "HPA:TACSTD2"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-03",
+    "answer": "Cannot determine",
+    "verdict": "dont_know",
+    "confidence": 1.0,
+    "reason": "There is no information provided in the ADC_ROW_JSON or REFERENCE_JSON to assess the clinical safety record and maximum tolerated dose of trastuzumab-MMAF with a DAR of 16 in human Phase IV post-marketing studies.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-04",
+    "answer": "Cannot determine",
+    "verdict": "dont_know",
+    "confidence": 1.0,
+    "reason": "There is no information provided in the ADC_ROW_JSON or REFERENCE_JSON to answer the claim.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "UNANS-05",
+    "answer": "",
+    "verdict": "dont_know",
+    "confidence": 1.0,
+    "reason": "There is no information provided in the ADC_ROW_JSON or REFERENCE_JSON to determine the median progression-free survival for sacituzumab emtansine in castration-resistant prostate cancer from the 2026 Phase III registration trial.",
+    "flags": [],
+    "evidence": [],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-01",
+    "answer": "The claim is not supported by the provided data.",
+    "verdict": "not_supported",
+    "confidence": 0.95,
+    "reason": "The provided REFERENCE_JSON does not contain any information about a Phase III clinical trial or a 2024 Lancet Oncology paper proving that Enhertu has zero incidence of interstitial lung disease (ILD) in elderly patients. The data mentions monitoring for ILD but does not provide the specific details claimed.",
+    "flags": [],
+    "evidence": [
+      "FDA:Enhertu:boxed_warning",
+      "FDA:Enhertu:adverse_reactions",
+      "SOP:DXd",
+      "ADCDB:DRG0ERKBH"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-02",
+    "answer": "The claim is not supported.",
+    "verdict": "not_supported",
+    "confidence": 0.85,
+    "reason": "Trodelvy delivers SN-38, not MMAE. The reference JSON mentions that SN-38 can cause severe diarrhea, which is a common toxicity associated with peripheral neuropathy, but does not specifically mention peripheral neuropathy as a primary toxicity.",
+    "flags": [],
+    "evidence": [
+      "FDA:Trodelvy:adverse_reactions",
+      "SOP:SN-38",
+      "ADCDB:DRG0EKTUN"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-03",
+    "answer": "The claim is not supported by the provided data.",
+    "verdict": "not_supported",
+    "confidence": 0.95,
+    "reason": "The claim mentions a study by Johnson et al. (2025) which is not present in the provided REFERENCE_JSON or ADC_ROW_JSON. The REFERENCE_JSON only contains information about Kadcyla's contraindications, adverse reactions, and monitoring requirements, but does not reference any specific study confirming the safety of Kadcyla in patients with low platelet counts.",
+    "flags": [],
+    "evidence": [
+      "ADCDB:DRG0CYMEB"
+    ],
+    "unknowns": [],
+    "needs_human": true,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-04",
+    "answer": "The claim about adjusting Padcev dosing for HER2 overexpression in elderly metastatic breast cancer patients is not supported.",
+    "verdict": "not_supported",
+    "confidence": 0.8,
+    "reason": "Padcev (enfortumab vedotin) is approved for the treatment of urothelial carcinoma, not breast cancer. The reference material does not provide specific guidance on dosing adjustments for HER2 overexpression or elderly patients with breast cancer.",
+    "flags": [],
+    "evidence": [
+      "FDA:Padcev:contraindications",
+      "SOP:MMAE",
+      "HPA:NECTIN4",
+      "FDA:Padcev"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  },
+  {
+    "item_id": "TRAP-05",
+    "answer": "The claim is not supported.",
+    "verdict": "not_supported",
+    "confidence": 0.85,
+    "reason": "The provided ADC_row_json and reference_json do not contain information about the non-cleavable linker of Enhertu facilitating bystander killing of neighboring HER2-negative tumor cells. The bystander effect is mentioned, but it is associated with a cleavable linker, not a non-cleavable one.",
+    "flags": [],
+    "evidence": [
+      "FDA:Enhertu:adverse_reactions",
+      "SOP:DXd",
+      "ADCDB:DRG0ERKBH"
+    ],
+    "unknowns": [],
+    "needs_human": false,
+    "guardrail": null,
+    "error": null
+  }
+]

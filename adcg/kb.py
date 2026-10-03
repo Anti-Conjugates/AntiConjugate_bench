@@ -1,0 +1,216 @@
+"""Load the ADC table and the (pharmacist-reviewed) knowledge base."""
+
+from __future__ import annotations
+
+import json
+import re
+from dataclasses import dataclass, field
+from functools import cached_property
+from pathlib import Path
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data"
+
+# Team-curated reference files (UNVERIFIED until pharmacist review), keyed by citation prefix.
+SOURCE_FILES = {"fda": "fda_adcs_labels.json", "hpa": "hpa_target_expression.json",
+                "sop": "payload_class_rules.json", "curated": "adcdb_curated_table.json"}
+# Our payload-class ids -> keys in payload_class_rules.json
+SOP_KEY = {"topo1_dxd": "DXd", "topo1_sn38": "SN-38", "maytansinoid_dm1": "DM1", "auristatin_mmae": "MMAE"}
+LABEL_CHARS = 700
+
+
+def as_list(ev) -> list[str]:
+    """LLMs sometimes return a single citation string instead of a list."""
+    if not ev:
+        return []
+    if isinstance(ev, str):
+        return [ev]
+    return [str(e) for e in ev]
+
+
+def load_sources(data_dir: Path = DATA) -> dict:
+    out = {}
+    for key, fname in SOURCE_FILES.items():
+        f = data_dir / fname
+        out[key] = json.loads(f.read_text()) if f.exists() else {}
+    return out
+
+
+def load_thresholds(path: Path | None = None) -> dict:
+    return json.loads((path or ROOT / "config" / "thresholds.json").read_text())
+
+
+@dataclass
+class KB:
+    adc_table: pd.DataFrame
+    payload_kb: dict
+    drug_lists: dict
+    thresholds: dict
+    excluded_ids: set[str] = field(default_factory=set)
+    sources: dict = field(default_factory=dict)
+
+    @classmethod
+    def load(cls, table_csv: Path | None = None) -> KB:
+        table_csv = table_csv or ROOT / "data" / "adc_her2_table.csv"
+        df = pd.read_csv(table_csv, dtype=str).fillna("")
+        return cls(
+            adc_table=df,
+            payload_kb=json.loads((ROOT / "knowledge" / "payload_classes.json").read_text()),
+            drug_lists=json.loads((ROOT / "knowledge" / "drug_lists.json").read_text()),
+            thresholds=load_thresholds(),
+            sources=load_sources(),
+        )
+
+    def without(self, adc_ids: set[str]) -> KB:
+        """Retrieval view with held-out ADCs removed (fair split)."""
+        return KB(self.adc_table, self.payload_kb, self.drug_lists, self.thresholds, set(adc_ids), self.sources)
+
+    @property
+    def visible(self) -> pd.DataFrame:
+        return self.adc_table[~self.adc_table["adc_id"].isin(self.excluded_ids)]
+
+    @cached_property
+    def all_ids(self) -> set[str]:
+        curated = {r["adcdb_id"] for r in (self.sources.get("curated") or {}).get("adcs", []) if r.get("adcdb_id")}
+        return set(self.adc_table["adc_id"]) | curated
+
+    @staticmethod
+    def _row_names(row) -> set[str]:
+        names = [row.get("adc_id", ""), row.get("adc_name", ""), row.get("brand_name", "")]
+        names += row.get("synonyms", "").split(";")
+        return {_norm(n) for n in names if _norm(n)}
+
+    @cached_property
+    def _excluded_names(self) -> set[str]:
+        rows = self.adc_table[self.adc_table["adc_id"].isin(self.excluded_ids)]
+        return set().union(*(self._row_names(r) for _, r in rows.iterrows())) if len(rows) else set()
+
+    @cached_property
+    def extra_rows(self) -> list[dict]:
+        """Approved ADCs from the FDA-label file (joined to the curated ADCdb table) that are not in the
+        scraped HER2 table, e.g. TROP2 / Nectin-4 / CD30 ADCs."""
+        table_names = set().union(*(self._row_names(r) for _, r in self.adc_table.iterrows()))
+        curated = {_norm(_generic(r["adc_name"])): r for r in (self.sources.get("curated") or {}).get("adcs", [])}
+        rows = []
+        for brand, lab in (self.sources.get("fda") or {}).items():
+            m = lab.get("meta", {})
+            cur = curated.get(_norm(_generic(m.get("generic_name", ""))), {})
+            row = {"adc_id": cur.get("adcdb_id", ""), "adc_name": m.get("generic_name", ""), "brand_name": brand,
+                   "status": "Approved (FDA label)", "antigen": m.get("target", ""), "antibody": cur.get("antibody", ""),
+                   "payload": m.get("payload", ""), "payload_target": m.get("payload_class", ""),
+                   "linker": m.get("linker", ""), "dar": str(m.get("dar", "")), "synonyms": _generic(m.get("generic_name", ""))}
+            if not (self._row_names(row) & table_names):
+                rows.append(row)
+        seen = table_names.union(*(self._row_names(r) for r in rows)) if rows else table_names
+        for r in curated.values():
+            row = {"adc_id": r.get("adcdb_id", ""), "adc_name": r.get("adc_name", ""), "brand_name": r.get("brand", ""),
+                   "status": "Curated ADCdb record", "antigen": r.get("target", ""), "antibody": r.get("antibody", ""),
+                   "payload": r.get("payload", ""), "payload_target": r.get("payload_target", ""),
+                   "linker": r.get("linker", ""), "synonyms": ""}
+            if row["adc_id"] and not (self._row_names(row) & seen):
+                rows.append(row)
+        return rows
+
+    def find_adc(self, name: str) -> dict | None:
+        key = _norm(name)
+        if not key:
+            return None
+        for _, row in self.adc_table.iterrows():
+            if key in self._row_names(row):
+                return None if row["adc_id"] in self.excluded_ids else row.to_dict()
+        for row in self.extra_rows:
+            if key in self._row_names(row) and not (self._row_names(row) & self._excluded_names):
+                return dict(row)
+        return None
+
+    def find_adc_in_text(self, text: str) -> dict | None:
+        """Resolve the ADC named in free text (longest name match), respecting the split."""
+        rows = [r.to_dict() for _, r in self.adc_table.iterrows()] + self.extra_rows
+        best = ""
+        for row in rows:
+            names = [row.get("adc_name", ""), row.get("brand_name", "")] + row.get("synonyms", "").split(";")
+            for n in names:
+                n = n.strip()
+                if len(n) >= 4 and len(n) > len(best) and re.search(rf"(?<![\w-]){re.escape(n)}(?![\w-])", text, re.I):
+                    best = n
+        return self.find_adc(best) if best else None
+
+    @staticmethod
+    def adc_cite(adc: dict) -> str:
+        return f"ADCDB:{adc['adc_id']}" if adc.get("adc_id") else f"FDA:{adc.get('brand_name', '')}"
+
+    def fda_label(self, adc: dict) -> tuple[str, dict] | None:
+        keys = {_norm(adc.get("brand_name", "")), _norm(_generic(adc.get("adc_name", "")))} - {""}
+        for brand, lab in (self.sources.get("fda") or {}).items():
+            if keys & {_norm(brand), _norm(_generic(lab.get("meta", {}).get("generic_name", "")))}:
+                return brand, lab
+        return None
+
+    def reference(self, adc: dict) -> dict:
+        """Label, SOP and expression context for one ADC, keyed by the citation string to use."""
+        out = {}
+        hit = self.fda_label(adc)
+        gene = ""
+        if hit:
+            brand, lab = hit
+            gene = lab.get("meta", {}).get("target_gene", "")
+            for sec, texts in lab.get("label_sections", {}).items():
+                if texts:
+                    out[f"FDA:{brand}:{sec}"] = [str(t)[:LABEL_CHARS] for t in texts]
+        sop_key = SOP_KEY.get(self.payload_class(adc.get("payload", "")) or "")
+        sop = (self.sources.get("sop") or {}).get("payload_classes", {})
+        if sop_key in sop:
+            out[f"SOP:{sop_key}"] = sop[sop_key]
+        hpa = self.sources.get("hpa") or {}
+        if not gene and "her2" in adc.get("antigen", "").lower():
+            gene = "ERBB2"
+        if gene in hpa:
+            h = hpa[gene]
+            out[f"HPA:{gene}"] = {k: h.get(k) for k in ("rna_tissue_specificity", "protein_tissue_distribution",
+                                                         "biophysics_implication") if h.get(k)}
+        return out
+
+    def payload_class(self, payload: str) -> str | None:
+        hits = [
+            cid for cid, c in self.payload_kb["classes"].items()
+            if re.search(c["payload_regex"], payload or "", flags=re.I)
+        ]
+        return hits[0] if len(hits) == 1 else None
+
+    def citation_ok(self, cite: str, patient: dict | None = None) -> bool:
+        from adcg.rules import RULES
+
+        kind, _, ref = cite.partition(":")
+        kind = kind.strip().upper()
+        ref = ref.strip()
+        if kind == "ADCDB":
+            return ref in self.all_ids
+        if kind == "KB":
+            head, _, sub = ref.partition(":")
+            if head == "drug_lists":
+                return sub in self.drug_lists
+            return head in self.payload_kb["classes"] or head in self.payload_kb["antibody_class_effects"]
+        if kind == "RULE":
+            return ref in RULES
+        if kind == "PATIENT":
+            return patient is not None and ref in patient
+        if kind == "FDA":
+            brand, _, sec = ref.partition(":")
+            lab = (self.sources.get("fda") or {}).get(brand)
+            return lab is not None and (not sec or bool(lab.get("label_sections", {}).get(sec)))
+        if kind == "SOP":
+            sop = self.sources.get("sop") or {}
+            return ref in sop.get("payload_classes", {}) or ref in sop.get("general_prescribing_rules", {})
+        if kind == "HPA":
+            return ref in (self.sources.get("hpa") or {})
+        return False
+
+
+def _generic(name: str) -> str:
+    return re.sub(r"^ado-", "", (name or "").strip(), flags=re.I)
+
+
+def _norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())

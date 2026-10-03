@@ -1,0 +1,11 @@
+{
+  "_status": "UNVERIFIED DRAFT - pharmacist to review. Lower-case generic names.",
+  "cyp3a4_strong_inhibitor": ["clarithromycin", "itraconazole", "ketoconazole", "posaconazole", "voriconazole", "ritonavir", "cobicistat", "nefazodone", "telithromycin"],
+  "cyp3a4_strong_inducer": ["rifampicin", "rifampin", "carbamazepine", "phenytoin", "st johns wort", "enzalutamide", "apalutamide"],
+  "anticoagulant": ["warfarin", "apixaban", "rivaroxaban", "edoxaban", "dabigatran", "enoxaparin", "dalteparin", "heparin"],
+  "antiplatelet": ["aspirin", "clopidogrel", "ticagrelor", "prasugrel", "dipyridamole"],
+  "ugt1a1_interacting": ["atazanavir", "ketoconazole", "rifampicin", "rifampin", "carbamazepine", "phenytoin"],
+  "cardiotoxic": ["doxorubicin", "epirubicin", "daunorubicin", "trastuzumab", "pertuzumab"],
+  "neurotoxic": ["paclitaxel", "docetaxel", "vincristine", "vinorelbine", "oxaliplatin", "cisplatin", "bortezomib", "thalidomide"],
+  "pneumonitis_risk": ["amiodarone", "nitrofurantoin", "methotrexate", "bleomycin"]
+}

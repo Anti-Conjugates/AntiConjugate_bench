@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+results/runs/
+.pytest_cache/
+.ruff_cache/
+benchmark/test/answers*.jsonl
+results/cache/
+data/benchmark_30_items.json
+*gold*.json

@@ -1,0 +1,117 @@
+{
+  "payload_classes": {
+    "DXd": {
+      "full_name": "Deruxtecan (Exatecan derivative)",
+      "mechanism": "Topoisomerase I inhibitor",
+      "cleavable_linker": true,
+      "membrane_permeable": true,
+      "bystander_effect": "High (uncharged payload readily diffuses across membranes)",
+      "primary_toxicities": [
+        "Interstitial Lung Disease (ILD) / fatal pneumonitis",
+        "Neutropenia / leukopenia",
+        "Left ventricular dysfunction (in HER2-targeted constructs)",
+        "Nausea / vomiting / alopecia"
+      ],
+      "absolute_contraindications": [
+        "Active or pre-existing drug-induced interstitial lung disease / pneumonitis",
+        "Baseline LVEF < 40%"
+      ],
+      "monitoring_requirements": [
+        "Prompt high-resolution CT chest upon any cough, dyspnea, or fever",
+        "Periodic baseline and on-treatment echocardiogram / MUGA scan for LVEF",
+        "Regular complete blood counts (CBC)"
+      ],
+      "drug_interactions": [
+        "Concomitant cardiotoxic or pulmonary toxic agents",
+        "Strong OATP1B1/1B3 or P-gp modulators (minimal clinical impact relative to systemic organ reserve)"
+      ]
+    },
+    "DM1": {
+      "full_name": "Mertansine (Maytansinoid derivative)",
+      "mechanism": "Microtubule inhibitor (tubulin depolymerization)",
+      "cleavable_linker": false,
+      "membrane_permeable": false,
+      "bystander_effect": "Low/negligible (charged lysosomal catabolite lysine-MCC-DM1 remains trapped in targeted cell)",
+      "primary_toxicities": [
+        "Thrombocytopenia (frequent Grade 3-4, risk of fatal intracranial/GI bleeding)",
+        "Hepatotoxicity (transaminitis, hyperbilirubinemia, nodular regenerative hyperplasia)",
+        "Peripheral neuropathy",
+        "Left ventricular dysfunction"
+      ],
+      "absolute_contraindications": [
+        "Baseline platelet count < 100,000/uL prior to initiation",
+        "Severe hepatic impairment (total bilirubin > 3x ULN or AST/ALT > 5x ULN without hepatic metastases)",
+        "Baseline LVEF < 45-50%"
+      ],
+      "monitoring_requirements": [
+        "Platelet count and CBC prior to each treatment cycle",
+        "Hepatic transaminases (AST, ALT) and total bilirubin prior to each cycle",
+        "LVEF evaluation at baseline and every 3 months"
+      ],
+      "drug_interactions": [
+        "Strong CYP3A4 inhibitors (e.g., ketoconazole, itraconazole) increase DM1 exposure; avoid concomitant use",
+        "Anticoagulants or antiplatelet therapies markedly increase hemorrhage risk with thrombocytopenia"
+      ]
+    },
+    "MMAE": {
+      "full_name": "Monomethyl auristatin E",
+      "mechanism": "Microtubule inhibitor (synthetic antimitotic)",
+      "cleavable_linker": true,
+      "membrane_permeable": true,
+      "bystander_effect": "High (neutral hydrophobic payload diffuses into adjacent cells upon cathepsin B cleavage)",
+      "primary_toxicities": [
+        "Peripheral neuropathy (cumulative sensory and motor)",
+        "Severe neutropenia and febrile neutropenia",
+        "Severe hyperglycemia and diabetic ketoacidosis (in Padcev / Nectin-4 constructs)",
+        "Severe cutaneous adverse reactions (SCAR, Stevens-Johnson syndrome, TEN)"
+      ],
+      "absolute_contraindications": [
+        "Severe hepatic impairment (Child-Pugh Class C) - MMAE clearance is primarily biliary/hepatic",
+        "Severe pre-existing motor peripheral neuropathy (Grade >= 3)",
+        "Active Stevens-Johnson syndrome or toxic epidermal necrolysis"
+      ],
+      "monitoring_requirements": [
+        "Screen for numbness, tingling, weakness (neuropathy dose delays or reductions)",
+        "Frequent blood glucose monitoring in diabetic patients receiving enfortumab vedotin",
+        "Inspect skin for progressive rash or bullous lesions",
+        "Monitor renal reserve (CrCl < 30 mL/min associated with higher mortality/toxicities)"
+      ],
+      "drug_interactions": [
+        "Strong CYP3A4 inhibitors (e.g., ketoconazole, clarithromycin, voriconazole) markedly increase free MMAE AUC and toxicity; close monitoring or dose reduction required",
+        "Strong CYP3A4 inducers (e.g., rifampin, carbamazepine, St. John's wort) decrease MMAE efficacy"
+      ]
+    },
+    "SN-38": {
+      "full_name": "7-ethyl-10-hydroxycamptothecin",
+      "mechanism": "Topoisomerase I inhibitor (active metabolite of irinotecan)",
+      "cleavable_linker": true,
+      "membrane_permeable": true,
+      "bystander_effect": "Moderate to high (pH-sensitive cleavable linker releases free SN-38 in tumor microenvironment)",
+      "primary_toxicities": [
+        "Severe, life-threatening neutropenia and febrile neutropenia",
+        "Severe diarrhea (early and late onset, dehydration and electrolyte collapse)",
+        "Nausea / vomiting",
+        "Hypersensitivity reactions"
+      ],
+      "absolute_contraindications": [
+        "Severe uncontrolled neutropenia (ANC < 1500/uL at cycle initiation)",
+        "Severe hepatic impairment (bilirubin > 1.5x ULN without documented Gilbert syndrome)"
+      ],
+      "monitoring_requirements": [
+        "Test for UGT1A1*28 genotype: homozygous (*28/*28) patients have impaired glucuronidation clearance and substantially higher risk of severe neutropenia and diarrhea; require reduced starting dose or intensified monitoring",
+        "Active monitoring for early/late diarrhea; immediate high-dose loperamide protocol",
+        "CBC with differential prior to each dose"
+      ],
+      "drug_interactions": [
+        "UGT1A1 inhibitors (e.g., atazanavir, gemfibrozil, ketoconazole) increase SN-38 exposure",
+        "UGT1A1 inducers (e.g., rifampin, phenytoin) decrease SN-38 exposure"
+      ]
+    }
+  },
+  "general_prescribing_rules": {
+    "elderly_renal_cutoff": "CrCl < 30 mL/min requires dose adjustment and close toxicodynamic surveillance for auristatin and maytansinoid ADCs.",
+    "elderly_hepatic_cutoff": "Child-Pugh B or C leads to profound drug accumulation of lipophilic payloads (MMAE, DM1, SN-38) cleared hepatically.",
+    "polypharmacy_cyp3a4": "Concomitant administration of strong CYP3A4 inhibitors with MMAE or DM1 triggers an mandatory drug-interaction alert and clinician review.",
+    "novelty_unverified_rule": "If an ADC construct, target pairing, or clinical trial number is not documented in verified databases (openFDA, ADCDB, ClinicalTrials.gov), the agent MUST abstain (verdict: dont_know, needs_human: true)."
+  }
+}

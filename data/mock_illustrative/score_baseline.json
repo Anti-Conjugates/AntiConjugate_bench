@@ -1,0 +1,11 @@
+{
+  "num_items": 30,
+  "total_score": -93.0,
+  "mean_score": -3.1,
+  "accuracy": 0.333,
+  "brier_score": 0.4246,
+  "abstention_rate": 0.0,
+  "total_missed_must_flags": 32,
+  "total_fake_citations": 13,
+  "note": "Per-item details removed: they contained the benchmark gold labels."
+}

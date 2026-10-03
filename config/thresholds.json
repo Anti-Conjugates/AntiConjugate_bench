@@ -1,0 +1,16 @@
+{
+  "_owner": "pharmacist (set before the benchmark run; do not tune on the test set)",
+  "guardrail_block_threshold": 0.30,
+  "agent_min_confidence": 0.55,
+  "egfr_severe": 30,
+  "egfr_moderate": 60,
+  "bilirubin_x_uln_moderate": 1.5,
+  "ast_alt_x_uln_high": 3.0,
+  "platelets_low": 100,
+  "anc_low": 1.5,
+  "lvef_low": 50,
+  "elderly_age": 75,
+  "polypharmacy_n": 5,
+  "affinity_kd_nm_high_affinity": 0.1,
+  "affinity_kd_nm_low_affinity": 10.0
+}

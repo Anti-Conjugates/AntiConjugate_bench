@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "llm": "ollama:qwen2.5:7b-instruct",
+    "items": "/home/ubuntu/repos/adc-guardrail/benchmark/test/items_public.json",
+    "n": 30,
+    "resolved_models": [
+      "qwen2.5:7b-instruct"
+    ]
+  },
+  "baseline": {
+    "num_items": 30,
+    "total_score": -22.0,
+    "mean_score": -0.73,
+    "accuracy": 0.533,
+    "brier_score": 0.3138,
+    "abstention_rate": 0.1,
+    "total_missed_must_flags": 15,
+    "total_fake_citations": 0,
+    "guardrail_blocked": 11
+  },
+  "agent": {
+    "num_items": 30,
+    "total_score": 1.0,
+    "mean_score": 0.03,
+    "accuracy": 0.733,
+    "brier_score": 0.208,
+    "abstention_rate": 0.167,
+    "total_missed_must_flags": 5,
+    "total_fake_citations": 0,
+    "guardrail_blocked": 6
+  }
+}

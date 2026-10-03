@@ -1,0 +1,16 @@
+{
+  "search_rows": 3402,
+  "clinical_stage_rows": 56,
+  "clinical_stage_targeting_antigen": 56,
+  "approved_targeting_antigen": 5,
+  "filled_fields_among_targeting": {
+    "dar": 40,
+    "linker": 56,
+    "payload": 56,
+    "conjugate_type": 52,
+    "bystander": 7,
+    "binding_affinity": 3,
+    "circulating_stability": 1,
+    "toxicity": 2
+  }
+}

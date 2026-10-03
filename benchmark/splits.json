@@ -1,0 +1,27 @@
+{
+  "method": "group-by-antibody",
+  "seed": 7,
+  "heldout_antibodies": [
+    "HMA000352",
+    "XMT-1519",
+    "Trastuzumab-(\u03baK183C+K290C)",
+    "Pertuzumab",
+    "MEDI-4276",
+    "MIW338",
+    "Zanidatamab",
+    "DX-CHO9"
+  ],
+  "heldout_adc_ids": [
+    "DRG0AWQJG",
+    "DRG0FWYLZ",
+    "DRG0GYNBS",
+    "DRG0HVXED",
+    "DRG0KWKQC",
+    "DRG0PXYTA",
+    "DRG0SWCOG",
+    "DRG0UIDCY",
+    "DRG0WMIKO",
+    "DRG0YDBZU",
+    "DRG0YPVKH"
+  ]
+}
