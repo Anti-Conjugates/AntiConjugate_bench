@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { isDeepStrictEqual } from 'node:util';
 import {
   WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema,
   type ResearchCatalog, type ResearchRequest, type ResearchReceipt, type ClaimAudit
@@ -90,7 +91,7 @@ function trustedReceipts(tool: ToolId, request: ResearchRequest): ResearchReceip
 export function receiptIntegrity(receipt: ResearchReceipt, request: ResearchRequest): boolean {
   const tool: ToolId = receipt.kind === 'openfda' ? 'read_openfda' : receipt.kind === 'label' ? 'read_label' : receipt.kind === 'derived' ? 'read_derived' : 'read_workbook';
   if (!allowedTools(request).includes(tool)) return false;
-  return trustedReceipts(tool, request).some(expected => JSON.stringify(expected) === JSON.stringify(receipt));
+  return trustedReceipts(tool, request).some(expected => isDeepStrictEqual(expected, receipt));
 }
 
 export interface ExpectedClaim {

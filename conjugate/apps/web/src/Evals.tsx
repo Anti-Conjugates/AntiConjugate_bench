@@ -2,6 +2,7 @@ import type { ResearchCatalog } from '@her2/shared';
 import results from '../../../evals/results.json';
 import harnessChecks from '../../../evals/harness.json';
 import { faultTests, productLabel, questionTitles, verdictLabels } from './labels';
+import { EvaluationStudies } from './EvaluationStudies';
 
 type Verdict = keyof typeof verdictLabels;
 type QuestionId = keyof typeof questionTitles;
@@ -89,6 +90,8 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       <p>Software checks on the pipeline, run by <code>scripts/eval.ts</code> against the same server code the app uses. They test whether the verifier enforces its rules. They are not a clinical benchmark and say nothing about whether the sources themselves are right.</p>
     </header>
 
+    <EvaluationStudies />
+
     <section aria-labelledby="harness-checks-heading">
       <h2 id="harness-checks-heading">Harness checks</h2>
       <p><strong>{harnessChecks.passed}/{harnessChecks.total}</strong> checks passed across both products, five questions and two source settings. This suite edits source records and replays the verifier. It makes no model calls.</p>
@@ -108,7 +111,7 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       <div><dt>Scripted strategies caught in every scope</dt><dd>{strategiesCaughtEverywhere}/{strategiesTotal}</dd></div>
       <div><dt>Honest control accepted</dt><dd>{honest ? `${honest.accepted}/${honest.total}` : 'n/a'}</dd></div>
       <div><dt>Verdicts that changed with workbook only</dt><dd>{data.verdicts.changed_count}/{data.verdicts.total}</dd></div>
-      <div><dt>Claude drafts accepted</dt><dd>{data.claude.skipped ? 'not run' : `${data.claude.accepted}/${data.claude.total}`}</dd></div>
+      <div><dt>Prior workflow drafts accepted</dt><dd>{data.claude.skipped ? 'not run' : `${data.claude.accepted}/${data.claude.total}`}</dd></div>
     </dl>
 
     <section aria-labelledby="shifts-heading">
@@ -137,7 +140,7 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
 
     <section aria-labelledby="strategies-heading">
       <h2 id="strategies-heading">Scripted strategies</h2>
-      <p>Drafts written by us, not by a model, to see what the verifier lets through. Each one is tried on all 16 product, question and source-policy scopes. <code>honest_expected</code> is the control and should always pass.</p>
+      <p>Drafts written by us, not by a model, to see what the verifier lets through. Each one is tried on all {scopes.length} product, question and source-policy scopes. <code>honest_expected</code> is the control and should always pass.</p>
       <ScopeGrid caption="Scripted strategies by scope" scopes={scopes} rows={strategyGrid} okLabel="rejected the scripted draft, or accepted the honest control" badLabel="accepted a scripted draft" axisNote={axisNote} />
       <table className="checks-table"><caption className="sr-only">Scripted strategies</caption>
         <thead><tr><th scope="col">Strategy</th><th scope="col">What it does</th><th scope="col">Accepted</th><th scope="col">Caught by</th></tr></thead>
@@ -147,9 +150,10 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
     </section>
 
     <section aria-labelledby="claude-heading">
-      <h2 id="claude-heading">Claude ({data.claude.model})</h2>
+      <h2 id="claude-heading">Prior planner and draft run ({data.claude.model})</h2>
+      <p>This earlier run is dated {data.generated_at}. It includes planning; the paired selection study above tests drafting only.</p>
       {data.claude.skipped ? <p>Not run. No server key was set when the evals ran.</p> : <>
-        <p>Claude planned the tools and drafted the citation ids for all 16 scopes. The verifier judged every draft. Completed {data.claude.completed}/{data.claude.total}, accepted {data.claude.accepted}/{data.claude.total}, failed {data.claude.failed}. Median plan {ms(data.claude.median_plan_ms)}, draft {ms(data.claude.median_draft_ms)}, end to end {ms(data.claude.median_wall_ms)}.</p>
+        <p>Claude planned the tools and drafted the citation ids for {data.claude.total} scopes. The verifier judged every draft. Completed {data.claude.completed}/{data.claude.total}, accepted {data.claude.accepted}/{data.claude.total}, failed {data.claude.failed}. Median plan {ms(data.claude.median_plan_ms)}, draft {ms(data.claude.median_draft_ms)}, end to end {ms(data.claude.median_wall_ms)}.</p>
         <div className="trace-table-wrap"><table className="checks-table"><caption className="sr-only">Claude runs by scope</caption>
           <thead><tr><th scope="col">Product</th><th scope="col">Question</th><th scope="col">Sources</th><th scope="col">Outcome</th><th scope="col">Tools planned</th><th scope="col">Plan</th><th scope="col">Draft</th><th scope="col">Total</th></tr></thead>
           <tbody>{data.claude.rows.map((row) => <tr key={row.product_id + row.question_id + row.evidence_policy}>

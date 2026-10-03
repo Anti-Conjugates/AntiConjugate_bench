@@ -8,6 +8,22 @@ The best fit is the epistemological-agent description supplied by the organiser.
 
 ## Demo sequence
 
+For judges, open Evals after the claim comparison. Start with "Would the eval
+catch a broken checker?" Show the original key-order failure, its fix and the
+three surviving single-check variants. The suite catches deliberately weakened
+checks by observing bad drafts get accepted, not by noticing a changed hash.
+
+Then show the paired citation-selection experiment. Eligibility flags are hidden
+in both model arms. The supplied citation mapping is the only difference. Show
+the no-model baselines before the model scores: these known fixtures are simple
+enough for a source-kind rule. The contribution is the auditable verifier and its
+tested boundaries, not a claim that an LLM outperforms those rules.
+
+Download the JSON artifacts to show individual outcomes, provider errors,
+fingerprints and excluded cases. `npm run eval:verifier` is offline;
+`npm run eval:selection` uses paid Claude calls, at most 120 with no retries.
+The second command tests drafting on fixed sources and deliberately skips planning.
+
 1. Check a plausible inference. In Check a claim, pick Enhertu and the question "Does a cleavable linker mean release in blood?". Keep rules only, sources set to All, and tick the synthetic confirmation. The label summary contradicts the inference: the cleavable tetrapeptide linker is described as plasma-stable with intracellular cleavage. This says nothing about release in any one person.
 2. Take the evidence away. Set sources to Workbook only and run again. The verdict changes to Not enough evidence because the label is withheld. The run cannot use another product's sources or model memory to keep its verdict. Compare the Sources used sections of the two results.
 3. Show useful support. Pick "What is it made of?". The Sources used section shows the exact workbook cells for payload and DAR. Supported here means the uploaded row says this. The snapshot is unverified and the clinical gate stays blocked.

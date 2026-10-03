@@ -1,5 +1,44 @@
 # Software verification — 2026-10-03
 
+## Latest: checker sensitivity and paired citation selection
+
+These are software contract results on developer-known fixtures.
+
+- `npm run eval:verifier`: 7/10 deliberately weakened production-function copies
+  detected. Three single-check variants survive because other guards still reject
+  these faults. 80/80 healthy controls accepted; 176/176 applicable faults rejected.
+- The first run accepted only 20/80 healthy controls. JSON object key order caused
+  false rejections in `receiptIntegrity`. `isDeepStrictEqual` fixes object ordering
+  while preserving exact values and array order. Original failed artifact retained.
+- `npm run eval:selection`: 120 real `claude-opus-5-5` requests, no retries. Three
+  paired presentations across 20 scopes. Both arms hide the eligibility flag and
+  use the same sources, schema, system prompt and scoped skills. Only the supplied
+  citation mapping differs. Mapped: 59/60 accepted, one provider error. Unmapped:
+  34/60 accepted, 25 verifier rejections, one provider error. Errors remain in the
+  denominator. Paired acceptance difference is 41.7 percentage points.
+- No-model baselines expose the shortcut: eligible-only and source-kind selection
+  each match 20/20 expected sets. Neither model result proves scientific reasoning
+  or superiority over rules. Repeated observations are correlated; no significance
+  test, clinical accuracy, calibration or general attack-resistance claim.
+- Strict typecheck, lint and 73 API + 58 frontend tests pass. Offline harness remains
+  360/360; injected citations 60/60 rejected; honest scripted control 20/20 accepted.
+  HTTP smoke passes without model/browser calls. Fresh verifier replay passes;
+  previous-code exports fail closed. Dependency audit reports zero vulnerabilities.
+- Production build and independent source/artifact review pass. Evals loads on
+  demand, with its detailed evaluation data in a separate JavaScript chunk.
+- The earlier 20/20 two-call Claude pipeline artifact is retained with its original
+  timestamp. It was not rerun as part of this 120-request draft-only study. Offline
+  reproduction reports skipped model calls when no key is configured.
+- A separate unit regression covers combined cross-product and invented citation
+  IDs, including single-check removal and all four citation defenses removed.
+  It does not inflate the 176-case study denominator.
+  Browser checks remain excluded. Public Space remains on its previous version.
+
+Design and dated amendment are in `EVALUATION_DESIGN.md`. Full generated JSON
+includes individual decisions, provider errors, exclusions and fingerprints.
+The production two-call workflow is unchanged except the key-order equality fix.
+The paired study deliberately does not exercise planning or live retrieval.
+
 ## Latest: harness and frozen US identity
 
 Supersedes the earlier counts and connection status below; those entries are

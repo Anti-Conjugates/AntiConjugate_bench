@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { BookOpen, FileCheck2, FlaskConical, ListChecks, Table2, UserRound, Workflow } from 'lucide-react';
 import type { Catalog, ResearchCatalog } from '@her2/shared';
 import { describeFailure, fetchCatalog } from './boundaries';
@@ -8,7 +8,7 @@ import { EvidenceAudit } from './EvidenceAudit';
 import { AdcAtlas } from './AdcAtlas';
 import { ContextReview } from './ContextReview';
 import { HowItWorks } from './HowItWorks';
-import { Evals } from './Evals';
+const Evals = lazy(() => import('./Evals').then(module => ({ default: module.Evals })));
 
 const views = [
   { id: 'audit', label: 'Check a claim', icon: FileCheck2 },
@@ -74,7 +74,7 @@ export default function App() {
         {view === 'atlas' && (research.data ? <AdcAtlas catalog={research.data} /> : <CatalogState state={research} name="ADC table" />)}
         {view === 'context' && (clinical.data ? <ContextReview catalog={clinical.data} /> : <CatalogState state={clinical} name="label catalog" />)}
         {view === 'how' && <HowItWorks />}
-        {view === 'evals' && <Evals catalog={research.data} />}
+        {view === 'evals' && <Suspense fallback={<p role="status">Loading evals...</p>}><Evals catalog={research.data} /></Suspense>}
         {view === 'sources' && <>{clinical.failure && <CatalogState state={clinical} name="source list" />}<SourceLibrary catalog={clinical.data} /></>}
       </main>
     </div>

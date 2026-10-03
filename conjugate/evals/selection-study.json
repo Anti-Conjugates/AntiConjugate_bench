@@ -1,0 +1,3706 @@
+{
+  "kind": "paired_supplied_record_selection_not_scientific_discovery",
+  "generated_at": "2026-10-03T21:13:22.975Z",
+  "manifest": {
+    "code_sha256": "27217bad80a6c94eea6ffef5322baef742cac91a3a76abca6916e9f59b11d416",
+    "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+    "evaluation_sha256": "20d6878cf822693bdfab5d682b38fe431d4a0ec936b6575cf95782694c77d619",
+    "design_sha256": "3b8b35fac4f0a74337b902b57489f6bf611d0ec282efb952cc38657ed31915ba",
+    "lockfile_sha256": "f25840fb306160818ff74f145d689a3ba14999682fceb7044bb15589f26db3b8",
+    "node": "v24.19.0",
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "scopes": 20
+  },
+  "model": "claude-opus-5-5",
+  "prompt_sha256": "b555a5f4edca851aa7ecb8cdab75a1adef928e33c0e362f3270d8435800bd3ea",
+  "skills": [
+    {
+      "name": "evidence-retrieval",
+      "version": "1.0.0",
+      "sha256": "d904c1ba739cbfbb52f958b046c3d566e1b643360d919f41856d28bf7103e8b8"
+    },
+    {
+      "name": "provenance-review",
+      "version": "1.0.0",
+      "sha256": "f8cae5fb23b40891f80daf84efa2b408f70610c1a8f0ab7ff21f6d7dfdd8a94e"
+    },
+    {
+      "name": "counter-evidence",
+      "version": "1.0.0",
+      "sha256": "59074ff3b1aa565792c59da74034fefa6eb8bbc48e01d231bca39c2c4bc82c89"
+    }
+  ],
+  "source_fingerprints": [
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "3368819bd1152d417f4dce92d8081a203133b4f612a1797fd4d8119e48d81b73"
+        },
+        {
+          "id": "UK-KADCYLA-SMPC",
+          "sha256": "e53118dd5d782c6448c578ec76f7966964275e7fff26360f9d0a8a2f87dc8ffa"
+        },
+        {
+          "id": "DERIVED-DRG0CYMEB-NOT-ADCDB",
+          "sha256": "177e7cffb37e4f6502453a64ece8cebd9d43d6a848d8b62b0d168681fd778f9f"
+        },
+        {
+          "id": "US-OPENFDA-DRG0CYMEB-IDENTITY",
+          "sha256": "f41500297113def55269931c21b9b7f05444dbd110e1c15c5cdb03f53886d93c"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "3368819bd1152d417f4dce92d8081a203133b4f612a1797fd4d8119e48d81b73"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        },
+        {
+          "id": "UK-KADCYLA-SMPC",
+          "sha256": "e53118dd5d782c6448c578ec76f7966964275e7fff26360f9d0a8a2f87dc8ffa"
+        },
+        {
+          "id": "DERIVED-DRG0CYMEB-NOT-ADCDB",
+          "sha256": "177e7cffb37e4f6502453a64ece8cebd9d43d6a848d8b62b0d168681fd778f9f"
+        },
+        {
+          "id": "US-OPENFDA-DRG0CYMEB-IDENTITY",
+          "sha256": "f41500297113def55269931c21b9b7f05444dbd110e1c15c5cdb03f53886d93c"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        },
+        {
+          "id": "UK-KADCYLA-SMPC",
+          "sha256": "c74ab3123aac5a8de72383cf771ae6e34790e0918e5f0d4835e1581c5454cdf9"
+        },
+        {
+          "id": "DERIVED-DRG0CYMEB-NOT-ADCDB",
+          "sha256": "177e7cffb37e4f6502453a64ece8cebd9d43d6a848d8b62b0d168681fd778f9f"
+        },
+        {
+          "id": "US-OPENFDA-DRG0CYMEB-IDENTITY",
+          "sha256": "f41500297113def55269931c21b9b7f05444dbd110e1c15c5cdb03f53886d93c"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        },
+        {
+          "id": "UK-KADCYLA-SMPC",
+          "sha256": "c74ab3123aac5a8de72383cf771ae6e34790e0918e5f0d4835e1581c5454cdf9"
+        },
+        {
+          "id": "DERIVED-DRG0CYMEB-NOT-ADCDB",
+          "sha256": "177e7cffb37e4f6502453a64ece8cebd9d43d6a848d8b62b0d168681fd778f9f"
+        },
+        {
+          "id": "US-OPENFDA-DRG0CYMEB-IDENTITY",
+          "sha256": "f41500297113def55269931c21b9b7f05444dbd110e1c15c5cdb03f53886d93c"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        },
+        {
+          "id": "UK-KADCYLA-SMPC",
+          "sha256": "c74ab3123aac5a8de72383cf771ae6e34790e0918e5f0d4835e1581c5454cdf9"
+        },
+        {
+          "id": "DERIVED-DRG0CYMEB-NOT-ADCDB",
+          "sha256": "177e7cffb37e4f6502453a64ece8cebd9d43d6a848d8b62b0d168681fd778f9f"
+        },
+        {
+          "id": "US-OPENFDA-DRG0CYMEB-IDENTITY",
+          "sha256": "0b5db973174a3648c69df1ab2e7682684b6a3aefc64a09e994dd46e7e1173303"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0CYMEB-COMPOSITION",
+          "sha256": "535992a410e76910c6f402b5331685b2e7ffe6d9d7ce63cdd0c66fab555d8520"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "1b572a00c6642851a079a2bf797b72b27cf54b12f95b3ce3e99e0a33caf74cec"
+        },
+        {
+          "id": "UK-ENHERTU-SMPC",
+          "sha256": "35573b5784638da6d29188e9bfabd591ea3c6c3ed0bb1dddb7ea23a360b8d131"
+        },
+        {
+          "id": "DERIVED-DRG0ERKBH-NOT-ADCDB",
+          "sha256": "b7617816f91f3e2899bb39e4fe35b7ce9e4fd0cdec6e4adeb72f2b79cc5797e6"
+        },
+        {
+          "id": "US-OPENFDA-DRG0ERKBH-IDENTITY",
+          "sha256": "5dc0047f7a2a405b17f28a7d2a77a3a94ce276a2c9166e0b1b0fb059ad3c8c91"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "1b572a00c6642851a079a2bf797b72b27cf54b12f95b3ce3e99e0a33caf74cec"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        },
+        {
+          "id": "UK-ENHERTU-SMPC",
+          "sha256": "35573b5784638da6d29188e9bfabd591ea3c6c3ed0bb1dddb7ea23a360b8d131"
+        },
+        {
+          "id": "DERIVED-DRG0ERKBH-NOT-ADCDB",
+          "sha256": "b7617816f91f3e2899bb39e4fe35b7ce9e4fd0cdec6e4adeb72f2b79cc5797e6"
+        },
+        {
+          "id": "US-OPENFDA-DRG0ERKBH-IDENTITY",
+          "sha256": "5dc0047f7a2a405b17f28a7d2a77a3a94ce276a2c9166e0b1b0fb059ad3c8c91"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        },
+        {
+          "id": "UK-ENHERTU-SMPC",
+          "sha256": "270120390056ef2a9c83835dcb89e02b5d2b82599b21bd36c73054be67bf2d21"
+        },
+        {
+          "id": "DERIVED-DRG0ERKBH-NOT-ADCDB",
+          "sha256": "b7617816f91f3e2899bb39e4fe35b7ce9e4fd0cdec6e4adeb72f2b79cc5797e6"
+        },
+        {
+          "id": "US-OPENFDA-DRG0ERKBH-IDENTITY",
+          "sha256": "5dc0047f7a2a405b17f28a7d2a77a3a94ce276a2c9166e0b1b0fb059ad3c8c91"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        },
+        {
+          "id": "UK-ENHERTU-SMPC",
+          "sha256": "270120390056ef2a9c83835dcb89e02b5d2b82599b21bd36c73054be67bf2d21"
+        },
+        {
+          "id": "DERIVED-DRG0ERKBH-NOT-ADCDB",
+          "sha256": "b7617816f91f3e2899bb39e4fe35b7ce9e4fd0cdec6e4adeb72f2b79cc5797e6"
+        },
+        {
+          "id": "US-OPENFDA-DRG0ERKBH-IDENTITY",
+          "sha256": "5dc0047f7a2a405b17f28a7d2a77a3a94ce276a2c9166e0b1b0fb059ad3c8c91"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        },
+        {
+          "id": "UK-ENHERTU-SMPC",
+          "sha256": "270120390056ef2a9c83835dcb89e02b5d2b82599b21bd36c73054be67bf2d21"
+        },
+        {
+          "id": "DERIVED-DRG0ERKBH-NOT-ADCDB",
+          "sha256": "b7617816f91f3e2899bb39e4fe35b7ce9e4fd0cdec6e4adeb72f2b79cc5797e6"
+        },
+        {
+          "id": "US-OPENFDA-DRG0ERKBH-IDENTITY",
+          "sha256": "35e0c98f1becdc2a0cc9627a9c8d5fb8cab84c9b24c8d71491e306625800f02d"
+        }
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "sources": [
+        {
+          "id": "WORKBOOK-DRG0ERKBH-COMPOSITION",
+          "sha256": "7572fc7e0f06889d851344e262b9483d37b2e779b71c233846682fc3334da2f3"
+        }
+      ]
+    }
+  ],
+  "skipped": false,
+  "reason": null,
+  "conditions": "Same records, schema, system prompt and skills. Eligibility flag hidden in both. Expected mapping supplied only to mapped arm.",
+  "repetitions": 3,
+  "independent_scopes": 20,
+  "max_provider_calls": 120,
+  "provider_calls": 120,
+  "retries": 0,
+  "baseline": {
+    "eligible_only_accepted": 20,
+    "kind_only_accepted": 20,
+    "total": 20,
+    "rows": [
+      {
+        "scope": "DRG0CYMEB/composition/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/composition/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/linker_release/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/linker_release/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/payload_risk_transfer/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/workbook_safety/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/label_identity/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0CYMEB/label_identity/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/composition/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/composition/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/linker_release/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/linker_release/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/payload_risk_transfer/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/workbook_safety/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/label_identity/all",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      },
+      {
+        "scope": "DRG0ERKBH/label_identity/workbook_only",
+        "eligible_only_accepted": true,
+        "kind_only_accepted": true
+      }
+    ]
+  },
+  "arms": [
+    {
+      "arm": "mapped",
+      "accepted": 59,
+      "verifier_rejected": 0,
+      "provider_errors": 1,
+      "attempts": 60
+    },
+    {
+      "arm": "unmapped",
+      "accepted": 34,
+      "verifier_rejected": 25,
+      "provider_errors": 1,
+      "attempts": 60
+    }
+  ],
+  "paired_acceptance_difference": 0.4166666666666667,
+  "pairs": [
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "provider_error",
+      "unmapped_status": "accepted",
+      "delta": -1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "provider_error",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "verifier_rejected",
+      "delta": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "mapped_status": "accepted",
+      "unmapped_status": "accepted",
+      "delta": 0
+    }
+  ],
+  "rows": [
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "50f7534a8b9553445fa1291874e32c9295ad58d900c20ae592f4ebbfc98954f1",
+      "started_at": "2026-10-03T21:07:25.135Z",
+      "completed_at": "2026-10-03T21:07:29.417Z",
+      "wall_ms": 4283,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "40a1af525eaefcc23b743d935a33a12cdd9ef15c4fbbc70f4cb9fe3b3a13eca7",
+      "started_at": "2026-10-03T21:07:29.419Z",
+      "completed_at": "2026-10-03T21:07:32.551Z",
+      "wall_ms": 3133,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "997ca222977d6eef6bde7555247f196db10577cf902d97ed166a866a171f9bfd",
+      "started_at": "2026-10-03T21:07:32.552Z",
+      "completed_at": "2026-10-03T21:07:38.486Z",
+      "wall_ms": 5933,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "1cfff63acb9574d66f57bd2ba5472fdb8ebe7074280203ba9eee3c3a93256d27",
+      "started_at": "2026-10-03T21:07:38.488Z",
+      "completed_at": "2026-10-03T21:07:49.024Z",
+      "wall_ms": 10536,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "efed1d47e767600f6035beca446c9e31b0565de25d0a5aeff33d1f17847bf01f",
+      "started_at": "2026-10-03T21:07:49.026Z",
+      "completed_at": "2026-10-03T21:07:52.458Z",
+      "wall_ms": 3432,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "2b968049571873bcc4ab93df6d0c7cea5ffa4882ee2c04190f2da629cef35664",
+      "started_at": "2026-10-03T21:07:52.460Z",
+      "completed_at": "2026-10-03T21:07:55.808Z",
+      "wall_ms": 3348,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "UK-KADCYLA-SMPC",
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "052b4d8cc84387c6b879128564c745daf65d9ee2eabd03e91ec2ba1df7f62ec7",
+      "started_at": "2026-10-03T21:07:55.810Z",
+      "completed_at": "2026-10-03T21:07:59.474Z",
+      "wall_ms": 3664,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "d4ac1e2a64d580342915f1426d311d284871589fee88ca678889287f5a3db26d",
+      "started_at": "2026-10-03T21:07:59.475Z",
+      "completed_at": "2026-10-03T21:08:01.739Z",
+      "wall_ms": 2264,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "d4ac1e2a64d580342915f1426d311d284871589fee88ca678889287f5a3db26d",
+      "started_at": "2026-10-03T21:08:01.741Z",
+      "completed_at": "2026-10-03T21:08:03.792Z",
+      "wall_ms": 2051,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "052b4d8cc84387c6b879128564c745daf65d9ee2eabd03e91ec2ba1df7f62ec7",
+      "started_at": "2026-10-03T21:08:03.793Z",
+      "completed_at": "2026-10-03T21:08:05.897Z",
+      "wall_ms": 2105,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "052b4d8cc84387c6b879128564c745daf65d9ee2eabd03e91ec2ba1df7f62ec7",
+      "started_at": "2026-10-03T21:08:05.899Z",
+      "completed_at": "2026-10-03T21:08:07.725Z",
+      "wall_ms": 1827,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "d4ac1e2a64d580342915f1426d311d284871589fee88ca678889287f5a3db26d",
+      "started_at": "2026-10-03T21:08:07.727Z",
+      "completed_at": "2026-10-03T21:08:09.861Z",
+      "wall_ms": 2134,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "32279bc902e3d2a1b4a1d9ee5269201502d4779daee5d47ac02915c8645ddf72",
+      "started_at": "2026-10-03T21:08:09.862Z",
+      "completed_at": "2026-10-03T21:08:13.785Z",
+      "wall_ms": 3923,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "fb2dd79a3467eb6d4b3fdc8d749a4cc92fe99aa9f8beb632276f4c08ffdf5c75",
+      "started_at": "2026-10-03T21:08:13.786Z",
+      "completed_at": "2026-10-03T21:08:17.022Z",
+      "wall_ms": 3237,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "2a0c126088323f942e85b852b9884fceb36978ce92d555e86c1aa159b9ec81a5",
+      "started_at": "2026-10-03T21:08:17.024Z",
+      "completed_at": "2026-10-03T21:08:19.717Z",
+      "wall_ms": 2693,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "38eb797d5cd88b8bbe9a3a9ce7a7b4dca08afb46e8dd776b6c7b9f11880357cb",
+      "started_at": "2026-10-03T21:08:19.718Z",
+      "completed_at": "2026-10-03T21:08:22.546Z",
+      "wall_ms": 2828,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "52c6d6170dacef301b98603391c07937b147b600b28cbbe4ddaa2707329870bf",
+      "started_at": "2026-10-03T21:08:22.547Z",
+      "completed_at": "2026-10-03T21:08:24.296Z",
+      "wall_ms": 1749,
+      "status": "provider_error",
+      "selected": [],
+      "caught_by": [],
+      "error_code": "CLAUDE_REFUSED",
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "85d163b2341d3efebcbb0c55b1914710c184bb1e94d10f160f5a664ef5257262",
+      "started_at": "2026-10-03T21:08:24.297Z",
+      "completed_at": "2026-10-03T21:08:26.899Z",
+      "wall_ms": 2602,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "8fc854abdfd5fac818d4b34b82358a14574557cdef27da6e9c22882ad4d3260a",
+      "started_at": "2026-10-03T21:08:26.900Z",
+      "completed_at": "2026-10-03T21:08:30.925Z",
+      "wall_ms": 4025,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "a2fad223a3bc9e8d232044304b16616e337baaf3a64d780110d9862153f07a53",
+      "started_at": "2026-10-03T21:08:30.926Z",
+      "completed_at": "2026-10-03T21:08:33.421Z",
+      "wall_ms": 2495,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "a2fad223a3bc9e8d232044304b16616e337baaf3a64d780110d9862153f07a53",
+      "started_at": "2026-10-03T21:08:33.423Z",
+      "completed_at": "2026-10-03T21:08:35.709Z",
+      "wall_ms": 2286,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "8fc854abdfd5fac818d4b34b82358a14574557cdef27da6e9c22882ad4d3260a",
+      "started_at": "2026-10-03T21:08:35.710Z",
+      "completed_at": "2026-10-03T21:08:37.227Z",
+      "wall_ms": 1518,
+      "status": "provider_error",
+      "selected": [],
+      "caught_by": [],
+      "error_code": "CLAUDE_REFUSED",
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "8fc854abdfd5fac818d4b34b82358a14574557cdef27da6e9c22882ad4d3260a",
+      "started_at": "2026-10-03T21:08:37.228Z",
+      "completed_at": "2026-10-03T21:08:41.005Z",
+      "wall_ms": 3776,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "a2fad223a3bc9e8d232044304b16616e337baaf3a64d780110d9862153f07a53",
+      "started_at": "2026-10-03T21:08:41.006Z",
+      "completed_at": "2026-10-03T21:08:43.235Z",
+      "wall_ms": 2229,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "7aa39d723e0dd53dacebcd2cd3af8c10e65ac756a47891b3b36d66bc4ba8bcc1",
+      "started_at": "2026-10-03T21:08:43.236Z",
+      "completed_at": "2026-10-03T21:08:46.616Z",
+      "wall_ms": 3380,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "79f7aa2cfbcbc167bbc3f05c57ccff6923558741e84b0351abb4af4b933d3000",
+      "started_at": "2026-10-03T21:08:46.617Z",
+      "completed_at": "2026-10-03T21:08:49.558Z",
+      "wall_ms": 2942,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "b7c0c8dcac4c868be8a2e1909ce600633a50ad5193810438ca7881d7d47da57a",
+      "started_at": "2026-10-03T21:08:49.560Z",
+      "completed_at": "2026-10-03T21:08:52.605Z",
+      "wall_ms": 3045,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "88cb6621e87c8e3bd22a74ade5e1c1149e044e1f3e78d9efa4a9c6b25f9c2a0c",
+      "started_at": "2026-10-03T21:08:52.606Z",
+      "completed_at": "2026-10-03T21:08:55.355Z",
+      "wall_ms": 2749,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "96c6d7a29bf8fc42b17072bf23af3694b023eb33146c67fc408c4144a04a48eb",
+      "started_at": "2026-10-03T21:08:55.357Z",
+      "completed_at": "2026-10-03T21:08:57.304Z",
+      "wall_ms": 1947,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "451d46d652c3b4718da95fc3c08afd6aa639540492bc77ca656b4829336995e1",
+      "started_at": "2026-10-03T21:08:57.305Z",
+      "completed_at": "2026-10-03T21:09:00.449Z",
+      "wall_ms": 3144,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "eed52670eb52dcb94c6b71df9ae485bd38594388880b54c3e17b7abdff2ba907",
+      "started_at": "2026-10-03T21:09:00.450Z",
+      "completed_at": "2026-10-03T21:09:04.684Z",
+      "wall_ms": 4234,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "4601b64193bf54adb624bd0ceb47f0f1d8f7bdc5930f1bd10c1df2db7a4a62ff",
+      "started_at": "2026-10-03T21:09:04.685Z",
+      "completed_at": "2026-10-03T21:09:07.251Z",
+      "wall_ms": 2566,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "4601b64193bf54adb624bd0ceb47f0f1d8f7bdc5930f1bd10c1df2db7a4a62ff",
+      "started_at": "2026-10-03T21:09:07.251Z",
+      "completed_at": "2026-10-03T21:09:10.859Z",
+      "wall_ms": 3608,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "eed52670eb52dcb94c6b71df9ae485bd38594388880b54c3e17b7abdff2ba907",
+      "started_at": "2026-10-03T21:09:10.860Z",
+      "completed_at": "2026-10-03T21:09:15.308Z",
+      "wall_ms": 4449,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "eed52670eb52dcb94c6b71df9ae485bd38594388880b54c3e17b7abdff2ba907",
+      "started_at": "2026-10-03T21:09:15.309Z",
+      "completed_at": "2026-10-03T21:09:19.775Z",
+      "wall_ms": 4466,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "4601b64193bf54adb624bd0ceb47f0f1d8f7bdc5930f1bd10c1df2db7a4a62ff",
+      "started_at": "2026-10-03T21:09:19.776Z",
+      "completed_at": "2026-10-03T21:09:22.034Z",
+      "wall_ms": 2257,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "8cc50f5aade9f7a426273bdb8aca576a9446d0940131557f7f380d4ae47c8d8b",
+      "started_at": "2026-10-03T21:09:22.035Z",
+      "completed_at": "2026-10-03T21:09:26.805Z",
+      "wall_ms": 4771,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "fcfc5e2182cc53e8abc5b09d7dbdd7b0f5db96373b8f067f43ae077ea2ab6b10",
+      "started_at": "2026-10-03T21:09:26.806Z",
+      "completed_at": "2026-10-03T21:09:29.708Z",
+      "wall_ms": 2902,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "e0d5569ff3b38a590ad36387a8c347a4a9abae03bb4280a36782bcd0fa6cc8ac",
+      "started_at": "2026-10-03T21:09:29.709Z",
+      "completed_at": "2026-10-03T21:09:32.883Z",
+      "wall_ms": 3175,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "6a228a3f4eec0e01740ed448defa39c63a9191e5e2530e6c41ca19aa675d6a9c",
+      "started_at": "2026-10-03T21:09:32.885Z",
+      "completed_at": "2026-10-03T21:09:34.838Z",
+      "wall_ms": 1954,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "f4422f63b92e7142a86ffa75bebe79888a7aac75d9babb15871ec16a887d8c6c",
+      "started_at": "2026-10-03T21:09:34.839Z",
+      "completed_at": "2026-10-03T21:09:37.042Z",
+      "wall_ms": 2203,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "69202d1ed3cea2edd910e89b29e621c33f2a96ab62e26f79e0efc9d30468d9bb",
+      "started_at": "2026-10-03T21:09:37.043Z",
+      "completed_at": "2026-10-03T21:09:40.346Z",
+      "wall_ms": 3304,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "2e3e648072a6600e0cd38629e1b5f2e2c15d03e284a95422d388227728eaa033",
+      "started_at": "2026-10-03T21:09:40.347Z",
+      "completed_at": "2026-10-03T21:09:43.519Z",
+      "wall_ms": 3172,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "e4a21b5f4e32634042b259db6c84548a01c6d6df32cdfc6f80bd44a4eb409fc6",
+      "started_at": "2026-10-03T21:09:43.520Z",
+      "completed_at": "2026-10-03T21:09:46.166Z",
+      "wall_ms": 2646,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "e4a21b5f4e32634042b259db6c84548a01c6d6df32cdfc6f80bd44a4eb409fc6",
+      "started_at": "2026-10-03T21:09:46.167Z",
+      "completed_at": "2026-10-03T21:09:48.733Z",
+      "wall_ms": 2566,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "2e3e648072a6600e0cd38629e1b5f2e2c15d03e284a95422d388227728eaa033",
+      "started_at": "2026-10-03T21:09:48.733Z",
+      "completed_at": "2026-10-03T21:09:51.699Z",
+      "wall_ms": 2965,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "2e3e648072a6600e0cd38629e1b5f2e2c15d03e284a95422d388227728eaa033",
+      "started_at": "2026-10-03T21:09:51.699Z",
+      "completed_at": "2026-10-03T21:09:54.225Z",
+      "wall_ms": 2526,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "e4a21b5f4e32634042b259db6c84548a01c6d6df32cdfc6f80bd44a4eb409fc6",
+      "started_at": "2026-10-03T21:09:54.225Z",
+      "completed_at": "2026-10-03T21:09:56.772Z",
+      "wall_ms": 2547,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "6656a0a741668f652eac2383f41ee5dc627d86606469f9e831cd7092f8364a52",
+      "started_at": "2026-10-03T21:09:56.773Z",
+      "completed_at": "2026-10-03T21:10:00.666Z",
+      "wall_ms": 3893,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "d6c5db4edc31e35eff1d3deed99452857b8b1a26930f3b2d07c424d29224c914",
+      "started_at": "2026-10-03T21:10:00.667Z",
+      "completed_at": "2026-10-03T21:10:03.502Z",
+      "wall_ms": 2835,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "48799ff0d0f106082dd2db44217dfa65826dadf2dfce0b9f482bdff65e44944f",
+      "started_at": "2026-10-03T21:10:03.503Z",
+      "completed_at": "2026-10-03T21:10:06.894Z",
+      "wall_ms": 3392,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "0bf6f0b94e53b8def0c9001dca0f9103987107149c40a43281466049e1c429b1",
+      "started_at": "2026-10-03T21:10:06.895Z",
+      "completed_at": "2026-10-03T21:10:10.712Z",
+      "wall_ms": 3817,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "8f28015744fcb5bc50f20bc8b54e66c38421c7a5710c6c0201c3d9a97db73cfc",
+      "started_at": "2026-10-03T21:10:10.713Z",
+      "completed_at": "2026-10-03T21:10:13.701Z",
+      "wall_ms": 2988,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "16527105601dc94b18d58b3c8f413b89a17ad4dccabd4a3a3a818160bc594b12",
+      "started_at": "2026-10-03T21:10:13.702Z",
+      "completed_at": "2026-10-03T21:10:16.744Z",
+      "wall_ms": 3043,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "62cb8d8cc32aa15026c789b1a9ce13b17e94ef7e7731e85113e79dcc73859f7b",
+      "started_at": "2026-10-03T21:10:16.746Z",
+      "completed_at": "2026-10-03T21:10:19.604Z",
+      "wall_ms": 2858,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "9a82cbeb29021bb03a53ddcd05ba58696738898180684093cb6dcbc859e3e8d3",
+      "started_at": "2026-10-03T21:10:19.605Z",
+      "completed_at": "2026-10-03T21:10:21.941Z",
+      "wall_ms": 2337,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "9a82cbeb29021bb03a53ddcd05ba58696738898180684093cb6dcbc859e3e8d3",
+      "started_at": "2026-10-03T21:10:21.942Z",
+      "completed_at": "2026-10-03T21:10:24.253Z",
+      "wall_ms": 2311,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "62cb8d8cc32aa15026c789b1a9ce13b17e94ef7e7731e85113e79dcc73859f7b",
+      "started_at": "2026-10-03T21:10:24.254Z",
+      "completed_at": "2026-10-03T21:10:28.113Z",
+      "wall_ms": 3859,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "62cb8d8cc32aa15026c789b1a9ce13b17e94ef7e7731e85113e79dcc73859f7b",
+      "started_at": "2026-10-03T21:10:28.114Z",
+      "completed_at": "2026-10-03T21:10:30.222Z",
+      "wall_ms": 2108,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "9a82cbeb29021bb03a53ddcd05ba58696738898180684093cb6dcbc859e3e8d3",
+      "started_at": "2026-10-03T21:10:30.223Z",
+      "completed_at": "2026-10-03T21:10:32.642Z",
+      "wall_ms": 2419,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "4a08e9f898b2b46fb4ded30aff466aa86c14f25b1a0c8cdb62f6d6c046d83a2b",
+      "started_at": "2026-10-03T21:10:32.643Z",
+      "completed_at": "2026-10-03T21:10:35.985Z",
+      "wall_ms": 3343,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "554ab8a0c7f5b02724ea961dc055bdbbab5fe907a61064f08ba1200c20693f05",
+      "started_at": "2026-10-03T21:10:35.987Z",
+      "completed_at": "2026-10-03T21:10:38.526Z",
+      "wall_ms": 2539,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "67e221e7f660570a3892f22cc39e7713abd2c900f14d0cca41da73046fbcabc3",
+      "started_at": "2026-10-03T21:10:38.527Z",
+      "completed_at": "2026-10-03T21:10:40.891Z",
+      "wall_ms": 2364,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "26583bb0b2e7c7ee54519819ae2f74b73b015445ba9924381ff7d0694b717212",
+      "started_at": "2026-10-03T21:10:40.892Z",
+      "completed_at": "2026-10-03T21:10:43.772Z",
+      "wall_ms": 2881,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "2dc16a6c0b4ce77bfae4bd23b07d0042bde984ab64d0faa6ccd70a95638389fc",
+      "started_at": "2026-10-03T21:10:43.773Z",
+      "completed_at": "2026-10-03T21:10:46.019Z",
+      "wall_ms": 2247,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "b2f4dfb9dbf27763e6a8911f7b789435bc7228aa88c4e8ee586d2742e9d35d26",
+      "started_at": "2026-10-03T21:10:46.021Z",
+      "completed_at": "2026-10-03T21:10:48.994Z",
+      "wall_ms": 2974,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "UK-ENHERTU-SMPC",
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "a19458a951bc0c83d68a184a168e93a5466c0659be3272b7f5dc5929499f98cf",
+      "started_at": "2026-10-03T21:10:48.995Z",
+      "completed_at": "2026-10-03T21:10:51.801Z",
+      "wall_ms": 2806,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "472d6b119375dbce2d22d9df565a009c538c0a5bea64442770f94ebeb49dfb50",
+      "started_at": "2026-10-03T21:10:51.801Z",
+      "completed_at": "2026-10-03T21:10:54.695Z",
+      "wall_ms": 2894,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "472d6b119375dbce2d22d9df565a009c538c0a5bea64442770f94ebeb49dfb50",
+      "started_at": "2026-10-03T21:10:54.696Z",
+      "completed_at": "2026-10-03T21:10:57.716Z",
+      "wall_ms": 3020,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "a19458a951bc0c83d68a184a168e93a5466c0659be3272b7f5dc5929499f98cf",
+      "started_at": "2026-10-03T21:10:57.717Z",
+      "completed_at": "2026-10-03T21:11:00.386Z",
+      "wall_ms": 2670,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "a19458a951bc0c83d68a184a168e93a5466c0659be3272b7f5dc5929499f98cf",
+      "started_at": "2026-10-03T21:11:00.387Z",
+      "completed_at": "2026-10-03T21:11:03.414Z",
+      "wall_ms": 3027,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "472d6b119375dbce2d22d9df565a009c538c0a5bea64442770f94ebeb49dfb50",
+      "started_at": "2026-10-03T21:11:03.415Z",
+      "completed_at": "2026-10-03T21:11:07.306Z",
+      "wall_ms": 3891,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "composition",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "dac6a2462434c2c834ca17b5966acc8932bd94e52df61a56ffbe7740747f6650",
+      "started_at": "2026-10-03T21:11:07.307Z",
+      "completed_at": "2026-10-03T21:11:10.622Z",
+      "wall_ms": 3315,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "3272982033073b9fb243bd2325eb7c3b901a45078e688025d2c116a12e3537f7",
+      "started_at": "2026-10-03T21:11:10.623Z",
+      "completed_at": "2026-10-03T21:11:12.884Z",
+      "wall_ms": 2261,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "adb6380d73f5ec4f77b0637468c8156cf691bfa4fe3618f89139a48aa14b4adc",
+      "started_at": "2026-10-03T21:11:12.885Z",
+      "completed_at": "2026-10-03T21:11:15.404Z",
+      "wall_ms": 2520,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "57cf41bbfd44d5b5a68c0af93cfe62f6fe4ed7d1d6811ec88526a597dc7a4233",
+      "started_at": "2026-10-03T21:11:15.405Z",
+      "completed_at": "2026-10-03T21:11:17.795Z",
+      "wall_ms": 2390,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "336228d763e58d7b6fd3f12bff8815fa08d3dbdf6474dd0a46d539573860fcfc",
+      "started_at": "2026-10-03T21:11:17.796Z",
+      "completed_at": "2026-10-03T21:11:20.518Z",
+      "wall_ms": 2722,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "21ce3489f94278e531ec59467da39f5c5d866b61e7bcbb430cb0be1fd0a6ec58",
+      "started_at": "2026-10-03T21:11:20.518Z",
+      "completed_at": "2026-10-03T21:11:23.312Z",
+      "wall_ms": 2794,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "32f0399bab08a6aa1d6859944961baa611eaede8416df82f31920bca349536f8",
+      "started_at": "2026-10-03T21:11:23.313Z",
+      "completed_at": "2026-10-03T21:11:26.865Z",
+      "wall_ms": 3552,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "7ee18e7da046b188d6ce1d6e97e22f9791edb890b991ea369b92a1cb76dfc769",
+      "started_at": "2026-10-03T21:11:26.866Z",
+      "completed_at": "2026-10-03T21:11:29.121Z",
+      "wall_ms": 2256,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "7ee18e7da046b188d6ce1d6e97e22f9791edb890b991ea369b92a1cb76dfc769",
+      "started_at": "2026-10-03T21:11:29.122Z",
+      "completed_at": "2026-10-03T21:11:31.417Z",
+      "wall_ms": 2295,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "32f0399bab08a6aa1d6859944961baa611eaede8416df82f31920bca349536f8",
+      "started_at": "2026-10-03T21:11:31.418Z",
+      "completed_at": "2026-10-03T21:11:34.295Z",
+      "wall_ms": 2877,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "32f0399bab08a6aa1d6859944961baa611eaede8416df82f31920bca349536f8",
+      "started_at": "2026-10-03T21:11:34.295Z",
+      "completed_at": "2026-10-03T21:11:36.508Z",
+      "wall_ms": 2212,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "7ee18e7da046b188d6ce1d6e97e22f9791edb890b991ea369b92a1cb76dfc769",
+      "started_at": "2026-10-03T21:11:36.508Z",
+      "completed_at": "2026-10-03T21:11:38.588Z",
+      "wall_ms": 2080,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "linker_release",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "56a00ffd35e4d9d34144c8072b9b995d799beababd36884ac82412e5cb755826",
+      "started_at": "2026-10-03T21:11:38.589Z",
+      "completed_at": "2026-10-03T21:11:42.041Z",
+      "wall_ms": 3452,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "bbae1f1a9c8cf1b71834e872179c06ac7cd3d6c61fa7fbcd93acfa7f8c7eb138",
+      "started_at": "2026-10-03T21:11:42.042Z",
+      "completed_at": "2026-10-03T21:11:45.491Z",
+      "wall_ms": 3449,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "dfb52cddf0755377508d8c2cdd5874b0a7306b1980989831fc95140d5fdcfbbb",
+      "started_at": "2026-10-03T21:11:45.491Z",
+      "completed_at": "2026-10-03T21:11:48.622Z",
+      "wall_ms": 3131,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "0f2828e44e94780b207c2b8546e06aa38cc8202b05fc5a5dca315ca6ba32fd26",
+      "started_at": "2026-10-03T21:11:48.623Z",
+      "completed_at": "2026-10-03T21:11:51.153Z",
+      "wall_ms": 2530,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "06358cc0934059a17de23beeb44b6213d1454bfd6c376dc8133348f98b65f141",
+      "started_at": "2026-10-03T21:11:51.154Z",
+      "completed_at": "2026-10-03T21:11:53.755Z",
+      "wall_ms": 2602,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "4b6f926073515b9b556ae27fc828de0ae27ae6e9c5982b3277167d19dbc16d25",
+      "started_at": "2026-10-03T21:11:53.756Z",
+      "completed_at": "2026-10-03T21:11:56.540Z",
+      "wall_ms": 2784,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "9d482d57d55357f7128215b62aea16a53a262acc29c2cd23213073d9d4002d73",
+      "started_at": "2026-10-03T21:11:56.541Z",
+      "completed_at": "2026-10-03T21:11:59.659Z",
+      "wall_ms": 3118,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "5155191921f280abe58d366dee9c5b0697981ac65270263c06af0758331cc91d",
+      "started_at": "2026-10-03T21:11:59.660Z",
+      "completed_at": "2026-10-03T21:12:02.046Z",
+      "wall_ms": 2386,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "5155191921f280abe58d366dee9c5b0697981ac65270263c06af0758331cc91d",
+      "started_at": "2026-10-03T21:12:02.047Z",
+      "completed_at": "2026-10-03T21:12:04.051Z",
+      "wall_ms": 2004,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "9d482d57d55357f7128215b62aea16a53a262acc29c2cd23213073d9d4002d73",
+      "started_at": "2026-10-03T21:12:04.051Z",
+      "completed_at": "2026-10-03T21:12:07.044Z",
+      "wall_ms": 2993,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "9d482d57d55357f7128215b62aea16a53a262acc29c2cd23213073d9d4002d73",
+      "started_at": "2026-10-03T21:12:07.045Z",
+      "completed_at": "2026-10-03T21:12:09.394Z",
+      "wall_ms": 2350,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "5155191921f280abe58d366dee9c5b0697981ac65270263c06af0758331cc91d",
+      "started_at": "2026-10-03T21:12:09.395Z",
+      "completed_at": "2026-10-03T21:12:11.488Z",
+      "wall_ms": 2093,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "payload_risk_transfer",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "996ee4a51f3c839e307032ec8769310c409a9706556ed0ee1f2c4ba2e54df99c",
+      "started_at": "2026-10-03T21:12:11.490Z",
+      "completed_at": "2026-10-03T21:12:14.876Z",
+      "wall_ms": 3386,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "bfc6dc40fbedabb3c180c66c0c8105b3965824674ca3a46391afa5e80855e4dc",
+      "started_at": "2026-10-03T21:12:14.877Z",
+      "completed_at": "2026-10-03T21:12:17.688Z",
+      "wall_ms": 2811,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "ac8f6d9680a92dbe1b41de650a56136b7a040e3ccd209d1dd04a2e4eb5c7dece",
+      "started_at": "2026-10-03T21:12:17.688Z",
+      "completed_at": "2026-10-03T21:12:23.135Z",
+      "wall_ms": 5446,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "417e0d9db1dc8868bfd2f238bde4640b0f3516470f6a71f330b5110893b64f93",
+      "started_at": "2026-10-03T21:12:23.135Z",
+      "completed_at": "2026-10-03T21:12:25.107Z",
+      "wall_ms": 1972,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "afabcf31632210a4b6808084397c77ab940c3bb9ac423cb92cb5d424d091843c",
+      "started_at": "2026-10-03T21:12:25.108Z",
+      "completed_at": "2026-10-03T21:12:28.438Z",
+      "wall_ms": 3330,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "6ce5a1cd83a26b60760c03bd65cc3ff6bea2794fb8be1ebbed02fda0ad13ba3a",
+      "started_at": "2026-10-03T21:12:28.439Z",
+      "completed_at": "2026-10-03T21:12:31.412Z",
+      "wall_ms": 2973,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "1a36fdc5f629acbe071183ee5fa2f98e7be48da88e8f4e5d5bcffb33d36fb9e2",
+      "started_at": "2026-10-03T21:12:31.413Z",
+      "completed_at": "2026-10-03T21:12:34.511Z",
+      "wall_ms": 3098,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "6796ff692fe22701fe27ca641e0b039ce2c0452bbc7a1df131eb2c0621d8553a",
+      "started_at": "2026-10-03T21:12:34.512Z",
+      "completed_at": "2026-10-03T21:12:36.846Z",
+      "wall_ms": 2334,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "6796ff692fe22701fe27ca641e0b039ce2c0452bbc7a1df131eb2c0621d8553a",
+      "started_at": "2026-10-03T21:12:36.846Z",
+      "completed_at": "2026-10-03T21:12:39.036Z",
+      "wall_ms": 2190,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "1a36fdc5f629acbe071183ee5fa2f98e7be48da88e8f4e5d5bcffb33d36fb9e2",
+      "started_at": "2026-10-03T21:12:39.037Z",
+      "completed_at": "2026-10-03T21:12:41.967Z",
+      "wall_ms": 2930,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "1a36fdc5f629acbe071183ee5fa2f98e7be48da88e8f4e5d5bcffb33d36fb9e2",
+      "started_at": "2026-10-03T21:12:41.968Z",
+      "completed_at": "2026-10-03T21:12:44.965Z",
+      "wall_ms": 2997,
+      "status": "verifier_rejected",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "6796ff692fe22701fe27ca641e0b039ce2c0452bbc7a1df131eb2c0621d8553a",
+      "started_at": "2026-10-03T21:12:44.966Z",
+      "completed_at": "2026-10-03T21:12:46.942Z",
+      "wall_ms": 1976,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "workbook_safety",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "22f5471b5aee8be18778d45e8c1e01d9040c93aeddd20a2caebd71a39f08e9a1",
+      "started_at": "2026-10-03T21:12:46.943Z",
+      "completed_at": "2026-10-03T21:12:50.174Z",
+      "wall_ms": 3232,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "b4760528cd07669f02fd26001caf869cee64454b1c8d1f93f718e002007250e8",
+      "started_at": "2026-10-03T21:12:50.175Z",
+      "completed_at": "2026-10-03T21:12:53.379Z",
+      "wall_ms": 3204,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "620d13708ff34b8d8d09af2ab45a5e87fa94b5d09a8f247f4ab198f20eb3c549",
+      "started_at": "2026-10-03T21:12:53.380Z",
+      "completed_at": "2026-10-03T21:12:56.194Z",
+      "wall_ms": 2814,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "19f2e4dd1e8f5823783848f7870ce15f68c6522a6b611af136e51983ff20b404",
+      "started_at": "2026-10-03T21:12:56.195Z",
+      "completed_at": "2026-10-03T21:12:59.313Z",
+      "wall_ms": 3118,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "62dac58089906d142f35ce59c302d3ad1078a7e5e6f35b70ab378c6631bf5cf0",
+      "started_at": "2026-10-03T21:12:59.314Z",
+      "completed_at": "2026-10-03T21:13:03.437Z",
+      "wall_ms": 4123,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "792b752128e1ee1ed86afdf9e41b7b875c9b1bb5cd886be45fcf6a7a5907374b",
+      "started_at": "2026-10-03T21:13:03.438Z",
+      "completed_at": "2026-10-03T21:13:05.879Z",
+      "wall_ms": 2441,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "1b30fb1b209a19678d02e46632ad90d9fb0794726abb7b77c3426375454937ec",
+      "started_at": "2026-10-03T21:13:05.880Z",
+      "completed_at": "2026-10-03T21:13:08.686Z",
+      "wall_ms": 2806,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 0,
+      "seed": 17,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "61b2a88a03aa5b6c8f779ce57a77f664fb010c8b2897f87fa850367a22cfe4bf",
+      "started_at": "2026-10-03T21:13:08.687Z",
+      "completed_at": "2026-10-03T21:13:10.897Z",
+      "wall_ms": 2210,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "mapped",
+      "order": 0,
+      "context_sha256": "61b2a88a03aa5b6c8f779ce57a77f664fb010c8b2897f87fa850367a22cfe4bf",
+      "started_at": "2026-10-03T21:13:10.898Z",
+      "completed_at": "2026-10-03T21:13:13.445Z",
+      "wall_ms": 2548,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 1,
+      "seed": 29,
+      "arm": "unmapped",
+      "order": 1,
+      "context_sha256": "1b30fb1b209a19678d02e46632ad90d9fb0794726abb7b77c3426375454937ec",
+      "started_at": "2026-10-03T21:13:13.446Z",
+      "completed_at": "2026-10-03T21:13:15.915Z",
+      "wall_ms": 2469,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "unmapped",
+      "order": 0,
+      "context_sha256": "1b30fb1b209a19678d02e46632ad90d9fb0794726abb7b77c3426375454937ec",
+      "started_at": "2026-10-03T21:13:15.916Z",
+      "completed_at": "2026-10-03T21:13:20.518Z",
+      "wall_ms": 4602,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "repetition": 2,
+      "seed": 43,
+      "arm": "mapped",
+      "order": 1,
+      "context_sha256": "61b2a88a03aa5b6c8f779ce57a77f664fb010c8b2897f87fa850367a22cfe4bf",
+      "started_at": "2026-10-03T21:13:20.519Z",
+      "completed_at": "2026-10-03T21:13:22.974Z",
+      "wall_ms": 2456,
+      "status": "accepted",
+      "selected": [
+        {
+          "claim_id": "label_identity",
+          "source_ids": []
+        }
+      ],
+      "caught_by": [],
+      "error_code": null,
+      "provider_calls": 1
+    }
+  ],
+  "limits": [
+    "20 developer-known fixtures, not an unseen holdout.",
+    "Presentation seeds do not seed provider sampling.",
+    "Repeated observations are correlated; no significance or calibration claim.",
+    "Record kinds and local prompt packs remain available; simple baselines can match the contract.",
+    "No planner or live retrieval. One call per arm, shared 60-second pair deadline. No retries or repairs.",
+    "Expected sets come from the app, not clinician evaluation. Clinical release remains blocked."
+  ]
+}

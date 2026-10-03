@@ -15,6 +15,8 @@
     "smoke": "tsx scripts/smoke.ts",
     "eval": "tsx scripts/eval.ts",
     "eval:harness": "tsx scripts/eval_harness.ts",
+    "eval:verifier": "tsx scripts/eval_verifier.ts",
+    "eval:selection": "tsx scripts/eval_selection.ts",
     "replay": "tsx scripts/replay_research.ts",
     "import:openfda": "tsx scripts/import_openfda.ts",
     "check": "npm run typecheck && npm run lint && npm test && npm run build"
