@@ -191,9 +191,6 @@ export function HarnessFigure({ variant = 'wide' }: { variant?: Variant }) {
 
 /* ---------------------------------------------------------------- false premise */
 
-/** UK-KADCYLA-SMPC -> Kadcyla label */
-export const labelName = (sourceId: string) => /^UK-.+-SMPC$/.test(sourceId) ? sourceId.slice(3, -5).toLowerCase().replace(/^./, letter => letter.toUpperCase()) + ' label' : sourceId;
-
 export interface PremiseFigureProps { question: string; stated: string; recorded: string; check: string; verdict: keyof typeof verdictLabels; cited: string[]; variant?: Variant }
 
 function Marked({ lines, stated, x, y, size, lineGap, anchor = 'start' }: { lines: string[]; stated: string; x: number; y: number; size: number; lineGap: number; anchor?: 'start' | 'middle' }) {
@@ -206,7 +203,7 @@ export function PremiseFigure({ question, stated, recorded, check, verdict, cite
   const id = `fig-premise-${variant}`;
   const title = 'A question with a false premise';
   const desc = `Question: "${question}". The premise gate compares "${stated}" with the recorded linker, ${recorded}, and flags it (${check}) before any model call. The claim is still checked against the sources; the verifier's recorded verdict is ${verdictLabels[verdict]}, citing ${cited.join(', ') || 'nothing'}.`;
-  const citedText = cited.length ? cited.map(labelName).join(', ') : 'nothing';
+  const citedText = cited.length ? cited.join(', ') : 'nothing';
   const recordedShort = recorded.length > 30 ? recorded.replace(/^.*\((\w+)\)$/, '$1') : recorded;
   if (variant === 'tall') {
     const q = wrap(`“${question}”`, 34);

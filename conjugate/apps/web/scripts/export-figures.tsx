@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import type { ReactElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { BaitFigure, EnvironmentFigure, HarnessFigure, PremiseFigure, ShareCard } from '../src/figures';
-import { loadPresentationData } from '../src/presentationData';
+import { labelSourceName, loadPresentationData } from '../src/presentationData';
 
 const out = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'figures');
 const data = loadPresentationData({ state: 'missing' });
@@ -17,12 +17,11 @@ const finding = data.premise.report.findings[0];
 if (!finding) throw new Error('Recorded premise exhibit has no finding');
 const verdict = data.premise.kadcylaVerdict.verdict;
 if (verdict !== 'supported' && verdict !== 'contradicted' && verdict !== 'insufficient') throw new Error(`Unknown verdict ${verdict}`);
-const labelProducts = data.environment.labelSources.map(id => id.replace(/^UK-/, '').replace(/-SMPC$/, '').toLowerCase().replace(/^./, letter => letter.toUpperCase()));
 
 const figures: Record<string, ReactElement> = {
-  'environment.svg': <EnvironmentFigure workbookRecords={data.environment.workbookRecords} labelProducts={labelProducts} sources={data.environment.sources} />,
+  'environment.svg': <EnvironmentFigure workbookRecords={data.environment.workbookRecords} labelProducts={data.environment.labelProducts} sources={data.environment.sources} />,
   'harness.svg': <HarnessFigure />,
-  'false-premise.svg': <PremiseFigure question={data.premise.question} stated={finding.stated ?? ''} recorded={finding.recorded ?? ''} check={finding.check} verdict={verdict} cited={data.premise.kadcylaVerdict.source_ids} />,
+  'false-premise.svg': <PremiseFigure question={data.premise.question} stated={finding.stated ?? ''} recorded={finding.recorded ?? ''} check={finding.check} verdict={verdict} cited={data.premise.kadcylaVerdict.source_ids.map(labelSourceName)} />,
   'hallucination-bait.svg': <BaitFigure invented={data.bait.invented} fakeNct={data.bait.fakeNct} receipt={data.bait.receipt} modelCalls={data.bait.modelCalls} />,
   'share-card.svg': <ShareCard workbookRecords={data.environment.workbookRecords} sourceCount={data.environment.sources.length} />,
 };

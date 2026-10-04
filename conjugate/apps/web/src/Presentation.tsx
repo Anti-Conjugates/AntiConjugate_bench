@@ -7,7 +7,7 @@ import { verdictLabels } from './labels';
 import { prefersReducedMotion, useRevealOnScroll } from './motion';
 import { BaitFigure, EnvironmentFigure, HarnessFigure, PremiseFigure, RatioBar } from './figures';
 import { BaitSideBySide, BenchmarkTable } from './PresentationBenchmark';
-import { PRESENTATION_SECTIONS, loadPresentationData, type PresentationData } from './presentationData';
+import { PRESENTATION_SECTIONS, labelSourceName, loadPresentationData, type PresentationData } from './presentationData';
 import { loadBenchmark } from './benchmarkArtifact';
 
 type Verdict = keyof typeof verdictLabels;
@@ -15,9 +15,6 @@ const asVerdict = (value: string): Verdict => {
   if (!(value in verdictLabels)) throw new Error(`Unknown recorded verdict ${value}`);
   return value as Verdict;
 };
-const SOURCE_LABELS: Record<string, string> = { 'UK-KADCYLA-SMPC': 'Kadcyla UK label paraphrase', 'UK-ENHERTU-SMPC': 'Enhertu UK label paraphrase' };
-const sourceLabel = (id: string) => SOURCE_LABELS[id] ?? id;
-const productFromLabel = (id: string) => id.replace(/^UK-/, '').replace(/-SMPC$/, '').toLowerCase().replace(/^./, letter => letter.toUpperCase());
 const num = (fraction: string) => fraction.split('/').map(Number) as [number, number];
 
 function ViewLink({ view, onNavigate, className = 'landing-link', children }: { view: ViewId; onNavigate: (view: ViewId) => void; className?: string; children: ReactNode }) {
@@ -91,6 +88,15 @@ function SectionNav() {
     PRESENTATION_SECTIONS.forEach(section => { const node = document.getElementById(section.id); if (node) io.observe(node); });
     return () => io.disconnect();
   }, []);
+  useEffect(() => {
+    const section = PRESENTATION_SECTIONS[active];
+    if (!section) return;
+    const link = document.querySelector<HTMLElement>(`.pres-nav a[href="#${section.id}"]`);
+    const list = link?.closest('ol');
+    if (!link || !list) return;
+    const linkBox = link.getBoundingClientRect(), listBox = list.getBoundingClientRect();
+    list.scrollLeft += linkBox.left - listBox.left - (listBox.width - linkBox.width) / 2;
+  }, [active]);
   const shown = Math.max(active, 0);
   return <nav className="pres-nav" aria-label="Presentation sections">
     <ol>{PRESENTATION_SECTIONS.map((section, index) => <li key={section.id}>
@@ -117,10 +123,10 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
   useSectionKeys();
   const { environment: env, harness, premise, bait, failures: f } = data;
   const finding = premise.report.findings[0];
-  const labelProducts = env.labelSources.map(productFromLabel);
+  const { labelProducts } = env;
   const kadcylaVerdict = asVerdict(premise.kadcylaVerdict.verdict);
   const enhertuVerdict = asVerdict(premise.enhertuLive.verdict);
-  const premiseFigure = (variant: 'wide' | 'tall') => <PremiseFigure variant={variant} question={premise.question} stated={finding?.stated ?? ''} recorded={finding?.recorded ?? ''} check={finding?.check ?? ''} verdict={kadcylaVerdict} cited={premise.kadcylaVerdict.source_ids} />;
+  const premiseFigure = (variant: 'wide' | 'tall') => <PremiseFigure variant={variant} question={premise.question} stated={finding?.stated ?? ''} recorded={finding?.recorded ?? ''} check={finding?.check ?? ''} verdict={kadcylaVerdict} cited={premise.kadcylaVerdict.source_ids.map(labelSourceName)} />;
   const baitFigure = (variant: 'wide' | 'tall') => <BaitFigure variant={variant} invented={bait.invented} fakeNct={bait.fakeNct} receipt={bait.receipt} modelCalls={bait.modelCalls} />;
   const envFigure = (variant: 'wide' | 'tall') => <EnvironmentFigure variant={variant} workbookRecords={env.workbookRecords} labelProducts={labelProducts} sources={env.sources} />;
 
@@ -154,6 +160,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
       figure={<Figure wide={envFigure('wide')} tall={envFigure('tall')} caption={<>Example receipts from the recorded live run in <code>evals/live-retrieval.json</code> ({f.live.generatedAt.slice(0, 10)}).</>} />}>
       <p>Two local files: an ADCdb workbook snapshot with {env.workbookRecords} ADCs, and short draft paraphrases of the UK labels for {labelProducts.join(' and ')}. That is the evidence the verifier can cite.</p>
       <p>On top of that, {env.sources.length} live sources: {env.sources.map(source => source.name).join(', ')}. Each is reached through one fixed URL template written in code. The model never picks a URL. Every fetch leaves a receipt with the HTTP status and a SHA-256 of the body, including the ones that fail.</p>
+      <p className="pres-aside">You can ask about any of the {env.scopedProducts} workbook ADCs. Only {labelProducts.join(' and ')} have label text; for the rest the agent has the workbook composition plus an ADCdb lookup, and openFDA and DailyMed only for the {env.usLabelProducts} with a recorded US label name.</p>
       <p className="pres-aside">Live lookups only answer “does this id exist?” and “does this record match the snapshot?”. They are never used as clinical evidence.</p>
     </Section>
 
@@ -170,7 +177,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
         <PremiseGateAnim question={premise.question} report={premise.report} source={<>Recorded premise-gate report for this exact question, <code>evals/premise-study.json</code>.</>} />
       </>}>
       <p>Kadcyla’s linker is recorded as non-cleavable (SMCC). The premise gate catches the mismatch before any model call and shows it to the user.</p>
-      <p>The claim is still checked. The verifier read the sources and returned <strong>{verdictLabels[kadcylaVerdict]}</strong>, citing {premise.kadcylaVerdict.source_ids.map(sourceLabel).join(', ') || 'nothing'}. In the offline chat replay the same turn made {premise.kadcylaChat.modelCalls} model calls and read {premise.kadcylaChat.sourceReads} sources.</p>
+      <p>The claim is still checked. The verifier read the sources and returned <strong>{verdictLabels[kadcylaVerdict]}</strong>, citing {premise.kadcylaVerdict.source_ids.map(labelSourceName).join(', ') || 'nothing'}. In the offline chat replay the same turn made {premise.kadcylaChat.modelCalls} model calls and read {premise.kadcylaChat.sourceReads} sources.</p>
       <dl className="pres-facts">
         <div><dt>Same idea, true premise (Enhertu), live single agent</dt><dd>{verdictLabels[enhertuVerdict]} · {premise.enhertuLive.modelCalls} model calls · <code>evals/chat-live.json</code></dd></div>
         <div><dt>Same Enhertu question, live agent team</dt><dd>{premise.teamLinker.status}{premise.teamLinker.code ? ` (${premise.teamLinker.code})` : ''}, not retried · <code>evals/team-live.json</code></dd></div>
@@ -229,7 +236,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
         <li>Not clinically validated. No pharmacist or clinician has reviewed the label paraphrases; clinical release is blocked in every run.</li>
         <li>No prescribing, dose or treatment-selection advice. Those questions stop at the scope gate.</li>
         <li>No calibrated confidence. Probabilities stay null; counts are software coverage, not a chance of being right.</li>
-        <li>Small n: a few products, five questions, developer-written fixtures. Not an unseen holdout.</li>
+        <li>Small n: {data.limits.premiseCases} premise-gate cases, {data.harness.chatLiveRows} recorded live chat turns, {data.harness.teamLiveRows} live team runs, label text for {data.environment.labelProducts.length} products. Developer-written fixtures, not an unseen holdout.</li>
         <li>Model scores (proxy rewards, ESM-2 similarity, AlphaFold DB confidence) are proxies, not ADC performance.</li>
         <li>OpenFold and AlphaFold 3 were not run.</li>
       </ul>

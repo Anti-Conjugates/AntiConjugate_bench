@@ -1,4 +1,4 @@
-import { BenchmarkArtifactSchema, TEAM_GRAPH, type BenchmarkArtifact, type PremiseReport } from '@her2/shared';
+import { BenchmarkArtifactSchema, LABEL_PRODUCT_IDS, TEAM_GRAPH, WORKBOOK_PRODUCTS, productLabel as workbookLabel, type BenchmarkArtifact, type PremiseReport } from '@her2/shared';
 import results from '../../../evals/results.json';
 import chatOffline from '../../../evals/chat.json';
 import chatLive from '../../../evals/chat-live.json';
@@ -26,6 +26,12 @@ export function parseBenchmark(value: unknown): BenchmarkLoad {
 }
 
 const ratio = (count: number, total: number) => `${count}/${total}`;
+
+/** "UK-KADCYLA-SMPC" -> "Kadcyla label", using the shared label-product list; unknown ids are shown as-is. */
+export function labelSourceName(sourceId: string): string {
+  const product = LABEL_PRODUCT_IDS.find(id => sourceId === `UK-${workbookLabel(id).toUpperCase()}-SMPC`);
+  return product ? `${workbookLabel(product)} label` : sourceId;
+}
 function must<T>(value: T | undefined, what: string): T {
   if (value === undefined) throw new Error(`Missing recorded ${what}`);
   return value;
@@ -73,6 +79,9 @@ export function loadPresentationData(benchmark: BenchmarkLoad) {
     benchmark,
     environment: {
       workbookRecords: workbookRecordCount, workbookFile,
+      scopedProducts: WORKBOOK_PRODUCTS.length,
+      labelProducts: LABEL_PRODUCT_IDS.map(workbookLabel),
+      usLabelProducts: WORKBOOK_PRODUCTS.filter(product => product.us_label).length,
       labelSources: [...new Set(results.verdicts.rows.flatMap(row => row.receipts_read).filter(id => id.startsWith('UK-')))].sort(),
       sources, maxReferences: liveStudy.manifest.catalog.max_references, timeoutMs: liveStudy.manifest.catalog.timeout_ms,
     },
@@ -110,6 +119,7 @@ export function loadPresentationData(benchmark: BenchmarkLoad) {
       live: { ...liveStudy.statuses, total: liveRows.length, generatedAt: liveStudy.manifest.generated_at },
     },
     limits: {
+      premiseCases: premiseStudy.rows.length,
       chat: chatLive.limitations, team: teamLive.limitations, live: liveStudy.limits, models: modelChecks.limits, premise: premiseStudy.limits,
     },
   };

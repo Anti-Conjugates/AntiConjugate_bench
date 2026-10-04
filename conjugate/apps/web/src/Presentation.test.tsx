@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { BenchmarkArtifact } from '@her2/shared';
 import { Presentation, sectionTarget } from './Presentation';
-import { loadPresentationData, parseBenchmark, PRESENTATION_SECTIONS } from './presentationData';
+import { labelSourceName, loadPresentationData, parseBenchmark, PRESENTATION_SECTIONS } from './presentationData';
 import { pickBaitPair } from './PresentationBenchmark';
 import { urlTemplate, wrap } from './figures';
 
@@ -48,6 +48,8 @@ describe('Presentation', () => {
     expect(body).toContain(data.failures.shortcut.eligibleOnly);
     expect(body).toContain(data.failures.withholding.changed);
     for (const source of data.environment.sources) expect(body).toContain(source.name);
+    expect(body).toContain(`any of the ${data.environment.scopedProducts} workbook ADCs`);
+    for (const product of data.environment.labelProducts) expect(body).toContain(product);
   });
 
   it('gives every figure an accessible title and description', () => {
@@ -96,6 +98,10 @@ describe('presentation helpers', () => {
     expect(sectionTarget([-900, -200, 72, 600, 1400], -1)).toBe(1);
     expect(sectionTarget([-900, -200], 1)).toBeNull();
     expect(sectionTarget([300, 900], -1)).toBeNull();
+  });
+  it('names label sources from the shared product list', () => {
+    expect(labelSourceName('UK-KADCYLA-SMPC')).toBe('Kadcyla label');
+    expect(labelSourceName('WORKBOOK-X')).toBe('WORKBOOK-X');
   });
   it('wraps text and shortens URLs to their template', () => {
     expect(wrap('one two three four', 9)).toEqual(['one two', 'three', 'four']);
