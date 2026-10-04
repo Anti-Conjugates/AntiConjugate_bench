@@ -1,7 +1,7 @@
 {
   "kind": "live_source_retrieval_check_not_clinical",
   "manifest": {
-    "generated_at": "2026-10-04T11:42:22.146Z",
+    "generated_at": "2026-10-04T12:11:02.551Z",
     "node": "v24.21.0",
     "user_agent": "Conjugate-HER2-research-prototype/0.1 (+https://github.com/Anti-Conjugates/AntiConjugate-Devin; source identity checks only; not clinical use)",
     "catalog": {
@@ -44,8 +44,8 @@
       "user_agent": "Conjugate-HER2-research-prototype/0.1 (+https://github.com/Anti-Conjugates/AntiConjugate-Devin; source identity checks only; not clinical use)"
     },
     "code_sha256": {
-      "apps/api/src/live-retrieval.ts": "6a7584b2cd8805fd5cfcab5dc9d0a38d53f77cf8842c7f20606f40fa8efc5506",
-      "packages/shared/src/live.ts": "5c20d2d0fb1bed9aabb2dd295cf9888edd3208f4ad1020081f53fca96013c6de"
+      "apps/api/src/live-retrieval.ts": "32e2d29dff0b0a6e57fac85b8547465be02cfcfd6de9c48925b12330782a44eb",
+      "packages/shared/src/live.ts": "6d6ee60357e0408a398aa7c1e5e20c2af0309f6ff8881c9a7a65c6c15c4ae6a5"
     },
     "snapshot_sha256": {
       "apps/api/src/openfda.snapshot.json": "75542fb2b789d947257e03611767a15e13962e59650b2b9782570244c2138a4a",
@@ -59,6 +59,15 @@
         "product_id": "DRG0ERKBH"
       },
       {
+        "product_id": "DRG0EKTUN"
+      },
+      {
+        "product_id": "DRG0BBQSE"
+      },
+      {
+        "product_id": "DRG0JEVIM"
+      },
+      {
         "references": [
           "NCT03529110",
           "NCT09999999",
@@ -69,17 +78,20 @@
     ]
   },
   "statuses": {
-    "ok": 8,
+    "ok": 15,
     "not_found": 2,
     "drift": 0,
     "error": 0
   },
   "timings_ms": {
-    "total": 1955,
+    "total": 4452,
     "per_request": [
-      845,
-      730,
-      380
+      935,
+      931,
+      733,
+      608,
+      608,
+      637
     ]
   },
   "checks": [
@@ -107,8 +119,8 @@
       "http_status": 200,
       "bytes": 139102,
       "raw_sha256": "73aebd2f93a6b1b2ad1cddc011d15283323f896ba94459606c90486e09a21fcd",
-      "duration_ms": 131.9,
-      "fetched_at": "2026-10-04T11:42:20.191Z",
+      "duration_ms": 137.9,
+      "fetched_at": "2026-10-04T12:10:58.098Z",
       "parsed": {
         "spl_id": "27ab596b-f625-4866-b65a-54508ffce760",
         "set_id": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
@@ -174,8 +186,8 @@
       "http_status": 200,
       "bytes": 580,
       "raw_sha256": "79f9484524959f1735a63e59ba425636658bdb6ba5ba001ca84c7ee5cdafd472",
-      "duration_ms": 246.9,
-      "fetched_at": "2026-10-04T11:42:20.212Z",
+      "duration_ms": 294.4,
+      "fetched_at": "2026-10-04T12:10:58.119Z",
       "parsed": {
         "set_id": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
         "spl_version": "35",
@@ -207,8 +219,8 @@
       "http_status": 200,
       "bytes": 474253,
       "raw_sha256": "c0cf6444e2ae17893baf91c8571d0a2b64e3f5d4875a472b3aa185cfbb4ef838",
-      "duration_ms": 817.5,
-      "fetched_at": "2026-10-04T11:42:20.212Z",
+      "duration_ms": 904.1,
+      "fetched_at": "2026-10-04T12:10:58.120Z",
       "parsed": {
         "adc_id": "DRG0CYMEB",
         "adc_name": "Trastuzumab emtansine",
@@ -274,8 +286,8 @@
       "http_status": 200,
       "bytes": 371896,
       "raw_sha256": "61ad277930c58cae40e7f0c346cf9e562ac843670bad08b45064c79bbd6ba3a9",
-      "duration_ms": 111.4,
-      "fetched_at": "2026-10-04T11:42:21.036Z",
+      "duration_ms": 108.8,
+      "fetched_at": "2026-10-04T12:10:59.032Z",
       "parsed": {
         "spl_id": "a4106ba4-f398-4663-980c-2b7195283edd",
         "set_id": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
@@ -341,8 +353,8 @@
       "http_status": 200,
       "bytes": 590,
       "raw_sha256": "11ff58a008e3d668556e02fa6ff3c79d11fd8a647c9238a7b6fce2300a161f70",
-      "duration_ms": 71.5,
-      "fetched_at": "2026-10-04T11:42:21.036Z",
+      "duration_ms": 83.5,
+      "fetched_at": "2026-10-04T12:10:59.033Z",
       "parsed": {
         "set_id": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
         "spl_version": "28",
@@ -374,8 +386,8 @@
       "http_status": 200,
       "bytes": 468700,
       "raw_sha256": "50bb251f8925c4e447168642c126dce3edd9b3a63a5fe50bf685cd4111196b00",
-      "duration_ms": 724.4,
-      "fetched_at": "2026-10-04T11:42:21.036Z",
+      "duration_ms": 925.7,
+      "fetched_at": "2026-10-04T12:10:59.033Z",
       "parsed": {
         "adc_id": "DRG0ERKBH",
         "adc_name": "Trastuzumab deruxtecan",
@@ -432,6 +444,335 @@
       ]
     },
     {
+      "source": "openfda",
+      "subject": "DRG0EKTUN",
+      "url": "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact%3A%22TRODELVY%22&limit=1&sort=effective_time%3Adesc",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 200132,
+      "raw_sha256": "373282e5ad35d601de8d700311bea06fe06dfd1634894d4d1d4e43dc76c83143",
+      "duration_ms": 98.9,
+      "fetched_at": "2026-10-04T12:10:59.964Z",
+      "parsed": {
+        "spl_id": "2085d741-19ba-4115-bbe9-0debac82c204",
+        "set_id": "57a597d2-03f0-472e-b148-016d7169169d",
+        "version": "20",
+        "effective_time": "20260624",
+        "brand_name": "TRODELVY",
+        "generic_name": "SACITUZUMAB GOVITECAN",
+        "application_number": "BLA761115",
+        "manufacturer_name": "Gilead Sciences, Inc."
+      },
+      "comparison": [
+        {
+          "field": "brand_name",
+          "snapshot": "TRODELVY",
+          "live": "TRODELVY",
+          "agrees": true
+        },
+        {
+          "field": "generic_name",
+          "snapshot": "SACITUZUMAB GOVITECAN",
+          "live": "SACITUZUMAB GOVITECAN",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "dailymed",
+      "subject": "DRG0EKTUN",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=TRODELVY&pagesize=1",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 560,
+      "raw_sha256": "c868527e5a9c7c9b3a17c3251bab8afc1844635d06b9099cecd6c9e5d23bfc83",
+      "duration_ms": 84.2,
+      "fetched_at": "2026-10-04T12:10:59.964Z",
+      "parsed": {
+        "set_id": "57a597d2-03f0-472e-b148-016d7169169d",
+        "spl_version": "20",
+        "published_date": "Jun 29, 2026",
+        "title": "TRODELVY (SACITUZUMAB GOVITECAN) POWDER, FOR SOLUTION [GILEAD SCIENCES, INC.]"
+      },
+      "comparison": [
+        {
+          "field": "title_brand",
+          "snapshot": "TRODELVY",
+          "live": "TRODELVY",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "adcdb",
+      "subject": "DRG0EKTUN",
+      "url": "https://adcdb.idrblab.net/data/adc/details/DRG0EKTUN",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 279175,
+      "raw_sha256": "f3ead124ef5f38f168bb9c30d10078fccc330aacdd09bfef8c669462986cb25c",
+      "duration_ms": 729.3,
+      "fetched_at": "2026-10-04T12:10:59.964Z",
+      "parsed": {
+        "adc_id": "DRG0EKTUN",
+        "adc_name": "Sacituzumab govitecan",
+        "brand": "Trodelvy",
+        "antibody": "Sacituzumab",
+        "target": "Tumor-associated calcium signal transducer 2 (TACSTD2)",
+        "payload": "SN-38",
+        "linker": "CL2A",
+        "dar": "7.6~8"
+      },
+      "comparison": [
+        {
+          "field": "adc_name",
+          "snapshot": "Sacituzumab govitecan",
+          "live": "Sacituzumab govitecan",
+          "agrees": true
+        },
+        {
+          "field": "brand",
+          "snapshot": "Trodelvy",
+          "live": "Trodelvy",
+          "agrees": true
+        },
+        {
+          "field": "antibody",
+          "snapshot": "Sacituzumab",
+          "live": "Sacituzumab",
+          "agrees": true
+        },
+        {
+          "field": "target",
+          "snapshot": "Tumor-associated calcium signal transducer 2 (TACSTD2)",
+          "live": "Tumor-associated calcium signal transducer 2 (TACSTD2)",
+          "agrees": true
+        },
+        {
+          "field": "payload",
+          "snapshot": "SN-38",
+          "live": "SN-38",
+          "agrees": true
+        },
+        {
+          "field": "linker",
+          "snapshot": "CL2A",
+          "live": "CL2A",
+          "agrees": true
+        },
+        {
+          "field": "dar",
+          "snapshot": "7.6~8",
+          "live": "7.6~8",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "openfda",
+      "subject": "DRG0BBQSE",
+      "url": "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact%3A%22PADCEV+EJFV%22&limit=1&sort=effective_time%3Adesc",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 315046,
+      "raw_sha256": "ea6212b22355ab2770cf833ab6cae72c36353262c4eb34cda7206b4dc824adc2",
+      "duration_ms": 89.5,
+      "fetched_at": "2026-10-04T12:11:00.697Z",
+      "parsed": {
+        "spl_id": "e8e304ca-8a56-4869-96e2-427ee4a1fe3c",
+        "set_id": "b5631d3e-4604-4363-8f20-11dfc5a4a8ed",
+        "version": "18",
+        "effective_time": "20260804",
+        "brand_name": "PADCEV EJFV",
+        "generic_name": "ENFORTUMAB VEDOTIN",
+        "application_number": "BLA761137",
+        "manufacturer_name": "SEAGEN INC."
+      },
+      "comparison": [
+        {
+          "field": "brand_name",
+          "snapshot": "PADCEV EJFV",
+          "live": "PADCEV EJFV",
+          "agrees": true
+        },
+        {
+          "field": "generic_name",
+          "snapshot": "ENFORTUMAB VEDOTIN",
+          "live": "ENFORTUMAB VEDOTIN",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "dailymed",
+      "subject": "DRG0BBQSE",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=PADCEV&pagesize=1",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 572,
+      "raw_sha256": "a90295d99350edc956ba799f47a9723f31a582fe1c26f35aee5ff4a9ac1a546b",
+      "duration_ms": 81.8,
+      "fetched_at": "2026-10-04T12:11:00.698Z",
+      "parsed": {
+        "set_id": "b5631d3e-4604-4363-8f20-11dfc5a4a8ed",
+        "spl_version": "18",
+        "published_date": "Aug 17, 2026",
+        "title": "PADCEV EJFV (ENFORTUMAB VEDOTIN) INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION [SEAGEN INC.]"
+      },
+      "comparison": [
+        {
+          "field": "title_brand",
+          "snapshot": "PADCEV",
+          "live": "PADCEV",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "adcdb",
+      "subject": "DRG0BBQSE",
+      "url": "https://adcdb.idrblab.net/data/adc/details/DRG0BBQSE",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 224672,
+      "raw_sha256": "8d250db4be718854f8e2d32790c7b4fc468e53a0fd6d8a6ff4bbcfc58e2cbea8",
+      "duration_ms": 605,
+      "fetched_at": "2026-10-04T12:11:00.698Z",
+      "parsed": {
+        "adc_id": "DRG0BBQSE",
+        "adc_name": "Enfortumab vedotin",
+        "brand": "Padcev",
+        "antibody": "Enfortumab",
+        "target": "Nectin-4 (NECTIN4)",
+        "payload": "Monomethyl auristatin E",
+        "linker": "Mc-Val-Cit-PABC",
+        "dar": "3.8~4"
+      },
+      "comparison": [
+        {
+          "field": "adc_name",
+          "snapshot": "Enfortumab vedotin",
+          "live": "Enfortumab vedotin",
+          "agrees": true
+        },
+        {
+          "field": "brand",
+          "snapshot": "Padcev",
+          "live": "Padcev",
+          "agrees": true
+        },
+        {
+          "field": "antibody",
+          "snapshot": "Enfortumab",
+          "live": "Enfortumab",
+          "agrees": true
+        },
+        {
+          "field": "target",
+          "snapshot": "Nectin-4 (NECTIN4)",
+          "live": "Nectin-4 (NECTIN4)",
+          "agrees": true
+        },
+        {
+          "field": "payload",
+          "snapshot": "Monomethyl auristatin E",
+          "live": "Monomethyl auristatin E",
+          "agrees": true
+        },
+        {
+          "field": "linker",
+          "snapshot": "Mc-Val-Cit-PABC",
+          "live": "Mc-Val-Cit-PABC",
+          "agrees": true
+        },
+        {
+          "field": "dar",
+          "snapshot": "3.8~4",
+          "live": "3.8~4",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "adcdb",
+      "subject": "DRG0JEVIM",
+      "url": "https://adcdb.idrblab.net/data/adc/details/DRG0JEVIM",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 256431,
+      "raw_sha256": "f18ab5a8048ebefd9661854c1b59935cab600679131c9382e46fa71630d83a4d",
+      "duration_ms": 606.1,
+      "fetched_at": "2026-10-04T12:11:01.305Z",
+      "parsed": {
+        "adc_id": "DRG0JEVIM",
+        "adc_name": "Disitamab vedotin",
+        "brand": "Aidixi",
+        "antibody": "Hertuzumab",
+        "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+        "payload": "Monomethyl auristatin E",
+        "linker": "Mc-Val-Cit-PABC",
+        "dar": "4"
+      },
+      "comparison": [
+        {
+          "field": "adc_name",
+          "snapshot": "Disitamab vedotin",
+          "live": "Disitamab vedotin",
+          "agrees": true
+        },
+        {
+          "field": "brand",
+          "snapshot": "Aidixi",
+          "live": "Aidixi",
+          "agrees": true
+        },
+        {
+          "field": "antibody",
+          "snapshot": "Hertuzumab",
+          "live": "Hertuzumab",
+          "agrees": true
+        },
+        {
+          "field": "target",
+          "snapshot": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+          "live": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+          "agrees": true
+        },
+        {
+          "field": "payload",
+          "snapshot": "Monomethyl auristatin E",
+          "live": "Monomethyl auristatin E",
+          "agrees": true
+        },
+        {
+          "field": "linker",
+          "snapshot": "Mc-Val-Cit-PABC",
+          "live": "Mc-Val-Cit-PABC",
+          "agrees": true
+        },
+        {
+          "field": "dar",
+          "snapshot": "4",
+          "live": "4",
+          "agrees": true
+        }
+      ]
+    },
+    {
       "source": "clinicaltrials_gov",
       "subject": "NCT03529110",
       "url": "https://clinicaltrials.gov/api/v2/studies/NCT03529110?fields=protocolSection.identificationModule",
@@ -441,8 +782,8 @@
       "http_status": 200,
       "bytes": 1098,
       "raw_sha256": "5d493d1382276ffe00691b71e6c9d8536ce5a627ef8f565ec2498a5001ee8d97",
-      "duration_ms": 195.6,
-      "fetched_at": "2026-10-04T11:42:21.766Z",
+      "duration_ms": 192.2,
+      "fetched_at": "2026-10-04T12:11:01.913Z",
       "parsed": {
         "nct_id": "NCT03529110",
         "official_title": "A Phase 3, Multicenter, Randomized, Open-Label, Active-Controlled Study of DS-8201a (Trastuzumab Deruxtecan), an Anti-HER2 Antibody Drug Conjugate (ADC), Versus Ado Trastuzumab Emtansine (T-DM1) for HER2-Positive, Unresectable and/or Metastatic Breast Cancer Subjects Previously Treated With Trastuzumab and Taxane",
@@ -460,8 +801,8 @@
       "http_status": 404,
       "bytes": 32,
       "raw_sha256": "b5a11b5eeca7a13a17afa0e000206e1eb5130f005bd57e722b098ae5d584e7ae",
-      "duration_ms": 196.4,
-      "fetched_at": "2026-10-04T11:42:21.767Z",
+      "duration_ms": 201,
+      "fetched_at": "2026-10-04T12:11:01.915Z",
       "parsed": {},
       "comparison": []
     },
@@ -475,8 +816,8 @@
       "http_status": 200,
       "bytes": 4703,
       "raw_sha256": "b87a4e115a1b50ef9cf1c5f3719124cd1b2c233addc59b8337089dbd4eb91cae",
-      "duration_ms": 377.9,
-      "fetched_at": "2026-10-04T11:42:21.767Z",
+      "duration_ms": 634.7,
+      "fetched_at": "2026-10-04T12:11:01.915Z",
       "parsed": {
         "pmid": "29420467",
         "title": "HER kinase inhibition in patients with HER2- and HER3-mutant cancers.",
@@ -495,8 +836,8 @@
       "http_status": 200,
       "bytes": 146,
       "raw_sha256": "37b0ed9f7cbf77b4fc8cb44de7b373b225f18eaa7f52f076d19c731ffc48c0a9",
-      "duration_ms": 233,
-      "fetched_at": "2026-10-04T11:42:21.768Z",
+      "duration_ms": 242,
+      "fetched_at": "2026-10-04T12:11:01.916Z",
       "parsed": {},
       "comparison": []
     }

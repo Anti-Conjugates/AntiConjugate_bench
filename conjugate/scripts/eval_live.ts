@@ -10,7 +10,7 @@ const expectedReferences: Record<string, LiveReceipt['status']> = { NCT03529110:
 
 async function main() {
   const retriever = createLiveRetriever();
-  const requests: LiveCheckRequest[] = [{ product_id: 'DRG0CYMEB' }, { product_id: 'DRG0ERKBH' }, { references: Object.keys(expectedReferences) }];
+  const requests: LiveCheckRequest[] = [{ product_id: 'DRG0CYMEB' }, { product_id: 'DRG0ERKBH' }, { product_id: 'DRG0EKTUN' }, { product_id: 'DRG0BBQSE' }, { product_id: 'DRG0JEVIM' }, { references: Object.keys(expectedReferences) }];
   const runs = [];
   for (const request of requests) runs.push(await retriever.check(request));
   const rows = runs.flatMap(run => run.receipts).map(receipt => ({
