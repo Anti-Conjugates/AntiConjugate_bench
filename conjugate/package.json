@@ -32,7 +32,8 @@
     "replay:chat": "tsx scripts/replay_chat.ts",
     "import:openfda": "tsx scripts/import_openfda.ts",
     "check": "npm run typecheck && npm run lint && npm test && npm run build",
-    "bench": "tsx scripts/bench.ts"
+    "bench": "tsx scripts/bench.ts",
+    "figures": "tsx --tsconfig apps/web/tsconfig.json apps/web/scripts/export-figures.tsx"
   },
   "devDependencies": {
     "@eslint/js": "9.39.1",

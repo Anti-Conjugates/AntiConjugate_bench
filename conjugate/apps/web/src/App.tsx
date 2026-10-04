@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { BookOpen, FileCheck2, FlaskConical, Home, ListChecks, MessageSquare, Table2, UserRound, Workflow } from 'lucide-react';
+import { BookOpen, FileCheck2, FlaskConical, Home, ListChecks, Map as MapIcon, MessageSquare, Table2, UserRound, Workflow } from 'lucide-react';
 import type { Catalog, ResearchCatalog } from '@her2/shared';
 import { describeFailure, fetchCatalog } from './boundaries';
 import { fetchResearchCatalog } from './researchBoundaries';
@@ -10,12 +10,14 @@ import { AdcAtlas } from './AdcAtlas';
 import { ContextReview } from './ContextReview';
 import { HowItWorks } from './HowItWorks';
 import { Landing } from './Landing';
+import { Presentation } from './Presentation';
 import { viewFromHash, type ViewId } from './navigation';
 const Evals = lazy(() => import('./Evals').then(module => ({ default: module.Evals })));
 const ModelLab = lazy(() => import('./ModelLab').then(module => ({ default: module.ModelLab })));
 
 const views = [
-  { id: 'home', label: 'Overview', icon: Home },
+  { id: 'home', label: 'Presentation', icon: Home },
+  { id: 'overview', label: 'Interactive story', icon: MapIcon },
   { id: 'chat', label: 'Research chat', icon: MessageSquare },
   { id: 'audit', label: 'Check a claim', icon: FileCheck2 },
   { id: 'context', label: 'Patient context', icon: UserRound },
@@ -84,8 +86,9 @@ export default function App() {
     </aside>
     <div className="workspace-shell">
       <div className="boundary-banner" role="note">Research prototype. Clinical use stays blocked until a pharmacist reviews it.</div>
-      <main id="main-content" className={`main-content ${view === 'home' ? 'main-home' : ''}`} tabIndex={-1} ref={main}>
-        {view === 'home' && <Landing onNavigate={navigate} />}
+      <main id="main-content" className={`main-content ${view === 'home' || view === 'overview' ? 'main-home' : ''}`} tabIndex={-1} ref={main}>
+        {view === 'home' && <Presentation onNavigate={navigate} />}
+        {view === 'overview' && <Landing onNavigate={navigate} />}
         {view === 'chat' && (research.data ? <ResearchChat catalog={research.data} /> : <CatalogState state={research} name="research catalog" />)}
         {view === 'audit' && (research.data ? <EvidenceAudit catalog={research.data} /> : <CatalogState state={research} name="research catalog" />)}
         {view === 'atlas' && (research.data ? <AdcAtlas catalog={research.data} /> : <CatalogState state={research} name="ADC table" />)}
