@@ -1,6 +1,7 @@
-import { ApiErrorSchema, ChatEventSchema, ChatRequestSchema, ChatResultSchema, chatExecutionIsConsistent, chatIntent, chatScopeKey, renderChatReply, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog } from '@her2/shared';
+import { ApiErrorSchema, ChatEventSchema, ChatRequestSchema, ChatResultSchema, chatExecutionIsConsistent, chatIntent, chatScopeKey, renderChatReply, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog, type TurnGuard } from '@her2/shared';
 import { BoundaryError } from './boundaries';
 import { validateResearchResult } from './researchBoundaries';
+import { validateTurnGuard } from './guardBoundaries';
 
 function invalid(message = 'The chat response failed validation. No answer was accepted.'): never { throw new BoundaryError(message, 'INVALID_CHAT_RESULT'); }
 function failure(code: string): BoundaryError {
@@ -16,12 +17,14 @@ export function validateChatResult(data: unknown, request: ChatRequest, catalog:
   const result = parsed.data;
   if (result.reply !== renderChatReply(result.status, result.audits, result.selected_audit_ids, result.missing_scopes.length)) return invalid();
   const intent = chatIntent(request);
-  if (result.engine !== request.engine || !chatExecutionIsConsistent(result) || JSON.stringify(result.scopes.map(chatScopeKey)) !== JSON.stringify(intent.scopes.map(chatScopeKey)) || (intent.status !== 'ready' && result.status !== intent.status)) return invalid();
+  if (result.engine !== request.engine || !chatExecutionIsConsistent(result) || JSON.stringify(result.scopes.map(chatScopeKey)) !== JSON.stringify((result.status === 'premise_blocked' ? [] : intent.scopes).map(chatScopeKey))
+    || (result.status === 'premise_blocked' ? intent.status === 'outside_scope' : intent.status !== 'ready' && result.status !== intent.status)) return invalid();
+  try { validateTurnGuard(result.guard, request, catalog); } catch { return invalid(); }
   for (const audit of result.audits) validateResearchResult(audit.result, { ...audit.scope, engine: 'evidence', synthetic_confirmed: true, integrity_drill: 'none' }, catalog);
   return result;
 }
 
-export async function streamChatTurn(input: ChatRequest, catalog: ResearchCatalog, signal: AbortSignal, onStep: (step: ChatStep) => void): Promise<ChatResult> {
+export async function streamChatTurn(input: ChatRequest, catalog: ResearchCatalog, signal: AbortSignal, onStep: (step: ChatStep) => void, onGuard?: (guard: TurnGuard) => void): Promise<ChatResult> {
   if (signal.aborted) throw new DOMException('Cancelled', 'AbortError');
   const request = ChatRequestSchema.parse(input);
   if (request.engine === 'claude' && !catalog.claude_configured) throw new BoundaryError('Claude is off. Choose rules only to make a new request.', 'CLAUDE_NOT_CONFIGURED');
@@ -39,6 +42,7 @@ export async function streamChatTurn(input: ChatRequest, catalog: ResearchCatalo
   let pending = '';
   let bytes = 0;
   let result: ChatResult | undefined;
+  let guard: TurnGuard | undefined;
   const steps: ChatStep[] = [];
   const line = (value: string) => {
     if (!value.trim()) return;
@@ -50,7 +54,9 @@ export async function streamChatTurn(input: ChatRequest, catalog: ResearchCatalo
     if (!parsed.success) return invalid();
     const event = parsed.data;
     if (event.type === 'error') throw failure(event.error.code);
-    if (event.type === 'result') { result = validateChatResult(event.result, request, catalog); return; }
+    if (event.type === 'result') { result = validateChatResult(event.result, request, catalog); if (!guard || JSON.stringify(result.guard) !== JSON.stringify(guard)) return invalid('The chat result did not match the streamed premise check.'); return; }
+    if (event.type === 'guard') { if (guard || steps.length) return invalid(); try { guard = validateTurnGuard(event.guard, request, catalog); } catch { return invalid(); } onGuard?.(guard); return; }
+    if (!guard) return invalid();
     if (steps.length >= 12 || event.step.id !== `step-${steps.length + 1}` || steps.some(step => step.stage === 'answer') || (event.step.scope && !chatIntent(request).scopes.some(scope => chatScopeKey(scope) === chatScopeKey(event.step.scope!)))) return invalid();
     steps.push(event.step); onStep(event.step);
   };

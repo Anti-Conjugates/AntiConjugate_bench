@@ -2,14 +2,16 @@ import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { Annotation, END, Send, START, StateGraph } from '@langchain/langgraph';
 import { ChatScopeSchema, TEAM_LIMITS, TeamRequestSchema, TeamResultSchema, chatAuditProseIsConsistent, chatFollowups, chatIntent, chatScopeKey, renderChatReply, teamExecutionIsConsistent,
-  type ChatAudit, type ChatIntent, type ChatScope, type TeamNode, type TeamResult, type TeamStep, type TeamWorker } from '@her2/shared';
+  type TurnGuard, type ChatAudit, type ChatIntent, type ChatScope, type TeamNode, type TeamResult, type TeamStep, type TeamWorker } from '@her2/shared';
 import { claudeMessage } from './claude.js';
 import { ApiFailure, type FailureCode } from './errors.js';
 import { CLAUDE_MODEL } from './evidence.js';
 import { fingerprint, HARNESS_CODE_SHA256 } from './research-harness.js';
 import { runResearch, type ResearchOptions } from './research.js';
+import type { LiveRetriever } from './live-retrieval.js';
+import { turnGuard } from './turn-guard.js';
 
-export interface TeamOptions extends Omit<ResearchOptions, 'onTrace'> { onStep?: (step: TeamStep) => void | Promise<void> }
+export interface TeamOptions extends Omit<ResearchOptions, 'onTrace'> { onStep?: (step: TeamStep) => void | Promise<void>; onGuard?: (guard: TurnGuard) => void | Promise<void>; live?: LiveRetriever | null }
 interface Assignment { audit_id: string; scope: ChatScope }
 interface WorkerRun extends Assignment { status: TeamWorker['status']; code: string | null; model_calls: number; audit: ChatAudit | null; duration_ms: number; audited: boolean }
 
@@ -35,9 +37,10 @@ function finalJson(envelope: Awaited<ReturnType<typeof claudeMessage>>) {
 }
 const enumSchema = (values: string[]) => ({ type: 'string', enum: values });
 
-export function buildTeamGraph(run: (node: TeamNode, state: TeamState) => Promise<Partial<TeamState>>, route: { afterScope: (s: TeamState) => string; afterPlan: (s: TeamState) => string | Send[]; afterVerify: (s: TeamState) => string; afterGate: (s: TeamState) => string }, worker: (assignment: Assignment) => Promise<WorkerRun>) {
+export function buildTeamGraph(run: (node: TeamNode, state: TeamState) => Promise<Partial<TeamState>>, route: { afterPremise: (s: TeamState) => string; afterPlan: (s: TeamState) => string | Send[]; afterVerify: (s: TeamState) => string; afterGate: (s: TeamState) => string }, worker: (assignment: Assignment) => Promise<WorkerRun>) {
   return new StateGraph(TeamAnnotation)
     .addNode('scope_gate', state => run('scope_gate', state))
+    .addNode('premise_gate', state => run('premise_gate', state))
     .addNode('lead_plan', state => run('lead_plan', state))
     .addNode('evidence_worker', async (input: TeamState) => ({ runs: [await worker(input.dispatch!)] }))
     .addNode('verifier', state => run('verifier', state))
@@ -45,7 +48,8 @@ export function buildTeamGraph(run: (node: TeamNode, state: TeamState) => Promis
     .addNode('omission_gate', state => run('omission_gate', state))
     .addNode('answer', state => run('answer', state))
     .addEdge(START, 'scope_gate')
-    .addConditionalEdges('scope_gate', route.afterScope, ['lead_plan', 'answer'])
+    .addEdge('scope_gate', 'premise_gate')
+    .addConditionalEdges('premise_gate', route.afterPremise, ['lead_plan', 'answer'])
     .addConditionalEdges('lead_plan', route.afterPlan, ['evidence_worker', 'lead_select', 'omission_gate'])
     .addEdge('evidence_worker', 'verifier')
     .addConditionalEdges('verifier', route.afterVerify, ['lead_select', 'omission_gate'])
@@ -147,8 +151,19 @@ async function executeTeam(input: unknown, options: TeamOptions, deadline: numbe
     }
   };
 
+  let guard: TurnGuard | undefined;
+  let blocked = false;
   const nodes: Record<Exclude<TeamNode, 'evidence_worker'>, (state: TeamState) => Promise<Partial<TeamState>>> = {
     scope_gate: async () => { await emit(step('scope_gate', 'controller')); return {}; },
+    premise_gate: async () => {
+      const began = performance.now();
+      guard = await turnGuard(request.message, intent, options.live, options.signal);
+      remaining();
+      await options.onGuard?.(guard);
+      blocked = guard.premise.decision === 'blocked' && intent.status !== 'outside_scope';
+      await emit(step('premise_gate', 'controller', { ...(blocked ? { status: 'failed' as const, code: 'PREMISE_BLOCKED' } : {}), duration_ms: performance.now() - began }));
+      return {};
+    },
     lead_plan: async state => {
       const open = unattempted(state);
       let plan = open;
@@ -208,7 +223,7 @@ async function executeTeam(input: unknown, options: TeamOptions, deadline: numbe
   };
   let gateVisits = 0;
   const graph = buildTeamGraph((node, state) => nodes[node as keyof typeof nodes](state), {
-    afterScope: () => intent.status === 'ready' ? 'lead_plan' : 'answer',
+    afterPremise: () => intent.status === 'ready' && !blocked ? 'lead_plan' : 'answer',
     afterPlan: state => state.assignments.length ? state.assignments.map(dispatch => new Send('evidence_worker', { ...state, dispatch })) : accepted(state).length ? 'lead_select' : 'omission_gate',
     afterVerify: state => accepted(state).length ? 'lead_select' : 'omission_gate',
     afterGate: state => (++gateVisits <= TEAM_LIMITS.max_revisions && state.feedback.length) ? 'lead_plan' : 'answer'
@@ -218,17 +233,20 @@ async function executeTeam(input: unknown, options: TeamOptions, deadline: numbe
 
   const ordered = runs(final);
   const audits = ordered.filter(run => run.status === 'accepted' && run.audit).map(run => run.audit!);
-  const selected = intent.status === 'ready' ? final.selected : [];
+  const ready = intent.status === 'ready' && !blocked;
+  const scopes = blocked ? [] : intent.scopes;
+  const selected = ready ? final.selected : [];
   const selectedKeys = audits.filter(audit => selected.includes(audit.id)).map(audit => chatScopeKey(audit.scope));
-  const missing = intent.scopes.filter(scope => !selectedKeys.includes(chatScopeKey(scope)));
-  const status = intent.status === 'ready' ? (missing.length ? 'incomplete' : 'complete') : intent.status;
+  const missing = scopes.filter(scope => !selectedKeys.includes(chatScopeKey(scope)));
+  const status = blocked ? 'premise_blocked' : intent.status === 'ready' ? (missing.length ? 'incomplete' : 'complete') : intent.status;
   const result = TeamResultSchema.parse({
     id: randomUUID(), created_at: new Date().toISOString(), engine: request.engine, model: leadCalls + workerCalls ? CLAUDE_MODEL : null,
-    status, reply: renderChatReply(status, audits, selected, missing.length), scopes: intent.scopes, audits,
+    status, reply: renderChatReply(status, audits, selected, missing.length), scopes, audits,
     workers: ordered.map(run => ({ audit_id: run.audit_id, scope: run.scope, status: run.status, code: run.code, audited: run.audited, model_calls: run.model_calls })),
-    selected_audit_ids: selected, missing_scopes: missing, revisions: final.revisions, followups: chatFollowups(status, intent.scopes[0]?.evidence_policy), trace,
+    selected_audit_ids: selected, missing_scopes: missing, revisions: final.revisions, followups: chatFollowups(status, scopes[0]?.evidence_policy), trace,
     harness: { version: 'conjugate-team-1', framework: '@langchain/langgraph@1.4.19', lead_calls: leadCalls, worker_calls: workerCalls, audit_calls: ordered.filter(run => run.audited).length,
       evidence_reads: audits.reduce((sum, audit) => sum + audit.result.harness.tool_calls, 0), code_sha256: HARNESS_CODE_SHA256, intent_sha256: fingerprint(intent), limits: TEAM_LIMITS },
+    guard,
     clinical_status: 'draft_pending_pharmacist', eligibility: 'not_assessed', needs_human: true, guardrail: { status: 'blocked' }, answer_correctness_probability: null, omission_probability: null
   });
   if (!teamExecutionIsConsistent(result)) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);

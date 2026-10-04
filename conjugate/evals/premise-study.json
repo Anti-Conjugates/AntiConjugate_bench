@@ -1,0 +1,3475 @@
+{
+  "kind": "developer_authored_premise_gate_sensitivity_not_clinical",
+  "generated_at": "2026-10-04T11:42:06.513Z",
+  "manifest": {
+    "code_sha256": "6d2b3be145c67eda845c4fed3b7233fc8d60e89b52f7fae32bb7f6c107d7352e",
+    "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+    "evaluation_sha256": "0e78042e3f6c7ccaf5f789dee4796f6fc02565b441d862a7932ab8879e22bb96",
+    "design_sha256": "3b8b35fac4f0a74337b902b57489f6bf611d0ec282efb952cc38657ed31915ba",
+    "lockfile_sha256": "9614439f2541879fbdaab99406c8b7e79c09f062056e3e21aeb00ba6ef161f3a",
+    "node": "v24.21.0",
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "scopes": 20
+  },
+  "gate_function_sha256": "79d5cad86894cc582f214089d111dc4af5654f40744687191ef1c393bb0b0fd8",
+  "facts_sha256": "4460aa9fd7e32380da6ecb9b0760e118e52aa4d62c8db111217ead5e5f0a28d5",
+  "attribution": {
+    "repository": "https://github.com/Anti-Conjugates/adc-guardrail",
+    "commit": "5ac1c1a",
+    "files": [
+      "adcg/premise.py",
+      "adcg/kb.py"
+    ],
+    "scope": "category names and approach adapted; no code, data, thresholds or benchmark results imported"
+  },
+  "provider_requests": 0,
+  "passed": true,
+  "compiled_agrees": true,
+  "exhibit": {
+    "question": "Kadcyla has a cleavable linker, so how fast is DM1 released in blood?",
+    "report": {
+      "version": "conjugate-premise-1",
+      "decision": "flagged",
+      "findings": [
+        {
+          "kind": "contradicted_premise",
+          "check": "contradicted_linker",
+          "text": "The workbook and label paraphrase record the Kadcyla linker as non-cleavable, not cleavable.",
+          "stated": "cleavable",
+          "recorded": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)",
+          "product_id": "DRG0CYMEB",
+          "evidence_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ],
+          "limitation": "Compared with the user-uploaded workbook snapshot and draft UK label paraphrases pending pharmacist review. A match or mismatch is a table comparison, not a scientific or clinical ruling."
+        }
+      ],
+      "facts_sha256": "4460aa9fd7e32380da6ecb9b0760e118e52aa4d62c8db111217ead5e5f0a28d5"
+    }
+  },
+  "controls_cleared": 23,
+  "control_count": 23,
+  "faults_as_expected": 40,
+  "fault_count": 40,
+  "variants_agree": 303,
+  "variant_count": 303,
+  "mutants_detected": 16,
+  "mutant_count": 16,
+  "by_family": [
+    {
+      "family": "control",
+      "cases": 23,
+      "as_expected": 23,
+      "variants": 111,
+      "variants_agree": 111
+    },
+    {
+      "family": "contradicted_payload",
+      "cases": 4,
+      "as_expected": 4,
+      "variants": 20,
+      "variants_agree": 20
+    },
+    {
+      "family": "contradicted_target",
+      "cases": 3,
+      "as_expected": 3,
+      "variants": 15,
+      "variants_agree": 15
+    },
+    {
+      "family": "contradicted_linker",
+      "cases": 3,
+      "as_expected": 3,
+      "variants": 15,
+      "variants_agree": 15
+    },
+    {
+      "family": "contradicted_dar",
+      "cases": 4,
+      "as_expected": 4,
+      "variants": 20,
+      "variants_agree": 20
+    },
+    {
+      "family": "contradicted_no_risk",
+      "cases": 4,
+      "as_expected": 4,
+      "variants": 20,
+      "variants_agree": 20
+    },
+    {
+      "family": "invented_inn",
+      "cases": 2,
+      "as_expected": 2,
+      "variants": 8,
+      "variants_agree": 8
+    },
+    {
+      "family": "invented_code",
+      "cases": 2,
+      "as_expected": 2,
+      "variants": 8,
+      "variants_agree": 8
+    },
+    {
+      "family": "unsupported_product",
+      "cases": 2,
+      "as_expected": 2,
+      "variants": 8,
+      "variants_agree": 8
+    },
+    {
+      "family": "unverifiable_construct",
+      "cases": 2,
+      "as_expected": 2,
+      "variants": 8,
+      "variants_agree": 8
+    },
+    {
+      "family": "nct_reference",
+      "cases": 2,
+      "as_expected": 2,
+      "variants": 10,
+      "variants_agree": 10
+    },
+    {
+      "family": "pmid_reference",
+      "cases": 2,
+      "as_expected": 2,
+      "variants": 10,
+      "variants_agree": 10
+    },
+    {
+      "family": "author_year_reference",
+      "cases": 2,
+      "as_expected": 2,
+      "variants": 10,
+      "variants_agree": 10
+    },
+    {
+      "family": "resolved_reference",
+      "cases": 4,
+      "as_expected": 4,
+      "variants": 20,
+      "variants_agree": 20
+    },
+    {
+      "family": "precedence",
+      "cases": 4,
+      "as_expected": 4,
+      "variants": 20,
+      "variants_agree": 20
+    }
+  ],
+  "mutants": [
+    {
+      "name": "invented_inn",
+      "disabled_checks": [
+        "invented_inn"
+      ],
+      "detected": true,
+      "escaped_faults": 3,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "invented_inn.trastuzumab_vedotin",
+        "invented_inn.trastuzumab_novatecan",
+        "precedence.inn_dar"
+      ]
+    },
+    {
+      "name": "invented_code",
+      "disabled_checks": [
+        "invented_code"
+      ],
+      "detected": true,
+      "escaped_faults": 2,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "invented_code.zentrovab",
+        "invented_code.xb_2291"
+      ]
+    },
+    {
+      "name": "unsupported_product",
+      "disabled_checks": [
+        "unsupported_product"
+      ],
+      "detected": true,
+      "escaped_faults": 3,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "unsupported_product.datroway",
+        "unsupported_product.trodelvy",
+        "precedence.unsupported_no_risk"
+      ]
+    },
+    {
+      "name": "unverifiable_construct",
+      "disabled_checks": [
+        "unverifiable_construct"
+      ],
+      "detected": true,
+      "escaped_faults": 2,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "unverifiable_construct.trastuzumab_mmae_called_enhertu",
+        "unverifiable_construct.pertuzumab_dxd"
+      ]
+    },
+    {
+      "name": "nct_reference",
+      "disabled_checks": [
+        "nct_reference"
+      ],
+      "detected": true,
+      "escaped_faults": 5,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "nct_reference.enhertu_linker",
+        "nct_reference.kadcyla_payload",
+        "resolved_reference.not_found"
+      ]
+    },
+    {
+      "name": "pmid_reference",
+      "disabled_checks": [
+        "pmid_reference"
+      ],
+      "detected": true,
+      "escaped_faults": 2,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "pmid_reference.kadcyla_dm1",
+        "pmid_reference.enhertu"
+      ]
+    },
+    {
+      "name": "author_year_reference",
+      "disabled_checks": [
+        "author_year_reference"
+      ],
+      "detected": true,
+      "escaped_faults": 3,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "author_year_reference.smith",
+        "author_year_reference.jones_and_lee",
+        "precedence.author_target"
+      ]
+    },
+    {
+      "name": "contradicted_payload",
+      "disabled_checks": [
+        "contradicted_payload"
+      ],
+      "detected": true,
+      "escaped_faults": 5,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "contradicted_payload.enhertu_mmae",
+        "contradicted_payload.kadcyla_dxd",
+        "contradicted_payload.kadcyla_payload_question"
+      ]
+    },
+    {
+      "name": "contradicted_target",
+      "disabled_checks": [
+        "contradicted_target"
+      ],
+      "detected": true,
+      "escaped_faults": 3,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "contradicted_target.kadcyla_trop2",
+        "contradicted_target.enhertu_egfr",
+        "contradicted_target.kadcyla_nectin4"
+      ]
+    },
+    {
+      "name": "contradicted_linker",
+      "disabled_checks": [
+        "contradicted_linker"
+      ],
+      "detected": true,
+      "escaped_faults": 3,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "contradicted_linker.kadcyla_cleavable",
+        "contradicted_linker.enhertu_non_cleavable",
+        "contradicted_linker.kadcyla_cleavable_statement"
+      ]
+    },
+    {
+      "name": "contradicted_dar",
+      "disabled_checks": [
+        "contradicted_dar"
+      ],
+      "detected": true,
+      "escaped_faults": 4,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "contradicted_dar.kadcyla_8",
+        "contradicted_dar.kadcyla_4_2",
+        "contradicted_dar.enhertu_4"
+      ]
+    },
+    {
+      "name": "contradicted_no_risk",
+      "disabled_checks": [
+        "contradicted_no_risk"
+      ],
+      "detected": true,
+      "escaped_faults": 4,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "contradicted_no_risk.enhertu_ild",
+        "contradicted_no_risk.enhertu_ild_zero",
+        "contradicted_no_risk.kadcyla_platelets"
+      ]
+    },
+    {
+      "name": "contradiction_checks_removed",
+      "disabled_checks": [
+        "contradicted_payload",
+        "contradicted_target",
+        "contradicted_linker",
+        "contradicted_dar",
+        "contradicted_no_risk"
+      ],
+      "detected": true,
+      "escaped_faults": 19,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "contradicted_payload.enhertu_mmae",
+        "contradicted_payload.kadcyla_dxd",
+        "contradicted_payload.kadcyla_payload_question"
+      ]
+    },
+    {
+      "name": "unverifiable_checks_removed",
+      "disabled_checks": [
+        "invented_inn",
+        "invented_code",
+        "unsupported_product",
+        "unverifiable_construct",
+        "nct_reference",
+        "pmid_reference",
+        "author_year_reference"
+      ],
+      "detected": true,
+      "escaped_faults": 20,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "invented_inn.trastuzumab_vedotin",
+        "invented_inn.trastuzumab_novatecan",
+        "invented_code.zentrovab"
+      ]
+    },
+    {
+      "name": "precedence_inverted",
+      "disabled_checks": [],
+      "detected": true,
+      "escaped_faults": 5,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "unverifiable_construct.trastuzumab_mmae_called_enhertu",
+        "precedence.nct_payload",
+        "precedence.author_target"
+      ]
+    },
+    {
+      "name": "always_clear",
+      "disabled_checks": [],
+      "detected": true,
+      "escaped_faults": 39,
+      "faults": 39,
+      "controls_cleared": 23,
+      "controls": 23,
+      "examples": [
+        "contradicted_payload.enhertu_mmae",
+        "contradicted_payload.kadcyla_dxd",
+        "contradicted_payload.kadcyla_payload_question"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "control.kadcyla_made_of",
+      "family": "control",
+      "kind": "control",
+      "message": "What is Kadcyla made of?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "What is T-DM1 made of?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "What is KADCYLA made of?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: What is Kadcyla made of?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "What  is  Kadcyla  made  of?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "What is Kadcyla made of.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.compare_both",
+      "family": "control",
+      "kind": "control",
+      "message": "Compare Kadcyla and Enhertu composition.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Compare T-DM1 and T-DXd composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Compare KADCYLA and ENHERTU composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Compare Kadcyla and Enhertu composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Compare  Kadcyla  and  Enhertu  composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Compare Kadcyla and Enhertu composition?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.both_payloads",
+      "family": "control",
+      "kind": "control",
+      "message": "Kadcyla carries DM1 and Enhertu carries DXd.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 carries DM1 and T-DXd carries DXd.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA carries DM1 and ENHERTU carries DXd.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla carries DM1 and Enhertu carries DXd.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  carries  DM1  and  Enhertu  carries  DXd.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla carries DM1 and Enhertu carries DXd?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.kadcyla_her2_dm1",
+      "family": "control",
+      "kind": "control",
+      "message": "Kadcyla is a HER2-targeted ADC with DM1.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 is a HER2-targeted ADC with DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA is a HER2-targeted ADC with DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla is a HER2-targeted ADC with DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  is  a  HER2-targeted  ADC  with  DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla is a HER2-targeted ADC with DM1?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.enhertu_her2",
+      "family": "control",
+      "kind": "control",
+      "message": "Enhertu targets HER2.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd targets HER2.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU targets HER2.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu targets HER2.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  targets  HER2.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu targets HER2?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.own_inn_construct",
+      "family": "control",
+      "kind": "control",
+      "message": "Trastuzumab-DM1 (Kadcyla) composition.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Trastuzumab-DM1 (T-DM1) composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Trastuzumab-DM1 (KADCYLA) composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Trastuzumab-DM1 (Kadcyla) composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Trastuzumab-DM1  (Kadcyla)  composition.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Trastuzumab-DM1 (Kadcyla) composition?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.alias_target",
+      "family": "control",
+      "kind": "control",
+      "message": "Does T-DXd target HER2?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does T-DXd target HER2?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  T-DXd  target  HER2?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does T-DXd target HER2.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.true_negation_payload",
+      "family": "control",
+      "kind": "control",
+      "message": "Enhertu does not carry DM1.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd does not carry DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU does not carry DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu does not carry DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  does  not  carry  DM1.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu does not carry DM1?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.true_negation_linker",
+      "family": "control",
+      "kind": "control",
+      "message": "Kadcyla's linker is not cleavable.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1's linker is not cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA's linker is not cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla's linker is not cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla's  linker  is  not  cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla's linker is not cleavable?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.offered_alternative",
+      "family": "control",
+      "kind": "control",
+      "message": "Does Enhertu carry DXd or DM1?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does T-DXd carry DXd or DM1?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does ENHERTU carry DXd or DM1?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does Enhertu carry DXd or DM1?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  Enhertu  carry  DXd  or  DM1?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does Enhertu carry DXd or DM1.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.enhertu_cleavable",
+      "family": "control",
+      "kind": "control",
+      "message": "Does Enhertu's cleavable linker establish release in blood?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does T-DXd's cleavable linker establish release in blood?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does ENHERTU's cleavable linker establish release in blood?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does Enhertu's cleavable linker establish release in blood?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  Enhertu's  cleavable  linker  establish  release  in  blood?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does Enhertu's cleavable linker establish release in blood.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.kadcyla_non_cleavable",
+      "family": "control",
+      "kind": "control",
+      "message": "Kadcyla's linker is non-cleavable.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1's linker is non-cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA's linker is non-cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla's linker is non-cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla's  linker  is  non-cleavable.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla's linker is non-cleavable?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.kadcyla_dar_exact",
+      "family": "control",
+      "kind": "control",
+      "message": "Kadcyla has a DAR of 3.5.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 has a DAR of 3.5.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA has a DAR of 3.5.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla has a DAR of 3.5.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  has  a  DAR  of  3.5.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla has a DAR of 3.5?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.kadcyla_dar_tolerance",
+      "family": "control",
+      "kind": "control",
+      "message": "Kadcyla has a DAR of 4.0.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 has a DAR of 4.0.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA has a DAR of 4.0.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla has a DAR of 4.0.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  has  a  DAR  of  4.0.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla has a DAR of 4.0?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.enhertu_dar_tolerance",
+      "family": "control",
+      "kind": "control",
+      "message": "Enhertu has a DAR of 7.8.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd has a DAR of 7.8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU has a DAR of 7.8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu has a DAR of 7.8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  has  a  DAR  of  7.8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu has a DAR of 7.8?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.both_dar",
+      "family": "control",
+      "kind": "control",
+      "message": "Kadcyla has DAR 3.5 while Enhertu has DAR 8.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 has DAR 3.5 while T-DXd has DAR 8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA has DAR 3.5 while ENHERTU has DAR 8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla has DAR 3.5 while Enhertu has DAR 8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  has  DAR  3.5  while  Enhertu  has  DAR  8.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla has DAR 3.5 while Enhertu has DAR 8?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.unrecorded_toxicity",
+      "family": "control",
+      "kind": "control",
+      "message": "Enhertu has no peripheral neuropathy warning.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd has no peripheral neuropathy warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU has no peripheral neuropathy warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu has no peripheral neuropathy warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  has  no  peripheral  neuropathy  warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu has no peripheral neuropathy warning?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.unrecorded_nrh",
+      "family": "control",
+      "kind": "control",
+      "message": "Enhertu has no NRH warning.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd has no NRH warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU has no NRH warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu has no NRH warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  has  no  NRH  warning.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu has no NRH warning?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.existing_chat_toxicity",
+      "family": "control",
+      "kind": "control",
+      "message": "Enhertu composition and toxicity.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd composition and toxicity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU composition and toxicity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu composition and toxicity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  composition  and  toxicity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu composition and toxicity?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.existing_chat_identity",
+      "family": "control",
+      "kind": "control",
+      "message": "Enhertu composition and US identity.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd composition and US identity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU composition and US identity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu composition and US identity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  composition  and  US  identity.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu composition and US identity?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.existing_chat_withhold",
+      "family": "control",
+      "kind": "control",
+      "message": "What changes with only workbook evidence?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: What changes with only workbook evidence?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "What  changes  with  only  workbook  evidence?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "What changes with only workbook evidence.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.lab_values_not_gated",
+      "family": "control",
+      "kind": "control",
+      "message": "Is Enhertu safe to use at platelets 40?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Is T-DXd safe to use at platelets 40?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Is ENHERTU safe to use at platelets 40?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Is Enhertu safe to use at platelets 40?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Is  Enhertu  safe  to  use  at  platelets  40?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Is Enhertu safe to use at platelets 40.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "control.payload_code_not_invented",
+      "family": "control",
+      "kind": "control",
+      "message": "Does Kadcyla carry DM1 rather than SN-38?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does T-DM1 carry DM1 rather than SN-38?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does KADCYLA carry DM1 rather than SN-38?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does Kadcyla carry DM1 rather than SN-38?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  Kadcyla  carry  DM1  rather  than  SN-38?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does Kadcyla carry DM1 rather than SN-38.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_payload.enhertu_mmae",
+      "family": "contradicted_payload",
+      "kind": "fault",
+      "message": "Enhertu carries MMAE.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_payload"
+      ],
+      "checks": [
+        "contradicted_payload"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_payload",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd carries MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU carries MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu carries MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  carries  MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu carries MMAE?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_payload.kadcyla_dxd",
+      "family": "contradicted_payload",
+      "kind": "fault",
+      "message": "Kadcyla carries DXd.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_payload"
+      ],
+      "checks": [
+        "contradicted_payload"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_payload",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 carries DXd.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA carries DXd.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla carries DXd.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  carries  DXd.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla carries DXd?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_payload.kadcyla_payload_question",
+      "family": "contradicted_payload",
+      "kind": "fault",
+      "message": "Why is Kadcyla's MMAE payload released in blood?",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_payload"
+      ],
+      "checks": [
+        "contradicted_payload"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_payload",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Why is T-DM1's MMAE payload released in blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Why is KADCYLA's MMAE payload released in blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Why is Kadcyla's MMAE payload released in blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Why  is  Kadcyla's  MMAE  payload  released  in  blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Why is Kadcyla's MMAE payload released in blood.",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_payload.enhertu_dm1_statement",
+      "family": "contradicted_payload",
+      "kind": "fault",
+      "message": "Enhertu delivers DM1 to HER2 cells.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_payload"
+      ],
+      "checks": [
+        "contradicted_payload"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_payload",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd delivers DM1 to HER2 cells.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU delivers DM1 to HER2 cells.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu delivers DM1 to HER2 cells.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  delivers  DM1  to  HER2  cells.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu delivers DM1 to HER2 cells?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_target.kadcyla_trop2",
+      "family": "contradicted_target",
+      "kind": "fault",
+      "message": "Kadcyla targets TROP2.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_target"
+      ],
+      "checks": [
+        "contradicted_target"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_target",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 targets TROP2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA targets TROP2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla targets TROP2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  targets  TROP2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla targets TROP2?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_target.enhertu_egfr",
+      "family": "contradicted_target",
+      "kind": "fault",
+      "message": "Enhertu targets EGFR.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_target"
+      ],
+      "checks": [
+        "contradicted_target"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_target",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd targets EGFR.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU targets EGFR.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu targets EGFR.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  targets  EGFR.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu targets EGFR?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_target.kadcyla_nectin4",
+      "family": "contradicted_target",
+      "kind": "fault",
+      "message": "Kadcyla is a Nectin-4 ADC.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_target"
+      ],
+      "checks": [
+        "contradicted_target"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_target",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 is a Nectin-4 ADC.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA is a Nectin-4 ADC.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla is a Nectin-4 ADC.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  is  a  Nectin-4  ADC.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla is a Nectin-4 ADC?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_linker.kadcyla_cleavable",
+      "family": "contradicted_linker",
+      "kind": "fault",
+      "message": "Does Kadcyla's cleavable linker establish release in blood?",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_linker"
+      ],
+      "checks": [
+        "contradicted_linker"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_linker",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does T-DM1's cleavable linker establish release in blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does KADCYLA's cleavable linker establish release in blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does Kadcyla's cleavable linker establish release in blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  Kadcyla's  cleavable  linker  establish  release  in  blood?",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does Kadcyla's cleavable linker establish release in blood.",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_linker.enhertu_non_cleavable",
+      "family": "contradicted_linker",
+      "kind": "fault",
+      "message": "Enhertu's linker is non-cleavable.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_linker"
+      ],
+      "checks": [
+        "contradicted_linker"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_linker",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd's linker is non-cleavable.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU's linker is non-cleavable.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu's linker is non-cleavable.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu's  linker  is  non-cleavable.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu's linker is non-cleavable?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_linker.kadcyla_cleavable_statement",
+      "family": "contradicted_linker",
+      "kind": "fault",
+      "message": "Kadcyla uses a cleavable linker.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_linker"
+      ],
+      "checks": [
+        "contradicted_linker"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_linker",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 uses a cleavable linker.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA uses a cleavable linker.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla uses a cleavable linker.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  uses  a  cleavable  linker.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla uses a cleavable linker?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_dar.kadcyla_8",
+      "family": "contradicted_dar",
+      "kind": "fault",
+      "message": "Kadcyla has a DAR of 8.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_dar"
+      ],
+      "checks": [
+        "contradicted_dar"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_dar",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 has a DAR of 8.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA has a DAR of 8.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla has a DAR of 8.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  has  a  DAR  of  8.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla has a DAR of 8?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_dar.kadcyla_4_2",
+      "family": "contradicted_dar",
+      "kind": "fault",
+      "message": "Kadcyla has a DAR of 4.2.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_dar"
+      ],
+      "checks": [
+        "contradicted_dar"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_dar",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 has a DAR of 4.2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA has a DAR of 4.2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla has a DAR of 4.2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  has  a  DAR  of  4.2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla has a DAR of 4.2?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_dar.enhertu_4",
+      "family": "contradicted_dar",
+      "kind": "fault",
+      "message": "Enhertu has a DAR of 4.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_dar"
+      ],
+      "checks": [
+        "contradicted_dar"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_dar",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd has a DAR of 4.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU has a DAR of 4.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu has a DAR of 4.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  has  a  DAR  of  4.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu has a DAR of 4?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_dar.swapped",
+      "family": "contradicted_dar",
+      "kind": "fault",
+      "message": "Kadcyla has DAR 8 while Enhertu has DAR 3.5.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_dar",
+        "contradicted_dar"
+      ],
+      "checks": [
+        "contradicted_dar",
+        "contradicted_dar"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_dar",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 has DAR 8 while T-DXd has DAR 3.5.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA has DAR 8 while ENHERTU has DAR 3.5.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla has DAR 8 while Enhertu has DAR 3.5.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  has  DAR  8  while  Enhertu  has  DAR  3.5.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla has DAR 8 while Enhertu has DAR 3.5?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_no_risk.enhertu_ild",
+      "family": "contradicted_no_risk",
+      "kind": "fault",
+      "message": "Enhertu has no ILD risk.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_no_risk"
+      ],
+      "checks": [
+        "contradicted_no_risk"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_no_risk",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd has no ILD risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU has no ILD risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu has no ILD risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu  has  no  ILD  risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu has no ILD risk?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_no_risk.enhertu_ild_zero",
+      "family": "contradicted_no_risk",
+      "kind": "fault",
+      "message": "Enhertu's ILD risk is zero.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_no_risk"
+      ],
+      "checks": [
+        "contradicted_no_risk"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_no_risk",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DXd's ILD risk is zero.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "ENHERTU's ILD risk is zero.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Enhertu's ILD risk is zero.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Enhertu's  ILD  risk  is  zero.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Enhertu's ILD risk is zero?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_no_risk.kadcyla_platelets",
+      "family": "contradicted_no_risk",
+      "kind": "fault",
+      "message": "Kadcyla never causes thrombocytopenia.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_no_risk"
+      ],
+      "checks": [
+        "contradicted_no_risk"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_no_risk",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 never causes thrombocytopenia.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA never causes thrombocytopenia.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla never causes thrombocytopenia.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  never  causes  thrombocytopenia.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla never causes thrombocytopenia?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "contradicted_no_risk.kadcyla_neuropathy",
+      "family": "contradicted_no_risk",
+      "kind": "fault",
+      "message": "Kadcyla has no peripheral neuropathy risk.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_no_risk"
+      ],
+      "checks": [
+        "contradicted_no_risk"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_no_risk",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "T-DM1 has no peripheral neuropathy risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "KADCYLA has no peripheral neuropathy risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Kadcyla has no peripheral neuropathy risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Kadcyla  has  no  peripheral  neuropathy  risk.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Kadcyla has no peripheral neuropathy risk?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "invented_inn.trastuzumab_vedotin",
+      "family": "invented_inn",
+      "kind": "fault",
+      "message": "What does trastuzumab vedotin carry?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "invented_inn"
+      ],
+      "checks": [
+        "invented_inn"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "invented_inn",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: What does trastuzumab vedotin carry?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "What  does  trastuzumab  vedotin  carry?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "What does trastuzumab vedotin carry.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "invented_inn.trastuzumab_novatecan",
+      "family": "invented_inn",
+      "kind": "fault",
+      "message": "Compare trastuzumab novatecan with Enhertu.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "invented_inn"
+      ],
+      "checks": [
+        "invented_inn"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "invented_inn",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Compare trastuzumab novatecan with T-DXd.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Compare trastuzumab novatecan with ENHERTU.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Compare trastuzumab novatecan with Enhertu.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Compare  trastuzumab  novatecan  with  Enhertu.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Compare trastuzumab novatecan with Enhertu?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "invented_code.zentrovab",
+      "family": "invented_code",
+      "kind": "fault",
+      "message": "Tell me about the investigational ADC Zentrovab-7.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "invented_code"
+      ],
+      "checks": [
+        "invented_code"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "invented_code",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: Tell me about the investigational ADC Zentrovab-7.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Tell  me  about  the  investigational  ADC  Zentrovab-7.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Tell me about the investigational ADC Zentrovab-7?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "invented_code.xb_2291",
+      "family": "invented_code",
+      "kind": "fault",
+      "message": "Is XB-2291 ADC like Enhertu?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "invented_code"
+      ],
+      "checks": [
+        "invented_code"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "invented_code",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Is XB-2291 ADC like T-DXd?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Is XB-2291 ADC like ENHERTU?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Is XB-2291 ADC like Enhertu?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Is  XB-2291  ADC  like  Enhertu?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Is XB-2291 ADC like Enhertu.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "unsupported_product.datroway",
+      "family": "unsupported_product",
+      "kind": "fault",
+      "message": "Compare Enhertu with Datroway.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "unsupported_product"
+      ],
+      "checks": [
+        "unsupported_product"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "unsupported_product",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Compare T-DXd with Datroway.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Compare ENHERTU with Datroway.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Compare Enhertu with Datroway.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Compare  Enhertu  with  Datroway.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Compare Enhertu with Datroway?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "unsupported_product.trodelvy",
+      "family": "unsupported_product",
+      "kind": "fault",
+      "message": "What is Trodelvy made of?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "unsupported_product"
+      ],
+      "checks": [
+        "unsupported_product"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "unsupported_product",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: What is Trodelvy made of?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "What  is  Trodelvy  made  of?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "What is Trodelvy made of.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "unverifiable_construct.trastuzumab_mmae_called_enhertu",
+      "family": "unverifiable_construct",
+      "kind": "fault",
+      "message": "Is trastuzumab-MMAE called Enhertu?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "contradicted_payload",
+        "unverifiable_construct"
+      ],
+      "checks": [
+        "contradicted_payload",
+        "unverifiable_construct"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "unverifiable_construct",
+        "unverifiable_checks_removed",
+        "precedence_inverted",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Is trastuzumab-MMAE called T-DXd?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Is trastuzumab-MMAE called ENHERTU?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Is trastuzumab-MMAE called Enhertu?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Is  trastuzumab-MMAE  called  Enhertu?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Is trastuzumab-MMAE called Enhertu.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "unverifiable_construct.pertuzumab_dxd",
+      "family": "unverifiable_construct",
+      "kind": "fault",
+      "message": "Explain the pertuzumab-DXd conjugate.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "unverifiable_construct"
+      ],
+      "checks": [
+        "unverifiable_construct"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "unverifiable_construct",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: Explain the pertuzumab-DXd conjugate.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Explain  the  pertuzumab-DXd  conjugate.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Explain the pertuzumab-DXd conjugate?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "nct_reference.enhertu_linker",
+      "family": "nct_reference",
+      "kind": "fault",
+      "message": "Does NCT09999999 show Enhertu linker release?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "nct_reference"
+      ],
+      "checks": [
+        "nct_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "nct_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does NCT09999999 show T-DXd linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does NCT09999999 show ENHERTU linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does NCT09999999 show Enhertu linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  NCT09999999  show  Enhertu  linker  release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does NCT09999999 show Enhertu linker release.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "nct_reference.kadcyla_payload",
+      "family": "nct_reference",
+      "kind": "fault",
+      "message": "NCT09999998 reports the Kadcyla payload.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "nct_reference"
+      ],
+      "checks": [
+        "nct_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "nct_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "NCT09999998 reports the T-DM1 payload.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "NCT09999998 reports the KADCYLA payload.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: NCT09999998 reports the Kadcyla payload.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "NCT09999998  reports  the  Kadcyla  payload.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "NCT09999998 reports the Kadcyla payload?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "pmid_reference.kadcyla_dm1",
+      "family": "pmid_reference",
+      "kind": "fault",
+      "message": "PMID: 99999901 says Kadcyla payload is DM1.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "pmid_reference"
+      ],
+      "checks": [
+        "pmid_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "pmid_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "PMID: 99999901 says T-DM1 payload is DM1.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "PMID: 99999901 says KADCYLA payload is DM1.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: PMID: 99999901 says Kadcyla payload is DM1.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "PMID:  99999901  says  Kadcyla  payload  is  DM1.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "PMID: 99999901 says Kadcyla payload is DM1?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "pmid_reference.enhertu",
+      "family": "pmid_reference",
+      "kind": "fault",
+      "message": "Per PMID 99999902, what is Enhertu made of?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "pmid_reference"
+      ],
+      "checks": [
+        "pmid_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "pmid_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Per PMID 99999902, what is T-DXd made of?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Per PMID 99999902, what is ENHERTU made of?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Per PMID 99999902, what is Enhertu made of?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Per  PMID  99999902,  what  is  Enhertu  made  of?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Per PMID 99999902, what is Enhertu made of.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "author_year_reference.smith",
+      "family": "author_year_reference",
+      "kind": "fault",
+      "message": "Smith et al. 2019 showed Enhertu DAR 8.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "author_year_reference"
+      ],
+      "checks": [
+        "author_year_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "author_year_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Smith et al. 2019 showed T-DXd DAR 8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Smith et al. 2019 showed ENHERTU DAR 8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Smith et al. 2019 showed Enhertu DAR 8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Smith  et  al.  2019  showed  Enhertu  DAR  8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Smith et al. 2019 showed Enhertu DAR 8?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "author_year_reference.jones_and_lee",
+      "family": "author_year_reference",
+      "kind": "fault",
+      "message": "Jones and Lee (2021) describe the Kadcyla linker.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "author_year_reference"
+      ],
+      "checks": [
+        "author_year_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "author_year_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Jones and Lee (2021) describe the T-DM1 linker.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Jones and Lee (2021) describe the KADCYLA linker.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Jones and Lee (2021) describe the Kadcyla linker.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Jones  and  Lee  (2021)  describe  the  Kadcyla  linker.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Jones and Lee (2021) describe the Kadcyla linker?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "resolved_reference.exists",
+      "family": "resolved_reference",
+      "kind": "fault",
+      "message": "Does NCT09999999 show Enhertu linker release?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [
+        "resolved_reference"
+      ],
+      "checks": [
+        "resolved_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does NCT09999999 show T-DXd linker release?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does NCT09999999 show ENHERTU linker release?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does NCT09999999 show Enhertu linker release?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  NCT09999999  show  Enhertu  linker  release?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does NCT09999999 show Enhertu linker release.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "resolved_reference.not_found",
+      "family": "resolved_reference",
+      "kind": "fault",
+      "message": "Does NCT09999999 show Enhertu linker release?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "nct_reference"
+      ],
+      "checks": [
+        "nct_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "nct_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does NCT09999999 show T-DXd linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does NCT09999999 show ENHERTU linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does NCT09999999 show Enhertu linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  NCT09999999  show  Enhertu  linker  release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does NCT09999999 show Enhertu linker release.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "resolved_reference.error",
+      "family": "resolved_reference",
+      "kind": "fault",
+      "message": "Does NCT09999999 show Enhertu linker release?",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "nct_reference"
+      ],
+      "checks": [
+        "nct_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "nct_reference",
+        "unverifiable_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Does NCT09999999 show T-DXd linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Does NCT09999999 show ENHERTU linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Does NCT09999999 show Enhertu linker release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Does  NCT09999999  show  Enhertu  linker  release?",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Does NCT09999999 show Enhertu linker release.",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "resolved_reference.exists_contradiction",
+      "family": "resolved_reference",
+      "kind": "fault",
+      "message": "NCT09999999 says Enhertu carries MMAE.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_payload",
+        "resolved_reference"
+      ],
+      "checks": [
+        "contradicted_payload",
+        "resolved_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_payload",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "NCT09999999 says T-DXd carries MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "NCT09999999 says ENHERTU carries MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: NCT09999999 says Enhertu carries MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "NCT09999999  says  Enhertu  carries  MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "NCT09999999 says Enhertu carries MMAE?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "precedence.nct_payload",
+      "family": "precedence",
+      "kind": "fault",
+      "message": "NCT09999999 Enhertu carries MMAE.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "contradicted_payload",
+        "nct_reference"
+      ],
+      "checks": [
+        "contradicted_payload",
+        "nct_reference"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "nct_reference",
+        "unverifiable_checks_removed",
+        "precedence_inverted",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "NCT09999999 T-DXd carries MMAE.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "NCT09999999 ENHERTU carries MMAE.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: NCT09999999 Enhertu carries MMAE.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "NCT09999999  Enhertu  carries  MMAE.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "NCT09999999 Enhertu carries MMAE?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "precedence.author_target",
+      "family": "precedence",
+      "kind": "fault",
+      "message": "Smith et al. 2019 showed Kadcyla targets TROP2.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "author_year_reference",
+        "contradicted_target"
+      ],
+      "checks": [
+        "author_year_reference",
+        "contradicted_target"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "author_year_reference",
+        "unverifiable_checks_removed",
+        "precedence_inverted",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Smith et al. 2019 showed T-DM1 targets TROP2.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Smith et al. 2019 showed KADCYLA targets TROP2.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Smith et al. 2019 showed Kadcyla targets TROP2.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Smith  et  al.  2019  showed  Kadcyla  targets  TROP2.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Smith et al. 2019 showed Kadcyla targets TROP2?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "precedence.inn_dar",
+      "family": "precedence",
+      "kind": "fault",
+      "message": "Trastuzumab vedotin and Kadcyla: Kadcyla has a DAR of 8.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "contradicted_dar",
+        "invented_inn"
+      ],
+      "checks": [
+        "contradicted_dar",
+        "invented_inn"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "invented_inn",
+        "unverifiable_checks_removed",
+        "precedence_inverted",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Trastuzumab vedotin and T-DM1: T-DM1 has a DAR of 8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Trastuzumab vedotin and KADCYLA: KADCYLA has a DAR of 8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Trastuzumab vedotin and Kadcyla: Kadcyla has a DAR of 8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Trastuzumab  vedotin  and  Kadcyla:  Kadcyla  has  a  DAR  of  8.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Trastuzumab vedotin and Kadcyla: Kadcyla has a DAR of 8?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "precedence.unsupported_no_risk",
+      "family": "precedence",
+      "kind": "fault",
+      "message": "Compare Datroway. Enhertu has no ILD risk.",
+      "expected_decision": "blocked",
+      "decision": "blocked",
+      "expected_checks": [
+        "contradicted_no_risk",
+        "unsupported_product"
+      ],
+      "checks": [
+        "contradicted_no_risk",
+        "unsupported_product"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "unsupported_product",
+        "unverifiable_checks_removed",
+        "precedence_inverted",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Compare Datroway. T-DXd has no ILD risk.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Compare Datroway. ENHERTU has no ILD risk.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Compare Datroway. Enhertu has no ILD risk.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Compare  Datroway.  Enhertu  has  no  ILD  risk.",
+          "decision": "blocked",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Compare Datroway. Enhertu has no ILD risk?",
+          "decision": "blocked",
+          "agrees": true
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Developer-written fixtures checked against the frozen workbook snapshot table, not a clinical benchmark and not an unseen holdout.",
+    "A flagged or blocked premise is a table mismatch, not a scientific or clinical ruling.",
+    "Mutants change the premise gate in memory only, never the app; overlapping checks can leave mutants surviving and survivors are shown.",
+    "References are unresolved here; existence of a resolved reference is never treated as evidence.",
+    "No model or network calls; counts are finite software coverage, not a probability of anything."
+  ]
+}

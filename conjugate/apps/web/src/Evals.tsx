@@ -8,7 +8,11 @@ import teamChecks from '../../../evals/team.json';
 import teamLive from '../../../evals/team-live.json';
 import modelChecks from '../../../evals/models.json';
 import { faultTests, productLabel, questionTitles, verdictLabels } from './labels';
-import { EvaluationStudies } from './EvaluationStudies';
+import verifier from '../../../evals/verifier-study.json';
+import premiseStudy from '../../../evals/premise-study.json';
+import liveStudy from '../../../evals/live-retrieval.json';
+import { useState, type KeyboardEvent } from 'react';
+import { EvaluationStudies, ExactTable, TableScroll } from './EvaluationStudies';
 
 type Verdict = keyof typeof verdictLabels;
 type QuestionId = keyof typeof questionTitles;
@@ -53,18 +57,57 @@ function buildScopes(productIds: string[], name: (id: string) => string): Scope[
 const cellsFor = <Row extends { product_id: string; question_id: QuestionId; evidence_policy: Policy }>(rows: Row[], cell: (row: Row) => GridCell): Record<string, GridCell> =>
   Object.fromEntries(rows.map((row) => [scopeKey(row), cell(row)]));
 
-/** One square per scope. Blue means the verifier did what that eval expects; copper means it did not. */
+const glyph = (cell: GridCell | undefined) => cell ? (cell.ok ? '✓' : '✕') : '·';
+const moves: Record<string, (r: number, c: number, rows: number, cols: number) => [number, number]> = {
+  ArrowRight: (r, c, _rows, cols) => [r, Math.min(c + 1, cols - 1)], ArrowLeft: (r, c) => [r, Math.max(c - 1, 0)],
+  ArrowDown: (r, c, rows) => [Math.min(r + 1, rows - 1), c], ArrowUp: (r, c) => [Math.max(r - 1, 0), c],
+  Home: (r) => [r, 0], End: (r, _c, _rows, cols) => [r, cols - 1],
+};
+
+/** One square per scope with a glyph as well as a colour. One tab stop; arrow keys move between squares. */
 function ScopeGrid({ caption, scopes, rows, okLabel, badLabel, axisNote }: { caption: string; scopes: Scope[]; rows: GridRow[]; okLabel: string; badLabel: string; axisNote: string }) {
+  const [active, setActive] = useState<[number, number]>([0, 0]);
+  const [focused, setFocused] = useState(false);
+  const describe = (r: number, c: number) => { const scope = scopes[c]; const cell = rows[r]?.cells[scope?.key ?? '']; return scope ? `${rows[r]?.label}, ${scope.long}: ${cell ? cell.note : 'not run'}` : ''; };
+  const onKeyDown = (event: KeyboardEvent<HTMLTableCellElement>) => {
+    const move = moves[event.key]; if (!move) return;
+    event.preventDefault();
+    const [r, c] = move(active[0], active[1], rows.length, scopes.length);
+    setActive([r, c]);
+    event.currentTarget.closest('table')?.querySelector<HTMLElement>(`[data-cell="${r}-${c}"]`)?.focus();
+  };
   return <>
-    <div className="trace-table-wrap"><table className="scope-grid"><caption className="sr-only">{caption}</caption>
+    <TableScroll label={caption + ', scrollable'}><table className="scope-grid"><caption className="sr-only">{caption}. Use arrow keys to move between squares.</caption>
       <thead><tr><th scope="col"><span className="sr-only">Row</span></th>{scopes.map((scope) => <th scope="col" key={scope.key}><abbr title={scope.long}>{scope.short}</abbr></th>)}</tr></thead>
-      <tbody>{rows.map((row) => <tr key={row.key}><th scope="row"><code>{row.label}</code></th>{scopes.map((scope) => {
+      <tbody>{rows.map((row, r) => <tr key={row.key}><th scope="row"><code>{row.label}</code></th>{scopes.map((scope, c) => {
         const cell = row.cells[scope.key];
-        return <td key={scope.key} className={cell ? (cell.ok ? 'grid-ok' : 'grid-bad') : 'grid-none'} title={cell ? scope.long + ': ' + cell.note : scope.long + ': not run'}><span className="sr-only">{cell ? cell.note : 'not run'}</span></td>;
+        const label = scope.long + ': ' + (cell ? cell.note : 'not run');
+        return <td key={scope.key} data-cell={`${r}-${c}`} tabIndex={active[0] === r && active[1] === c ? 0 : -1} aria-label={label} title={label} onKeyDown={onKeyDown}
+          onFocus={() => { setActive([r, c]); setFocused(true); }} onBlur={() => setFocused(false)}
+          className={cell ? (cell.ok ? 'grid-ok' : 'grid-bad') : 'grid-none'}><span aria-hidden="true">{glyph(cell)}</span></td>;
       })}</tr>)}</tbody>
-    </table></div>
-    <p className="grid-legend"><span className="legend-ok">{okLabel}</span><span className="legend-bad">{badLabel}</span><span className="legend-axis">{axisNote}</span></p>
+    </table></TableScroll>
+    <p className="grid-readout" aria-hidden="true">{focused ? describe(active[0], active[1]) : 'Hover or focus a square for its scope and result.'}</p>
+    <p className="grid-legend"><span className="legend-ok"><span aria-hidden="true">✓</span>{okLabel}</span><span className="legend-bad"><span aria-hidden="true">✕</span>{badLabel}</span><span className="legend-none"><span aria-hidden="true">·</span>not run</span><span className="legend-axis">{axisNote}</span></p>
   </>;
+}
+
+interface Bar { label: string; num: number; den: number }
+/** Horizontal bars grouped by what a good result looks like. Labels and fractions are the source of truth; bars only echo them. */
+function Scoreboard({ groups, also }: { groups: { title: string; tone: 'ok' | 'bad'; note?: string; bars: Bar[] }[]; also: { label: string; value: string }[] }) {
+  return <section className="scoreboard" aria-labelledby="scoreboard-heading">
+    <h2 id="scoreboard-heading" className="sr-only">Scoreboard</h2>
+    <div className="scoreboard-groups">{groups.map((group) => <div className={`score-group score-${group.tone}`} key={group.title}>
+      <h3>{group.title}</h3>
+      <ul>{group.bars.map((bar) => <li key={bar.label}>
+        <span className="score-label">{bar.label}</span>
+        <span className="score-value">{bar.num}/{bar.den}</span>
+        <span className="score-track" aria-hidden="true"><span style={{ width: `${bar.den ? (bar.num / bar.den) * 100 : 0}%` }} /></span>
+      </li>)}</ul>
+      {group.note && <p className="field-hint">{group.note}</p>}
+    </div>)}</div>
+    <dl className="score-also">{also.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
+  </section>;
 }
 
 export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
@@ -90,59 +133,90 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       ok: row.rejected, note: row.rejected ? 'rejected, caught by ' + row.caught_by.join(', ') : 'accepted, fault not caught',
     })),
   }));
+  const scriptedRows = data.strategies.rows.filter((row) => row.strategy !== 'honest_expected');
+  const groups = [
+    { title: 'Faults caught', tone: 'ok' as const, bars: [
+      { label: 'Injected bad citations rejected', num: data.drills.rejected_count, den: data.drills.total },
+      { label: 'Faults rejected by unchanged verifier', num: verifier.faults_rejected, den: verifier.fault_count },
+      { label: 'Scripted strategies caught in every scope', num: strategiesCaughtEverywhere, den: strategiesTotal },
+      { label: 'Weakened verifiers detected', num: verifier.mutants_detected, den: verifier.mutant_count },
+    ] },
+    { title: 'Controls preserved', tone: 'ok' as const, bars: [
+      ...(honest ? [{ label: 'Honest control accepted', num: honest.accepted, den: honest.total }] : []),
+      { label: 'Valid controls accepted', num: verifier.controls_accepted, den: verifier.control_count },
+    ] },
+    { title: 'Still escapes', tone: 'bad' as const, note: 'Explained under Scripted strategies and the broken-checker study below.', bars: [
+      { label: 'Scripted drafts accepted', num: leaks.length, den: scriptedRows.length },
+      { label: 'Weakened verifiers not detected', num: verifier.mutant_count - verifier.mutants_detected, den: verifier.mutant_count },
+    ] },
+  ];
+  const also = [
+    { label: 'Verdicts that changed with workbook only', value: `${data.verdicts.changed_count}/${data.verdicts.total}` },
+    { label: 'Prior workflow drafts accepted', value: data.claude.skipped ? 'not run' : `${data.claude.accepted}/${data.claude.total}` },
+  ];
   return <section className="evals-view" aria-labelledby="evals-heading">
     <header className="view-heading">
       <h1 id="evals-heading">Evals</h1>
-      <p>Software checks on the pipeline, run by <code>scripts/eval.ts</code> against the same server code the app uses. They test whether the verifier enforces its rules. They are not a clinical benchmark and say nothing about whether the sources themselves are right.</p>
+      <p>Software checks that the verifier enforces its own rules. Not a clinical benchmark.</p>
     </header>
+    <Scoreboard groups={groups} also={also} />
 
     <EvaluationStudies />
 
-    <section aria-labelledby="model-checks-heading"><h2 id="model-checks-heading">Component observations</h2><p>{modelChecks.rows.length} fixed views across two antibody references, twenty molecular records and four observation settings replayed consistently. These checks reuse imported values; they do not rerun a model.</p><p>Linker lab separates graph checks and calculated chemistry from ESM sequence similarity and HER2 target confidence. A constructed no-handle control gets the same saturated proxy reward as a two-handle fragment, while failing the independent attachment check.</p><p>{modelChecks.limits.join(' ')}</p><details className="run-record"><summary>Reproduce the component checks</summary><p><code>npm run eval:models</code> and <code>npm run replay:models -- export.json</code>. Recorded {modelChecks.generated_at}. Snapshot SHA-256 <code>{modelChecks.snapshot_sha256}</code>. Controller SHA-256 <code>{modelChecks.code_sha256}</code>.</p></details></section>
+    <section aria-labelledby="premise-checks-heading"><h2 id="premise-checks-heading">Premise checks</h2>
+      <p>The premise gate runs before every chat and agent-team turn, before any model call or evidence read. It flagged or blocked {premiseStudy.faults_as_expected}/{premiseStudy.fault_count} developer-written faulty questions as expected, cleared {premiseStudy.controls_cleared}/{premiseStudy.control_count} valid ones, agreed with itself on {premiseStudy.variants_agree}/{premiseStudy.variant_count} paraphrases, and every one of {premiseStudy.mutant_count} deliberately weakened gates was caught ({premiseStudy.mutants_detected} detected). {premiseStudy.provider_requests} model calls.</p>
+      <ExactTable label="Premise checks by family"><table><thead><tr><th scope="col">Family</th><th scope="col">Cases as expected</th><th scope="col">Paraphrases agree</th></tr></thead>
+        <tbody>{premiseStudy.by_family.map(row => <tr key={row.family}><th scope="row">{row.family.replaceAll('_', ' ')}</th><td>{row.as_expected}/{row.cases}</td><td>{row.variants_agree}/{row.variants}</td></tr>)}</tbody></table></ExactTable>
+      <details className="run-record"><summary>How this was measured</summary><p>{premiseStudy.limits.join(' ')}</p><p>Category names and approach adapted from <a href={premiseStudy.attribution.repository}>adc-guardrail</a> at {premiseStudy.attribution.commit}; {premiseStudy.attribution.scope}.</p><p><code>npm run eval:premise</code>.</p></details>
+    </section>
+
+    <section aria-labelledby="live-checks-heading"><h2 id="live-checks-heading">Live source checks</h2>
+      <p>One recorded run against the real sources: {liveStudy.statuses.ok} receipts matched, {liveStudy.statuses.not_found} known-fake references came back not found, {liveStudy.statuses.drift} drifted from the frozen snapshot and {liveStudy.statuses.error} failed. {liveStudy.checks.filter(check => check.passed).length}/{liveStudy.checks.length} checks passed.</p>
+      <ExactTable label="Live source receipts" wide><table><thead><tr><th scope="col">Source</th><th scope="col">Subject</th><th scope="col">Status</th><th scope="col">HTTP</th><th scope="col">Raw SHA-256</th></tr></thead>
+        <tbody>{liveStudy.rows.map(row => <tr key={row.source + row.subject}><th scope="row">{row.source}</th><td>{row.subject}</td><td>{row.status}</td><td>{row.http_status ?? '—'}</td><td><code>{row.raw_sha256 ? row.raw_sha256.slice(0, 16) : '—'}</code></td></tr>)}</tbody></table></ExactTable>
+      <details className="run-record"><summary>How this was measured</summary><p>{liveStudy.limits.join(' ')}</p><p>Fixed URL templates on allowlisted HTTPS hosts; redirects off-host are rejected; no retries. <code>npm run eval:live</code>.</p></details>
+    </section>
+
+    <section aria-labelledby="model-checks-heading"><h2 id="model-checks-heading">Component observations</h2>
+      <p>{modelChecks.rows.length} fixed views across two antibody references, twenty molecular records and four observation settings replayed consistently.</p>
+      <p>A constructed no-handle control gets the same saturated proxy reward as a two-handle fragment, while failing the independent attachment check.</p>
+      <details className="run-record"><summary>How this was measured</summary><p>These checks reuse imported values; they do not rerun a model. Linker lab separates graph checks and calculated chemistry from ESM sequence similarity and HER2 target confidence.</p><p>{modelChecks.limits.join(' ')}</p><p><code>npm run eval:models</code> and <code>npm run replay:models -- export.json</code>. Recorded {modelChecks.generated_at}. Snapshot SHA-256 <code>{modelChecks.snapshot_sha256}</code>. Controller SHA-256 <code>{modelChecks.code_sha256}</code>.</p></details>
+    </section>
 
     <section aria-labelledby="chat-checks-heading"><h2 id="chat-checks-heading">Conversation checks</h2>
-      <p>{chatChecks.rows.filter(row => row.status === 'complete' && row.replay_passed).length}/{chatChecks.rows.length} fixed rules-only turns passed the execution checks and replay. No provider calls. These are software controls, not a language-quality or clinical benchmark.</p>
-      <p>The live native-tool smoke completed {chatLive.rows.filter(row => row.status === 'complete').length} research turns and stopped {chatLive.rows.filter(row => row.status === 'outside_scope').length} clinical question before a model call. It used {chatLive.provider_requests} provider requests, with {chatLive.retries} retries. Failures, if present, stay in the artifact.</p>
-      <div className="trace-table-wrap"><table className="checks-table"><caption className="sr-only">Observed live chat calls</caption><thead><tr><th scope="col">Turn</th><th scope="col">Result</th><th scope="col">Provider requests</th><th scope="col">Local source reads</th></tr></thead><tbody>{chatLive.rows.map(row => <tr key={row.id}><th scope="row"><code>{row.id}</code></th><td>{row.status.replaceAll('_', ' ')}{'error_code' in row && <code> {String(row.error_code)}</code>}</td><td>{row.actual_provider_requests}</td><td>{'source_reads' in row ? row.source_reads : '—'}</td></tr>)}</tbody></table></div>
+      <p>{chatChecks.rows.filter(row => row.status === 'complete' && row.replay_passed).length}/{chatChecks.rows.length} fixed rules-only turns passed the execution checks and replay. No provider calls.</p>
+      <p>The live native-tool smoke completed {chatLive.rows.filter(row => row.status === 'complete').length} research turns and stopped {chatLive.rows.filter(row => row.status === 'outside_scope').length} clinical question before a model call. It used {chatLive.provider_requests} provider requests, with {chatLive.retries} retries.</p>
+      <ExactTable label="Observed live chat calls, scrollable"><table className="checks-table"><caption className="sr-only">Observed live chat calls</caption><thead><tr><th scope="col">Turn</th><th scope="col">Result</th><th scope="col">Provider requests</th><th scope="col">Local source reads</th></tr></thead><tbody>{chatLive.rows.map(row => <tr key={row.id}><th scope="row"><code>{row.id}</code></th><td>{row.status.replaceAll('_', ' ')}{'error_code' in row && <code> {String(row.error_code)}</code>}</td><td>{row.actual_provider_requests}</td><td>{'source_reads' in row ? row.source_reads : '—'}</td></tr>)}</tbody></table></ExactTable>
       <details className="run-record"><summary>Earlier live run: failures and omissions kept</summary><p>The review run recorded {chatLiveReview.rows.filter(row => row.status === 'failed').length} provider failure and {chatLiveReview.rows.filter(row => row.status === 'incomplete').reduce((sum, row) => sum + ('omitted_checks' in row ? Number(row.omitted_checks) : 0), 0)} unanswered checks. No request was retried or silently switched to rules only. A later controller change keeps locally recognized scope hints after a failed question, so a follow-up cannot accidentally refer to an older question.</p><ul>{chatLiveReview.rows.map(row => <li key={row.id}><code>{row.id}</code>: {row.status}{'error_code' in row && <code> {String(row.error_code)}</code>} · {row.actual_provider_requests} requests</li>)}</ul><p>Recorded {chatLiveReview.generated_at}. Code SHA-256 <code>{chatLiveReview.code_sha256}</code>.</p></details>
-      <p>Claude coordinates fixed checks and selects returned audit IDs. The verifier owns citations and verdicts. The same research questions can be answered with rules; this does not demonstrate independent scientific discovery or model superiority.</p>
-      <details className="run-record"><summary>Reproduce the conversation checks</summary><p><code>npm run eval:chat</code> runs offline checks. <code>npm run eval:chat -- --live</code> makes paid calls, capped at 16 with no retries. <code>npm run replay:chat -- turn.json</code> checks saved audits and rendering, not the original model execution.</p><p>Live artifact generated {chatLive.generated_at}. Code SHA-256 <code>{chatLive.code_sha256}</code>. Live compatibility testing first exposed an unhandled direct-caller metadata field; the parser and regression fixture now explicitly support it.</p></details>
+      <details className="run-record"><summary>How this was measured</summary><p>These are software controls, not a language-quality or clinical benchmark. Failures, if present, stay in the artifact.</p><p>Claude coordinates fixed checks and selects returned audit IDs. The verifier owns citations and verdicts. The same research questions can be answered with rules; this does not demonstrate independent scientific discovery or model superiority.</p><p><code>npm run eval:chat</code> runs offline checks. <code>npm run eval:chat -- --live</code> makes paid calls, capped at 16 with no retries. <code>npm run replay:chat -- turn.json</code> checks saved audits and rendering, not the original model execution.</p><p>Live artifact generated {chatLive.generated_at}. Code SHA-256 <code>{chatLive.code_sha256}</code>. Live compatibility testing first exposed an unhandled direct-caller metadata field; the parser and regression fixture now explicitly support it.</p></details>
     </section>
 
     <section aria-labelledby="team-checks-heading"><h2 id="team-checks-heading">Agent team checks</h2>
-      <p>{teamChecks.rows.filter(row => row.passed).length}/{teamChecks.rows.length} offline rows passed. {teamChecks.rows.filter(row => row.id.startsWith('rules_')).length} are the fixed rules-only scopes run through the LangGraph graph with code in every seat; the rest are scripted leads and workers that under-plan, drop audits, refuse, return foreign ids or invent pairs, and must be caught by the omission gate, verifier or schema. Scripted agents are deterministic stand-ins; they say nothing about how often a real model misbehaves.</p>
-      <div className="trace-table-wrap"><table className="checks-table"><caption className="sr-only">Scripted agent-team gate checks</caption><thead><tr><th scope="col">Case</th><th scope="col">Expected</th><th scope="col">Outcome</th><th scope="col">Revisions</th><th scope="col">Lead / worker calls</th></tr></thead><tbody>{teamChecks.rows.filter(row => !row.id.startsWith('rules_')).map(row => <tr key={row.id}><th scope="row"><code>{row.id}</code></th><td>{row.expected}</td><td>{row.passed ? 'as expected' : 'unexpected'}: {row.status.replaceAll('_', ' ')}{'error_code' in row && <code> {String(row.error_code)}</code>}</td><td>{'revisions' in row ? row.revisions : '—'}</td><td>{'lead_calls' in row ? `${row.lead_calls} / ${row.worker_calls}` : '—'}</td></tr>)}</tbody></table></div>
-      <p>The live team smoke ran {teamLive.rows.length} turns with {teamLive.provider_requests} provider requests under a cap of {teamLive.request_cap}, {teamLive.retries} retries. {teamLive.rows.filter(row => row.status === 'failed').length} turns ended in a provider refusal at the lead. They are recorded as failures; nothing was retried or switched to rules only.</p>
-      <div className="trace-table-wrap"><table className="checks-table"><caption className="sr-only">Observed live agent-team turns</caption><thead><tr><th scope="col">Turn</th><th scope="col">Result</th><th scope="col">Provider requests</th><th scope="col">Graph path</th></tr></thead><tbody>{teamLive.rows.map(row => <tr key={row.id}><th scope="row"><code>{row.id}</code></th><td>{row.status.replaceAll('_', ' ')}{'error_code' in row && <code> {String(row.error_code)}</code>}</td><td>{row.actual_provider_requests}</td><td>{'trace' in row ? row.trace.map(step => step.split(':')[0]).join(' → ') : '—'}</td></tr>)}</tbody></table></div>
-      <details className="run-record"><summary>Reproduce the agent team checks</summary><p><code>npm run eval:team</code> runs the offline rows. <code>npm run eval:team -- --live</code> makes paid calls, capped at {teamLive.request_cap} with no retries. Graph: {teamChecks.graph}. Framework {teamChecks.framework}. Offline artifact {teamChecks.generated_at}, live artifact {teamLive.generated_at}, code SHA-256 <code>{teamLive.code_sha256}</code>.</p></details>
+      <p>{teamChecks.rows.filter(row => row.passed).length}/{teamChecks.rows.length} offline rows passed. Scripted leads and workers misbehave on purpose and must be caught by the omission gate, verifier or schema.</p>
+      <ExactTable label="Scripted agent-team gate checks, scrollable" wide><table className="checks-table"><caption className="sr-only">Scripted agent-team gate checks</caption><thead><tr><th scope="col">Case</th><th scope="col">Expected</th><th scope="col">Outcome</th><th scope="col">Revisions</th><th scope="col">Lead / worker calls</th></tr></thead><tbody>{teamChecks.rows.filter(row => !row.id.startsWith('rules_')).map(row => <tr key={row.id}><th scope="row"><code>{row.id}</code></th><td>{row.expected}</td><td>{row.passed ? 'as expected' : 'unexpected'}: {row.status.replaceAll('_', ' ')}{'error_code' in row && <code> {String(row.error_code)}</code>}</td><td>{'revisions' in row ? row.revisions : '—'}</td><td>{'lead_calls' in row ? `${row.lead_calls} / ${row.worker_calls}` : '—'}</td></tr>)}</tbody></table></ExactTable>
+      <p>The live team smoke ran {teamLive.rows.length} turns with {teamLive.provider_requests} provider requests under a cap of {teamLive.request_cap}, {teamLive.retries} retries. {teamLive.rows.filter(row => row.status === 'failed').length} turns ended in a provider refusal at the lead and are recorded as failures.</p>
+      <ExactTable label="Observed live agent-team turns, scrollable" wide><table className="checks-table"><caption className="sr-only">Observed live agent-team turns</caption><thead><tr><th scope="col">Turn</th><th scope="col">Result</th><th scope="col">Provider requests</th><th scope="col">Graph path</th></tr></thead><tbody>{teamLive.rows.map(row => <tr key={row.id}><th scope="row"><code>{row.id}</code></th><td>{row.status.replaceAll('_', ' ')}{'error_code' in row && <code> {String(row.error_code)}</code>}</td><td>{row.actual_provider_requests}</td><td>{'trace' in row ? row.trace.map(step => step.split(':')[0]).join(' → ') : '—'}</td></tr>)}</tbody></table></ExactTable>
+      <details className="run-record"><summary>How this was measured</summary><p>{teamChecks.rows.filter(row => row.id.startsWith('rules_')).length} rows are the fixed rules-only scopes run through the LangGraph graph with code in every seat. The rest are scripted leads and workers that under-plan, drop audits, refuse, return foreign ids or invent pairs. Scripted agents are deterministic stand-ins; they say nothing about how often a real model misbehaves.</p><p>Live refusals were not retried or switched to rules only.</p><p><code>npm run eval:team</code> runs the offline rows. <code>npm run eval:team -- --live</code> makes paid calls, capped at {teamLive.request_cap} with no retries. Graph: {teamChecks.graph}. Framework {teamChecks.framework}. Offline artifact {teamChecks.generated_at}, live artifact {teamLive.generated_at}, code SHA-256 <code>{teamLive.code_sha256}</code>.</p></details>
     </section>
 
     <section aria-labelledby="harness-checks-heading">
       <h2 id="harness-checks-heading">Harness checks</h2>
-      <p><strong>{harnessChecks.passed}/{harnessChecks.total}</strong> checks passed across both products, five questions and two source settings. This suite edits source records and replays the verifier. It makes no model calls.</p>
-      <table className="checks-table"><caption className="sr-only">Harness check results</caption>
+      <p><strong>{harnessChecks.passed}/{harnessChecks.total}</strong> checks passed across both products, five questions and two source settings. No model calls.</p>
+      <ExactTable label="Harness check results, scrollable"><table className="checks-table"><caption className="sr-only">Harness check results</caption>
         <thead><tr><th scope="col">Check</th><th scope="col">Passed</th></tr></thead>
         <tbody>{harnessChecks.checks.map(check => <tr key={check.name}><th scope="row">{check.name}</th><td>{check.passed}/{check.total}</td></tr>)}</tbody>
-      </table>
-      <details className="run-record"><summary>Reproduce this run</summary>
+      </table></ExactTable>
+      <details className="run-record"><summary>How this was measured</summary>
+        <p>This suite edits source records and replays the verifier. Source edits are deliberate software faults. Replay does not reproduce Claude’s choices or establish scientific correctness.</p>
         <p><code>npm run eval:harness</code> reruns these checks. <code>npm run replay -- export.json</code> checks an exported research result with the same code and sources.</p>
         <p>Generated {harnessChecks.generated_at}. Code SHA-256 <code>{harnessChecks.code_sha256}</code>.</p>
-        <p>Source edits are deliberate software faults. Replay does not reproduce Claude’s choices or establish scientific correctness.</p>
       </details>
     </section>
 
-    <dl className="atlas-totals">
-      <div><dt>Injected bad citations rejected</dt><dd>{data.drills.rejected_count}/{data.drills.total}</dd></div>
-      <div><dt>Scripted strategies caught in every scope</dt><dd>{strategiesCaughtEverywhere}/{strategiesTotal}</dd></div>
-      <div><dt>Honest control accepted</dt><dd>{honest ? `${honest.accepted}/${honest.total}` : 'n/a'}</dd></div>
-      <div><dt>Verdicts that changed with workbook only</dt><dd>{data.verdicts.changed_count}/{data.verdicts.total}</dd></div>
-      <div><dt>Prior workflow drafts accepted</dt><dd>{data.claude.skipped ? 'not run' : `${data.claude.accepted}/${data.claude.total}`}</dd></div>
-    </dl>
-
     <section aria-labelledby="shifts-heading">
       <h2 id="shifts-heading">Source withholding</h2>
-      <p>Each product and question run twice in rules only mode: once with all sources, once with only the workbook. A verdict that changes shows what it rested on.</p>
-      <table className="checks-table"><caption className="sr-only">Verdict with all sources against workbook only</caption>
+      <p>Each product and question runs twice in rules only mode: all sources, then workbook only. A changed verdict shows what it rested on.</p>
+      <ExactTable label="Verdict with all sources against workbook only, scrollable" wide><table className="checks-table"><caption className="sr-only">Verdict with all sources against workbook only</caption>
         <thead><tr><th scope="col">Product</th><th scope="col">Question</th><th scope="col">All sources</th><th scope="col">Workbook only</th><th scope="col">Changed</th></tr></thead>
         <tbody>{data.verdicts.shifts.map((row) => <tr key={row.product_id + row.question_id} className={row.changed ? 'row-changed' : ''}>
           <td>{name(row.product_id)}</td><td>{questionTitles[row.question_id]}</td>
@@ -150,27 +224,27 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
           <td><span className={`claim-verdict verdict-${row.workbook_only}`}>{verdictLabels[row.workbook_only]}</span></td>
           <td>{row.changed ? 'Yes' : 'No'}</td>
         </tr>)}</tbody>
-      </table>
+      </table></ExactTable>
     </section>
 
     <section aria-labelledby="drills-heading">
       <h2 id="drills-heading">Fault tests</h2>
-      <p>After a normal draft, one citation is swapped for a bad one. The verifier has to reject the draft. {data.drills.total} runs: 2 products, 5 questions, 2 source policies, 3 faults.</p>
-      <table className="checks-table"><caption className="sr-only">Fault tests by fault type</caption>
+      <p>One citation in a normal draft is swapped for a bad one; the verifier has to reject the draft. {data.drills.total} runs: 2 products, 5 questions, 2 source policies, 3 faults.</p>
+      <ScopeGrid caption="Fault tests by scope" scopes={scopes} rows={drillGrid} okLabel="rejected" badLabel="accepted, fault not caught" axisNote={axisNote} />
+      <ExactTable label="Fault tests by fault type, scrollable"><table className="checks-table"><caption className="sr-only">Fault tests by fault type</caption>
         <thead><tr><th scope="col">Fault</th><th scope="col">Rejected</th><th scope="col">Caught by</th></tr></thead>
         <tbody>{drills.map((row) => <tr key={row.drill}><th scope="row">{faultTests[row.drill]}</th><td>{row.rejected}/{row.total}</td><td>{row.caught_by.map((code) => <code key={code}>{code} </code>)}</td></tr>)}</tbody>
-      </table>
-      <ScopeGrid caption="Fault tests by scope" scopes={scopes} rows={drillGrid} okLabel="rejected" badLabel="accepted, fault not caught" axisNote={axisNote} />
+      </table></ExactTable>
     </section>
 
     <section aria-labelledby="strategies-heading">
       <h2 id="strategies-heading">Scripted strategies</h2>
-      <p>Drafts written by us, not by a model, to see what the verifier lets through. Each one is tried on all {scopes.length} product, question and source-policy scopes. <code>honest_expected</code> is the control and should always pass.</p>
+      <p>Drafts written by us, not by a model, tried on all {scopes.length} scopes. <code>honest_expected</code> is the control and should always pass.</p>
       <ScopeGrid caption="Scripted strategies by scope" scopes={scopes} rows={strategyGrid} okLabel="rejected the scripted draft, or accepted the honest control" badLabel="accepted a scripted draft" axisNote={axisNote} />
-      <table className="checks-table"><caption className="sr-only">Scripted strategies</caption>
+      <ExactTable label="Scripted strategies, scrollable" wide><table className="checks-table"><caption className="sr-only">Scripted strategies</caption>
         <thead><tr><th scope="col">Strategy</th><th scope="col">What it does</th><th scope="col">Accepted</th><th scope="col">Caught by</th></tr></thead>
         <tbody>{data.strategies.by_strategy.map((row) => <tr key={row.strategy}><th scope="row"><code>{row.strategy}</code></th><td>{row.description}</td><td>{row.accepted}/{row.total}</td><td>{row.caught_by.map((code) => <code key={code}>{code} </code>)}</td></tr>)}</tbody>
-      </table>
+      </table></ExactTable>
       {leaks.length > 0 && <p className="field-hint">Accepted non-control drafts: {leaks.map((row) => `${row.strategy} on ${name(row.product_id)}, ${questionTitles[row.question_id].toLowerCase()}, ${policyLabel(row.evidence_policy)}`).join('; ')}. In those scopes the only retrieved source is the one expected source, so citing everything is the same as citing the right thing. This is a property of the scope, not a gap the verifier missed.</p>}
     </section>
 
@@ -178,28 +252,32 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       <h2 id="claude-heading">Prior planner and draft run ({data.claude.model})</h2>
       <p>This earlier run is dated {data.generated_at}. It includes planning; the paired selection study above tests drafting only.</p>
       {data.claude.skipped ? <p>Not run. No server key was set when the evals ran.</p> : <>
-        <p>Claude planned the tools and drafted the citation ids for {data.claude.total} scopes. The verifier judged every draft. Completed {data.claude.completed}/{data.claude.total}, accepted {data.claude.accepted}/{data.claude.total}, failed {data.claude.failed}. Median plan {ms(data.claude.median_plan_ms)}, draft {ms(data.claude.median_draft_ms)}, end to end {ms(data.claude.median_wall_ms)}.</p>
-        <div className="trace-table-wrap"><table className="checks-table"><caption className="sr-only">Claude runs by scope</caption>
+        <p>Completed {data.claude.completed}/{data.claude.total}, accepted {data.claude.accepted}/{data.claude.total}, failed {data.claude.failed}. Median plan {ms(data.claude.median_plan_ms)}, draft {ms(data.claude.median_draft_ms)}, end to end {ms(data.claude.median_wall_ms)}.</p>
+        <ExactTable label="Claude runs by scope, scrollable" wide><table className="checks-table"><caption className="sr-only">Claude runs by scope</caption>
           <thead><tr><th scope="col">Product</th><th scope="col">Question</th><th scope="col">Sources</th><th scope="col">Outcome</th><th scope="col">Tools planned</th><th scope="col">Plan</th><th scope="col">Draft</th><th scope="col">Total</th></tr></thead>
           <tbody>{data.claude.rows.map((row) => <tr key={row.product_id + row.question_id + row.evidence_policy}>
             <td>{name(row.product_id)}</td><td>{questionTitles[row.question_id]}</td><td>{policyLabel(row.evidence_policy)}</td>
             <td>{row.ok && row.verdict ? <span className={`claim-verdict verdict-${row.verdict}`}>{verdictLabels[row.verdict]}</span> : <code className="uncertainty">{row.error_code ?? 'failed'}</code>}</td>
             <td>{row.tools_planned?.join(', ') ?? ''}</td><td>{ms(row.plan_ms)}</td><td>{ms(row.draft_ms)}</td><td>{ms(row.wall_ms)}</td>
           </tr>)}</tbody>
-        </table></div>
+        </table></ExactTable>
+        <p className="field-hint">Claude planned the tools and drafted the citation ids for {data.claude.total} scopes. The verifier judged every draft.</p>
       </>}
     </section>
 
     <section aria-labelledby="eval-notes-heading">
       <h2 id="eval-notes-heading">Read these numbers carefully</h2>
-      <ul className="plain-list">{data.notes.map((note) => <li key={note}>{note}</li>)}
-        <li>Passing these checks means the verifier enforces its own rules. It does not mean the app is safe, calibrated or resistant to every way a model could game it.</li>
-      </ul>
-      <dl className="result-provenance">
-        <div><dt>Generated</dt><dd>{data.generated_at}</dd></div>
-        <div><dt>Dataset SHA-256</dt><dd><code>{data.dataset_sha256}</code></dd></div>
-        <div><dt>Command</dt><dd><code>npm run eval</code></dd></div>
-      </dl>
+      <p className="evals-caveat">Passing these checks means the verifier enforces its own rules. It does not mean the app is safe, calibrated or resistant to every way a model could game it.</p>
+      <details className="run-record"><summary>How this was measured</summary>
+        <ul className="plain-list">{data.notes.map((note) => <li key={note}>{note}</li>)}
+          <li>Run by <code>scripts/eval.ts</code> against the same server code the app uses. They say nothing about whether the sources themselves are right.</li>
+        </ul>
+        <dl className="result-provenance">
+          <div><dt>Generated</dt><dd>{data.generated_at}</dd></div>
+          <div><dt>Dataset SHA-256</dt><dd><code>{data.dataset_sha256}</code></dd></div>
+          <div><dt>Command</dt><dd><code>npm run eval</code></dd></div>
+        </dl>
+      </details>
     </section>
   </section>;
 }

@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-04T08:59:00.686Z",
+  "generated_at": "2026-10-04T11:42:08.153Z",
   "kind": "offline_agent_team_gates_and_replay_not_clinical_benchmark",
   "framework": "@langchain/langgraph@1.4.19",
   "graph": "scope_gate -> lead_plan -> evidence_worker (parallel, one per pair) -> verifier -> lead_select -> omission_gate -> (lead_plan once | answer)",
-  "code_sha256": "d024370b1b2e49a383be4a6e833f9ca8415b6a45a0dd336ae77dd48ee6b19bc2",
+  "code_sha256": "6d2b3be145c67eda845c4fed3b7233fc8d60e89b52f7fae32bb7f6c107d7352e",
   "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
   "limits": {
     "deadline_ms": 60000,
@@ -52,6 +52,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -59,7 +60,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 37,
+      "wall_ms": 54,
       "clinical_release": "blocked"
     },
     {
@@ -94,6 +95,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -101,7 +103,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 8,
+      "wall_ms": 14,
       "clinical_release": "blocked"
     },
     {
@@ -136,6 +138,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -143,7 +146,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 9,
+      "wall_ms": 14,
       "clinical_release": "blocked"
     },
     {
@@ -176,6 +179,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -183,7 +187,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 7,
+      "wall_ms": 11,
       "clinical_release": "blocked"
     },
     {
@@ -216,6 +220,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -223,7 +228,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 8,
+      "wall_ms": 12,
       "clinical_release": "blocked"
     },
     {
@@ -256,6 +261,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -263,7 +269,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 6,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -296,6 +302,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -303,7 +310,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 8,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -336,6 +343,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -378,6 +386,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -385,7 +394,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 7,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -418,6 +427,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -425,7 +435,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 6,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -461,6 +471,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -468,7 +479,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 6,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -503,6 +514,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -510,7 +522,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 5,
+      "wall_ms": 7,
       "clinical_release": "blocked"
     },
     {
@@ -545,6 +557,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -552,7 +565,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 6,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -585,6 +598,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -592,7 +606,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 4,
+      "wall_ms": 7,
       "clinical_release": "blocked"
     },
     {
@@ -625,6 +639,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -632,7 +647,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 5,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -665,6 +680,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -672,7 +688,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 5,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -705,6 +721,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -712,7 +729,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 7,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -745,6 +762,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -752,7 +770,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 5,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -787,6 +805,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -794,7 +813,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 5,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -827,6 +846,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:controller",
         "evidence_worker:controller",
         "verifier:deterministic_verifier",
@@ -834,7 +854,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 5,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -887,6 +907,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:lead_agent",
         "evidence_worker:worker_agent",
         "evidence_worker:worker_agent",
@@ -896,7 +917,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 29,
+      "wall_ms": 47,
       "clinical_release": "blocked"
     },
     {
@@ -949,6 +970,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:lead_agent",
         "evidence_worker:worker_agent",
         "evidence_worker:worker_agent",
@@ -961,7 +983,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 10,
+      "wall_ms": 21,
       "clinical_release": "blocked"
     },
     {
@@ -1014,6 +1036,7 @@
       "omitted_checks": 1,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:lead_agent",
         "evidence_worker:worker_agent",
         "evidence_worker:worker_agent",
@@ -1026,7 +1049,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 14,
+      "wall_ms": 18,
       "clinical_release": "blocked"
     },
     {
@@ -1079,6 +1102,7 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:lead_agent",
         "evidence_worker:worker_agent",
         "verifier:deterministic_verifier",
@@ -1091,7 +1115,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 17,
+      "wall_ms": 15,
       "clinical_release": "blocked"
     },
     {
@@ -1134,6 +1158,7 @@
       "omitted_checks": 1,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:lead_agent",
         "evidence_worker:worker_agent",
         "evidence_worker:worker_agent:CLAUDE_REFUSED",
@@ -1142,7 +1167,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 7,
+      "wall_ms": 10,
       "clinical_release": "blocked"
     },
     {
@@ -1185,6 +1210,7 @@
       "omitted_checks": 1,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "lead_plan:lead_agent",
         "evidence_worker:worker_agent:CLAUDE_INVALID_OUTPUT",
         "evidence_worker:worker_agent",
@@ -1193,7 +1219,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 7,
+      "wall_ms": 10,
       "clinical_release": "blocked"
     },
     {
@@ -1203,7 +1229,7 @@
       "status": "failed",
       "error_code": "CLAUDE_INVALID_OUTPUT",
       "actual_provider_requests": 1,
-      "wall_ms": 2
+      "wall_ms": 3
     },
     {
       "id": "clinical_boundary",
@@ -1219,9 +1245,10 @@
       "omitted_checks": 0,
       "trace": [
         "scope_gate:controller",
+        "premise_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 2,
+      "wall_ms": 4,
       "clinical_release": "blocked"
     }
   ],

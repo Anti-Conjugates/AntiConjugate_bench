@@ -40,7 +40,7 @@ function team(behaviour: Behaviour = {}, seen: Record<string, unknown>[] = []): 
 const claude = (behaviour: Behaviour = {}, seen: Record<string, unknown>[] = []) => ({ claude: { apiKey: 'test-key', fetch: team(behaviour, seen) } });
 
 test('compiled LangGraph matches the published graph shape', () => {
-  const graph = buildTeamGraph(async () => ({}), { afterScope: () => 'answer', afterPlan: () => 'omission_gate', afterVerify: () => 'omission_gate', afterGate: () => 'answer' }, async () => { throw new Error('unused'); }).getGraph();
+  const graph = buildTeamGraph(async () => ({}), { afterPremise: () => 'answer', afterPlan: () => 'omission_gate', afterVerify: () => 'omission_gate', afterGate: () => 'answer' }, async () => { throw new Error('unused'); }).getGraph();
   const edges = graph.edges.map(edge => ({ from: edge.source, to: edge.target, conditional: Boolean(edge.conditional) })).sort((a, b) => `${a.from}>${a.to}`.localeCompare(`${b.from}>${b.to}`));
   assert.deepEqual(edges, [...TEAM_GRAPH.edges].sort((a, b) => `${a.from}>${a.to}`.localeCompare(`${b.from}>${b.to}`)));
   assert.deepEqual(Object.keys(graph.nodes).filter(node => !node.startsWith('__')).sort(), [...TEAM_GRAPH.nodes].sort());
@@ -50,7 +50,7 @@ test('rules-only team runs the same graph with code in every seat and no model c
   const result = await runTeam(request('Compare Kadcyla and Enhertu composition.', 'evidence'), { onStep: step => { steps.push(step.node); } });
   assert.equal(result.status, 'complete'); assert.equal(result.audits.length, 2); assert.equal(result.model, null);
   assert.equal(result.harness.lead_calls, 0); assert.equal(result.harness.worker_calls, 0); assert.equal(result.harness.evidence_reads, 8); assert.equal(result.revisions, 0);
-  assert.deepEqual(steps, ['scope_gate', 'lead_plan', 'evidence_worker', 'evidence_worker', 'verifier', 'verifier', 'lead_select', 'omission_gate', 'answer']);
+  assert.deepEqual(steps, ['scope_gate', 'premise_gate', 'lead_plan', 'evidence_worker', 'evidence_worker', 'verifier', 'verifier', 'lead_select', 'omission_gate', 'answer']);
   assert.ok(result.trace.every(step => step.actor === 'controller' || step.actor === 'deterministic_verifier'));
   assert.ok(teamExecutionIsConsistent(result)); assert.equal((await replayTeamResult(result)).passed, true);
   assert.equal(result.guardrail.status, 'blocked'); assert.equal(result.needs_human, true); assert.equal(result.answer_correctness_probability, null); assert.equal(result.omission_probability, null);
@@ -58,7 +58,7 @@ test('rules-only team runs the same graph with code in every seat and no model c
 test('clinical and unrecognized questions stop at the scope gate without any provider call', async () => {
   for (const [message, status] of [['Which Enhertu dose should a patient receive?', 'outside_scope'], ['What is the weather?', 'clarification']] as const) {
     const result = await runTeam(request(message), { claude: { apiKey: 'test-key', fetch: async () => { assert.fail('Must not call provider'); } } });
-    assert.equal(result.status, status); assert.equal(result.harness.lead_calls, 0); assert.deepEqual(result.trace.map(step => step.node), ['scope_gate', 'answer']); assert.ok(teamExecutionIsConsistent(result));
+    assert.equal(result.status, status); assert.equal(result.harness.lead_calls, 0); assert.deepEqual(result.trace.map(step => step.node), ['scope_gate', 'premise_gate', 'answer']); assert.ok(teamExecutionIsConsistent(result));
   }
 });
 test('lead plans, isolated workers run in parallel with one pair each, verifier accepts, lead selects', async () => {
@@ -70,7 +70,7 @@ test('lead plans, isolated workers run in parallel with one pair each, verifier 
   assert.equal(workerBodies.length, 4);
   assert.ok(workerBodies.every(body => (body.includes('DRG0CYMEB') ? 1 : 0) + (body.includes('DRG0ERKBH') ? 1 : 0) === 1), 'each worker sees exactly one product');
   assert.ok(seen.every(body => !JSON.stringify(body).includes('Compare Kadcyla')), 'raw user text never reaches the provider');
-  assert.deepEqual(result.trace.map(step => [step.node, step.actor]), [['scope_gate', 'controller'], ['lead_plan', 'lead_agent'], ['evidence_worker', 'worker_agent'], ['evidence_worker', 'worker_agent'], ['verifier', 'deterministic_verifier'], ['verifier', 'deterministic_verifier'], ['lead_select', 'lead_agent'], ['omission_gate', 'controller'], ['answer', 'controller']]);
+  assert.deepEqual(result.trace.map(step => [step.node, step.actor]), [['scope_gate', 'controller'], ['premise_gate', 'controller'], ['lead_plan', 'lead_agent'], ['evidence_worker', 'worker_agent'], ['evidence_worker', 'worker_agent'], ['verifier', 'deterministic_verifier'], ['verifier', 'deterministic_verifier'], ['lead_select', 'lead_agent'], ['omission_gate', 'controller'], ['answer', 'controller']]);
   assert.ok(teamExecutionIsConsistent(result)); assert.equal((await replayTeamResult(result)).passed, true);
 });
 test('omission gate sends an under-selecting lead back exactly once, then shows what is still missing', async () => {

@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, it } from 'vitest';
-import { Landing, exhibitRow, landingStats } from './Landing';
+import { Landing, PREMISE_EXAMPLE, exhibitRow, landingStats } from './Landing';
 import { viewFromHash } from './navigation';
 
 const markup = renderToStaticMarkup(createElement(Landing, { onNavigate: () => {} }));
@@ -26,6 +26,43 @@ it('leads with the message, the recorded exhibit and the eval counts read from t
   expect(markup).toContain('got through');
   expect(markup).toContain('not whether the science is right');
   expect(markup).toContain('Schematic only. Not a molecular structure');
+});
+
+it('tells the seven-beat story with every number read from the artifacts', () => {
+  for (const id of ['beat-01', 'beat-02', 'beat-03', 'beat-04', 'beat-05', 'beat-06', 'beat-07']) {
+    expect(markup).toContain(`id="${id}"`);
+    expect(markup).toContain(`href="#${id}"`);
+  }
+  for (const heading of ['Start with a question that already contains a mistake.', 'Now ask it about Enhertu, where the premise is true.', 'Drafts that cheat get thrown out. Checks that go missing stay visible.', 'We broke the verifier on purpose.']) {
+    expect(visible.replace(/\s+/g, ' ')).toContain(heading);
+  }
+  expect(markup).toContain('Recorded example');
+  expect(markup).toContain('Premise gate output for this exact question');
+  expect(markup).toContain('the same gate runs before every turn');
+  expect(markup).toContain('<mark class="pg-match">cleavable</mark>');
+  expect(markup).toContain('openFDA, DailyMed, ClinicalTrials.gov, PubMed and ADCdb');
+  const stats = landingStats();
+  expect(stats.shiftsChanged).toBe('3/10');
+  expect(stats.beforeFixControls).toBe('20/80');
+  expect(stats.afterFixControls).toBe('80/80');
+  expect(stats.survivingMutants).toEqual(['source_allowlist', 'source_eligibility', 'evidence_availability']);
+  expect(stats.survivorEscapes).toBe(0);
+  for (const value of [stats.shiftsChanged, stats.beforeFixControls, stats.afterFixControls, stats.harness, stats.claudeAccepted, stats.teamLiveFailed, stats.blockedRows]) expect(markup).toContain(value);
+  expect(PREMISE_EXAMPLE.report.findings[0]!.kind).toBe('contradicted_premise');
+});
+
+it('renders static, visible content on the server with live regions for verdicts and the graph', () => {
+  expect(markup).not.toContain('data-beat=');
+  expect(markup).toContain('aria-live="polite"');
+  expect(markup).toContain('class="tg-svg tg-row"');
+  expect(markup).toContain('Agent team graph.');
+  expect(markup).toMatch(/class="motion-toggle" aria-pressed="false"><span[^>]*><\/span>Pause orbit/);
+  const css = readFileSync(resolve(__dirname, 'styles.css'), 'utf8');
+  const block = css.slice(css.indexOf('/* === story-motion === */'), css.indexOf('/* === end story-motion === */'));
+  expect(block.length).toBeGreaterThan(100);
+  expect(block).toContain('prefers-reduced-motion: reduce');
+  expect(block).not.toMatch(/animation:[^;]*infinite/);
+  expect(block).not.toMatch(/transition:[^;]*\b(width|height|top|left|margin|padding)\b/);
 });
 
 it('uses plain copy and makes no clinical or model-quality claim', () => {

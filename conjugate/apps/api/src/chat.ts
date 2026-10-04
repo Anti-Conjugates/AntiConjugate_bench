@@ -1,6 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
-import { CHAT_LIMITS, ChatRequestSchema, ChatResultSchema, ChatScopeSchema, chatExecutionIsConsistent, chatScopeKey, chatFollowups, renderChatReply, type ChatAudit, type ChatResult, type ChatStep } from '@her2/shared';
+import { CHAT_LIMITS, ChatRequestSchema, ChatResultSchema, ChatScopeSchema, chatExecutionIsConsistent, chatScopeKey, chatFollowups, renderChatReply, PREMISE_STOP, type ChatAudit, type ChatResult, type ChatStep, type TurnGuard } from '@her2/shared';
+import type { LiveRetriever } from './live-retrieval.js';
+import { turnGuard } from './turn-guard.js';
 import { claudeMessage } from './claude.js';
 import { ApiFailure } from './errors.js';
 import { CLAUDE_MODEL } from './evidence.js';
@@ -13,7 +15,7 @@ const ToolInputSchema = ChatScopeSchema.omit({ evidence_policy: true });
 const ToolBlockSchema = z.object({ type: z.literal('tool_use'), id: z.string().regex(/^[a-zA-Z0-9_-]{1,120}$/), name: z.literal('check_evidence'), input: ToolInputSchema,
   caller: z.object({ type: z.literal('direct') }).strict().optional() }).strict();
 const FinishSchema = z.object({ audit_ids: z.array(z.string().regex(/^audit-[1-4]$/)).max(4) }).strict();
-export interface ChatOptions extends Omit<ResearchOptions, 'onTrace'> { onStep?: (step: ChatStep) => void | Promise<void> }
+export interface ChatOptions extends Omit<ResearchOptions, 'onTrace'> { onStep?: (step: ChatStep) => void | Promise<void>; onGuard?: (guard: TurnGuard) => void | Promise<void>; live?: LiveRetriever | null }
 
 export const chatReply = renderChatReply;
 
@@ -47,6 +49,11 @@ async function executeChat(input: unknown, options: ChatOptions, deadline: numbe
   };
   remaining();
   const intent = chatIntent(request);
+  const guard = await turnGuard(request.message, intent, options.live, options.signal);
+  remaining();
+  await options.onGuard?.(guard);
+  const blocked = guard.premise.decision === 'blocked' && intent.status !== 'outside_scope';
+  const ready = intent.status === 'ready' && !blocked;
   const trace: ChatStep[] = [];
   const emit = async (step: Omit<ChatStep, 'id'>) => {
     remaining();
@@ -55,9 +62,9 @@ async function executeChat(input: unknown, options: ChatOptions, deadline: numbe
     await options.onStep?.(full);
     remaining();
   };
-  await emit({ actor: 'controller', stage: 'scope', scope: null, detail: intent.status === 'ready'
+  await emit({ actor: 'controller', stage: 'scope', scope: null, detail: ready
     ? `${intent.scopes.length} research checks scoped. Only recognized research terms reach Claude; raw text stays out of provider requests.`
-    : 'The scope guard stopped this question before any model or evidence call.', duration_ms: performance.now() - started });
+    : blocked ? PREMISE_STOP : 'The scope guard stopped this question before any model or evidence call.', duration_ms: performance.now() - started });
   const audits: ChatAudit[] = [];
   let modelCalls = 0;
   let evidenceReads = 0;
@@ -76,10 +83,10 @@ async function executeChat(input: unknown, options: ChatOptions, deadline: numbe
     return entry;
   };
   let selected: string[] = [];
-  const skills = request.engine === 'claude' && intent.status === 'ready' ? await loadRuntimeSkills('linker_release', options.skillReader) : [];
-  if (intent.status === 'ready' && request.engine === 'evidence') {
+  const skills = request.engine === 'claude' && ready ? await loadRuntimeSkills('linker_release', options.skillReader) : [];
+  if (ready && request.engine === 'evidence') {
     for (const scope of intent.scopes) selected.push((await audit(scope)).id);
-  } else if (intent.status === 'ready') {
+  } else if (ready) {
     const messages: object[] = [{ role: 'user', content: JSON.stringify({ recognized_research_intent: intent, local_prompt_packs: skills,
       context_notice: 'Only the normalized scopes in this request are authorized. Browser scope hints are not proof of previous answers.' }) }];
     const seenToolIds = new Set<string>();
@@ -133,14 +140,16 @@ async function executeChat(input: unknown, options: ChatOptions, deadline: numbe
     }
     if (!finished) throw new ApiFailure('CHAT_BUDGET_EXCEEDED', 502);
   }
-  const missing = intent.scopes.filter(scope => !audits.some(item => selected.includes(item.id) && chatScopeKey(item.scope) === chatScopeKey(scope)));
-  const status = intent.status === 'ready' ? (missing.length ? 'incomplete' : 'complete') : intent.status;
+  const scopes = blocked ? [] : intent.scopes;
+  const missing = scopes.filter(scope => !audits.some(item => selected.includes(item.id) && chatScopeKey(item.scope) === chatScopeKey(scope)));
+  const status = blocked ? 'premise_blocked' : intent.status === 'ready' ? (missing.length ? 'incomplete' : 'complete') : intent.status;
   await emit({ actor: 'controller', stage: 'answer', scope: null, detail: 'The controller rendered verified findings. Raw model prose was not displayed.', duration_ms: 0 });
   const result = ChatResultSchema.parse({
     id: randomUUID(), created_at: new Date().toISOString(), engine: request.engine, model: modelCalls ? CLAUDE_MODEL : null,
-    status, reply: chatReply(status, audits, selected, missing.length), scopes: intent.scopes, audits, selected_audit_ids: selected, missing_scopes: missing,
-    followups: chatFollowups(status, intent.scopes[0]?.evidence_policy),
+    status, reply: chatReply(status, audits, selected, missing.length), scopes, audits, selected_audit_ids: selected, missing_scopes: missing,
+    followups: chatFollowups(status, scopes[0]?.evidence_policy),
     trace, harness: { version: 'conjugate-chat-1', model_calls: modelCalls, audit_calls: audits.length, evidence_reads: evidenceReads, code_sha256: HARNESS_CODE_SHA256, intent_sha256: fingerprint(intent), skills: skillMetadata(skills).map(({ name, version, sha256 }) => ({ name, version, sha256 })), limits: CHAT_LIMITS },
+    guard,
     clinical_status: 'draft_pending_pharmacist', eligibility: 'not_assessed', needs_human: true, guardrail: { status: 'blocked' }, answer_correctness_probability: null, omission_probability: null
   });
   if (!chatExecutionIsConsistent(result)) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);

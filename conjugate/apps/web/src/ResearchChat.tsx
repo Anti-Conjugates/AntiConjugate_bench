@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDownToLine, ArrowUp, MessageSquare, Square, RotateCcw } from 'lucide-react';
-import { TEAM_GRAPH, chatConversationContext, type ChatAudit, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog, type TeamNode, type TeamResult, type TeamStep } from '@her2/shared';
+import { chatConversationContext, type ChatAudit, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog, type TeamNode, type TeamResult, type TeamStep, type TurnGuard } from '@her2/shared';
+import { GuardPanel } from './GuardPanel';
 import { describeFailure } from './boundaries';
 import { RequestEpoch } from './researchBoundaries';
 import { downloadChatResult, streamChatTurn } from './chatBoundaries';
@@ -8,6 +9,7 @@ import { downloadTeamResult, streamTeamTurn } from './teamBoundaries';
 import { Receipt, receiptAnchor } from './AuditResult';
 import { compareResults, outcomeLabels, outcomeOf, policyLabels } from './auditSummary';
 import { productLabel } from './labels';
+import { TeamGraph as TeamGraphSvg } from './TeamGraph';
 
 const STARTERS = [
   { title: 'Compare the two ADCs', question: 'Compare Kadcyla and Enhertu composition.', note: 'Different payloads, different recorded ratios.' },
@@ -16,19 +18,18 @@ const STARTERS = [
 ];
 type Harness = 'single' | 'team';
 type TurnResult = ChatResult | TeamResult;
-interface Turn { id: string; message: string; harness: Harness; request: ChatRequest; steps: (ChatStep | TeamStep)[]; result: TurnResult | null; failure: ReturnType<typeof describeFailure> | null; state: 'pending' | 'complete' | 'failed' | 'cancelled' }
+interface Turn { id: string; message: string; harness: Harness; request: ChatRequest; steps: (ChatStep | TeamStep)[]; guard: TurnGuard | null; result: TurnResult | null; failure: ReturnType<typeof describeFailure> | null; state: 'pending' | 'complete' | 'failed' | 'cancelled' }
 export const isTeamResult = (result: TurnResult): result is TeamResult => result.harness.version === 'conjugate-team-1';
 export const modelCalls = (result: TurnResult) => isTeamResult(result) ? result.harness.lead_calls + result.harness.worker_calls : result.harness.model_calls;
-const NODE_LABELS: Record<TeamNode, string> = { scope_gate: 'Scope gate', lead_plan: 'Lead plans', evidence_worker: 'Workers check', verifier: 'Verifier', lead_select: 'Lead selects', omission_gate: 'Omission gate', answer: 'Answer' };
+const NODE_LABELS: Record<TeamNode, string> = { scope_gate: 'Scope gate', premise_gate: 'Premise gate', lead_plan: 'Lead plans', evidence_worker: 'Workers check', verifier: 'Verifier', lead_select: 'Lead selects', omission_gate: 'Omission gate', answer: 'Answer' };
 const ACTOR_LABELS: Record<TeamStep['actor'], string> = { controller: 'code', lead_agent: 'Claude lead', worker_agent: 'Claude worker', deterministic_verifier: 'verifier code' };
 const NODE_DETAILS: Record<TeamNode, string> = {
-  scope_gate: 'Question compiled to authorized product/question pairs. Raw text stops here.', lead_plan: 'Chose which pairs to hand to workers.', evidence_worker: 'Ran check_evidence once for its own pair.',
+  scope_gate: 'Question compiled to authorized product/question pairs. Raw text stops here.', premise_gate: 'Question checked against the recorded composition and, when on, live reference lookups. A blocked premise ends the turn here.', lead_plan: 'Chose which pairs to hand to workers.', evidence_worker: 'Ran check_evidence once for its own pair.',
   verifier: 'Audit checked against the scope contract before the lead sees it.', lead_select: 'Selected audit ids from the verified list.', omission_gate: 'Selected audits compared with the authorized pairs.', answer: 'Reply rendered from verified claims only.'
 };
 export function TeamGraph({ steps, pending }: { steps: TeamStep[]; pending: boolean }) {
-  const byNode = (node: TeamNode) => steps.filter(step => step.node === node);
   return <div className="team-graph">
-    <ol className="team-nodes" aria-label="Graph nodes in order">{TEAM_GRAPH.nodes.map(node => { const reached = byNode(node); return <li key={node} data-state={reached.some(step => step.status === 'failed') ? 'failed' : reached.length ? 'done' : pending ? 'waiting' : 'skipped'}><span>{NODE_LABELS[node]}</span><small>{reached.length ? `${reached.length > 1 ? reached.length + ' × ' : ''}${ACTOR_LABELS[reached[0]!.actor]}` : pending ? 'waiting' : 'not reached'}</small></li>; })}</ol>
+    <TeamGraphSvg steps={steps} pending={pending} />
     <details className="chat-steps" open={pending || undefined}><summary>Graph events <span className="mono-label">{steps.length} completed events</span></summary>
       <ol>{steps.map(step => <li key={step.id}><span className="mono-label">{NODE_LABELS[step.node]} · {ACTOR_LABELS[step.actor]}{step.model_calls ? ` · ${step.model_calls} model call${step.model_calls > 1 ? 's' : ''}` : ''}</span><p>{step.scope ? `${step.audit_id}: ${step.scope.product_id} · ${step.scope.question_id} · ${policyLabels[step.scope.evidence_policy]}. ` : ''}{NODE_DETAILS[step.node]}{step.status === 'failed' && <> Failed: <code>{step.code}</code></>}</p></li>)}</ol>
       {pending && <p>Waiting for the next server event.</p>}
@@ -46,7 +47,7 @@ export function AuditCard({ audit, turnId, catalog, previous }: { audit: ChatAud
   const prefix = `${turnId}-${audit.id}-`;
   const product = catalog.dataset.records.find(record => record.id === audit.scope.product_id)!;
   const rows = previous && previous.scope.evidence_policy !== audit.scope.evidence_policy && previous.result.dataset_sha256 === result.dataset_sha256 ? compareResults(previous.result, result) : [];
-  return <article className="chat-audit">
+  return <article className={`chat-audit verdict-card-${outcomeOf(result)}`}>
     <div className="chat-audit-heading"><h3>{productLabel(product)}</h3><span className={`verdict-badge verdict-${outcomeOf(result)}`}>{outcomeLabels[outcomeOf(result)]}</span></div>
     <p className="chat-scope">{catalog.questions.find(question => question.id === audit.scope.question_id)?.title} · {policyLabels[audit.scope.evidence_policy]}</p>
     {result.claims.map(claim => <section key={claim.id} className="chat-claim"><h4>{claim.statement}</h4><p>{claim.explanation}</p>
@@ -92,12 +93,13 @@ export function ResearchChat({ catalog }: { catalog: ResearchCatalog }) {
     const request: ChatRequest = { message: message.trim(), engine, context: chatConversationContext(turns.map(turn => turn.request)), synthetic_confirmed: true };
     const ticket = epochs.current.begin();
     const id = crypto.randomUUID();
-    setTurns(current => [...current, { id, message: request.message, harness, request, steps: [], result: null, failure: null, state: 'pending' }]);
+    setTurns(current => [...current, { id, message: request.message, harness, request, steps: [], guard: null, result: null, failure: null, state: 'pending' }]);
     setDraft(''); composer.current?.focus();
     try {
       const onStep = (step: ChatStep | TeamStep) => { if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, steps: [...turn.steps, step] })); };
       const signal = AbortSignal.any([ticket.signal, AbortSignal.timeout(65000)]);
-      const result: TurnResult = harness === 'team' ? await streamTeamTurn(request, catalog, signal, onStep) : await streamChatTurn(request, catalog, signal, onStep);
+      const onGuard = (guard: TurnGuard) => { if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, guard })); };
+      const result: TurnResult = harness === 'team' ? await streamTeamTurn(request, catalog, signal, onStep, onGuard) : await streamChatTurn(request, catalog, signal, onStep, onGuard);
       if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, result, state: 'complete' }));
     } catch (error) { if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, failure: describeFailure(error), state: 'failed' })); }
     finally { if (epochs.current.current(ticket)) busy.current = false; }
@@ -132,6 +134,7 @@ export function ResearchChat({ catalog }: { catalog: ResearchCatalog }) {
           <div className="chat-followups">{turn.result.followups.map(question => <button key={question} className="button button-secondary" type="button" disabled={Boolean(active) || maxTurns || !confirmed} onClick={() => { void send(question); }}>{question}</button>)}</div>
           <details className="chat-run-record"><summary>Run record and export</summary><p>Server-reported fingerprints. Replay checks the saved audits and rendered reply; it does not rerun Claude.</p><dl><dt>Code SHA-256</dt><dd><code>{turn.result.harness.code_sha256}</code></dd><dt>Intent SHA-256</dt><dd><code>{turn.result.harness.intent_sha256}</code></dd><dt>Limits per question</dt><dd>{isTeamResult(turn.result) ? '4 lead calls · 8 worker calls · 4 audits · 1 revision · 60 seconds · no retries · LangGraph recursion limit 24' : '4 model calls · 4 audits · 16 local source reads · 60 seconds · no retries'}</dd>{!isTeamResult(turn.result) && <><dt>Local prompt packs</dt><dd>{turn.result.harness.skills.map(skill => <p key={skill.name}>{skill.name} @{skill.version} <code>{skill.sha256}</code></p>)}</dd></>}</dl><button className="button button-secondary" type="button" onClick={() => { try { exportTurn(turn); } catch { setExportError('Export failed validation. Nothing was downloaded.'); } }}><ArrowDownToLine size={14} aria-hidden="true" />Export this turn</button></details>
         </>}
+        {turn.guard && <GuardPanel guard={turn.guard} question={turn.message} />}
         {turn.harness === 'team' ? <TeamGraph steps={turn.steps as TeamStep[]} pending={turn.state === 'pending'} /> : <ChatSteps steps={turn.steps as ChatStep[]} pending={turn.state === 'pending'} />}
       </div>
     </li>)}</ol>

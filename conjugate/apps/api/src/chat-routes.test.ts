@@ -13,7 +13,8 @@ test('chat JSON and NDJSON routes agree and failures never change engines', asyn
   assert.match(String(streamed.headers['content-type']), /application\/x-ndjson/); assert.equal(streamed.headers['cache-control'], 'no-store');
   const events = streamed.body.trim().split('\n').map(line => ChatEventSchema.parse(JSON.parse(line)));
   const final = events.at(-1)!; assert.equal(final.type, 'result');
-  if (final.type === 'result') assert.deepEqual(events.slice(0, -1).map(event => event.type === 'trace' ? event.step : null), final.result.trace);
+  assert.equal(events[0]?.type, 'guard');
+  if (final.type === 'result') { assert.deepEqual(events.slice(1, -1).map(event => event.type === 'trace' ? event.step : null), final.result.trace); if (events[0]?.type === 'guard') assert.deepEqual(events[0].guard, final.result.guard); }
   for (const payload of [{ ...input, synthetic_confirmed: false }, { ...input, message: 'x'.repeat(1001) }, { ...input, history: [] }]) assert.equal((await app.inject(post(payload))).statusCode, 400);
   assert.equal((await app.inject(post({ ...input, message: 'x'.repeat(20000) }))).statusCode, 413);
   const missing = await app.inject(post({ ...input, engine: 'claude' })); assert.equal(missing.statusCode, 503); assert.equal(missing.json().error.code, 'CLAUDE_NOT_CONFIGURED');

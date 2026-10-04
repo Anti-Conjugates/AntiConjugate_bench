@@ -1,0 +1,510 @@
+{
+  "kind": "live_source_retrieval_check_not_clinical",
+  "manifest": {
+    "generated_at": "2026-10-04T11:42:22.146Z",
+    "node": "v24.21.0",
+    "user_agent": "Conjugate-HER2-research-prototype/0.1 (+https://github.com/Anti-Conjugates/AntiConjugate-Devin; source identity checks only; not clinical use)",
+    "catalog": {
+      "enabled": true,
+      "sources": [
+        {
+          "id": "clinicaltrials_gov",
+          "host": "clinicaltrials.gov",
+          "max_bytes": 64000,
+          "purpose": "Does this NCT id exist? Official title only."
+        },
+        {
+          "id": "pubmed",
+          "host": "eutils.ncbi.nlm.nih.gov",
+          "max_bytes": 256000,
+          "purpose": "Does this PMID exist? Title, journal and date only."
+        },
+        {
+          "id": "openfda",
+          "host": "api.fda.gov",
+          "max_bytes": 1000000,
+          "purpose": "US label identity fields compared with the frozen openFDA snapshot."
+        },
+        {
+          "id": "dailymed",
+          "host": "dailymed.nlm.nih.gov",
+          "max_bytes": 64000,
+          "purpose": "Current DailyMed SPL set id and version for the brand."
+        },
+        {
+          "id": "adcdb",
+          "host": "adcdb.idrblab.net",
+          "max_bytes": 1500000,
+          "purpose": "ADCdb composition fields compared with the workbook snapshot."
+        }
+      ],
+      "timeout_ms": 8000,
+      "deadline_ms": 25000,
+      "max_references": 4,
+      "user_agent": "Conjugate-HER2-research-prototype/0.1 (+https://github.com/Anti-Conjugates/AntiConjugate-Devin; source identity checks only; not clinical use)"
+    },
+    "code_sha256": {
+      "apps/api/src/live-retrieval.ts": "6a7584b2cd8805fd5cfcab5dc9d0a38d53f77cf8842c7f20606f40fa8efc5506",
+      "packages/shared/src/live.ts": "5c20d2d0fb1bed9aabb2dd295cf9888edd3208f4ad1020081f53fca96013c6de"
+    },
+    "snapshot_sha256": {
+      "apps/api/src/openfda.snapshot.json": "75542fb2b789d947257e03611767a15e13962e59650b2b9782570244c2138a4a",
+      "apps/api/src/workbook.snapshot.json": "9ec704ee1be7655c82c73c5f2fecc69fde0d2df60ffc66dfede501895f670a52"
+    },
+    "requests": [
+      {
+        "product_id": "DRG0CYMEB"
+      },
+      {
+        "product_id": "DRG0ERKBH"
+      },
+      {
+        "references": [
+          "NCT03529110",
+          "NCT09999999",
+          "PMID:29420467",
+          "PMID:99999999"
+        ]
+      }
+    ]
+  },
+  "statuses": {
+    "ok": 8,
+    "not_found": 2,
+    "drift": 0,
+    "error": 0
+  },
+  "timings_ms": {
+    "total": 1955,
+    "per_request": [
+      845,
+      730,
+      380
+    ]
+  },
+  "checks": [
+    {
+      "name": "Reference existence matches the known real/fake ids",
+      "passed": true
+    },
+    {
+      "name": "Every product source returned a receipt without a transport or parse error",
+      "passed": true
+    },
+    {
+      "name": "Safety fields stay blocked and null",
+      "passed": true
+    }
+  ],
+  "rows": [
+    {
+      "source": "openfda",
+      "subject": "DRG0CYMEB",
+      "url": "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact%3A%22KADCYLA%22&limit=1&sort=effective_time%3Adesc",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 139102,
+      "raw_sha256": "73aebd2f93a6b1b2ad1cddc011d15283323f896ba94459606c90486e09a21fcd",
+      "duration_ms": 131.9,
+      "fetched_at": "2026-10-04T11:42:20.191Z",
+      "parsed": {
+        "spl_id": "27ab596b-f625-4866-b65a-54508ffce760",
+        "set_id": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
+        "version": "35",
+        "effective_time": "20260401",
+        "brand_name": "KADCYLA",
+        "generic_name": "ADO-TRASTUZUMAB EMTANSINE",
+        "application_number": "BLA125427",
+        "manufacturer_name": "Genentech, Inc."
+      },
+      "comparison": [
+        {
+          "field": "brand_name",
+          "snapshot": "KADCYLA",
+          "live": "KADCYLA",
+          "agrees": true
+        },
+        {
+          "field": "generic_name",
+          "snapshot": "ADO-TRASTUZUMAB EMTANSINE",
+          "live": "ADO-TRASTUZUMAB EMTANSINE",
+          "agrees": true
+        },
+        {
+          "field": "application_number",
+          "snapshot": "BLA125427",
+          "live": "BLA125427",
+          "agrees": true
+        },
+        {
+          "field": "set_id",
+          "snapshot": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
+          "live": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
+          "agrees": true
+        },
+        {
+          "field": "version",
+          "snapshot": "35",
+          "live": "35",
+          "agrees": true
+        },
+        {
+          "field": "effective_time",
+          "snapshot": "20260401",
+          "live": "20260401",
+          "agrees": true
+        },
+        {
+          "field": "spl_id",
+          "snapshot": "27ab596b-f625-4866-b65a-54508ffce760",
+          "live": "27ab596b-f625-4866-b65a-54508ffce760",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "dailymed",
+      "subject": "DRG0CYMEB",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=KADCYLA&pagesize=1",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 580,
+      "raw_sha256": "79f9484524959f1735a63e59ba425636658bdb6ba5ba001ca84c7ee5cdafd472",
+      "duration_ms": 246.9,
+      "fetched_at": "2026-10-04T11:42:20.212Z",
+      "parsed": {
+        "set_id": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
+        "spl_version": "35",
+        "published_date": "Apr 03, 2026",
+        "title": "KADCYLA (ADO-TRASTUZUMAB EMTANSINE) INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION [GENENTECH, INC.]"
+      },
+      "comparison": [
+        {
+          "field": "set_id",
+          "snapshot": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
+          "live": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
+          "agrees": true
+        },
+        {
+          "field": "version",
+          "snapshot": "35",
+          "live": "35",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "adcdb",
+      "subject": "DRG0CYMEB",
+      "url": "https://adcdb.idrblab.net/data/adc/details/DRG0CYMEB",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 474253,
+      "raw_sha256": "c0cf6444e2ae17893baf91c8571d0a2b64e3f5d4875a472b3aa185cfbb4ef838",
+      "duration_ms": 817.5,
+      "fetched_at": "2026-10-04T11:42:20.212Z",
+      "parsed": {
+        "adc_id": "DRG0CYMEB",
+        "adc_name": "Trastuzumab emtansine",
+        "brand": "Kadcyla",
+        "antibody": "Trastuzumab",
+        "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+        "payload": "DM1",
+        "linker": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)",
+        "dar": "3.5"
+      },
+      "comparison": [
+        {
+          "field": "adc_name",
+          "snapshot": "Trastuzumab emtansine",
+          "live": "Trastuzumab emtansine",
+          "agrees": true
+        },
+        {
+          "field": "brand",
+          "snapshot": "Kadcyla",
+          "live": "Kadcyla",
+          "agrees": true
+        },
+        {
+          "field": "antibody",
+          "snapshot": "Trastuzumab",
+          "live": "Trastuzumab",
+          "agrees": true
+        },
+        {
+          "field": "target",
+          "snapshot": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+          "live": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+          "agrees": true
+        },
+        {
+          "field": "payload",
+          "snapshot": "DM1",
+          "live": "DM1",
+          "agrees": true
+        },
+        {
+          "field": "linker",
+          "snapshot": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)",
+          "live": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)",
+          "agrees": true
+        },
+        {
+          "field": "dar",
+          "snapshot": "3.5",
+          "live": "3.5",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "openfda",
+      "subject": "DRG0ERKBH",
+      "url": "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact%3A%22Enhertu%22&limit=1&sort=effective_time%3Adesc",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 371896,
+      "raw_sha256": "61ad277930c58cae40e7f0c346cf9e562ac843670bad08b45064c79bbd6ba3a9",
+      "duration_ms": 111.4,
+      "fetched_at": "2026-10-04T11:42:21.036Z",
+      "parsed": {
+        "spl_id": "a4106ba4-f398-4663-980c-2b7195283edd",
+        "set_id": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
+        "version": "28",
+        "effective_time": "20260515",
+        "brand_name": "Enhertu",
+        "generic_name": "FAM-TRASTUZUMAB DERUXTECAN-NXKI",
+        "application_number": "BLA761139",
+        "manufacturer_name": "Daiichi Sankyo Inc."
+      },
+      "comparison": [
+        {
+          "field": "brand_name",
+          "snapshot": "Enhertu",
+          "live": "Enhertu",
+          "agrees": true
+        },
+        {
+          "field": "generic_name",
+          "snapshot": "FAM-TRASTUZUMAB DERUXTECAN-NXKI",
+          "live": "FAM-TRASTUZUMAB DERUXTECAN-NXKI",
+          "agrees": true
+        },
+        {
+          "field": "application_number",
+          "snapshot": "BLA761139",
+          "live": "BLA761139",
+          "agrees": true
+        },
+        {
+          "field": "set_id",
+          "snapshot": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
+          "live": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
+          "agrees": true
+        },
+        {
+          "field": "version",
+          "snapshot": "28",
+          "live": "28",
+          "agrees": true
+        },
+        {
+          "field": "effective_time",
+          "snapshot": "20260515",
+          "live": "20260515",
+          "agrees": true
+        },
+        {
+          "field": "spl_id",
+          "snapshot": "a4106ba4-f398-4663-980c-2b7195283edd",
+          "live": "a4106ba4-f398-4663-980c-2b7195283edd",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "dailymed",
+      "subject": "DRG0ERKBH",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=Enhertu&pagesize=1",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 590,
+      "raw_sha256": "11ff58a008e3d668556e02fa6ff3c79d11fd8a647c9238a7b6fce2300a161f70",
+      "duration_ms": 71.5,
+      "fetched_at": "2026-10-04T11:42:21.036Z",
+      "parsed": {
+        "set_id": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
+        "spl_version": "28",
+        "published_date": "May 28, 2026",
+        "title": "ENHERTU (FAM-TRASTUZUMAB DERUXTECAN-NXKI) INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION [DAIICHI SANKYO INC.]"
+      },
+      "comparison": [
+        {
+          "field": "set_id",
+          "snapshot": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
+          "live": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
+          "agrees": true
+        },
+        {
+          "field": "version",
+          "snapshot": "28",
+          "live": "28",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "adcdb",
+      "subject": "DRG0ERKBH",
+      "url": "https://adcdb.idrblab.net/data/adc/details/DRG0ERKBH",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": null,
+      "http_status": 200,
+      "bytes": 468700,
+      "raw_sha256": "50bb251f8925c4e447168642c126dce3edd9b3a63a5fe50bf685cd4111196b00",
+      "duration_ms": 724.4,
+      "fetched_at": "2026-10-04T11:42:21.036Z",
+      "parsed": {
+        "adc_id": "DRG0ERKBH",
+        "adc_name": "Trastuzumab deruxtecan",
+        "brand": "Enhertu",
+        "antibody": "Trastuzumab",
+        "target": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+        "payload": "DXd",
+        "linker": "Mc-Gly-Gly-Phe-Gly",
+        "dar": "8"
+      },
+      "comparison": [
+        {
+          "field": "adc_name",
+          "snapshot": "Trastuzumab deruxtecan",
+          "live": "Trastuzumab deruxtecan",
+          "agrees": true
+        },
+        {
+          "field": "brand",
+          "snapshot": "Enhertu",
+          "live": "Enhertu",
+          "agrees": true
+        },
+        {
+          "field": "antibody",
+          "snapshot": "Trastuzumab",
+          "live": "Trastuzumab",
+          "agrees": true
+        },
+        {
+          "field": "target",
+          "snapshot": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+          "live": "Receptor tyrosine-protein kinase erbB-2 (HER2)",
+          "agrees": true
+        },
+        {
+          "field": "payload",
+          "snapshot": "DXd",
+          "live": "DXd",
+          "agrees": true
+        },
+        {
+          "field": "linker",
+          "snapshot": "Mc-Gly-Gly-Phe-Gly",
+          "live": "Mc-Gly-Gly-Phe-Gly",
+          "agrees": true
+        },
+        {
+          "field": "dar",
+          "snapshot": "8",
+          "live": "8",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "source": "clinicaltrials_gov",
+      "subject": "NCT03529110",
+      "url": "https://clinicaltrials.gov/api/v2/studies/NCT03529110?fields=protocolSection.identificationModule",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": "ok",
+      "http_status": 200,
+      "bytes": 1098,
+      "raw_sha256": "5d493d1382276ffe00691b71e6c9d8536ce5a627ef8f565ec2498a5001ee8d97",
+      "duration_ms": 195.6,
+      "fetched_at": "2026-10-04T11:42:21.766Z",
+      "parsed": {
+        "nct_id": "NCT03529110",
+        "official_title": "A Phase 3, Multicenter, Randomized, Open-Label, Active-Controlled Study of DS-8201a (Trastuzumab Deruxtecan), an Anti-HER2 Antibody Drug Conjugate (ADC), Versus Ado Trastuzumab Emtansine (T-DM1) for HER2-Positive, Unresectable and/or Metastatic Breast Cancer Subjects Previously Treated With Trastuzumab and Taxane",
+        "brief_title": "DS-8201a Versus T-DM1 for Human Epidermal Growth Factor Receptor 2 (HER2)-Positive, Unresectable and/or Metastatic Breast Cancer Previously Treated With Trastuzumab and Taxane [DESTINY-Breast03]"
+      },
+      "comparison": []
+    },
+    {
+      "source": "clinicaltrials_gov",
+      "subject": "NCT09999999",
+      "url": "https://clinicaltrials.gov/api/v2/studies/NCT09999999?fields=protocolSection.identificationModule",
+      "status": "not_found",
+      "error_code": null,
+      "expected_status": "not_found",
+      "http_status": 404,
+      "bytes": 32,
+      "raw_sha256": "b5a11b5eeca7a13a17afa0e000206e1eb5130f005bd57e722b098ae5d584e7ae",
+      "duration_ms": 196.4,
+      "fetched_at": "2026-10-04T11:42:21.767Z",
+      "parsed": {},
+      "comparison": []
+    },
+    {
+      "source": "pubmed",
+      "subject": "PMID:29420467",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29420467&retmode=json",
+      "status": "ok",
+      "error_code": null,
+      "expected_status": "ok",
+      "http_status": 200,
+      "bytes": 4703,
+      "raw_sha256": "b87a4e115a1b50ef9cf1c5f3719124cd1b2c233addc59b8337089dbd4eb91cae",
+      "duration_ms": 377.9,
+      "fetched_at": "2026-10-04T11:42:21.767Z",
+      "parsed": {
+        "pmid": "29420467",
+        "title": "HER kinase inhibition in patients with HER2- and HER3-mutant cancers.",
+        "journal": "Nature",
+        "pubdate": "2018 Feb 8"
+      },
+      "comparison": []
+    },
+    {
+      "source": "pubmed",
+      "subject": "PMID:99999999",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99999999&retmode=json",
+      "status": "not_found",
+      "error_code": null,
+      "expected_status": "not_found",
+      "http_status": 200,
+      "bytes": 146,
+      "raw_sha256": "37b0ed9f7cbf77b4fc8cb44de7b373b225f18eaa7f52f076d19c731ffc48c0a9",
+      "duration_ms": 233,
+      "fetched_at": "2026-10-04T11:42:21.768Z",
+      "parsed": {},
+      "comparison": []
+    }
+  ],
+  "limits": [
+    "One run at one point in time; live sources change.",
+    "Drift means the live record differs from the frozen snapshot; it is reported, not corrected.",
+    "Live data supports identity, reference existence and composition corroboration only. It is not clinical evidence.",
+    "Raw bodies are not stored; hashes are fingerprints, not signatures."
+  ]
+}

@@ -12,6 +12,7 @@ import { registerResearchRoutes } from './research-routes.js';
 import { registerChatRoutes } from './chat-routes.js';
 import { registerTeamRoutes } from './team-routes.js';
 import { registerModelRoutes } from './models-routes.js';
+import { liveRetrievalEnabled, registerLiveRoutes, sharedLiveRetriever } from './live-routes.js';
 import type { ChatOptions } from './chat.js';
 import type { McpInferenceOptions } from './model-mcp.js';
 
@@ -64,10 +65,12 @@ export async function createApp(options: AppOptions = {}): Promise<FastifyInstan
     return reply.code(200).send(result);
   });
 
+  const live = options.live !== undefined ? options.live : liveRetrievalEnabled() ? sharedLiveRetriever() : null;
   registerResearchRoutes(app, options);
-  registerChatRoutes(app, options);
-  registerTeamRoutes(app, options);
+  registerChatRoutes(app, { ...options, live });
+  registerTeamRoutes(app, { ...options, live });
   registerModelRoutes(app, options.inference);
+  registerLiveRoutes(app, { enabled: Boolean(live), ...(live ? { retriever: live } : {}) });
 
   if (options.staticRoot) {
     const root = resolve(options.staticRoot);
