@@ -8,7 +8,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { ReactElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BaitFigure, EnvironmentFigure, HarnessFigure, PremiseFigure, ShareCard } from '../src/figures';
+import { BaitFigure, EnvironmentFigure, HarnessFigure, PremiseFigure, ShareCard, WhyFigure } from '../src/figures';
 import { labelSourceName, loadPresentationData } from '../src/presentationData';
 
 const out = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'figures');
@@ -19,6 +19,7 @@ const verdict = data.premise.kadcylaVerdict.verdict;
 if (verdict !== 'supported' && verdict !== 'contradicted' && verdict !== 'insufficient') throw new Error(`Unknown verdict ${verdict}`);
 
 const figures: Record<string, ReactElement> = {
+  'why.svg': <WhyFigure />,
   'environment.svg': <EnvironmentFigure workbookRecords={data.environment.workbookRecords} labelProducts={data.environment.labelProducts} sources={data.environment.sources} />,
   'harness.svg': <HarnessFigure />,
   'false-premise.svg': <PremiseFigure question={data.premise.question} stated={finding.stated ?? ''} recorded={finding.recorded ?? ''} check={finding.check} verdict={verdict} cited={data.premise.kadcylaVerdict.source_ids.map(labelSourceName)} />,

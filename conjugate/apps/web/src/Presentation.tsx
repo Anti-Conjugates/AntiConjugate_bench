@@ -5,7 +5,7 @@ import { AdcHero } from './AdcHero';
 import { PremiseGateAnim } from './PremiseGateAnim';
 import { verdictLabels } from './labels';
 import { prefersReducedMotion, useRevealOnScroll } from './motion';
-import { BaitFigure, EnvironmentFigure, HarnessFigure, PremiseFigure, RatioBar } from './figures';
+import { BaitFigure, EnvironmentFigure, HarnessFigure, PremiseFigure, RatioBar, WhyFigure } from './figures';
 import { BaitSideBySide, BenchmarkPanel } from './PresentationBenchmark';
 import { PRESENTATION_SECTIONS, labelSourceName, loadPresentationData, type PresentationData } from './presentationData';
 import { loadBenchmark } from './benchmarkArtifact';
@@ -134,7 +134,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
     <header className="pres-hero">
       <p className="landing-kicker">Antibody-drug conjugates · research prototype</p>
       <h1>Trust less.<br /><em>Check more.</em></h1>
-      <p className="hero-lede">Research agents fail in ways that read well. Conjugate is a small harness around Claude where code, not the model, decides what counts as evidence. This page walks through it in eight sections, using only recorded runs.</p>
+      <p className="hero-lede">Research agents fail in ways that read well. Conjugate is a small harness around Claude where code, not the model, decides what counts as evidence. This page walks through it in nine sections, using only recorded runs.</p>
       <p className="pres-keys">Presenting? <kbd>PageDown</kbd> or <kbd>↓</kbd> jumps to the next section, <kbd>PageUp</kbd> or <kbd>↑</kbd> goes back.</p>
       <div className="hero-actions">
         <a className="hero-primary" href={`#${PRESENTATION_SECTIONS[0].id}`} onClick={event => { event.preventDefault(); jumpTo(PRESENTATION_SECTIONS[0].id); }}>Start <ArrowRight size={18} aria-hidden="true" /></a>
@@ -144,7 +144,13 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
 
     <SectionNav />
 
-    <Section id="p-problem" index={0} kicker="The problem" title="Research agents sound sure of themselves when they are wrong."
+    <Section id="p-why" index={0} kicker="Why this matters" title="Medicines are complex. AI is not yet trustworthy enough to help with them."
+      figure={<Figure wide={<WhyFigure variant="wide" />} tall={<WhyFigure variant="tall" />} caption="This page covers the first drug class only. Nothing here is clinical advice." />}>
+      <p>Every medicine has its own components, label wording and trail of evidence, and a mistake about any of them can reach a patient. AI assistants have narrowed the knowledge gap: they answer quickly and can now carry out tasks as agents.</p>
+      <p>They are not trust-ready for pharmacies or clinicians, because they sound just as sure when they are wrong. We built a framework and a test environment to measure that gap and catch the failures, starting with one drug class used to treat breast cancer: HER2-targeted antibody-drug conjugates (ADCs).</p>
+    </Section>
+
+    <Section id="p-problem" index={1} kicker="The problem" title="Research agents sound sure of themselves when they are wrong."
       figure={<><AdcHero /><p className="pres-cite">An antibody-drug conjugate: an antibody that finds the cancer cell, a linker, and a toxic payload. The questions in this demo are about how these parts are recorded.</p></>}>
       <p>Ask an agent about antibody-drug conjugates and it will answer in fluent paragraphs. Some of those paragraphs describe ADCs that do not exist, cite trials that were never registered, or go along with a wrong fact hidden in the question. Give it a score to chase and it learns the score, not the chemistry.</p>
       <ul className="pres-list">
@@ -156,7 +162,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
       <p className="pres-thesis">Thesis: don’t grade the agent’s prose. Make code check each claim against a source you can show, and record every failure.</p>
     </Section>
 
-    <Section id="p-environment" index={1} kicker="The environment" title="What the agent is allowed to touch."
+    <Section id="p-environment" index={2} kicker="The environment" title="What the agent is allowed to touch."
       figure={<Figure wide={envFigure('wide')} tall={envFigure('tall')} caption={<>Example receipts from the recorded live run in <code>evals/live-retrieval.json</code> ({f.live.generatedAt.slice(0, 10)}).</>} />}>
       <p>Two local files: an ADCdb workbook snapshot with {env.workbookRecords} ADCs, and short draft paraphrases of the UK labels for {labelProducts.join(' and ')}. That is the evidence the verifier can cite.</p>
       <p>On top of that, {env.sources.length} live sources: {env.sources.map(source => source.name).join(', ')}. Each is reached through one fixed URL template written in code. The model never picks a URL. Every fetch leaves a receipt with the HTTP status and a SHA-256 of the body, including the ones that fail.</p>
@@ -164,14 +170,14 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
       <p className="pres-aside">Live lookups only answer “does this id exist?” and “does this record match the snapshot?”. They are never used as clinical evidence.</p>
     </Section>
 
-    <Section id="p-harness" index={2} kicker="The harness" title="Code decides. The model only suggests."
+    <Section id="p-harness" index={3} kicker="The harness" title="Code decides. The model only suggests."
       figure={<Figure wide={<HarnessFigure variant="wide" />} tall={<HarnessFigure variant="tall" />} caption={<>Node order from the LangGraph team in <code>evals/team-live.json</code>: <code>{harness.teamGraph}</code></>} />}>
       <p>Every turn starts with two plain-code checks. The scope gate stops questions about doses or who should get a drug. The premise gate compares the facts stated in the question with the workbook. If either stops the turn, no model is called.</p>
       <p>Otherwise a Claude lead picks which checks to run, by id, and Claude workers run them in parallel. A deterministic verifier writes every verdict. An omission gate keeps any check the lead skipped visible on the answer. Models never write verdicts.</p>
       <p className="pres-aside">Two ways to run it: a single Claude agent ({harness.chatLiveComplete}/{harness.chatLiveRows} recorded live chat turns finished) or the LangGraph team with a lead and workers (capped at {harness.leadCap} lead and {harness.workerCap} worker calls, {harness.retries} retries; {harness.teamLiveRefused}/{harness.teamLiveRows} recorded live team runs were refused by Claude and kept as failures).</p>
     </Section>
 
-    <Section id="p-premise" index={3} kicker="Demo 1 · false premise" title="“Kadcyla has a cleavable linker…”"
+    <Section id="p-premise" index={4} kicker="Demo 1 · false premise" title="“Kadcyla has a cleavable linker…”"
       figure={<>
         <Figure wide={premiseFigure('wide')} tall={premiseFigure('tall')} caption={<>Premise gate output from <code>evals/premise-study.json</code>; verdict from <code>evals/results.json</code>.</>} />
         <PremiseGateAnim question={premise.question} report={premise.report} source={<>Recorded premise-gate report for this exact question, <code>evals/premise-study.json</code>.</>} />
@@ -185,20 +191,20 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
       <ViewLink view="chat" onNavigate={onNavigate}>Ask it yourself in the research chat <ArrowRight size={16} aria-hidden="true" /></ViewLink>
     </Section>
 
-    <Section id="p-bait" index={4} kicker="Demo 2 · hallucination bait" title="An ADC that doesn’t exist and a trial that was never registered."
+    <Section id="p-bait" index={5} kicker="Demo 2 · hallucination bait" title="An ADC that doesn’t exist and a trial that was never registered."
       figure={<><Figure wide={baitFigure('wide')} tall={baitFigure('tall')} caption={<>Gate decisions from <code>evals/premise-study.json</code>; receipt from <code>evals/live-retrieval.json</code>.</>} /><BaitSideBySide load={data.benchmark} /></>}>
       <p>We ask about “Zentrovab-7”, which we made up, and about {bait.receipt.subject}, a trial id that does not exist. The premise gate stops both before Claude sees them: {bait.modelCalls} model calls.</p>
       <p>When live retrieval is on, the trial id is looked up on ClinicalTrials.gov through the fixed template. The recorded receipt says HTTP {bait.receipt.http}, <code>{bait.receipt.status}</code>. A real id ({bait.realReceipt.subject}) came back HTTP {bait.realReceipt.http}. Existence alone is never treated as evidence.</p>
       <p className="pres-aside">The panel below compares plain Claude with the harness on the same bait, using rows from the benchmark file when it exists.</p>
     </Section>
 
-    <Section id="p-benchmark" index={5} kicker="Benchmark" title="Plain Claude against the harness, same questions."
+    <Section id="p-benchmark" index={6} kicker="Benchmark" title="Plain Claude against the harness, same questions."
       figure={<BenchmarkPanel load={data.benchmark} />}>
       <p>The benchmark asks plain Claude and the harness the same composition, invented-ADC, fake-reference, false-premise and out-of-scope questions, and records what each one did: answered correctly, declined, flagged the premise, bluffed, or made up a citation.</p>
       <p>Counts come straight from <code>evals/benchmark.json</code>. If that file is missing or does not match the shared schema, this section says so instead of showing numbers.</p>
     </Section>
 
-    <Section id="p-failures" index={6} kicker="What went wrong" title="Failures we hit while building this, kept in the record."
+    <Section id="p-failures" index={7} kicker="What went wrong" title="Failures we hit while building this, kept in the record."
       figure={<ul className="pres-cards">
         <FailureCard title="Claude refused, and we kept the row" artifact="evals/team-live.json, evals/chat-live.json" bar={{ label: 'live team runs refused', value: f.refusals.team, tone: 'bad' }} onNavigate={onNavigate} view="evals">
           Anthropic’s API sometimes stops with a refusal and no text. Those runs are recorded as failed ({f.refusals.chat} live chat turns, {f.refusals.team} live team runs) with {f.refusals.retries} retries and no fallback answer.
@@ -227,7 +233,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
       <ViewLink view="evals" onNavigate={onNavigate}>All evals, including the ones that got through <ArrowRight size={16} aria-hidden="true" /></ViewLink>
     </Section>
 
-    <Section id="p-limits" index={7} kicker="Limits" title="What this is not."
+    <Section id="p-limits" index={8} kicker="Limits" title="What this is not."
       figure={<div className="pres-limits">
         <h3>From the artifacts themselves</h3>
         <ul className="pres-small-list">{[data.limits.chat[0], data.limits.team[2], data.limits.live[2], data.limits.models[2], data.limits.premise[1]].filter((item): item is string => Boolean(item)).map(item => <li key={item}>{item}</li>)}</ul>

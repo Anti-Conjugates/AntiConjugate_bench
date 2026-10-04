@@ -30,12 +30,20 @@ const text = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/&#x27;|&#3
 describe('Presentation', () => {
   const html = render();
 
-  it('renders all eight sections in order with headings', () => {
+  it('renders all nine sections in order with headings', () => {
     const positions = PRESENTATION_SECTIONS.map(section => html.indexOf(`id="${section.id}"`));
     expect(positions.every(position => position >= 0)).toBe(true);
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
     for (const section of PRESENTATION_SECTIONS) expect(html).toContain(`aria-labelledby="${section.id}-heading"`);
     expect(text(html)).toContain('Trust less.');
+  });
+
+  it('opens with why the project exists, before the problem', () => {
+    expect(PRESENTATION_SECTIONS[0].id).toBe('p-why');
+    const why = text(html.slice(html.indexOf('id="p-why"'), html.indexOf('id="p-problem"')));
+    expect(why).toContain('pharmacies or clinicians');
+    expect(why).toContain('breast cancer');
+    expect(why).toContain('HER2-targeted antibody-drug conjugates');
   });
 
   it('shows numbers read from the committed artifacts', () => {

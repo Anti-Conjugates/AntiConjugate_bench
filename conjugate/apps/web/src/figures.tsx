@@ -150,6 +150,40 @@ const HARNESS_STEPS: { key: string; title: string; lines: string[]; kind: Kind }
 ];
 export const HARNESS_STEP_KEYS = HARNESS_STEPS.map(step => step.key);
 
+const WHY_STEPS: { kind: Kind; title: string; lines: string[] }[] = [
+  { kind: 'plain', title: 'Medicines are complex', lines: ['components, labels,', 'evidence trails'] },
+  { kind: 'model', title: 'AI narrowed the gap', lines: ['answers fast,', 'acts as an agent'] },
+  { kind: 'stop', title: 'Not trust-ready', lines: ['sounds sure when', 'it is wrong'] },
+  { kind: 'code', title: 'Framework + test env', lines: ['code checks claims,', 'failures recorded'] },
+  { kind: 'source', title: 'Starting point', lines: ['HER2 antibody-drug', 'conjugates, breast cancer'] },
+];
+
+export function WhyFigure({ variant = 'wide' }: { variant?: Variant }) {
+  const id = `fig-why-${variant}`;
+  const title = 'Why this project exists';
+  const desc = 'Medicines are complex. AI assistants narrowed the knowledge gap and can act as agents, but they are not trust-ready for pharmacies or clinicians because they sound sure when they are wrong. This project builds a framework and test environment, starting with HER2-targeted antibody-drug conjugates used in breast cancer.';
+  if (variant === 'tall') {
+    const w = 260, h = 70, gap = 24, x = 50, top = 20;
+    const y = (i: number) => top + i * (h + gap);
+    return <Svg id={id} width={360} height={y(WHY_STEPS.length) + 6} title={title} desc={desc}>
+      {WHY_STEPS.slice(0, -1).map((_, i) => <Arrow key={i} id={id} d={`M${x + w / 2} ${y(i) + h} L${x + w / 2} ${y(i + 1) - 4}`} />)}
+      {WHY_STEPS.map((step, i) => <Box key={step.title} x={x} y={y(i)} w={w} h={h} kind={step.kind} title={step.title} lines={step.lines} n={i} />)}
+    </Svg>;
+  }
+  const w = 200, h = 88, gap = 30, left = 20, row1 = 20, row2 = 172;
+  const x = (i: number) => left + i * (w + gap);
+  const [complex, gap1, notReady, framework, start] = WHY_STEPS as [typeof WHY_STEPS[number], typeof WHY_STEPS[number], typeof WHY_STEPS[number], typeof WHY_STEPS[number], typeof WHY_STEPS[number]];
+  return <Svg id={id} width={x(2) + w + left} height={row2 + h + 20} title={title} desc={desc}>
+    <Arrow id={id} d={`M${x(0) + w} ${row1 + h / 2} L${x(1) - 3} ${row1 + h / 2}`} />
+    <Arrow id={id} d={`M${x(1) + w} ${row1 + h / 2} L${x(2) - 3} ${row1 + h / 2}`} />
+    <Arrow id={id} d={`M${x(2) + w / 2} ${row1 + h} L${x(2) + w / 2} ${row2 - 3}`} />
+    <Arrow id={id} d={`M${x(2)} ${row2 + h / 2} L${x(1) + w + 3} ${row2 + h / 2}`} />
+    {[complex, gap1, notReady].map((step, i) => <Box key={step.title} x={x(i)} y={row1} w={w} h={h} kind={step.kind} title={step.title} lines={step.lines} n={i} titleSize={14} />)}
+    <Box x={x(2)} y={row2} w={w} h={h} kind={framework.kind} title={framework.title} lines={framework.lines} n={3} titleSize={14} />
+    <Box x={x(1)} y={row2} w={w} h={h} kind={start.kind} title={start.title} lines={start.lines} n={4} titleSize={14} lineSize={12} />
+  </Svg>;
+}
+
 export function HarnessFigure({ variant = 'wide' }: { variant?: Variant }) {
   const id = `fig-harness-${variant}`;
   const title = 'The harness: where code decides and where the model only suggests';
