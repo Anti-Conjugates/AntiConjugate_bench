@@ -60,6 +60,19 @@ The ADC table keeps the workbook's 31 records, four separate author-derived rows
 
 For the demo walkthrough and the research behind it, see `docs/DEMO_GUIDE.md`.
 
+### Run record and US identity check
+
+The fifth question checks brand, generic name and application number in a frozen
+US openFDA record. Withhold that source and the result becomes “Not enough
+evidence”. It is separate from the UK summaries and cannot support clinical-risk
+claims. Source records show SPL identifiers, effective/fetch dates and hashes.
+
+Every research result has a Run record with model/tool counts, shared deadline,
+code/input/source/skill hashes and the zero-retry policy. The Evals page also
+shows a generated harness-check table. Reproduce it with `npm run eval:harness`;
+recheck an exported result with `npm run replay -- export.json`. Replay runs the
+verifier, not Claude. See `docs/HARNESS.md` for the design sources and limits.
+
 ### Runtime skills
 
 `runtime-skills/evidence-retrieval`, `counter-evidence` and `provenance-review` hold short reviewed `SKILL.md` files for the Claude planner and drafter. The app loads fixed local files, not user-supplied paths, marketplace plugins or arbitrary code. These prompt packs are separate from the pstack engineering plugin and from Anthropic-hosted Skills or code-execution containers, which are not connected.

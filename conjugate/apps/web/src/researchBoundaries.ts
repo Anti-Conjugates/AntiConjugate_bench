@@ -1,6 +1,6 @@
 import {
   ApiErrorSchema, ResearchCatalogSchema, ResearchEventSchema, ResearchRequestSchema, ResearchResultSchema,
-  ResearchQuestionSchema,
+  ResearchQuestionSchema, researchExecutionIsConsistent,
   type ResearchCatalog, type ResearchEvent, type ResearchRequest, type ResearchResult, type ResearchTrace,
 } from '@her2/shared';
 import { BoundaryError } from './boundaries';
@@ -66,7 +66,8 @@ export function validateResearchResult(data: unknown, request: ResearchRequest, 
   const receipts = new Map(result.receipts.map((receipt) => [receipt.id, receipt]));
   const expectedReceiptId = (kind: ResearchResult['receipts'][number]['kind']) => kind === 'workbook'
     ? `WORKBOOK-${request.product_id}-COMPOSITION`
-    : kind === 'derived' ? `DERIVED-${request.product_id}-NOT-ADCDB`
+    : kind === 'openfda' ? `US-OPENFDA-${request.product_id}-IDENTITY`
+      : kind === 'derived' ? `DERIVED-${request.product_id}-NOT-ADCDB`
       : request.product_id === 'DRG0ERKBH' ? 'UK-ENHERTU-SMPC' : 'UK-KADCYLA-SMPC';
   const acceptedDraftMatchesClaims = result.draft_integrity === 'accepted'
     && result.draft.claims.length === result.claims.length
@@ -74,10 +75,20 @@ export function validateResearchResult(data: unknown, request: ResearchRequest, 
       && claim.source_ids.length === draftClaim.source_ids.length && claim.source_ids.every((id) => draftClaim.source_ids.includes(id))));
   if (receipts.size !== result.receipts.length || new Set(result.claims.map((claim) => claim.id)).size !== result.claims.length
     || new Set(result.trace.map((step) => step.id)).size !== result.trace.length
+    || !researchExecutionIsConsistent(result)
     || result.receipts.some((receipt) => receipt.product_id !== request.product_id || receipt.id !== expectedReceiptId(receipt.kind)
+      || (request.evidence_policy === 'workbook_only' && receipt.kind !== 'workbook')
       || (receipt.kind === 'derived' && (receipt.provenance !== 'derived_not_adcdb' || receipt.eligible_for_claim))
       || (receipt.kind === 'workbook' && receipt.provenance !== 'user_uploaded_unverified')
-      || (receipt.kind === 'label' && (receipt.provenance !== 'label_paraphrase_pending_review' || request.evidence_policy === 'workbook_only')))
+      || (receipt.kind === 'label' && (receipt.provenance !== 'label_paraphrase_pending_review' || request.evidence_policy === 'workbook_only'))
+      || (receipt.kind === 'openfda' && (receipt.provenance !== 'openfda_identity_snapshot' || request.evidence_policy === 'workbook_only'
+        || receipt.eligible_for_claim !== (request.question_id === 'label_identity'))))
+    || result.harness.sources.length !== result.receipts.length
+    || new Set(result.harness.sources.map(source => source.id)).size !== result.harness.sources.length
+    || result.harness.sources.some(source => !receipts.has(source.id))
+    || result.harness.model_calls !== (request.engine === 'claude' ? 2 : 0)
+    || (request.engine === 'evidence' && result.harness.skills.length > 0)
+    || result.harness.tool_calls !== result.trace.filter(step => step.stage === 'retrieve' && step.tool !== null && step.status === 'completed').length
     || result.claims.some((claim) => claim.source_ids.some((id) => !receipts.get(id)?.eligible_for_claim))
     || result.challenges.some((challenge) => challenge.source_ids.some((id) => !receipts.has(id)))
     || result.trace.some((step) => step.source_ids.some((id) => !receipts.has(id)))

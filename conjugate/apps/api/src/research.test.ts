@@ -34,8 +34,8 @@ test('both products and all hypotheses are bounded shared-contract drafts; expli
     assert.equal(result.dataset_sha256, DATASET_SHA256); assert.equal(result.claims.length, 1);
     assert.ok(result.receipts.every(receipt => receipt.product_id === product_id));
     const tools = result.trace.filter(step => step.tool !== null).map(step => step.tool);
-    assert.deepEqual(tools, ['read_workbook', 'read_label', 'read_derived']);
-    assert.deepEqual(result.trace.map(step => step.stage), ['scope', 'plan', 'retrieve', 'retrieve', 'retrieve', 'draft', 'challenge', 'verify', 'handoff']);
+    assert.deepEqual(tools, ['read_workbook', 'read_label', 'read_derived', 'read_openfda']);
+    assert.deepEqual(result.trace.map(step => step.stage), ['scope', 'plan', 'retrieve', 'retrieve', 'retrieve', 'retrieve', 'draft', 'challenge', 'verify', 'handoff']);
     if (question_id === 'composition') {
       assert.equal(result.claims[0]!.verdict, 'supported');
       assert.match(result.claims[0]!.statement, product_id === 'DRG0CYMEB' ? /payload DM1 and DAR 3\.5/ : /payload DXd and DAR 8/);
@@ -61,7 +61,7 @@ test('source ablation actually executes only workbook; no hidden label or derive
     const result = await runResearch(request);
     assert.equal(result.receipts.length, 1); assert.equal(result.receipts[0]!.kind, 'workbook');
     assert.deepEqual(result.trace.filter(step => step.tool !== null).map(step => step.tool), ['read_workbook']);
-    assert.equal(result.trace.filter(step => step.status === 'skipped').length, 2);
+    assert.equal(result.trace.filter(step => step.status === 'skipped').length, 3);
     assert.ok(result.unknowns.some(text => text.includes('read_label was not retrieved')));
     assert.ok(result.unknowns.some(text => text.includes('read_derived was not retrieved')));
     assert.equal(result.claims[0]!.verdict, question_id === 'composition' ? 'supported' : 'insufficient');
@@ -78,7 +78,7 @@ test('all three developer-controlled post-draft drills are actually caught for b
     assert.equal(result.draft_integrity, 'rejected'); assert.deepEqual(result.claims, []);
     assert.deepEqual(result.omitted_claim_ids, ['linker_release']);
     assert.ok(result.challenges.some(check => check.outcome === 'caught'));
-    assert.match(result.answer, /intentionally developer-controlled software drill/);
+    assert.match(result.answer, /A fault was injected on purpose after drafting/);
     assert.match(result.trace.find(step => step.stage === 'draft')!.detail, /after normal drafting/);
     const badIds = result.draft.claims[0]!.source_ids;
     assert.ok(badIds.length > 0); assert.ok(badIds.every(id => /^[A-Za-z0-9_-]{1,120}$/.test(id)));
@@ -107,7 +107,7 @@ test('two bounded Claude calls use exact native transport, strict schemas, local
       assert.deepEqual(body.output_config.format.schema, calls === 1 ? plannerOutputSchema(request) : draftOutputSchema(request, receipts));
       const data = JSON.parse(body.messages[0].content);
       if (calls === 1) {
-        assert.deepEqual(data.allowed_tool_ids, allowedTools(request)); assert.equal(data.max_tool_calls, 3);
+        assert.deepEqual(data.allowed_tool_ids, allowedTools(request)); assert.equal(data.max_tool_calls, 4);
         assert.deepEqual(body.output_config.format.schema.properties.product_id.enum, [product_id]);
         // Reordering is canonicalized without adding/removing a selection.
         return modelResponse({ product_id, tool_ids: [...allowedTools(request)].reverse() });

@@ -1,0 +1,4443 @@
+{
+  "kind": "developer_authored_verifier_sensitivity_not_clinical",
+  "generated_at": "2026-10-03T21:07:26.493Z",
+  "manifest": {
+    "code_sha256": "27217bad80a6c94eea6ffef5322baef742cac91a3a76abca6916e9f59b11d416",
+    "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+    "evaluation_sha256": "ae80d055ccf143e545c4ef4f6e5a0591aad6ddd49c346e914524a439f417ac92",
+    "design_sha256": "3b8b35fac4f0a74337b902b57489f6bf611d0ec282efb952cc38657ed31915ba",
+    "lockfile_sha256": "f25840fb306160818ff74f145d689a3ba14999682fceb7044bb15589f26db3b8",
+    "node": "v24.19.0",
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "scopes": 20
+  },
+  "verifier_function_sha256": "66fe63c7544d9c2d868c09d74b7c4f0812984046bdebeb9eb8e0c68c06a1b66c",
+  "passed": true,
+  "compiled_agrees": true,
+  "control_semantics_hold": true,
+  "scope_count": 20,
+  "controls_accepted": 80,
+  "control_count": 80,
+  "faults_rejected": 176,
+  "fault_count": 176,
+  "mutants_detected": 7,
+  "mutant_count": 10,
+  "mutants": [
+    {
+      "name": "product_identity",
+      "disabled_checks": [
+        "product_identity"
+      ],
+      "detected": true,
+      "escaped_faults": 20,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": [
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "wrong_product"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/workbook_only",
+          "case_id": "wrong_product"
+        },
+        {
+          "scope": "DRG0CYMEB/linker_release/all",
+          "case_id": "wrong_product"
+        }
+      ]
+    },
+    {
+      "name": "source_allowlist",
+      "disabled_checks": [
+        "source_allowlist"
+      ],
+      "detected": false,
+      "escaped_faults": 0,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": []
+    },
+    {
+      "name": "exact_source_claim_pairing",
+      "disabled_checks": [
+        "exact_source_claim_pairing"
+      ],
+      "detected": true,
+      "escaped_faults": 28,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": [
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "extra_claim"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "duplicate_citation"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/workbook_only",
+          "case_id": "extra_claim"
+        }
+      ]
+    },
+    {
+      "name": "source_eligibility",
+      "disabled_checks": [
+        "source_eligibility"
+      ],
+      "detected": false,
+      "escaped_faults": 0,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": []
+    },
+    {
+      "name": "evidence_availability",
+      "disabled_checks": [
+        "evidence_availability"
+      ],
+      "detected": false,
+      "escaped_faults": 0,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": []
+    },
+    {
+      "name": "unique_claims",
+      "disabled_checks": [
+        "unique_claims"
+      ],
+      "detected": true,
+      "escaped_faults": 20,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": [
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "duplicate_claim"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/workbook_only",
+          "case_id": "duplicate_claim"
+        },
+        {
+          "scope": "DRG0CYMEB/linker_release/all",
+          "case_id": "duplicate_claim"
+        }
+      ]
+    },
+    {
+      "name": "omitted_claim_ids",
+      "disabled_checks": [
+        "omitted_claim_ids"
+      ],
+      "detected": true,
+      "escaped_faults": 20,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": [
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "missing_claim"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/workbook_only",
+          "case_id": "missing_claim"
+        },
+        {
+          "scope": "DRG0CYMEB/linker_release/all",
+          "case_id": "missing_claim"
+        }
+      ]
+    },
+    {
+      "name": "receipt_integrity",
+      "disabled_checks": [
+        "receipt_integrity"
+      ],
+      "detected": true,
+      "escaped_faults": 28,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": [
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "receipt_text_edit"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/workbook_only",
+          "case_id": "withheld_source"
+        },
+        {
+          "scope": "DRG0CYMEB/linker_release/all",
+          "case_id": "receipt_text_edit"
+        }
+      ]
+    },
+    {
+      "name": "citation_defenses_removed",
+      "disabled_checks": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability"
+      ],
+      "detected": true,
+      "escaped_faults": 86,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": [
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "extra_claim"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "invented_citation"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "cross_product_citation"
+        }
+      ]
+    },
+    {
+      "name": "always_accept",
+      "disabled_checks": [],
+      "detected": true,
+      "escaped_faults": 176,
+      "faults": 176,
+      "controls_accepted": 80,
+      "controls": 80,
+      "examples": [
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "wrong_product"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "missing_claim"
+        },
+        {
+          "scope": "DRG0CYMEB/composition/all",
+          "case_id": "duplicate_claim"
+        }
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "reason": "withheld_source:policy_all"
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "reason": "derived_as_primary:no_derived_receipt"
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "reason": "duplicate_citation:no_primary_ids"
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "reason": "missing_primary_receipt:no_primary_ids"
+    }
+  ],
+  "rows": [
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/all",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/composition/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/all",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/linker_release/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/payload_risk_transfer/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/workbook_safety/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/all",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0CYMEB/label_identity/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/all",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/composition/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/all",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/linker_release/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/payload_risk_transfer/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/workbook_safety/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "derived_as_primary",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "source_eligibility"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "duplicate_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/all",
+      "case_id": "missing_primary_receipt",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "exact_control",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "harmless_order_17",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "harmless_order_29",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "harmless_order_43",
+      "kind": "control",
+      "healthy_accepted": true,
+      "accepted_by": [
+        "unmodified_compiled",
+        "product_identity",
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "source_eligibility",
+        "evidence_availability",
+        "unique_claims",
+        "omitted_claim_ids",
+        "receipt_integrity",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": []
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "wrong_product",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "product_identity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "product_identity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "missing_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "omitted_claim_ids",
+        "always_accept"
+      ],
+      "caught_by": [
+        "omitted_claim_ids"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "duplicate_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "unique_claims",
+        "always_accept"
+      ],
+      "caught_by": [
+        "unique_claims"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "extra_claim",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "exact_source_claim_pairing",
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "exact_source_claim_pairing"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "invented_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "cross_product_citation",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "citation_defenses_removed",
+        "always_accept"
+      ],
+      "caught_by": [
+        "source_allowlist",
+        "exact_source_claim_pairing",
+        "evidence_availability"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "receipt_text_edit",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    },
+    {
+      "scope": "DRG0ERKBH/label_identity/workbook_only",
+      "case_id": "withheld_source",
+      "kind": "fault",
+      "healthy_accepted": false,
+      "accepted_by": [
+        "receipt_integrity",
+        "always_accept"
+      ],
+      "caught_by": [
+        "receipt_integrity"
+      ]
+    }
+  ],
+  "limits": [
+    "Mutants change the real verifier function in memory only, never the app.",
+    "Overlapping checks can leave individual mutants surviving; survivors are shown.",
+    "Known fixtures, not an unseen clinical holdout.",
+    "No model calls; counts are finite software coverage, not a probability of safety."
+  ]
+}

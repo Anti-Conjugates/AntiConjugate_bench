@@ -1,5 +1,81 @@
 # Software verification — 2026-10-03
 
+## Latest: checker sensitivity and paired citation selection
+
+These are software contract results on developer-known fixtures.
+
+- `npm run eval:verifier`: 7/10 deliberately weakened production-function copies
+  detected. Three single-check variants survive because other guards still reject
+  these faults. 80/80 healthy controls accepted; 176/176 applicable faults rejected.
+- The first run accepted only 20/80 healthy controls. JSON object key order caused
+  false rejections in `receiptIntegrity`. `isDeepStrictEqual` fixes object ordering
+  while preserving exact values and array order. Original failed artifact retained.
+- `npm run eval:selection`: 120 real `claude-opus-5-5` requests, no retries. Three
+  paired presentations across 20 scopes. Both arms hide the eligibility flag and
+  use the same sources, schema, system prompt and scoped skills. Only the supplied
+  citation mapping differs. Mapped: 59/60 accepted, one provider error. Unmapped:
+  34/60 accepted, 25 verifier rejections, one provider error. Errors remain in the
+  denominator. Paired acceptance difference is 41.7 percentage points.
+- No-model baselines expose the shortcut: eligible-only and source-kind selection
+  each match 20/20 expected sets. Neither model result proves scientific reasoning
+  or superiority over rules. Repeated observations are correlated; no significance
+  test, clinical accuracy, calibration or general attack-resistance claim.
+- Strict typecheck, lint and 73 API + 58 frontend tests pass. Offline harness remains
+  360/360; injected citations 60/60 rejected; honest scripted control 20/20 accepted.
+  HTTP smoke passes without model/browser calls. Fresh verifier replay passes;
+  previous-code exports fail closed. Dependency audit reports zero vulnerabilities.
+- Production build and independent source/artifact review pass. Evals loads on
+  demand, with its detailed evaluation data in a separate JavaScript chunk.
+- The earlier 20/20 two-call Claude pipeline artifact is retained with its original
+  timestamp. It was not rerun as part of this 120-request draft-only study. Offline
+  reproduction reports skipped model calls when no key is configured.
+- A separate unit regression covers combined cross-product and invented citation
+  IDs, including single-check removal and all four citation defenses removed.
+  It does not inflate the 176-case study denominator.
+  Browser checks remain excluded. Public Space remains on its previous version.
+
+Design and dated amendment are in `EVALUATION_DESIGN.md`. Full generated JSON
+includes individual decisions, provider errors, exclusions and fingerprints.
+The production two-call workflow is unchanged except the key-order equality fix.
+The paired study deliberately does not exercise planning or live retrieval.
+
+## Latest: harness and frozen US identity
+
+Supersedes the earlier counts and connection status below; those entries are
+retained as the development history.
+
+- Strict typecheck, lint, 67 API + 56 frontend tests, production build, HTTP smoke,
+  verifier replay and dependency audit (zero vulnerabilities) pass.
+- `npm run eval:harness`: 360/360 software checks across 20 scopes, including
+  receipt metadata edits, recomputed hashes, missing/mispaired/duplicate tool
+  executions, source withholding and clinical-gate literals.
+- `npm run eval`: 60/60 deliberately injected citation faults rejected; honest
+  control 20/20 accepted; abstain-all and invalid citation/identity strategies
+  accepted in 0/20 scopes. Cite-everything remains accepted in 2/20 where the
+  workbook is the only retrieved and required source. Source withholding changes
+  three of ten product/question verdicts, including both US identity questions.
+- Latest live `claude-opus-5-5` grid: 20/20 scopes accepted, no failures,
+  median wall time 5,034 ms. Claude receives the expected citation mapping; this
+  is contract-following, not independent source discovery or clinical correctness.
+- The separate reviewer reproduced three provenance gaps. Fixes: block every
+  non-workbook receipt under workbook-only; link receipts to unique allowed tool
+  executions; label browser hashes as server-reported and use replay to check
+  their contents. Regression tests cover each reproduction.
+- Skill-pack repair is a separate patch, not part of this app or its runtime.
+  Its 22 standard-library tests pass; 823 Devin and 836 Cursor files validate,
+  and repeat normalization changes zero files. Repository write access is absent.
+- The prior Hugging Face Space is live. This harness update is not deployed;
+  fresh approval is required. Public Claude stays off. Modal remote execution
+  and Google Antigravity remain unverified/unconnected.
+- Browser rendering, accessibility and interaction testing remain unverified:
+  browser automation is excluded. No independent clinical cases, keys or scoring
+  files were accessed, created or changed.
+
+Development follows pstack-her2 contracts → scoped source tools → independent
+verifier → source/trace checks → software verification → read-only review. The
+generic Python release checklist is adapted to this Node/Docker app: no Python
+wheel, release tag or package publication is needed for an app PR.
+
 ## Passed
 - Clean `npm ci` on Node 24.19.0 / npm 10.8.3: installed the pinned lockfile, zero reported audit vulnerabilities.
 - `npm run typecheck`: strict API/web/shared and HTTP-smoke-script typechecks.

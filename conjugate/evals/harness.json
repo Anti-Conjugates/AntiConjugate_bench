@@ -1,0 +1,123 @@
+{
+  "kind": "software_harness_checks_not_clinical_benchmark",
+  "generated_at": "2026-10-03T21:07:26.856Z",
+  "code_sha256": "27217bad80a6c94eea6ffef5322baef742cac91a3a76abca6916e9f59b11d416",
+  "passed": 360,
+  "total": 360,
+  "checks": [
+    {
+      "name": "Rules-only replay agrees",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Call and safety limits hold",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Only permitted sources are read",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source excerpt",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source section",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source title",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source limitations",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source eligible_for_claim",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source revision_date",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source url",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject changed source provenance",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject duplicate sources",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Replay rejects source edits even with recomputed hashes",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject receipts without execution",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject tool/source pairing edits",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject duplicate tool executions",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject wrong retrieval actor",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    },
+    {
+      "name": "Reject receipt outside retrieval",
+      "passed": 20,
+      "total": 20,
+      "failures": []
+    }
+  ],
+  "limits": [
+    "No model calls in this suite.",
+    "Source mutations are scripted software faults, not observed model attacks.",
+    "Hashes are fingerprints, not signatures.",
+    "Replay runs the verifier, not the model."
+  ]
+}

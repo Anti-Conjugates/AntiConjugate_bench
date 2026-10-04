@@ -8,6 +8,22 @@ The best fit is the epistemological-agent description supplied by the organiser.
 
 ## Demo sequence
 
+For judges, open Evals after the claim comparison. Start with "Would the eval
+catch a broken checker?" Show the original key-order failure, its fix and the
+three surviving single-check variants. The suite catches deliberately weakened
+checks by observing bad drafts get accepted, not by noticing a changed hash.
+
+Then show the paired citation-selection experiment. Eligibility flags are hidden
+in both model arms. The supplied citation mapping is the only difference. Show
+the no-model baselines before the model scores: these known fixtures are simple
+enough for a source-kind rule. The contribution is the auditable verifier and its
+tested boundaries, not a claim that an LLM outperforms those rules.
+
+Download the JSON artifacts to show individual outcomes, provider errors,
+fingerprints and excluded cases. `npm run eval:verifier` is offline;
+`npm run eval:selection` uses paid Claude calls, at most 120 with no retries.
+The second command tests drafting on fixed sources and deliberately skips planning.
+
 1. Check a plausible inference. In Check a claim, pick Enhertu and the question "Does a cleavable linker mean release in blood?". Keep rules only, sources set to All, and tick the synthetic confirmation. The label summary contradicts the inference: the cleavable tetrapeptide linker is described as plasma-stable with intracellular cleavage. This says nothing about release in any one person.
 2. Take the evidence away. Set sources to Workbook only and run again. The verdict changes to Not enough evidence because the label is withheld. The run cannot use another product's sources or model memory to keep its verdict. Compare the Sources used sections of the two results.
 3. Show useful support. Pick "What is it made of?". The Sources used section shows the exact workbook cells for payload and DAR. Supported here means the uploaded row says this. The snapshot is unverified and the clinical gate stays blocked.
@@ -16,7 +32,9 @@ The best fit is the epistemological-agent description supplied by the organiser.
 
 If time is short, do steps 1 and 2 and open the trace. Do not call rules only mode an LLM run.
 
-6. Show the checks. Open Evals. The numbers come from `scripts/eval.ts` running the real pipeline: how many injected bad citations the verifier rejected, which scripted strategies it caught everywhere, the one verdict that changes when the label is withheld, and the Claude grid with timings. Say what they are: software checks on the verifier, not a clinical benchmark.
+6. Check US identity. Select the US label identity question. It matches only brand, generic name and application number against a frozen openFDA record. Keep only the workbook and it becomes Not enough evidence. The US source is separate from the UK summary; it does not verify approval or current clinical labeling.
+7. Show the checks. Open Evals. The numbers come from the real pipeline: citation faults, scripted strategies, source-withholding changes, the Claude grid and the harness receipt/replay checks. Say what they are: software checks on the verifier, not a clinical benchmark.
+8. Open Run record under a result. It shows call counts, deadline, zero retries and source/skill/code fingerprints. Export JSON and use `npm run replay -- export.json` to rerun the verifier with the same code and sources. This does not rerun the model or authenticate the original execution.
 
 How it works shows the seven-stage pipeline, the ten verifier codes and what the app does not do. The antibody sequence map at the bottom of ADC table is exploratory ESM-2 structure data; say so if you show it.
 

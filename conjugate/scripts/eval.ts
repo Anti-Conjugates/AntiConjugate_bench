@@ -15,7 +15,7 @@ import {
 import { CLAUDE_MODEL } from '../apps/api/src/evidence.js';
 
 const PRODUCTS = ['DRG0CYMEB', 'DRG0ERKBH'] as const;
-const QUESTIONS = ['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety'] as const;
+const QUESTIONS = ['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety', 'label_identity'] as const;
 const POLICIES = ['all', 'workbook_only'] as const;
 const DRILLS = ['cross_product_citation', 'derived_as_primary', 'invented_source'] as const;
 

@@ -27,7 +27,7 @@ No browser automation. Hugging Face and Google Antigravity connections are user-
 
 ## Bounded research audit
 
-The separate research workflow uses `packages/shared/src/research.ts`. Exact products and four hypothesis IDs constrain scope; evidence-access policy controls which tools can read sources. Fixed local tools retrieve workbook cells, product-specific label paraphrases and separately classified derived notes. No live web retrieval or bulk ADCdb download runs inside the app.
+The separate research workflow uses `packages/shared/src/research.ts`. Exact products and five question IDs constrain scope; evidence-access policy controls which tools can read sources. Fixed local tools retrieve workbook cells, product-specific UK label paraphrases, separately classified derived notes and frozen US openFDA identity fields. The US source can support only the identity question. No live web retrieval or bulk ADCdb download runs inside the app. See `HARNESS.md` for run limits, fingerprints and verifier replay.
 
 Evidence mode uses an explicit deterministic controller. Optional Claude uses a bounded planner and identifier-only draft, with reviewed allowlisted local `runtime-skills/*/SKILL.md` resources. Skills cannot execute shell code, choose file paths or modify the verifier. Native Anthropic Skills uploads and hosted code-execution containers are not enabled. pstack remains an engineering workflow, not the runtime clinical agent.
 

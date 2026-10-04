@@ -1,9 +1,11 @@
 import { readFileSync } from 'node:fs';
+import { isDeepStrictEqual } from 'node:util';
 import {
   WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema,
   type ResearchCatalog, type ResearchRequest, type ResearchReceipt, type ClaimAudit
 } from '@her2/shared';
 import { CLAUDE_MODEL, getProduct, productSources } from './evidence.js';
+import { openFdaReceipt } from './research-openfda.js';
 
 // Frozen local import, not network retrieval and not a clinical evidence feed.
 const snapshot = WorkbookDatasetSchema.parse(JSON.parse(readFileSync(new URL('./workbook.snapshot.json', import.meta.url), 'utf8')));
@@ -13,10 +15,11 @@ export const QUESTIONS: ResearchCatalog['questions'] = [
   { id: 'composition', title: 'Composition record audit', description: 'Audit only recorded payload and DAR, not efficacy or clinical safety.' },
   { id: 'linker_release', title: 'Linker release hypothesis', description: 'Audit the positive hypothesis: A cleavable linker establishes rapid release in blood.' },
   { id: 'payload_risk_transfer', title: 'Payload-to-risk hypothesis', description: 'Audit whether payload identity alone establishes patient safety or transferable clinical risk.' },
-  { id: 'workbook_safety', title: 'Workbook-to-safety hypothesis', description: 'Audit whether workbook information alone establishes patient safety or eligibility.' }
+  { id: 'workbook_safety', title: 'Workbook-to-safety hypothesis', description: 'Audit whether workbook information alone establishes patient safety or eligibility.' },
+  { id: 'label_identity', title: 'US label identity', description: 'Check brand, generic name and application number in a frozen openFDA identity record.' }
 ];
-export type ToolId = 'read_workbook' | 'read_label' | 'read_derived';
-export const CANONICAL_TOOLS: readonly ToolId[] = ['read_workbook', 'read_label', 'read_derived'];
+export type ToolId = 'read_workbook' | 'read_label' | 'read_derived' | 'read_openfda';
+export const CANONICAL_TOOLS: readonly ToolId[] = ['read_workbook', 'read_label', 'read_derived', 'read_openfda'];
 export function allowedTools(request: ResearchRequest): ToolId[] {
   return request.evidence_policy === 'workbook_only' ? ['read_workbook'] : [...CANONICAL_TOOLS];
 }
@@ -41,8 +44,12 @@ const derivedFields = new Set(['ADCdb_ID', 'ADC name', 'Linker class', 'Release 
 // Each actual invocation reads only the scoped product. Derived notes are never
 // promoted into either approved-label evidence or the original clinical API.
 export function readResearchTool(tool: ToolId, request: ResearchRequest): ResearchReceipt[] {
-  const product = getProduct(request.product_id)!;
   if (!allowedTools(request).includes(tool)) throw new Error('Source policy forbids tool.');
+  return trustedReceipts(tool, request);
+}
+function trustedReceipts(tool: ToolId, request: ResearchRequest): ResearchReceipt[] {
+  const product = getProduct(request.product_id)!;
+  if (tool === 'read_openfda') return [openFdaReceipt(request)];
   if (tool === 'read_label') {
     const source = productSources(request.product_id).find(item => item.id === labelSourceId(request.product_id));
     if (!source) return [];
@@ -82,22 +89,9 @@ export function readResearchTool(tool: ToolId, request: ResearchRequest): Resear
 
 // Check only receipts that were actually supplied by executed tools; this is not another retrieval.
 export function receiptIntegrity(receipt: ResearchReceipt, request: ResearchRequest): boolean {
-  if (receipt.product_id !== request.product_id) return false;
-  if (receipt.kind === 'label') {
-    if (request.evidence_policy !== 'all' || receipt.id !== labelSourceId(request.product_id)) return false;
-    const label = productSources(request.product_id).find(item => item.id === receipt.id);
-    return !!label && receipt.provenance === 'label_paraphrase_pending_review' && receipt.excerpt === label.excerpt && receipt.url === label.url && receipt.section === label.section && receipt.revision_date === label.revision_date && receipt.eligible_for_claim === ['composition', 'linker_release'].includes(request.question_id);
-  }
-  if (receipt.kind === 'derived' && request.evidence_policy !== 'all') return false;
-  const record = receipt.kind === 'workbook' ? snapshot.records.find(item => item.id === request.product_id) : snapshot.derived_records.find(item => item.id === request.product_id);
-  if (!record || !receipt.section.includes(`SHA-256 ${snapshot.sha256}`) || !receipt.section.includes(`row ${record.row};`) || receipt.url !== null || receipt.revision_date !== null) return false;
-  if (receipt.id !== (receipt.kind === 'workbook' ? workbookSourceId(request.product_id) : derivedSourceId(request.product_id)) || receipt.provenance !== (receipt.kind === 'workbook' ? 'user_uploaded_unverified' : 'derived_not_adcdb')) return false;
-  try {
-    const cells: unknown = JSON.parse(receipt.excerpt);
-    const expectedCells = record.cells.filter(cell => (receipt.kind === 'workbook' ? compositionFields : derivedFields).has(cell.field));
-    const expectedEligibility = receipt.kind === 'workbook' && request.question_id === 'composition' && ['ADCdb_ID', 'Payload', 'DAR'].every(field => expectedCells.some(cell => cell.field === field && cell.value !== null));
-    return JSON.stringify(cells) === JSON.stringify(expectedCells) && receipt.eligible_for_claim === expectedEligibility;
-  } catch { return false; }
+  const tool: ToolId = receipt.kind === 'openfda' ? 'read_openfda' : receipt.kind === 'label' ? 'read_label' : receipt.kind === 'derived' ? 'read_derived' : 'read_workbook';
+  if (!allowedTools(request).includes(tool)) return false;
+  return trustedReceipts(tool, request).some(expected => isDeepStrictEqual(expected, receipt));
 }
 
 export interface ExpectedClaim {
@@ -110,6 +104,13 @@ export interface ExpectedClaim {
   limitation: string;
 }
 export function expectedClaim(request: ResearchRequest, receipts: ResearchReceipt[]): ExpectedClaim {
+  if (request.question_id === 'label_identity') {
+    const source = receipts.find(receipt => receipt.kind === 'openfda' && receiptIntegrity(receipt, request));
+    return { id: 'label_identity', statement: 'The US openFDA record matches this product’s brand, generic name and application number.',
+      source_ids: source ? [source.id] : [], verdict: source ? 'supported' : 'insufficient',
+      explanation: source ? 'All three identity fields match the product-specific allowlist in the frozen US record.' : 'No matching openFDA record was retrieved. Workbook and UK label summaries cannot substitute for that record.',
+      limitation: 'Identity match is not FDA approval verification, clinical evidence or a current-label check. US and UK records remain separate.' };
+  }
   const has = (id: string) => receipts.some(receipt => receipt.id === id && receipt.product_id === request.product_id && receipt.eligible_for_claim);
   const workbook = has(workbookSourceId(request.product_id));
   // Explicit source ablation: not even hidden label metadata enters the claim.

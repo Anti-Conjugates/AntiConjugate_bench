@@ -1,7 +1,8 @@
 import { z } from 'zod';
+import { HarnessManifestSchema } from './harness.js';
 
-export const ResearchQuestionSchema = z.enum(['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety']);
-export const ResearchToolSchema = z.enum(['read_workbook', 'read_label', 'read_derived']);
+export const ResearchQuestionSchema = z.enum(['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety', 'label_identity']);
+export const ResearchToolSchema = z.enum(['read_workbook', 'read_label', 'read_derived', 'read_openfda']);
 export const EvidencePolicySchema = z.enum(['all', 'workbook_only']);
 export const IntegrityDrillSchema = z.enum(['none', 'cross_product_citation', 'derived_as_primary', 'invented_source']);
 export const WorkbookCellSchema = z.object({
@@ -36,10 +37,10 @@ export const ResearchRequestSchema = z.object({
   integrity_drill: IntegrityDrillSchema, synthetic_confirmed: z.literal(true)
 }).strict();
 export const ResearchReceiptSchema = z.object({
-  id: z.string(), product_id: z.string(), kind: z.enum(['workbook', 'label', 'derived']),
+  id: z.string(), product_id: z.string(), kind: z.enum(['workbook', 'label', 'derived', 'openfda']),
   title: z.string(), url: z.string().url().nullable(), section: z.string(),
   revision_date: z.string().nullable(), excerpt: z.string(),
-  provenance: z.enum(['user_uploaded_unverified', 'label_paraphrase_pending_review', 'derived_not_adcdb']),
+  provenance: z.enum(['user_uploaded_unverified', 'label_paraphrase_pending_review', 'derived_not_adcdb', 'openfda_identity_snapshot']),
   eligible_for_claim: z.boolean(), limitations: z.array(z.string())
 }).strict();
 export const ClaimAuditSchema = z.object({
@@ -69,6 +70,7 @@ export const ResearchResultSchema = z.object({
   receipts: z.array(ResearchReceiptSchema), challenges: z.array(ResearchChallengeSchema),
   unknowns: z.array(z.string()), next_actions: z.array(z.string()), trace: z.array(ResearchTraceSchema),
   dataset_sha256: z.string().regex(/^[a-f0-9]{64}$/),
+  harness: HarnessManifestSchema,
   clinical_status: z.literal('draft_pending_pharmacist'), eligibility: z.literal('not_assessed'),
   needs_human: z.literal(true), guardrail: z.object({status: z.literal('blocked'), reasons: z.array(z.string())}).strict(),
   answer_correctness_probability: z.null(), omission_probability: z.null()
@@ -88,3 +90,20 @@ export type ResearchTrace = z.infer<typeof ResearchTraceSchema>;
 export type ResearchResult = z.infer<typeof ResearchResultSchema>;
 export type ResearchDraft = z.infer<typeof ResearchDraftSchema>;
 export type ResearchEvent = z.infer<typeof ResearchEventSchema>;
+
+export function researchExecutionIsConsistent(result: ResearchResult) {
+  const kinds = { read_workbook: 'workbook', read_label: 'label', read_derived: 'derived', read_openfda: 'openfda' } as const;
+  const executed = result.trace.filter(step => step.stage === 'retrieve' && step.status === 'completed');
+  if (executed.length !== result.harness.tool_calls || new Set(executed.map(step => step.tool)).size !== executed.length
+    || result.trace.some(step => step.tool !== null && (step.stage !== 'retrieve' || step.status !== 'completed' || step.actor !== 'local_tool'))) return false;
+  const readIds: string[] = [];
+  for (const step of executed) {
+    if (step.tool === null || step.actor !== 'local_tool' || (result.evidence_policy === 'workbook_only' && step.tool !== 'read_workbook')) return false;
+    for (const id of step.source_ids) {
+      if (!result.receipts.some(receipt => receipt.id === id && receipt.kind === kinds[step.tool!] && receipt.product_id === result.product_id)) return false;
+      readIds.push(id);
+    }
+  }
+  return readIds.length === result.receipts.length && new Set(readIds).size === readIds.length
+    && result.receipts.every(receipt => readIds.includes(receipt.id));
+}

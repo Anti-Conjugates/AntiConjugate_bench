@@ -1,0 +1,53 @@
+{
+  "kind": "openfda_identity_snapshot",
+  "records": [
+    {
+      "product_id": "DRG0CYMEB",
+      "jurisdiction": "US",
+      "id": "27ab596b-f625-4866-b65a-54508ffce760",
+      "set_id": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
+      "version": "35",
+      "effective_time": "20260401",
+      "fetched_at": "2026-10-03T20:27:21.610Z",
+      "query_url": "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact%3A%22KADCYLA%22&limit=1&sort=effective_time%3Adesc",
+      "record_url": "https://api.fda.gov/drug/label.json?search=id%3A%2227ab596b-f625-4866-b65a-54508ffce760%22&limit=1",
+      "raw_response_sha256": "73aebd2f93a6b1b2ad1cddc011d15283323f896ba94459606c90486e09a21fcd",
+      "brand_name": [
+        "KADCYLA"
+      ],
+      "generic_name": [
+        "ADO-TRASTUZUMAB EMTANSINE"
+      ],
+      "application_number": [
+        "BLA125427"
+      ],
+      "manufacturer_name": [
+        "Genentech, Inc."
+      ]
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "jurisdiction": "US",
+      "id": "a4106ba4-f398-4663-980c-2b7195283edd",
+      "set_id": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
+      "version": "28",
+      "effective_time": "20260515",
+      "fetched_at": "2026-10-03T20:27:21.711Z",
+      "query_url": "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact%3A%22Enhertu%22&limit=1&sort=effective_time%3Adesc",
+      "record_url": "https://api.fda.gov/drug/label.json?search=id%3A%22a4106ba4-f398-4663-980c-2b7195283edd%22&limit=1",
+      "raw_response_sha256": "61ad277930c58cae40e7f0c346cf9e562ac843670bad08b45064c79bbd6ba3a9",
+      "brand_name": [
+        "Enhertu"
+      ],
+      "generic_name": [
+        "FAM-TRASTUZUMAB DERUXTECAN-NXKI"
+      ],
+      "application_number": [
+        "BLA761139"
+      ],
+      "manufacturer_name": [
+        "Daiichi Sankyo Inc."
+      ]
+    }
+  ]
+}

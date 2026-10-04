@@ -1,5 +1,6 @@
 import { z } from 'zod';
 export * from './research.js';
+export * from './harness.js';
 
 export const EngineSchema = z.enum(['evidence', 'claude']);
 export const OrganFunctionSchema = z.enum(['unknown', 'normal', 'mild', 'moderate', 'severe']);

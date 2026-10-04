@@ -13,6 +13,8 @@ import {
 } from './research-evidence.js';
 import { researchDraft, researchPlan } from './research-claude.js';
 import { loadRuntimeSkills, skillTraceDetail, type RuntimeSkillReader } from './research-skills.js';
+import { openFdaSourceId } from './research-openfda.js';
+import { HARNESS_LIMITS, harnessManifest } from './research-harness.js';
 
 export interface ResearchOptions extends RunOptions {
   signal?: AbortSignal;
@@ -25,7 +27,7 @@ function sameIds(left: string[], right: string[]) {
 export function auditResearchDraft(request: ResearchRequest, draft: ResearchDraft, receipts: ResearchReceipt[]) {
   // Independent expected claim and citation mapping; no model-provided statements/verdicts.
   const expected = expectedClaim(request, receipts);
-  const allowedIds = new Set([workbookSourceId(request.product_id), ...(request.evidence_policy === 'all' ? [labelSourceId(request.product_id), derivedSourceId(request.product_id)] : [])]);
+  const allowedIds = new Set([workbookSourceId(request.product_id), ...(request.evidence_policy === 'all' ? [labelSourceId(request.product_id), derivedSourceId(request.product_id), openFdaSourceId(request.product_id)] : [])]);
   const selectedIds = draft.claims.flatMap(claim => claim.source_ids);
   const cited = receipts.filter(receipt => selectedIds.includes(receipt.id));
   const productCorrect = draft.product_id === request.product_id && cited.every(receipt => receipt.product_id === request.product_id);
@@ -71,7 +73,7 @@ export async function runResearch(untrustedInput: unknown, options: ResearchOpti
   const request = parsed.data;
   const startRun = performance.now();
   // One total deadline, shared by planner, local tools, draft and handoff (never reset per call).
-  const budget = Math.min(60_000, Math.max(1, options.claude?.timeoutMs ?? 60_000));
+  const budget = Math.min(HARNESS_LIMITS.deadline_ms, Math.max(1, options.claude?.timeoutMs ?? HARNESS_LIMITS.deadline_ms));
   const remaining = () => {
     if (options.signal?.aborted) throw new ApiFailure('RESEARCH_CANCELLED', 499);
     const left = budget - (performance.now() - startRun);
@@ -99,15 +101,16 @@ export async function runResearch(untrustedInput: unknown, options: ResearchOpti
     remaining();
   };
   let started = performance.now();
-  await step('scope', 'controller', 'completed', `Exact product ${request.product_id}; hypothesis ${request.question_id}; UK local label summaries if permitted; local workbook snapshot ${DATASET_SHA256}. No patient inputs or clinical flags.`, started);
+  await step('scope', 'controller', 'completed', `Exact product ${request.product_id}; question ${request.question_id}; UK local label summaries and separate frozen US identity fields if permitted; local workbook snapshot ${DATASET_SHA256}. No patient inputs or clinical flags.`, started);
   started = performance.now();
   if (request.engine === 'claude' && !options.claude?.apiKey?.trim()) throw new ApiFailure('CLAUDE_NOT_CONFIGURED', 503);
   const skills = request.engine === 'claude' ? await boundedLocal(() => loadRuntimeSkills(request.question_id, options.skillReader)) : [];
   const plan = request.engine === 'evidence' ? allowedTools(request) : await researchPlan(request, skills, callOptions(), options.signal);
   await step('plan', request.engine === 'claude' ? 'claude' : 'controller', 'completed', request.engine === 'evidence'
-    ? `Deterministic bounded plan: ${plan.join(', ')}. Evidence mode explicitly uses no LLM or network retrieval; at most 3 unique local tools.`
-    : `One completed Claude Opus 5.5 bounded planner call selected ${plan.join(', ')}. Canonical execution order; at most 3 unique local tools; no provider tool forcing. ${skillTraceDetail(skills)} Metadata/descriptions were included in the actual planner request.`, started);
+    ? `Rules-only plan: ${plan.join(', ')}. No model or network retrieval; at most 4 unique local tools.`
+    : `One completed Claude Opus 5.5 planner call selected ${plan.join(', ')}. At most 4 unique local tools, no retries. ${skillTraceDetail(skills)} Metadata/descriptions were included in the planner request.`, started);
   const receipts: ResearchReceipt[] = [];
+  let toolCalls = 0;
   const unknowns = ['No individual release rate, blood kinetics, affinity window, patient risk or eligibility is established.', 'Original workbook extraction date, raw sheet name and primary assay provenance are unknown; this is a local snapshot, not live ADCdb.', 'Label summaries are local UK draft paraphrases pending pharmacist review, not complete approved labels.'];
   for (const tool of CANONICAL_TOOLS) {
     started = performance.now();
@@ -119,10 +122,11 @@ export async function runResearch(untrustedInput: unknown, options: ResearchOpti
       await step('retrieve', 'controller', 'skipped', `${tool} skipped: ${policyBlocked ? 'workbook_only source constraint' : 'not selected by bounded planner'}; no evidence from it was used.`, started);
       continue;
     }
+    if (++toolCalls > HARNESS_LIMITS.max_tool_calls) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);
     const found = readResearchTool(tool, request);
     receipts.push(...found);
     if (!found.length) unknowns.push(`${tool} returned no product-specific local receipt; planned evidence is unavailable.`);
-    await step('retrieve', 'local_tool', 'completed', `${tool} actually read ${found.length} exact-product local receipt(s). No network retrieval. ${tool === 'read_derived' ? 'Author-derived notes are ineligible as primary evidence.' : tool === 'read_workbook' ? 'Raw composition cells only; never promoted to clinical flags.' : 'Local pending-review product-specific base label summary.'}`, started, tool, found.map(receipt => receipt.id));
+    await step('retrieve', 'local_tool', 'completed', `${tool} actually read ${found.length} exact-product local receipt(s). No network retrieval. ${tool === 'read_derived' ? 'Author-derived notes are ineligible as primary evidence.' : tool === 'read_workbook' ? 'Raw composition cells only; never promoted to clinical flags.' : tool === 'read_openfda' ? 'Frozen US identity fields only; not a UK label or clinical sections.' : 'Local pending-review product-specific UK label summary.'}`, started, tool, found.map(receipt => receipt.id));
   }
   started = performance.now();
   const expected = expectedClaim(request, receipts);
@@ -144,11 +148,11 @@ export async function runResearch(untrustedInput: unknown, options: ResearchOpti
     id: randomUUID(), created_at: new Date().toISOString(), product_id: request.product_id, question_id: request.question_id,
     engine: request.engine, model: request.engine === 'claude' ? CLAUDE_MODEL : null, evidence_policy: request.evidence_policy,
     integrity_drill: request.integrity_drill, draft, draft_integrity: audit.accepted ? 'accepted' : 'rejected',
-    answer: `${RESEARCH_NOTICE} ${audit.accepted ? 'Bounded trusted-template claim audit shown below; evidence outcome is independent of the blocked clinical release.' : 'Independent identifier checks rejected the draft. No claims are accepted and all expected claim IDs are shown as omitted.'}${request.integrity_drill === 'none' ? '' : ' This is an intentionally developer-controlled software drill, not an observed model hallucination or clinical benchmark.'}`,
+    answer: `${RESEARCH_NOTICE} ${audit.accepted ? 'The citations passed the checks. The verdict on the claim is separate from the clinical gate, which stays blocked.' : 'The verifier rejected the draft. No claim was accepted and the expected claim id is listed as omitted.'}${request.integrity_drill === 'none' ? '' : ' A fault was injected on purpose after drafting. This is a software test, not observed model behaviour.'}`,
     claims: audit.claims.map(claim => ({ id: claim.id, statement: claim.statement, verdict: claim.verdict, explanation: claim.explanation, source_ids: claim.source_ids, limitation: claim.limitation })),
     omitted_claim_ids: audit.omitted_claim_ids, receipts, challenges: audit.challenges, unknowns,
     next_actions: ['Pharmacist must review the exact product and primary source provenance before any clinical use.', 'Verify the original workbook extraction, missing/truncated cells and full label wording outside this local snapshot audit.', 'Do not infer patient safety, eligibility, doses or release rates from these structural records.'],
-    trace, dataset_sha256: DATASET_SHA256, clinical_status: 'draft_pending_pharmacist', eligibility: 'not_assessed', needs_human: true,
+    trace, dataset_sha256: DATASET_SHA256, harness: harnessManifest(request, receipts, skills, toolCalls, budget), clinical_status: 'draft_pending_pharmacist', eligibility: 'not_assessed', needs_human: true,
     guardrail: { status: 'blocked', reasons }, answer_correctness_probability: null, omission_probability: null
   });
 }
