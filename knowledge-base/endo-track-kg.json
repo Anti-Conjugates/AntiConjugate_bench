@@ -12503,6 +12503,36 @@
       "source": "cand-d193-artemis",
       "target": "cand-d192-astraea",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d194-harmonia",
+      "target": "lane-d194-harmonia",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d194-harmonia",
+      "target": "receipt-d194-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d194-harmonia",
+      "target": "receipt-d194-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d194-harmonia",
+      "target": "scorecard-d194-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "scorecard-d194-benchmark",
+      "target": "review-d194-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d194-harmonia",
+      "target": "cand-d193-artemis",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -29681,12 +29711,80 @@
         "total_score": 72.78,
         "top_action": "one_story_lead_artifact"
       }
+    },
+    {
+      "id": "cand-d194-harmonia",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D194 (HARMONIA)",
+      "properties": {
+        "target": "SFRP2 CRD Pharmacophore",
+        "theme": "Fibroblast-to-Myofibroblast Phenotype Reversal: Peritoneal Collagen Remodeling & Microenvironmental Decellularization",
+        "net_delta_g_bind_kcal": -148.65806251905758,
+        "clash_barrier_kcal": 211.02579365885322,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T19:03:43.319929+00:00"
+      }
+    },
+    {
+      "id": "lane-d194-harmonia",
+      "type": "execution_lane",
+      "label": "Lane D194: HARMONIA Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 4000,
+        "nexus_job_id": "2a590b06-bf6d-4b1a-8a07-631b41a9933f",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.9921568627450981,
+        "asps_clean_fraction_aqora": 0.977,
+        "cross_platform_tv": 0.030302484788322398,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "receipt-d194-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D194)",
+      "properties": {
+        "job_id": "2a590b06-bf6d-4b1a-8a07-631b41a9933f",
+        "shots": 4000,
+        "clean_fraction": 0.9921568627450981
+      }
+    },
+    {
+      "id": "receipt-d194-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D194)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.977,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d194-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D194 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.030302484788322398
+      }
+    },
+    {
+      "id": "review-d194-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D194)",
+      "properties": {
+        "total_score": 80.6,
+        "top_action": "one_story_lead_artifact"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.165",
-  "updated_at": "2026-10-04T18:53:17.281466+00:00"
+  "version": "11.6.166",
+  "updated_at": "2026-10-04T19:03:43.320297+00:00"
 }
