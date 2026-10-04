@@ -88,7 +88,7 @@ async function readJson(response: Response): Promise<unknown> {
   }
 }
 
-async function responseData(response: Response): Promise<unknown> {
+export async function responseData(response: Response): Promise<unknown> {
   const data = await readJson(response);
   if (!response.ok) {
     const parsed = ApiErrorSchema.safeParse(data);

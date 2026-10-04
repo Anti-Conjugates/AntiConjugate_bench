@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-04T02:09:52.396Z",
+  "generated_at": "2026-10-04T09:04:56.809Z",
   "kind": "live_native_chat_smoke_not_quality_benchmark",
-  "code_sha256": "432382c5a653f30baed3cb84130349d38d4413425cdfa05c57bdc84e8756a83c",
+  "code_sha256": "d024370b1b2e49a383be4a6e833f9ca8415b6a45a0dd336ae77dd48ee6b19bc2",
   "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
   "provider_requests": 8,
   "request_cap": 16,
@@ -39,15 +39,32 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 4966,
+      "wall_ms": 5575,
       "clinical_release": "blocked"
     },
     {
       "id": "linker_counter_evidence",
-      "status": "failed",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 2,
       "actual_provider_requests": 2,
-      "error_code": "CLAUDE_REFUSED",
-      "wall_ms": 3719
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "linker_release",
+          "evidence_policy": "all",
+          "verdict": "contradicted",
+          "cited_source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 4340,
+      "clinical_release": "blocked"
     },
     {
       "id": "withhold_sources_followup",
@@ -68,7 +85,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 4744,
+      "wall_ms": 4596,
       "clinical_release": "blocked"
     },
     {
@@ -92,7 +109,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 4713,
+      "wall_ms": 4788,
       "clinical_release": "blocked"
     },
     {

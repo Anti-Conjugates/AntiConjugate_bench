@@ -1,5 +1,13 @@
-export type FailureCode = 'CLAUDE_NOT_CONFIGURED' | 'CLAUDE_UNAVAILABLE' | 'CLAUDE_TIMEOUT' | 'CLAUDE_INVALID_OUTPUT' | 'CLAUDE_CONTEXT_LIMIT' | 'CLAUDE_REFUSED' | 'INVALID_REQUEST' | 'UNKNOWN_PRODUCT' | 'RESEARCH_CANCELLED' | 'RESEARCH_SKILL_INVALID' | 'CHAT_BUDGET_EXCEEDED' | 'CHAT_BUSY';
+export type FailureCode = 'CLAUDE_NOT_CONFIGURED' | 'CLAUDE_UNAVAILABLE' | 'CLAUDE_TIMEOUT' | 'CLAUDE_INVALID_OUTPUT' | 'CLAUDE_CONTEXT_LIMIT' | 'CLAUDE_REFUSED' | 'INVALID_REQUEST' | 'UNKNOWN_PRODUCT' | 'RESEARCH_CANCELLED' | 'RESEARCH_SKILL_INVALID' | 'CHAT_BUDGET_EXCEEDED' | 'CHAT_BUSY' | 'MODEL_ARTIFACT_INVALID' | 'MODEL_REPLAY_REJECTED' | 'INFERENCE_NOT_CONFIGURED' | 'INFERENCE_UNAVAILABLE' | 'INFERENCE_TIMEOUT' | 'INFERENCE_INVALID_OUTPUT' | 'INFERENCE_BUDGET_EXCEEDED' | 'INFERENCE_BUSY';
 const messages: Record<FailureCode, string> = {
+  INFERENCE_NOT_CONFIGURED: 'Live inference is off on this server. Nothing was sent.',
+  INFERENCE_UNAVAILABLE: 'HF inference failed. No saved result replaced it.',
+  INFERENCE_TIMEOUT: 'Inference timed out. No saved result replaced it.',
+  INFERENCE_INVALID_OUTPUT: 'Inference output failed validation. No score was released.',
+  INFERENCE_BUDGET_EXCEEDED: 'This server reached its inference call limit. Nothing was sent.',
+  INFERENCE_BUSY: 'An inference request is already running. Try after it finishes.',
+  MODEL_ARTIFACT_INVALID: 'Model observations could not be verified. No score was returned.',
+  MODEL_REPLAY_REJECTED: 'Saved model observations do not match this build.',
   CHAT_BUDGET_EXCEEDED: 'The chat reached its call limit. No answer was released. Nothing switched to rules only.',
   CHAT_BUSY: 'Two chat questions are already running on this server. Try again after one finishes.',
   CLAUDE_NOT_CONFIGURED: 'No ANTHROPIC_API_KEY on the server, so Claude is off. Pick rules only. Nothing was run.',

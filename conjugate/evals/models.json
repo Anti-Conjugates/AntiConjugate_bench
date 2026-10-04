@@ -1,0 +1,1295 @@
+{
+  "version": "conjugate-model-controls-1",
+  "generated_at": "2026-10-04T09:02:43.181Z",
+  "snapshot_sha256": "b4cbcdc00ebf27761d7b8b307c4a889831333b6a9d7b1000c7a3e9a6f3490a33",
+  "code_sha256": "761feee2d1d9f97b5c521867f05376e44eeede92efba45e43cb1a18c71bc44e4",
+  "model_calls": 0,
+  "provider_requests": 0,
+  "rows": [
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-01",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-01",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-01",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-01",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-02",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-02",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-02",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-02",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-03",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-03",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-03",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-03",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-04",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-04",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-04",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-04",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-05",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-05",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-05",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-05",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-06",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-06",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-06",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-06",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-07",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-07",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-07",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-07",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-08",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-08",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-08",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "control-08",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-01",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-01",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-01",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-01",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-02",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-02",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-02",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-02",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-03",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-03",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-03",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-03",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-04",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-04",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-04",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-04",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-05",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-05",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-05",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-05",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-06",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-06",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-06",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-06",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-07",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-07",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-07",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-07",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-08",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-08",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-08",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-08",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-09",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-09",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-09",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-09",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-10",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-10",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-10",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-10",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-11",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-11",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-11",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-11",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-12",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-12",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-12",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0CYMEB",
+      "molecule_id": "sample-12",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-01",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-01",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-01",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-01",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-02",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-02",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-02",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-02",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-03",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-03",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-03",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-03",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-04",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-04",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-04",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-04",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-05",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-05",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-05",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-05",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-06",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-06",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-06",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-06",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 1
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-07",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-07",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-07",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-07",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 2
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-08",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-08",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-08",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "control-08",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 3
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-01",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-01",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-01",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-01",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-02",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-02",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-02",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-02",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-03",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-03",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-03",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-03",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-04",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-04",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-04",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-04",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-05",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-05",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-05",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-05",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-06",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-06",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-06",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-06",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-07",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-07",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-07",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-07",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-08",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-08",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-08",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-08",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-09",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-09",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-09",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-09",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-10",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-10",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-10",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-10",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-11",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-11",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-11",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-11",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-12",
+      "policy": "all",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-12",
+      "policy": "without_structure",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-12",
+      "policy": "without_sequence",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    },
+    {
+      "product_id": "DRG0ERKBH",
+      "molecule_id": "sample-12",
+      "policy": "chemistry_only",
+      "deterministic": true,
+      "replay_passed": true,
+      "representation_passes": 0
+    }
+  ],
+  "limits": [
+    "This replays imported observations; model inference is not repeated.",
+    "The probes are unconditioned adapter trials, not a linker-generation benchmark.",
+    "Synthetic graph checks and proxy rewards do not establish ADC performance."
+  ]
+}

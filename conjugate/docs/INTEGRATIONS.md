@@ -7,10 +7,15 @@ The user explicitly ruled out browser automation and intends to connect Hugging 
 | Integration | State | Responsibility |
 |---|---|---|
 | Deterministic evidence mode | Implemented, no external model call | Application |
-| Anthropic Claude Opus 5.5 | Server adapter implemented; live access unverified without replacement key | Application + user credentials |
-| Hugging Face | Not connected; exact model/revision/output contract not selected | User |
+| Anthropic Claude Opus 5.5 | Native tool loop tested locally; public Space remains disabled | Application + user credentials |
+| Hugging Face | Live HF inference adapter through local MCP, off by default; private checkpoint probes also retained | Server credentials and separate research observations |
+| ESM-2 650M | Live single-residue fill-mask scoring; separate pinned CPU embedding artifact, 29/31 matched records | Separate sequence observations |
+| AlphaFold DB | HER2 target-monomer confidence imported, canonical P04626 v6, CC-BY-4.0 | Separate structure observations |
+| OpenFold / ESMFold / AlphaFold 3 | Not run; no local or hosted folding adapter | Requires access and compute review |
 | Google Antigravity skills | Not connected or executed here | User |
 | ADCdb | Two exact structural references; no live model/data fetch during runs | Local allowlist |
+
+See [live inference and MCP](MODEL_INFERENCE.md) and [component-scorecard methods](MODEL_SCORECARD.md). Imported observations cannot change evidence verdicts or clinical fields. Checkpoint reuse terms remain unresolved; its adapter probes are not the ADC Linker-GPT paper's results. Public deployment requires new approval.
 
 ## Keep engineering tools separate from scientific outputs
 

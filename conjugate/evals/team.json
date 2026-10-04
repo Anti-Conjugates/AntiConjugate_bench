@@ -1,0 +1,1234 @@
+{
+  "generated_at": "2026-10-04T08:59:00.686Z",
+  "kind": "offline_agent_team_gates_and_replay_not_clinical_benchmark",
+  "framework": "@langchain/langgraph@1.4.19",
+  "graph": "scope_gate -> lead_plan -> evidence_worker (parallel, one per pair) -> verifier -> lead_select -> omission_gate -> (lead_plan once | answer)",
+  "code_sha256": "d024370b1b2e49a383be4a6e833f9ca8415b6a45a0dd336ae77dd48ee6b19bc2",
+  "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+  "limits": {
+    "deadline_ms": 60000,
+    "max_lead_calls": 4,
+    "max_worker_calls": 8,
+    "max_audits": 4,
+    "max_revisions": 1,
+    "retries": 0,
+    "max_request_bytes": 65536,
+    "max_response_bytes": 131072
+  },
+  "provider_requests": 40,
+  "request_cap": null,
+  "retries": 0,
+  "rows": [
+    {
+      "id": "rules_Kadcyla_composition_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 37,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_composition_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "workbook_only",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 8,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_linker_release_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "linker_release",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "linker_release",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 9,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_linker_release_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "linker_release",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "linker_release",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 7,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_payload_risk_transfer_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "payload_risk_transfer",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 8,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_payload_risk_transfer_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "payload_risk_transfer",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 6,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_workbook_safety_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "workbook_safety",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "workbook_safety",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 8,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_workbook_safety_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "workbook_safety",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "workbook_safety",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 9,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_label_identity_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "label_identity",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "label_identity",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 7,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Kadcyla_label_identity_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "label_identity",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "label_identity",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 6,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_composition_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 6,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_composition_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "workbook_only",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 5,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_linker_release_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "linker_release",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "linker_release",
+          "evidence_policy": "all",
+          "verdict": "contradicted",
+          "cited_source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 6,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_linker_release_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "linker_release",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "linker_release",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 4,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_payload_risk_transfer_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "payload_risk_transfer",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 5,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_payload_risk_transfer_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "payload_risk_transfer",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 5,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_workbook_safety_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "workbook_safety",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "workbook_safety",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 7,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_workbook_safety_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "workbook_safety",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "workbook_safety",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 5,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_label_identity_all",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "label_identity",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "label_identity",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 5,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "rules_Enhertu_label_identity_workbook_only",
+      "expected": "complete, zero model calls, one audit",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0ERKBH",
+          "question_id": "label_identity",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "label_identity",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:controller",
+        "evidence_worker:controller",
+        "verifier:deterministic_verifier",
+        "lead_select:controller",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 5,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "scripted_cooperative_team",
+      "expected": "complete with 2 lead and 4 worker calls, no revision",
+      "passed": true,
+      "status": "complete",
+      "revisions": 0,
+      "lead_calls": 2,
+      "worker_calls": 4,
+      "actual_provider_requests": 6,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        },
+        {
+          "audit_id": "audit-2",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        },
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:lead_agent",
+        "evidence_worker:worker_agent",
+        "evidence_worker:worker_agent",
+        "verifier:deterministic_verifier",
+        "verifier:deterministic_verifier",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 29,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "scripted_lead_drops_audit_once",
+      "expected": "omission gate forces one revision, then complete",
+      "passed": true,
+      "status": "complete",
+      "revisions": 1,
+      "lead_calls": 3,
+      "worker_calls": 4,
+      "actual_provider_requests": 7,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        },
+        {
+          "audit_id": "audit-2",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        },
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:lead_agent",
+        "evidence_worker:worker_agent",
+        "evidence_worker:worker_agent",
+        "verifier:deterministic_verifier",
+        "verifier:deterministic_verifier",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "lead_plan:controller",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 10,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "scripted_lead_drops_audit_always",
+      "expected": "incomplete with the dropped check shown as unanswered",
+      "passed": true,
+      "status": "incomplete",
+      "revisions": 1,
+      "lead_calls": 3,
+      "worker_calls": 4,
+      "actual_provider_requests": 7,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        },
+        {
+          "audit_id": "audit-2",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        },
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 1,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:lead_agent",
+        "evidence_worker:worker_agent",
+        "evidence_worker:worker_agent",
+        "verifier:deterministic_verifier",
+        "verifier:deterministic_verifier",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "lead_plan:controller",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 14,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "scripted_lead_under_plans",
+      "expected": "gate sends the lead back to plan the open pair",
+      "passed": true,
+      "status": "complete",
+      "revisions": 1,
+      "lead_calls": 4,
+      "worker_calls": 4,
+      "actual_provider_requests": 8,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        },
+        {
+          "audit_id": "audit-2",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        },
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:lead_agent",
+        "evidence_worker:worker_agent",
+        "verifier:deterministic_verifier",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "lead_plan:lead_agent",
+        "evidence_worker:worker_agent",
+        "verifier:deterministic_verifier",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 17,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "scripted_worker_refused",
+      "expected": "refused worker shown; no rules-only substitute",
+      "passed": true,
+      "status": "incomplete",
+      "revisions": 0,
+      "lead_calls": 2,
+      "worker_calls": 3,
+      "actual_provider_requests": 5,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        },
+        {
+          "audit_id": "audit-2",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "failed",
+          "code": "CLAUDE_REFUSED"
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 1,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:lead_agent",
+        "evidence_worker:worker_agent",
+        "evidence_worker:worker_agent:CLAUDE_REFUSED",
+        "verifier:deterministic_verifier",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 7,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "scripted_worker_wrong_audit_id",
+      "expected": "worker returning a foreign id fails visibly",
+      "passed": true,
+      "status": "incomplete",
+      "revisions": 0,
+      "lead_calls": 2,
+      "worker_calls": 4,
+      "actual_provider_requests": 6,
+      "workers": [
+        {
+          "audit_id": "audit-1",
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "status": "failed",
+          "code": "CLAUDE_INVALID_OUTPUT"
+        },
+        {
+          "audit_id": "audit-2",
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "status": "accepted",
+          "code": null
+        }
+      ],
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 1,
+      "trace": [
+        "scope_gate:controller",
+        "lead_plan:lead_agent",
+        "evidence_worker:worker_agent:CLAUDE_INVALID_OUTPUT",
+        "evidence_worker:worker_agent",
+        "verifier:deterministic_verifier",
+        "lead_select:lead_agent",
+        "omission_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 7,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "scripted_lead_invents_pair",
+      "expected": "turn stops; unauthorized pair never runs",
+      "passed": true,
+      "status": "failed",
+      "error_code": "CLAUDE_INVALID_OUTPUT",
+      "actual_provider_requests": 1,
+      "wall_ms": 2
+    },
+    {
+      "id": "clinical_boundary",
+      "expected": "stops at the scope gate, no provider call",
+      "passed": true,
+      "status": "outside_scope",
+      "revisions": 0,
+      "lead_calls": 0,
+      "worker_calls": 0,
+      "actual_provider_requests": 0,
+      "workers": [],
+      "claims": [],
+      "omitted_checks": 0,
+      "trace": [
+        "scope_gate:controller",
+        "answer:controller"
+      ],
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    }
+  ],
+  "limitations": [
+    "Scripted leads and workers are deterministic stand-ins that exercise the code gates; they say nothing about how often a real model misbehaves.",
+    "Live rows are a smoke test of the real provider under a request cap, recorded as they happened, including failures. They are not a quality benchmark.",
+    "The verifier and omission gate are app-owned definitions. Passing them does not establish scientific truth, clinical validity or model superiority.",
+    "Clinical release is blocked in every row."
+  ]
+}

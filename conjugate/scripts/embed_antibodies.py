@@ -1,15 +1,22 @@
 
 """Antibody variable-domain embeddings for workbook ADCs (exploratory, not clinical evidence)."""
-import csv, hashlib, json, datetime, sys
+import argparse, csv, hashlib, json, datetime
+from pathlib import Path
 import numpy as np, torch
 from transformers import AutoTokenizer, AutoModel
 from sklearn.decomposition import PCA
+from scipy.stats import spearmanr
 
 MODEL = "facebook/esm2_t33_650M_UR50D"
 REVISION = "08e4846e537177426273712802403f7ba8261b6c"
-CSV = "therasabdab.csv"
+ROOT = Path(__file__).resolve().parents[1]
+parser = argparse.ArgumentParser()
+parser.add_argument('--csv', type=Path, required=True, help='Thera-SAbDab CSV snapshot')
+parser.add_argument('--output', type=Path, default=ROOT / 'data/antibody_embeddings.json')
+args = parser.parse_args()
+CSV = args.csv
 SRC_URL = "https://opig.stats.ox.ac.uk/webapps/sabdab-sabpred/static/downloads/TheraSAbDab_SeqStruc_OnlineDownload.csv"
-SNAP = "/home/ubuntu/repos/her2-agent/apps/api/src/workbook.snapshot.json"
+SNAP = ROOT / 'apps/api/src/workbook.snapshot.json'
 
 csv_sha = hashlib.sha256(open(CSV, "rb").read()).hexdigest()
 snap = json.load(open(SNAP))
@@ -33,8 +40,8 @@ for rec in snap["records"]:
                     "payload": rec["payload"], "antibody_workbook": antibody, "therasabdab_name": hit["Therapeutic"],
                     "match_via": via, "vh": hit["HeavySequence"], "vl": hit["LightSequence"]})
 
-tok = AutoTokenizer.from_pretrained(MODEL, revision=REVISION)
-model = AutoModel.from_pretrained(MODEL, revision=REVISION).eval()
+tok = AutoTokenizer.from_pretrained(MODEL, revision=REVISION, trust_remote_code=False)
+model = AutoModel.from_pretrained(MODEL, revision=REVISION, use_safetensors=True, trust_remote_code=False).eval()
 torch.set_num_threads(8)
 
 def embed(seq):
@@ -77,7 +84,7 @@ for i in range(N):
         ident[i, j] = ident[j, i] = v
 
 iu = np.triu_indices(N, 1)
-spearman = float(np.corrcoef(np.argsort(np.argsort(cos[iu])), np.argsort(np.argsort(ident[iu])))[0, 1])
+spearman = float(spearmanr(cos[iu], ident[iu]).statistic)
 pca = PCA(n_components=2, random_state=0).fit(Xn)
 xy = pca.transform(Xn)
 
@@ -91,10 +98,10 @@ out = {
     "matched_count": N, "workbook_count": len(snap["records"]), "unmatched": unmatched,
     "pca_explained_variance": [round(float(v), 4) for v in pca.explained_variance_ratio_],
     "spearman_cosine_vs_identity": round(spearman, 4),
-    "records": [{k: v for k, v in r.items() if k not in ("vh", "vl")} | {"vh_length": len(r["vh"]), "vl_length": len(r["vl"]),
+    "records": [{k: v for k, v in r.items() if k not in ("vh", "vl")} | {"input_sequence_sha256": hashlib.sha256((r["vh"] + '\0' + r["vl"]).encode()).hexdigest(), "vh_length": len(r["vh"]), "vl_length": len(r["vl"]),
                 "pc1": round(float(xy[i, 0]), 5), "pc2": round(float(xy[i, 1]), 5)} for i, r in enumerate(records)],
     "cosine": [[round(float(v), 5) for v in row] for row in cos],
     "identity": [[round(float(v), 4) for v in row] for row in ident],
 }
-json.dump(out, open("antibody_embeddings.json", "w"), indent=1)
+json.dump(out, open(args.output, "w"), indent=1)
 print("matched", N, "unmatched", [u["name"] for u in unmatched], "spearman", out["spearman_cosine_vs_identity"], "pca", out["pca_explained_variance"])

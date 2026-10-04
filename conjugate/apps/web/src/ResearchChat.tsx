@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDownToLine, ArrowUp, MessageSquare, Square, RotateCcw } from 'lucide-react';
-import { chatConversationContext, type ChatAudit, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog } from '@her2/shared';
+import { TEAM_GRAPH, chatConversationContext, type ChatAudit, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog, type TeamNode, type TeamResult, type TeamStep } from '@her2/shared';
 import { describeFailure } from './boundaries';
 import { RequestEpoch } from './researchBoundaries';
 import { downloadChatResult, streamChatTurn } from './chatBoundaries';
+import { downloadTeamResult, streamTeamTurn } from './teamBoundaries';
 import { Receipt, receiptAnchor } from './AuditResult';
 import { compareResults, outcomeLabels, outcomeOf, policyLabels } from './auditSummary';
 import { productLabel } from './labels';
@@ -13,7 +14,27 @@ const STARTERS = [
   { title: 'Check the linker claim', question: 'Does Enhertu’s cleavable linker establish release in blood?', note: 'Find counter-evidence, then withhold it.' },
   { title: 'Find the evidence limit', question: 'Can the Enhertu workbook establish safety?', note: 'See what these records cannot establish.' }
 ];
-interface Turn { id: string; message: string; request: ChatRequest; steps: ChatStep[]; result: ChatResult | null; failure: ReturnType<typeof describeFailure> | null; state: 'pending' | 'complete' | 'failed' | 'cancelled' }
+type Harness = 'single' | 'team';
+type TurnResult = ChatResult | TeamResult;
+interface Turn { id: string; message: string; harness: Harness; request: ChatRequest; steps: (ChatStep | TeamStep)[]; result: TurnResult | null; failure: ReturnType<typeof describeFailure> | null; state: 'pending' | 'complete' | 'failed' | 'cancelled' }
+export const isTeamResult = (result: TurnResult): result is TeamResult => result.harness.version === 'conjugate-team-1';
+export const modelCalls = (result: TurnResult) => isTeamResult(result) ? result.harness.lead_calls + result.harness.worker_calls : result.harness.model_calls;
+const NODE_LABELS: Record<TeamNode, string> = { scope_gate: 'Scope gate', lead_plan: 'Lead plans', evidence_worker: 'Workers check', verifier: 'Verifier', lead_select: 'Lead selects', omission_gate: 'Omission gate', answer: 'Answer' };
+const ACTOR_LABELS: Record<TeamStep['actor'], string> = { controller: 'code', lead_agent: 'Claude lead', worker_agent: 'Claude worker', deterministic_verifier: 'verifier code' };
+const NODE_DETAILS: Record<TeamNode, string> = {
+  scope_gate: 'Question compiled to authorized product/question pairs. Raw text stops here.', lead_plan: 'Chose which pairs to hand to workers.', evidence_worker: 'Ran check_evidence once for its own pair.',
+  verifier: 'Audit checked against the scope contract before the lead sees it.', lead_select: 'Selected audit ids from the verified list.', omission_gate: 'Selected audits compared with the authorized pairs.', answer: 'Reply rendered from verified claims only.'
+};
+export function TeamGraph({ steps, pending }: { steps: TeamStep[]; pending: boolean }) {
+  const byNode = (node: TeamNode) => steps.filter(step => step.node === node);
+  return <div className="team-graph">
+    <ol className="team-nodes" aria-label="Graph nodes in order">{TEAM_GRAPH.nodes.map(node => { const reached = byNode(node); return <li key={node} data-state={reached.some(step => step.status === 'failed') ? 'failed' : reached.length ? 'done' : pending ? 'waiting' : 'skipped'}><span>{NODE_LABELS[node]}</span><small>{reached.length ? `${reached.length > 1 ? reached.length + ' × ' : ''}${ACTOR_LABELS[reached[0]!.actor]}` : pending ? 'waiting' : 'not reached'}</small></li>; })}</ol>
+    <details className="chat-steps" open={pending || undefined}><summary>Graph events <span className="mono-label">{steps.length} completed events</span></summary>
+      <ol>{steps.map(step => <li key={step.id}><span className="mono-label">{NODE_LABELS[step.node]} · {ACTOR_LABELS[step.actor]}{step.model_calls ? ` · ${step.model_calls} model call${step.model_calls > 1 ? 's' : ''}` : ''}</span><p>{step.scope ? `${step.audit_id}: ${step.scope.product_id} · ${step.scope.question_id} · ${policyLabels[step.scope.evidence_policy]}. ` : ''}{NODE_DETAILS[step.node]}{step.status === 'failed' && <> Failed: <code>{step.code}</code></>}</p></li>)}</ol>
+      {pending && <p>Waiting for the next server event.</p>}
+    </details>
+  </div>;
+}
 function ChatSteps({ steps, pending }: { steps: ChatStep[]; pending: boolean }) {
   return <details className="chat-steps" open={pending || undefined}><summary>Run steps <span className="mono-label">{steps.length} completed events</span></summary>
     <ol>{steps.map(step => <li key={step.id}><span className="mono-label">{step.actor === 'claude' ? 'Claude' : step.actor.replaceAll('_', ' ')} · {step.stage}</span><p>{step.detail}</p></li>)}</ol>
@@ -47,6 +68,8 @@ export function AuditCard({ audit, turnId, catalog, previous }: { audit: ChatAud
 
 export function ResearchChat({ catalog }: { catalog: ResearchCatalog }) {
   const [engine, setEngine] = useState<ChatRequest['engine']>(catalog.claude_configured ? 'claude' : 'evidence');
+  const [harness, setHarness] = useState<Harness>('single');
+  const exportTurn = (turn: Turn) => { const result = turn.result!; return isTeamResult(result) ? downloadTeamResult(result, turn.request, catalog) : downloadChatResult(result, turn.request, catalog); };
   const [confirmed, setConfirmed] = useState(false);
   const [draft, setDraft] = useState('');
   const [turns, setTurns] = useState<Turn[]>([]);
@@ -58,7 +81,7 @@ export function ResearchChat({ catalog }: { catalog: ResearchCatalog }) {
   const maxTurns = turns.length >= 8;
   useEffect(() => {
     const epoch = epochs.current; epoch.invalidate(); busy.current = false;
-    setTurns([]); setDraft(''); setConfirmed(false); setEngine(catalog.claude_configured ? 'claude' : 'evidence');
+    setTurns([]); setDraft(''); setConfirmed(false); setEngine(catalog.claude_configured ? 'claude' : 'evidence'); setHarness('single');
     return () => epoch.invalidate();
   }, [catalog]);
   const update = (id: string, change: (turn: Turn) => Turn) => setTurns(current => current.map(turn => turn.id === id ? change(turn) : turn));
@@ -69,15 +92,18 @@ export function ResearchChat({ catalog }: { catalog: ResearchCatalog }) {
     const request: ChatRequest = { message: message.trim(), engine, context: chatConversationContext(turns.map(turn => turn.request)), synthetic_confirmed: true };
     const ticket = epochs.current.begin();
     const id = crypto.randomUUID();
-    setTurns(current => [...current, { id, message: request.message, request, steps: [], result: null, failure: null, state: 'pending' }]);
+    setTurns(current => [...current, { id, message: request.message, harness, request, steps: [], result: null, failure: null, state: 'pending' }]);
     setDraft(''); composer.current?.focus();
     try {
-      const result = await streamChatTurn(request, catalog, AbortSignal.any([ticket.signal, AbortSignal.timeout(65000)]), step => { if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, steps: [...turn.steps, step] })); });
+      const onStep = (step: ChatStep | TeamStep) => { if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, steps: [...turn.steps, step] })); };
+      const signal = AbortSignal.any([ticket.signal, AbortSignal.timeout(65000)]);
+      const result: TurnResult = harness === 'team' ? await streamTeamTurn(request, catalog, signal, onStep) : await streamChatTurn(request, catalog, signal, onStep);
       if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, result, state: 'complete' }));
     } catch (error) { if (epochs.current.current(ticket)) update(id, turn => ({ ...turn, failure: describeFailure(error), state: 'failed' })); }
     finally { if (epochs.current.current(ticket)) busy.current = false; }
   };
-  const status = active ? active.steps.at(-1)?.detail ?? 'Waiting for the server.' : turns.at(-1)?.state === 'complete' ? 'Question checked. Sources and limits are available.' : turns.at(-1)?.state === 'cancelled' ? 'Cancelled here. No answer accepted.' : '';
+  const lastStep = active?.steps.at(-1);
+  const status = active ? (lastStep ? ('detail' in lastStep ? lastStep.detail : `${NODE_LABELS[lastStep.node]}: ${NODE_DETAILS[lastStep.node]}`) : 'Waiting for the server.') : turns.at(-1)?.state === 'complete' ? 'Question checked. Sources and limits are available.' : turns.at(-1)?.state === 'cancelled' ? 'Cancelled here. No answer accepted.' : '';
   return <section className="research-chat" aria-labelledby="chat-heading">
     <header className="chat-header"><div><p className="eyebrow">Evidence, not reassurance</p><h1 id="chat-heading">Ask about the evidence</h1><p>Compare Kadcyla and Enhertu. Check a claim. See where the sources stop.</p></div>
       <button className="button button-secondary" type="button" onClick={() => { epochs.current.invalidate(); busy.current = false; setTurns([]); setDraft(''); setExportError(null); composer.current?.focus(); }} disabled={!turns.length && !draft}><RotateCcw size={14} aria-hidden="true" />New chat</button>
@@ -85,24 +111,28 @@ export function ResearchChat({ catalog }: { catalog: ResearchCatalog }) {
     <div className="chat-mode"><fieldset disabled={Boolean(active)}><legend>Run with</legend><label><input type="radio" name="chat-engine" checked={engine === 'claude'} disabled={!catalog.claude_configured} onChange={() => setEngine('claude')} />Claude</label><label><input type="radio" name="chat-engine" checked={engine === 'evidence'} onChange={() => setEngine('evidence')} />Rules only</label></fieldset>
       <p>{catalog.claude_configured ? 'Claude chooses evidence checks. The independent verifier owns each verdict.' : 'Claude is off on this server. Rules-only answers use the same evidence checks.'}</p>
     </div>
+    <div className="chat-harness"><fieldset disabled={Boolean(active)}><legend>Harness</legend><label><input type="radio" name="chat-harness" checked={harness === 'single'} onChange={() => setHarness('single')} />Single agent</label><label><input type="radio" name="chat-harness" checked={harness === 'team'} onChange={() => setHarness('team')} />Agent team (LangGraph)</label></fieldset>
+      <p>{harness === 'team' ? 'A lead agent plans checks, one worker per check runs in its own context with one tool, code verifies every audit, and a gate sends the lead back once if it drops a check. Rules only runs the same graph with code in every seat.' : 'One agent, one tool loop: the model asks for evidence checks and returns audit ids. The verifier owns every verdict.'}</p>
+    </div>
     {!turns.length && <div className="chat-starters" aria-label="Start with a research question">{STARTERS.map(starter => <button key={starter.title} type="button" onClick={() => { setDraft(starter.question); composer.current?.focus(); }}><MessageSquare size={17} aria-hidden="true" /><strong>{starter.title}</strong><span>{starter.note}</span></button>)}</div>}
     <ol className="chat-thread" aria-label="Research conversation">{turns.map((turn, index) => <li key={turn.id}>
       <div className="chat-question"><span className="mono-label">Your question</span><p>{turn.message}</p></div>
       <div className="chat-answer">
-        <div className="chat-answer-top"><span className="mono-label">{turn.result?.harness.model_calls ? 'Claude + evidence checks' : turn.request.engine === 'claude' && turn.state === 'pending' ? 'Claude' : 'Evidence checks'}</span><span>{index + 1} / 8</span></div>
+        <div className="chat-answer-top"><span className="mono-label">{turn.result && modelCalls(turn.result) ? (isTeamResult(turn.result) ? 'Claude agent team + evidence checks' : 'Claude + evidence checks') : turn.request.engine === 'claude' && turn.state === 'pending' ? (turn.harness === 'team' ? 'Claude agent team' : 'Claude') : turn.harness === 'team' ? 'Evidence checks (team graph)' : 'Evidence checks'}</span><span>{index + 1} / 8</span></div>
         {turn.state === 'pending' && <p>Checking the question. Only completed server events appear below.</p>}
         {turn.state === 'cancelled' && <p>Cancelled here. No answer accepted. Provider billing may already have started.</p>}
         {turn.failure && <div role="alert" className="error-alert"><strong>Question not checked.</strong><p>{turn.failure.message}</p><code>{turn.failure.code}</code></div>}
         {turn.result && <>
           {!turn.result.audits.length && <p>{turn.result.reply}</p>}
-          {turn.result.audits.length > 0 && <p className="chat-scope">Recognized scope: {turn.result.scopes.length} checks · {policyLabels[turn.result.scopes[0]!.evidence_policy]}. {turn.result.harness.model_calls} model calls; {turn.result.harness.evidence_reads} local source reads.</p>}
+          {turn.result.audits.length > 0 && <p className="chat-scope">Recognized scope: {turn.result.scopes.length} checks · {policyLabels[turn.result.scopes[0]!.evidence_policy]}. {modelCalls(turn.result)} model calls; {turn.result.harness.evidence_reads} local source reads.{isTeamResult(turn.result) && ` ${turn.result.workers.length} workers; ${turn.result.revisions} revision${turn.result.revisions === 1 ? '' : 's'}.`}</p>}
+          {turn.result && isTeamResult(turn.result) && turn.result.workers.some(worker => worker.status === 'failed') && <ul className="team-workers" aria-label="Failed workers">{turn.result.workers.filter(worker => worker.status === 'failed').map(worker => <li key={worker.audit_id}><strong>{worker.audit_id} failed</strong><span>{worker.scope.product_id} · {worker.scope.question_id}</span><code>{worker.code}</code><span>No rules-only result replaced it.</span></li>)}</ul>}
           {turn.result.missing_scopes.length > 0 && <div className="chat-omissions"><strong>Unanswered checks</strong><ul>{turn.result.missing_scopes.map(scope => <li key={`${scope.product_id}-${scope.question_id}`}>{scope.product_id} · {scope.question_id}</li>)}</ul></div>}
           {turn.result.audits.filter(audit => turn.result!.selected_audit_ids.includes(audit.id)).map(audit => <AuditCard key={audit.id} audit={audit} turnId={turn.id} catalog={catalog} previous={turns.slice(0, index).flatMap(prior => prior.result?.audits ?? []).reverse().find(prior => prior.scope.product_id === audit.scope.product_id && prior.scope.question_id === audit.scope.question_id)} />)}
           {turn.result.audits.some(audit => !turn.result!.selected_audit_ids.includes(audit.id)) && <details><summary>Checked but omitted from the answer</summary>{turn.result.audits.filter(audit => !turn.result!.selected_audit_ids.includes(audit.id)).map(audit => <AuditCard key={audit.id} audit={audit} turnId={turn.id} catalog={catalog} previous={undefined} />)}</details>}
           <div className="chat-followups">{turn.result.followups.map(question => <button key={question} className="button button-secondary" type="button" disabled={Boolean(active) || maxTurns || !confirmed} onClick={() => { void send(question); }}>{question}</button>)}</div>
-          <details className="chat-run-record"><summary>Run record and export</summary><p>Server-reported fingerprints. Replay checks the saved audits and rendered reply; it does not rerun Claude.</p><dl><dt>Code SHA-256</dt><dd><code>{turn.result.harness.code_sha256}</code></dd><dt>Intent SHA-256</dt><dd><code>{turn.result.harness.intent_sha256}</code></dd><dt>Limits per question</dt><dd>4 model calls · 4 audits · 16 local source reads · 60 seconds · no retries</dd><dt>Local prompt packs</dt><dd>{turn.result.harness.skills.map(skill => <p key={skill.name}>{skill.name} @{skill.version} <code>{skill.sha256}</code></p>)}</dd></dl><button className="button button-secondary" type="button" onClick={() => { try { downloadChatResult(turn.result!, turn.request, catalog); } catch { setExportError('Export failed validation. Nothing was downloaded.'); } }}><ArrowDownToLine size={14} aria-hidden="true" />Export this turn</button></details>
+          <details className="chat-run-record"><summary>Run record and export</summary><p>Server-reported fingerprints. Replay checks the saved audits and rendered reply; it does not rerun Claude.</p><dl><dt>Code SHA-256</dt><dd><code>{turn.result.harness.code_sha256}</code></dd><dt>Intent SHA-256</dt><dd><code>{turn.result.harness.intent_sha256}</code></dd><dt>Limits per question</dt><dd>{isTeamResult(turn.result) ? '4 lead calls · 8 worker calls · 4 audits · 1 revision · 60 seconds · no retries · LangGraph recursion limit 24' : '4 model calls · 4 audits · 16 local source reads · 60 seconds · no retries'}</dd>{!isTeamResult(turn.result) && <><dt>Local prompt packs</dt><dd>{turn.result.harness.skills.map(skill => <p key={skill.name}>{skill.name} @{skill.version} <code>{skill.sha256}</code></p>)}</dd></>}</dl><button className="button button-secondary" type="button" onClick={() => { try { exportTurn(turn); } catch { setExportError('Export failed validation. Nothing was downloaded.'); } }}><ArrowDownToLine size={14} aria-hidden="true" />Export this turn</button></details>
         </>}
-        <ChatSteps steps={turn.steps} pending={turn.state === 'pending'} />
+        {turn.harness === 'team' ? <TeamGraph steps={turn.steps as TeamStep[]} pending={turn.state === 'pending'} /> : <ChatSteps steps={turn.steps as ChatStep[]} pending={turn.state === 'pending'} />}
       </div>
     </li>)}</ol>
     <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{status}</p>

@@ -7,6 +7,7 @@ const port = Number.isInteger(configuredPort) && configuredPort >= 1 && configur
 const host = process.env.HOST ?? '127.0.0.1';
 try {
   const app = await createApp({
+    inference: process.env.HF_INFERENCE_ENABLED === 'true' && process.env.HF_TOKEN ? { apiKey: process.env.HF_TOKEN } : {},
     claude: { ...(process.env.ANTHROPIC_API_KEY ? { apiKey: process.env.ANTHROPIC_API_KEY } : {}) },
     staticRoot: fileURLToPath(new URL('../../web/dist/', import.meta.url))
   });

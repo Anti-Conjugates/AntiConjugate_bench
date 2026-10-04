@@ -45,6 +45,25 @@ All calls in one native batch are validated before any executes. Arguments can c
 
 Accepted but unselected audits are visible as omitted checks. An accepted insufficient-evidence claim is different from an omission or provider failure. The UI does not hide these states behind one badge.
 
+## Agent team (LangGraph)
+
+The chat view has a second harness, **Agent team**, served at `POST /api/team/turns` and `/api/team/turns/stream`. It runs the same bounded question through a LangGraph.js `StateGraph` (`apps/api/src/team.ts`, contracts in `packages/shared/src/team.ts`):
+
+```text
+scope_gate (code) → lead_plan (Claude) → evidence_worker ×N (Claude, parallel via Send, one pair and one tool each)
+  → verifier (code) → lead_select (Claude) → omission_gate (code) → lead_plan once more, or answer (code)
+```
+
+- **Lead** plans which authorized product/question pairs to delegate and later selects audit ids. It receives recognized terms and pair ids, never raw text or source prose, and returns ids only.
+- **Workers** each get a fresh context, one assigned pair and one strict `check_evidence` tool whose enums are fixed to that pair. A worker that calls the wrong pair, returns a foreign id, is refused or fails validation is marked failed and shown; nothing substitutes a rules-only audit for it.
+- **Verifier** is the same deterministic code as the single-agent chat. It re-checks every returned audit against the scope contract before the lead ever sees it.
+- **Omission gate** compares selected audits with authorized pairs. If the lead dropped an accepted audit or never planned a pair, the lead gets one revision with that feedback. After that the gap is reported as an unanswered check.
+- **Rules-only** runs the identical graph with code in the lead and worker seats, so the public Space and the tests exercise the same control flow.
+
+Budget per turn: 60 s, 4 lead calls, 8 worker calls (two per worker), 4 audits, 1 revision, 0 retries. The graph has no cycles beyond the single gated revision and a recursion limit of 24. Trace steps are emitted after each superstep in audit order, so streams are deterministic even though workers run concurrently. `npm run eval:team` runs all 20 rules-only scopes plus scripted misbehaving leads and workers through the gates; `-- --live` runs four real Claude turns under a 24-request cap and records what happened, failures included.
+
+Why LangGraph and not the Claude Agent SDK: the Agent SDK's hosting model launches a Claude Code subprocess with a working directory per session. This app needs a stateless request boundary with fixed evidence tools, which a typed graph over the Messages API provides without a shell.
+
 ## Limits and cost
 
 One turn has one 60-second deadline, at most four attempted provider calls, four deterministic audits, sixteen source reads, zero retries, 65,536 provider-request bytes, 131,072 provider-response bytes, and 4,096 output tokens per model call including thinking. JSON/NDJSON routes share a two-active-question limit per server instance. Existing IP rate limits remain in effect. Disconnect and Cancel abort further work; they do not prove provider billing stopped.
