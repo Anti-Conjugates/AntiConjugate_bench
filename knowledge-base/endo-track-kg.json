@@ -12308,6 +12308,56 @@
       "source": "cand-d188-eirene",
       "target": "cand-d187-epione",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d189-soteria",
+      "target": "target-sfrp2-crd-his45-acidic-pocket",
+      "type": "TARGETS"
+    },
+    {
+      "source": "cand-d189-soteria",
+      "target": "lane-d189-soteria",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d189-soteria",
+      "target": "receipt-d189-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d189-soteria",
+      "target": "receipt-d189-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d189-soteria",
+      "target": "scorecard-d189-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "cand-d189-soteria",
+      "target": "doc-d189-clinician-endorsement",
+      "type": "ENDORSED_BY"
+    },
+    {
+      "source": "clinician-liana",
+      "target": "doc-d189-clinician-endorsement",
+      "type": "CO_SIGNED"
+    },
+    {
+      "source": "clinician-dr-natasha",
+      "target": "doc-d189-clinician-endorsement",
+      "type": "CO_SIGNED"
+    },
+    {
+      "source": "scorecard-d189-benchmark",
+      "target": "review-d189-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d189-soteria",
+      "target": "cand-d188-eirene",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -29077,12 +29127,114 @@
         "top_recommended_action": "one_story_lead_artifact",
         "confidence": 0.88
       }
+    },
+    {
+      "id": "cand-d189-soteria",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D189 (SOTERIA)",
+      "properties": {
+        "smiles": "FC1=CC(=C(C=C1)C(=O)NC2=CC(=O)C3=C(C2=O)C(=O)C4=C(C3=O)C(=CC(=C4O)C(C)C)C(=O)NCCCCN(C)C)F",
+        "target": "SFRP2 CRD His45 Acidic Microenvironment Pocket (pH 6.5)",
+        "indication": "Severe Deep Infiltrating Endometriosis & Acidic Peritoneal Fibrosis",
+        "net_delta_g_bind_kcal": -112.4,
+        "clash_barrier_kcal": 199.5,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T07:55:00Z"
+      }
+    },
+    {
+      "id": "lane-d189-soteria",
+      "type": "execution_lane",
+      "label": "Lane D189: SOTERIA Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 4000,
+        "nexus_job_id": "5a37e3fb-351f-4a5d-bd7a-ec8679dd2d7f",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.993,
+        "asps_clean_fraction_aqora": 0.986,
+        "cross_platform_tv": 0.0165,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "target-sfrp2-crd-his45-acidic-pocket",
+      "type": "biological_target",
+      "label": "SFRP2 CRD His45 Protonated Acidic Pocket (pH 6.5)",
+      "properties": {
+        "uniprot_id": "Q96HF1",
+        "domain": "Cysteine-Rich Domain (CRD)",
+        "pathway": "Non-Canonical Wnt/Ca2+ Fibrotic Adhesions",
+        "microenvironment": "Acidic peritoneal fluid (pH 6.4-6.8)",
+        "protonation_state": "His45+ imidazolium cation"
+      }
+    },
+    {
+      "id": "doc-d189-clinician-endorsement",
+      "type": "clinical_evidence",
+      "label": "D189 Clinician Co-Design Endorsement Dossier",
+      "properties": {
+        "lead_gynecologist": "Liana",
+        "consultant_surgeon": "Dr Natasha",
+        "ratification_date": "2026-10-04",
+        "authorized_protocol": "ENDOTRACK-ORG-2026-D189 3D patient-derived organoid microfluidics",
+        "status": "RATIFIED"
+      }
+    },
+    {
+      "id": "receipt-d189-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D189)",
+      "properties": {
+        "job_id": "5a37e3fb-351f-4a5d-bd7a-ec8679dd2d7f",
+        "shots": 4000,
+        "clean_fraction": 0.993,
+        "max_sem": 0.0228
+      }
+    },
+    {
+      "id": "receipt-d189-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D189)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.986,
+        "max_sem": 0.0162,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d189-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D189 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.0165,
+        "clash_barrier_kcal": 199.5,
+        "induced_fit_benefit_kcal": -98.2,
+        "net_delta_g_bind_kcal": -112.4
+      }
+    },
+    {
+      "id": "review-d189-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D189)",
+      "properties": {
+        "problem_value_pts": 26.04,
+        "tech_perf_pts": 25.92,
+        "engineering_pts": 16.64,
+        "total_score": 80.88,
+        "top_recommended_action": "one_story_lead_artifact",
+        "confidence": 0.85
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.160",
-  "updated_at": "2026-10-04T06:39:48.681775+00:00"
+  "version": "11.6.161",
+  "updated_at": "2026-10-04T06:56:45.007503+00:00"
 }
