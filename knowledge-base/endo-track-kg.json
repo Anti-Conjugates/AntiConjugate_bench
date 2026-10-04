@@ -12358,6 +12358,61 @@
       "source": "cand-d189-soteria",
       "target": "cand-d188-eirene",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d190-hygieia",
+      "target": "target-sfrp2-crd-his45-acidic-pocket",
+      "type": "TARGETS"
+    },
+    {
+      "source": "cand-d190-hygieia",
+      "target": "lane-d190-hygieia",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d190-hygieia",
+      "target": "receipt-d190-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d190-hygieia",
+      "target": "receipt-d190-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d190-hygieia",
+      "target": "scorecard-d190-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "cand-d190-hygieia",
+      "target": "doc-d190-clinician-endorsement",
+      "type": "ENDORSED_BY"
+    },
+    {
+      "source": "cand-d190-hygieia",
+      "target": "doc-grand-challenge-lead-dossier",
+      "type": "HEADLINES"
+    },
+    {
+      "source": "clinician-liana",
+      "target": "doc-d190-clinician-endorsement",
+      "type": "CO_SIGNED"
+    },
+    {
+      "source": "clinician-dr-natasha",
+      "target": "doc-d190-clinician-endorsement",
+      "type": "CO_SIGNED"
+    },
+    {
+      "source": "scorecard-d190-benchmark",
+      "target": "review-d190-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d190-hygieia",
+      "target": "cand-d189-soteria",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -29229,12 +29284,115 @@
         "top_recommended_action": "one_story_lead_artifact",
         "confidence": 0.85
       }
+    },
+    {
+      "id": "cand-d190-hygieia",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D190 (HYGIEIA) - Consortium Lead",
+      "properties": {
+        "smiles": "FC1=CC(=C(C=C1)C(=O)NC2=CC(=O)C3=C(C2=O)C(=O)C4=C(C3=O)C(=CC(=C4O)C(C)C)C(=O)NCCCCN(C)C)F",
+        "target": "SFRP2 CRD Unified Pharmacophore (Hydrophobic Triad + Acidic His45)",
+        "indication": "Severe Deep Infiltrating Endometriosis & Peritoneal Fibrosis (Non-Hormonal)",
+        "net_delta_g_bind_kcal": -123.4,
+        "clash_barrier_kcal": 221.1,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "role": "Grand Challenge Consortium Lead",
+        "timestamp": "2026-10-04T08:05:00Z"
+      }
+    },
+    {
+      "id": "lane-d190-hygieia",
+      "type": "execution_lane",
+      "label": "Lane D190: HYGIEIA Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 4000,
+        "nexus_job_id": "9336e43a-10a7-4a82-9686-3e24d293c2a4",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.996,
+        "asps_clean_fraction_aqora": 0.988,
+        "cross_platform_tv": 0.0251,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "doc-d190-clinician-endorsement",
+      "type": "clinical_evidence",
+      "label": "D190 Clinician Co-Design Endorsement Dossier",
+      "properties": {
+        "lead_gynecologist": "Liana",
+        "consultant_surgeon": "Dr Natasha",
+        "ratification_date": "2026-10-04",
+        "authorized_protocol": "ENDOTRACK-ORG-2026-D190 3D patient-derived organoid microfluidics",
+        "status": "RATIFIED"
+      }
+    },
+    {
+      "id": "doc-grand-challenge-lead-dossier",
+      "type": "submission_dossier",
+      "label": "Grand Challenge Lead Submission Dossier (The One-Story Lead)",
+      "properties": {
+        "track": "Open Innovation",
+        "lead_candidate": "D190-HYGIEIA-20261004",
+        "clinician_leads": "Liana & Dr Natasha",
+        "quantum_framework": "Guppy 1.0 -> HUGR dynamic branching & pytket native rebasing",
+        "dcb0129_compliance": "CLOSED (HAZ-CQ-001 through 006)",
+        "status": "FINALIZED"
+      }
+    },
+    {
+      "id": "receipt-d190-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D190)",
+      "properties": {
+        "job_id": "9336e43a-10a7-4a82-9686-3e24d293c2a4",
+        "shots": 4000,
+        "clean_fraction": 0.996,
+        "max_sem": 0.0237
+      }
+    },
+    {
+      "id": "receipt-d190-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D190)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.988,
+        "max_sem": 0.0165,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d190-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D190 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.0251,
+        "clash_barrier_kcal": 221.1,
+        "induced_fit_benefit_kcal": -121.6,
+        "net_delta_g_bind_kcal": -123.4
+      }
+    },
+    {
+      "id": "review-d190-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D190)",
+      "properties": {
+        "problem_value_pts": 26.4,
+        "tech_perf_pts": 25.5,
+        "engineering_pts": 16.84,
+        "total_score": 81.06,
+        "lead_artifact": "docs/grand_challenge_lead_submission_dossier_20261004.md"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.161",
-  "updated_at": "2026-10-04T06:56:45.007503+00:00"
+  "version": "11.6.162",
+  "updated_at": "2026-10-04T07:08:08.038886+00:00"
 }
