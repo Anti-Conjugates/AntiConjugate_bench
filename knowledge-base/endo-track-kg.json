@@ -12443,6 +12443,36 @@
       "source": "cand-d191-panacea",
       "target": "cand-d190-hygieia",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d192-astraea",
+      "target": "lane-d192-astraea",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d192-astraea",
+      "target": "receipt-d192-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d192-astraea",
+      "target": "receipt-d192-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d192-astraea",
+      "target": "scorecard-d192-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "scorecard-d192-benchmark",
+      "target": "review-d192-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d192-astraea",
+      "target": "cand-d191-panacea",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -29485,12 +29515,80 @@
         "total_score": 83.02000000000001,
         "top_action": "one_story_lead_artifact"
       }
+    },
+    {
+      "id": "cand-d192-astraea",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D192 (ASTRAEA)",
+      "properties": {
+        "target": "SFRP2 CRD Pharmacophore",
+        "theme": "Anti-Angiogenic Peritoneal Lock: Halting Microvascular Endothelial Sprouting & VEGF Synergism in DIE Nodules",
+        "net_delta_g_bind_kcal": -122.75882163927173,
+        "clash_barrier_kcal": 194.56384324017552,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T18:41:17.170122+00:00"
+      }
+    },
+    {
+      "id": "lane-d192-astraea",
+      "type": "execution_lane",
+      "label": "Lane D192: ASTRAEA Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 4000,
+        "nexus_job_id": "e7a01d38-a1b9-4dff-8654-2d4ee6e06fb7",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.9907692307692307,
+        "asps_clean_fraction_aqora": 0.979,
+        "cross_platform_tv": 0.01942346207645667,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "receipt-d192-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D192)",
+      "properties": {
+        "job_id": "e7a01d38-a1b9-4dff-8654-2d4ee6e06fb7",
+        "shots": 4000,
+        "clean_fraction": 0.9907692307692307
+      }
+    },
+    {
+      "id": "receipt-d192-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D192)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.979,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d192-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D192 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.01942346207645667
+      }
+    },
+    {
+      "id": "review-d192-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D192)",
+      "properties": {
+        "total_score": 75.26,
+        "top_action": "one_story_lead_artifact"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.163",
-  "updated_at": "2026-10-04T18:28:01.934647+00:00"
+  "version": "11.6.164",
+  "updated_at": "2026-10-04T18:41:17.170436+00:00"
 }
