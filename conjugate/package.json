@@ -21,6 +21,7 @@
     "replay:models": "tsx scripts/replay_models.ts",
     "eval:verifier": "tsx scripts/eval_verifier.ts",
     "eval:selection": "tsx scripts/eval_selection.ts",
+    "eval:live": "tsx scripts/eval_live.ts",
     "replay": "tsx scripts/replay_research.ts",
     "replay:chat": "tsx scripts/replay_chat.ts",
     "import:openfda": "tsx scripts/import_openfda.ts",

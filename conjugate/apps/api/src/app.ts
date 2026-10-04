@@ -12,6 +12,7 @@ import { registerResearchRoutes } from './research-routes.js';
 import { registerChatRoutes } from './chat-routes.js';
 import { registerTeamRoutes } from './team-routes.js';
 import { registerModelRoutes } from './models-routes.js';
+import { registerLiveRoutes } from './live-routes.js';
 import type { ChatOptions } from './chat.js';
 import type { McpInferenceOptions } from './model-mcp.js';
 
@@ -68,6 +69,7 @@ export async function createApp(options: AppOptions = {}): Promise<FastifyInstan
   registerChatRoutes(app, options);
   registerTeamRoutes(app, options);
   registerModelRoutes(app, options.inference);
+  registerLiveRoutes(app);
 
   if (options.staticRoot) {
     const root = resolve(options.staticRoot);
