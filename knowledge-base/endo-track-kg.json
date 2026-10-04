@@ -12258,6 +12258,56 @@
       "source": "cand-d187-epione",
       "target": "framework-nhs-dcb0129",
       "type": "cleared_under"
+    },
+    {
+      "source": "cand-d188-eirene",
+      "target": "target-sfrp2-crd-hydrophobic-triad",
+      "type": "TARGETS"
+    },
+    {
+      "source": "cand-d188-eirene",
+      "target": "lane-d188-eirene",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d188-eirene",
+      "target": "receipt-d188-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d188-eirene",
+      "target": "receipt-d188-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d188-eirene",
+      "target": "scorecard-d188-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "cand-d188-eirene",
+      "target": "doc-d188-clinician-endorsement",
+      "type": "ENDORSED_BY"
+    },
+    {
+      "source": "clinician-liana",
+      "target": "doc-d188-clinician-endorsement",
+      "type": "CO_SIGNED"
+    },
+    {
+      "source": "clinician-dr-natasha",
+      "target": "doc-d188-clinician-endorsement",
+      "type": "CO_SIGNED"
+    },
+    {
+      "source": "scorecard-d188-benchmark",
+      "target": "review-d188-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d188-eirene",
+      "target": "cand-d187-epione",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -28927,12 +28977,112 @@
         "auto_resolved": true,
         "source": "edge_integrity_resolution"
       }
+    },
+    {
+      "id": "cand-d188-eirene",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D188 (EIRENE)",
+      "properties": {
+        "smiles": "CC(C)CC1=CC(=O)C2=C(C1=O)C(=O)C3=C(C2=O)C(=CC(=C3O)C(C)C)C(=O)NCCCCN(C)C",
+        "target": "SFRP2 CRD Hydrophobic Pocket (V68, L72, I90)",
+        "indication": "Severe Deep Infiltrating Endometriosis & Peritoneal Fibrosis",
+        "net_delta_g_bind_kcal": -87.2,
+        "clash_barrier_kcal": 162.1,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T07:35:00Z"
+      }
+    },
+    {
+      "id": "lane-d188-eirene",
+      "type": "execution_lane",
+      "label": "Lane D188: EIRENE Dual Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 2000,
+        "nexus_job_id": "3f379c8c-813f-43c8-ae48-931f985fd03f",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 4000,
+        "asps_clean_fraction_nexus": 0.992,
+        "asps_clean_fraction_aqora": 0.98,
+        "cross_platform_tv": 0.0306,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "target-sfrp2-crd-hydrophobic-triad",
+      "type": "biological_target",
+      "label": "SFRP2 CRD Hydrophobic Core Triad (Val68, Leu72, Ile90)",
+      "properties": {
+        "uniprot_id": "Q96HF1",
+        "domain": "Cysteine-Rich Domain (CRD)",
+        "pathway": "Non-Canonical Wnt/Ca2+ Fibrotic Signaling",
+        "shear_stress_phenotype": "Fluid-flow induced conformational lock"
+      }
+    },
+    {
+      "id": "doc-d188-clinician-endorsement",
+      "type": "clinical_evidence",
+      "label": "D188 Clinician Co-Design Endorsement Dossier",
+      "properties": {
+        "lead_gynecologist": "Liana",
+        "consultant_surgeon": "Dr Natasha",
+        "ratification_date": "2026-10-04",
+        "authorized_protocol": "3D patient-derived organoid microfluidic shear-stress testing",
+        "status": "RATIFIED"
+      }
+    },
+    {
+      "id": "receipt-d188-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D188)",
+      "properties": {
+        "job_id": "3f379c8c-813f-43c8-ae48-931f985fd03f",
+        "shots": 2000,
+        "clean_fraction": 0.992,
+        "max_sem": 0.0321
+      }
+    },
+    {
+      "id": "receipt-d188-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D188)",
+      "properties": {
+        "shots": 4000,
+        "clean_fraction": 0.98,
+        "max_sem": 0.0223,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d188-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D188 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.0306,
+        "clash_barrier_kcal": 162.1,
+        "induced_fit_benefit_kcal": -71.7,
+        "net_delta_g_bind_kcal": -87.2
+      }
+    },
+    {
+      "id": "review-d188-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D188)",
+      "properties": {
+        "problem_value_pts": 26.58,
+        "tech_perf_pts": 22.44,
+        "total_score": 74.94,
+        "top_recommended_action": "one_story_lead_artifact",
+        "confidence": 0.88
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.159",
-  "updated_at": "2026-10-04T05:42:22.982832+00:00"
+  "version": "11.6.160",
+  "updated_at": "2026-10-04T06:39:48.681775+00:00"
 }
