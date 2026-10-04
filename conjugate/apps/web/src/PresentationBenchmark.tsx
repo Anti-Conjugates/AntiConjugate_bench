@@ -33,7 +33,11 @@ export function BenchmarkMode({ artifact }: { artifact: BenchmarkArtifact }) {
 /** Mode banner plus BenchmarkSection when the artifact parses; otherwise the pending note. */
 export function BenchmarkPanel({ load }: { load: BenchmarkLoad }) {
   if (load.state !== 'ready') return <BenchmarkPending load={load} />;
-  return <div className="bench-panel"><BenchmarkMode artifact={load.artifact} /><BenchmarkBreakdown artifact={load.artifact} /><BenchmarkSection artifact={load.artifact} /></div>;
+  return <div className="bench-panel">
+    <BenchmarkMode artifact={load.artifact} />
+    <BenchmarkBreakdown artifact={load.artifact} />
+    <details className="run-record"><summary>Browse the full table and all {load.artifact.rows.length} recorded rows</summary><BenchmarkSection artifact={load.artifact} /></details>
+  </div>;
 }
 
 /** Picks the first bait item that has both a plain-Claude row and a harness row. */
