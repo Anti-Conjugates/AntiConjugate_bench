@@ -12623,6 +12623,36 @@
       "source": "cand-d196-thalia",
       "target": "cand-d195-calliope",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d197-melpomene",
+      "target": "lane-d197-melpomene",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d197-melpomene",
+      "target": "receipt-d197-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d197-melpomene",
+      "target": "receipt-d197-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d197-melpomene",
+      "target": "scorecard-d197-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "scorecard-d197-benchmark",
+      "target": "review-d197-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d197-melpomene",
+      "target": "cand-d196-thalia",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -30005,12 +30035,80 @@
         "total_score": 77.7,
         "top_action": "one_story_lead_artifact"
       }
+    },
+    {
+      "id": "cand-d197-melpomene",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D197 (MELPOMENE)",
+      "properties": {
+        "target": "SFRP2 CRD Pharmacophore",
+        "theme": "Integrin alpha-v-beta-3 (avb3) Focal Adhesion Disruption: Halting Peritoneal Implantation of Regurgitated Menstrual Debris",
+        "net_delta_g_bind_kcal": -136.38757044385122,
+        "clash_barrier_kcal": 205.5920189177963,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T19:30:48.158447+00:00"
+      }
+    },
+    {
+      "id": "lane-d197-melpomene",
+      "type": "execution_lane",
+      "label": "Lane D197: MELPOMENE Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 8000,
+        "nexus_job_id": "d17986af-6749-4651-80cb-880015556d10",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.9909228441754917,
+        "asps_clean_fraction_aqora": 0.9825,
+        "cross_platform_tv": 0.02121100813885582,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "receipt-d197-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D197)",
+      "properties": {
+        "job_id": "d17986af-6749-4651-80cb-880015556d10",
+        "shots": 8000,
+        "clean_fraction": 0.9909228441754917
+      }
+    },
+    {
+      "id": "receipt-d197-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D197)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.9825,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d197-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D197 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.02121100813885582
+      }
+    },
+    {
+      "id": "review-d197-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D197)",
+      "properties": {
+        "total_score": 76.32,
+        "top_action": "one_story_lead_artifact"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.168",
-  "updated_at": "2026-10-04T19:23:47.404711+00:00"
+  "version": "11.6.169",
+  "updated_at": "2026-10-04T19:30:48.158817+00:00"
 }
