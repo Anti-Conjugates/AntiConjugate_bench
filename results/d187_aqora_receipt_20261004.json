@@ -1,0 +1,96 @@
+{
+  "lane": "D187",
+  "backend": "nexus:H2-Emulator",
+  "framework": "pytket with AutoRebase(GATESET) & ASPS parity syndrome",
+  "shots_per_arm": 1000,
+  "asps_enabled": true,
+  "arms": {
+    "Apo Unbound": {
+      "arm_id": 0,
+      "job_id": "AFByb3ZpZGVySm9iAaEFZ6SOc9G3NnrK2bc2aA",
+      "theta1_half_turns": 0.5,
+      "theta2_half_turns": 0.0,
+      "raw_shots": 1000,
+      "post_selected_shots": 990,
+      "parity_clean_fraction": 0.99,
+      "parity_counts": {
+        "0": 995,
+        "1": 5
+      },
+      "post_selected_counts": {
+        "1001": 511,
+        "1111": 479
+      },
+      "mean_energy_hartree": 0.037276636844390254,
+      "sem_hartree": 0.022170883958653135,
+      "tv_vs_theory": 0.016161616161616266
+    },
+    "Pre-Docking": {
+      "arm_id": 1,
+      "job_id": "AFByb3ZpZGVySm9iAaEFaJvveyKcvlheYg6JFw",
+      "theta1_half_turns": 0.375,
+      "theta2_half_turns": 0.05,
+      "raw_shots": 1000,
+      "post_selected_shots": 977,
+      "parity_clean_fraction": 0.977,
+      "parity_counts": {
+        "0": 991,
+        "1": 9
+      },
+      "post_selected_counts": {
+        "1001": 310,
+        "1010": 3,
+        "1100": 2,
+        "1111": 662
+      },
+      "mean_energy_hartree": 0.30588232790427633,
+      "sem_hartree": 0.02099973751265892,
+      "tv_vs_theory": 0.013757274012637054
+    },
+    "Bound Induced-Fit": {
+      "arm_id": 2,
+      "job_id": "AFByb3ZpZGVySm9iAaEFaiHwc0CRTRalkEf7yA",
+      "theta1_half_turns": 0.25,
+      "theta2_half_turns": 0.15,
+      "raw_shots": 1000,
+      "post_selected_shots": 989,
+      "parity_clean_fraction": 0.989,
+      "parity_counts": {
+        "0": 994,
+        "1": 6
+      },
+      "post_selected_counts": {
+        "0101": 1,
+        "0110": 1,
+        "1001": 133,
+        "1010": 9,
+        "1100": 56,
+        "1111": 789
+      },
+      "mean_energy_hartree": 0.4244307347471809,
+      "sem_hartree": 0.02183624968900892,
+      "tv_vs_theory": 0.05976433467882362
+    },
+    "Steric Clash": {
+      "arm_id": 3,
+      "job_id": "AFByb3ZpZGVySm9iAaEFa5FMckGrJd94_VZsvw",
+      "theta1_half_turns": 0.125,
+      "theta2_half_turns": 0.0,
+      "raw_shots": 1000,
+      "post_selected_shots": 977,
+      "parity_clean_fraction": 0.977,
+      "parity_counts": {
+        "0": 989,
+        "1": 11
+      },
+      "post_selected_counts": {
+        "0000": 1,
+        "1001": 33,
+        "1111": 943
+      },
+      "mean_energy_hartree": 0.7103505661346791,
+      "sem_hartree": 0.00807139917481023,
+      "tv_vs_theory": 0.004283365781204125
+    }
+  }
+}

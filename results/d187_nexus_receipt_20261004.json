@@ -1,0 +1,91 @@
+{
+  "lane": "D187",
+  "backend": "Helios-1E-lite",
+  "framework": "Guppy 1.0 -> HUGR with 2-bit selector & mid-circuit parity syndrome",
+  "total_shots": 2000,
+  "job_id": "7b9fdba3-4487-4a17-a1c9-664bacd0afb4",
+  "hugr_id": "47a11b74-27d6-46d2-8c9b-5379d7e49f89",
+  "timestamp_utc": "2026-10-04T05:28:49.685976+00:00",
+  "asps_enabled": true,
+  "arms": {
+    "Apo Unbound": {
+      "arm_id": 0,
+      "theta1_half_turns": 0.5,
+      "theta2_half_turns": 0.0,
+      "raw_shots": 498,
+      "post_selected_shots": 496,
+      "parity_clean_fraction": 0.9959839357429718,
+      "parity_counts": {
+        "0": 496,
+        "1": 2
+      },
+      "post_selected_counts": {
+        "1111": 235,
+        "1001": 261
+      },
+      "mean_energy_hartree": 0.023250441984331766,
+      "sem_hartree": 0.031296031056627364,
+      "tv_vs_theory": 0.026209677419354954
+    },
+    "Pre-Docking": {
+      "arm_id": 1,
+      "theta1_half_turns": 0.375,
+      "theta2_half_turns": 0.05,
+      "raw_shots": 502,
+      "post_selected_shots": 497,
+      "parity_clean_fraction": 0.9900398406374502,
+      "parity_counts": {
+        "0": 499,
+        "1": 3
+      },
+      "post_selected_counts": {
+        "1111": 346,
+        "1001": 149,
+        "1100": 2
+      },
+      "mean_energy_hartree": 0.3300526435411496,
+      "sem_hartree": 0.029155309715581158,
+      "tv_vs_theory": 0.008859491060915822
+    },
+    "Bound Induced-Fit": {
+      "arm_id": 2,
+      "theta1_half_turns": 0.25,
+      "theta2_half_turns": 0.15,
+      "raw_shots": 512,
+      "post_selected_shots": 508,
+      "parity_clean_fraction": 0.9921875,
+      "parity_counts": {
+        "0": 509,
+        "1": 3
+      },
+      "post_selected_counts": {
+        "1111": 416,
+        "1001": 59,
+        "1100": 29,
+        "1010": 4
+      },
+      "mean_energy_hartree": 0.4534969907207735,
+      "sem_hartree": 0.02977931983296796,
+      "tv_vs_theory": 0.05708661417322833
+    },
+    "Steric Clash": {
+      "arm_id": 3,
+      "theta1_half_turns": 0.125,
+      "theta2_half_turns": 0.0,
+      "raw_shots": 488,
+      "post_selected_shots": 483,
+      "parity_clean_fraction": 0.9897540983606558,
+      "parity_counts": {
+        "0": 483,
+        "1": 5
+      },
+      "post_selected_counts": {
+        "1111": 465,
+        "1001": 18
+      },
+      "mean_energy_hartree": 0.7057705780007085,
+      "sem_hartree": 0.012030941827473206,
+      "tv_vs_theory": 0.0007931529990150288
+    }
+  }
+}

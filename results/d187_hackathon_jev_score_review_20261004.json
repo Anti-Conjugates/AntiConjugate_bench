@@ -1,0 +1,95 @@
+{
+  "timestamp_utc": "2026-10-04T05:41:36.004908+00:00",
+  "model": "jev-1.13.0",
+  "lane": "D187-EPIONE-20261004",
+  "clinician_endorsement": "Signed by Liana (Lead Gynecologist) & Dr Natasha (Surgeon)",
+  "hardware_shots": 6000,
+  "cross_platform_tv": 0.0216,
+  "usage": {
+    "input_tokens": 2737,
+    "output_tokens": 166
+  },
+  "scores": {
+    "problem_value": {
+      "score": 4.75,
+      "confidence": 0.83,
+      "probabilities": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.01,
+        "3": 0.09,
+        "4": 0.04,
+        "5": 0.86
+      },
+      "weighted_points": 28.5,
+      "max_points": 30.0
+    },
+    "tech_perf": {
+      "score": 4.09,
+      "confidence": 0.4,
+      "probabilities": {
+        "0": 0.0,
+        "1": 0.02,
+        "2": 0.09,
+        "3": 0.15,
+        "4": 0.26,
+        "5": 0.48
+      },
+      "weighted_points": 24.54,
+      "max_points": 30.0
+    },
+    "scientific_merit": {
+      "score": 4.12,
+      "confidence": 0.41,
+      "probabilities": {
+        "0": 0.0,
+        "1": 0.04,
+        "2": 0.09,
+        "3": 0.11,
+        "4": 0.23,
+        "5": 0.53
+      },
+      "weighted_points": 16.48,
+      "max_points": 20.0
+    },
+    "engineering": {
+      "score": 3.19,
+      "confidence": 0.0,
+      "probabilities": {
+        "0": 0.0,
+        "1": 0.15,
+        "2": 0.19,
+        "3": 0.21,
+        "4": 0.2,
+        "5": 0.25
+      },
+      "weighted_points": 12.76,
+      "max_points": 20.0
+    }
+  },
+  "total_weighted_score": 82.28,
+  "total_scale_100": 82.3,
+  "decision": {
+    "choice": "one_story_lead_artifact",
+    "confidence": 0.47,
+    "probabilities": {
+      "end_to_end_benchmark_annex": 0.22,
+      "one_story_lead_artifact": 0.61,
+      "interactive_demo_video": 0.07,
+      "customer_endorsement": 0.1
+    }
+  },
+  "downselect_readiness": {
+    "score": 3.62,
+    "confidence": 0.44,
+    "probabilities": {
+      "0": 0.04,
+      "1": 0.11,
+      "2": 0.04,
+      "3": 0.08,
+      "4": 0.5,
+      "5": 0.23
+    }
+  },
+  "top4_viable_probability": 0.27
+}

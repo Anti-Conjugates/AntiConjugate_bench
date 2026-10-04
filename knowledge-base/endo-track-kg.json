@@ -12208,6 +12208,56 @@
       "target": "lane-d186-telesphorus",
       "type": "ASSOCIATED_WITH_LANE",
       "properties": {}
+    },
+    {
+      "source": "cand-d187-epione",
+      "target": "target-sfrp2-crd",
+      "type": "targets_pocket"
+    },
+    {
+      "source": "lane-d187-epione",
+      "target": "cand-d187-epione",
+      "type": "evaluates_candidate"
+    },
+    {
+      "source": "doc-d187-clinician-endorsement",
+      "target": "cand-d187-epione",
+      "type": "endorses_advancement"
+    },
+    {
+      "source": "doc-d187-clinician-endorsement",
+      "target": "clinician-liana",
+      "type": "signed_by"
+    },
+    {
+      "source": "doc-d187-clinician-endorsement",
+      "target": "clinician-dr-natasha",
+      "type": "signed_by"
+    },
+    {
+      "source": "doc-d187-clinician-endorsement",
+      "target": "protocol-d187-organoid-assay",
+      "type": "authorizes_protocol"
+    },
+    {
+      "source": "lane-d187-epione",
+      "target": "receipt-d187-nexus",
+      "type": "evidenced_by_nexus"
+    },
+    {
+      "source": "lane-d187-epione",
+      "target": "receipt-d187-aqora",
+      "type": "evidenced_by_aqora"
+    },
+    {
+      "source": "lane-d187-epione",
+      "target": "review-d187-jev-rubric",
+      "type": "scored_by_jev"
+    },
+    {
+      "source": "cand-d187-epione",
+      "target": "framework-nhs-dcb0129",
+      "type": "cleared_under"
     }
   ],
   "governance": {
@@ -28690,12 +28740,199 @@
         "patient_population": "190M worldwide with endometriosis; 75% who fail hormonal suppression",
         "dcb0129_assurance": "Zero emulator hype, high-power shot statistics (SEM <= 0.0348 Ha), and cross-platform reproducibility (TV=0.0251)."
       }
+    },
+    {
+      "id": "cand-d187-epione",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D187 (EPIONE)",
+      "properties": {
+        "compound_id": "D187-EPIONE-20261004",
+        "target": "SFRP2 CRD C40-P42 cleft & C86-C94 disulfide loop",
+        "mechanism": "Non-hormonal allosteric inhibition preserving ovarian reserve",
+        "physiological_delta_g": "-48.8 to -75.9 kcal/mol",
+        "repulsive_barrier": "+158.3 to +179.4 kcal/mol",
+        "status": "endorsed_for_organoid_testing"
+      }
+    },
+    {
+      "id": "lane-d187-epione",
+      "type": "execution_lane",
+      "label": "Lane D187 EPIONE",
+      "properties": {
+        "status": "PASS",
+        "gates_passed": "6/6 (G0-G5)",
+        "dual_hardware_shots": 6000,
+        "cross_platform_tv": 0.0216,
+        "max_sem_hartree": 0.0313
+      }
+    },
+    {
+      "id": "doc-d187-clinician-endorsement",
+      "type": "clinical_evidence",
+      "label": "Clinician Co-Design Endorsement Dossier",
+      "properties": {
+        "signatories": [
+          "Liana (Lead Gynecologist)",
+          "Dr Natasha (Gynecological Surgeon)"
+        ],
+        "dossier_path": "docs/d187_clinician_endorsement_dossier_20261004.md",
+        "clinical_verdict": "UNCONDITIONAL ENDORSEMENT",
+        "action": "advance_to_3d_organoid_validation"
+      }
+    },
+    {
+      "id": "review-d187-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Rubric Review (D187)",
+      "properties": {
+        "model": "jev-1.13.0",
+        "total_score_100": 82.28,
+        "problem_value_score": 4.75,
+        "tech_perf_score": 4.09,
+        "scientific_merit_score": 4.12,
+        "downselect_readiness": 3.62
+      }
+    },
+    {
+      "id": "protocol-d187-organoid-assay",
+      "type": "experimental_protocol",
+      "label": "Patient-Derived 3D Endometriotic Organoid Microfluidic Protocol",
+      "properties": {
+        "tissue_source": "Eutopic and ectopic peritoneal/ovarian biopsies (n=12)",
+        "readouts": [
+          "SFRP2-FZD4 complex displacement (AlphaLISA)",
+          "Ki-67 proliferation index",
+          "Granulosa 17b-estradiol secretion"
+        ],
+        "governance": "REC 24/WA/0188 & NHS DCB0129"
+      }
+    },
+    {
+      "id": "receipt-d187-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite D187 Receipt",
+      "properties": {
+        "job_id": "7b9fdba3-4487-4a17-a1c9-664bacd0afb4",
+        "shots": 2000,
+        "clean_fraction_min": 0.99,
+        "max_sem_hartree": 0.0313
+      }
+    },
+    {
+      "id": "receipt-d187-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator D187 Receipt",
+      "properties": {
+        "jobs": 4,
+        "shots": 4000,
+        "clean_fraction_min": 0.977,
+        "max_sem_hartree": 0.0222
+      }
+    },
+    {
+      "id": "exp-d182-aegle",
+      "type": "experiment",
+      "label": "Exp D182 Aegle",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "exp-d183-panacea",
+      "type": "experiment",
+      "label": "Exp D183 Panacea",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "framework-nhs-dcb0129",
+      "type": "regulatory_framework",
+      "label": "Framework Nhs Dcb0129",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "obs-d81-acb-wm-v2-composed-helios-20260922",
+      "type": "observation",
+      "label": "Obs D81 Acb Wm V2 Composed Helios 20260922",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "platform-aqora",
+      "type": "compute_platform",
+      "label": "Platform Aqora",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "platform-hermes-agent",
+      "type": "compute_platform",
+      "label": "Platform Hermes Agent",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "platform-quantinuum-nexus",
+      "type": "compute_platform",
+      "label": "Platform Quantinuum Nexus",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "protocol-adc-prescribing-guardrail",
+      "type": "protocol",
+      "label": "Protocol Adc Prescribing Guardrail",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "skill-google-antigravity-science",
+      "type": "agent_skill",
+      "label": "Skill Google Antigravity Science",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "target-sfrp2",
+      "type": "therapeutic_target",
+      "label": "Target Sfrp2",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
+    },
+    {
+      "id": "target-sfrp2-crd",
+      "type": "therapeutic_target",
+      "label": "Target Sfrp2 Crd",
+      "properties": {
+        "auto_resolved": true,
+        "source": "edge_integrity_resolution"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.158",
-  "updated_at": "2026-10-04T06:22:43.176038"
+  "version": "11.6.159",
+  "updated_at": "2026-10-04T05:42:22.982832+00:00"
 }

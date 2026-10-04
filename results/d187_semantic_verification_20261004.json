@@ -1,0 +1,69 @@
+{
+  "candidate": "D187-EPIONE-20261004",
+  "timestamp_utc": "2026-10-04T05:27:54.083240+00:00",
+  "gate_g0": {
+    "status": "PASS",
+    "n_pauli_terms": 15,
+    "nuclear_repulsion": 1.482015
+  },
+  "gate_g1": {
+    "status": "PASS",
+    "max_tv": 5.000000000018878e-06
+  },
+  "arms": {
+    "arm_0": {
+      "name": "Apo Unbound",
+      "theta1_half_turns": 0.5,
+      "theta2_half_turns": 0.0,
+      "probabilities": {
+        "1001": 0.4999999999999999,
+        "1111": 0.5000000000000001
+      },
+      "parity_clean": true,
+      "energy_hartree": 0.059843787202602465,
+      "energy_kcal": 37.552543433449145,
+      "tv_analytic": 5.0000000000050004e-06
+    },
+    "arm_1": {
+      "name": "Pre-Docking",
+      "theta1_half_turns": 0.375,
+      "theta2_half_turns": 0.05,
+      "probabilities": {
+        "1001": 0.30675823598603014,
+        "1010": 0.0019000478314249096,
+        "1111": 0.6913417161825449
+      },
+      "parity_clean": true,
+      "energy_hartree": 0.3269399855310355,
+      "energy_kcal": 205.1579383707776,
+      "tv_analytic": 4.999999999993833e-06
+    },
+    "arm_2": {
+      "name": "Bound Induced-Fit",
+      "theta1_half_turns": 0.25,
+      "theta2_half_turns": 0.15,
+      "probabilities": {
+        "1001": 0.13846574691669244,
+        "1010": 0.007980862490033777,
+        "1111": 0.8535533905932737
+      },
+      "parity_clean": true,
+      "energy_hartree": 0.5533729024896177,
+      "energy_kcal": 347.2467390020311,
+      "tv_analytic": 4.999999999961632e-06
+    },
+    "arm_3": {
+      "name": "Steric Clash",
+      "theta1_half_turns": 0.125,
+      "theta2_half_turns": 0.0,
+      "probabilities": {
+        "1001": 0.03806023374435662,
+        "1111": 0.9619397662556434
+      },
+      "parity_clean": true,
+      "energy_hartree": 0.7046632023476482,
+      "energy_kcal": 442.18283549679256,
+      "tv_analytic": 5.000000000018878e-06
+    }
+  }
+}

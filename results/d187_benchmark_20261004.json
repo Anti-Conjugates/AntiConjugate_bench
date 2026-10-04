@@ -1,0 +1,64 @@
+{
+  "lane": "D187",
+  "candidate": "D187-EPIONE-20261004",
+  "timestamp_utc": "2026-10-04T05:39:25.347867+00:00",
+  "overall_status": "PASS",
+  "gates": {
+    "G0": {
+      "pass": true,
+      "details": "15 Pauli terms, E_nuc=1.482015 Ha"
+    },
+    "G1": {
+      "pass": true,
+      "max_tv": 5.000000000018878e-06
+    },
+    "G2": {
+      "pass": true,
+      "nexus_job": "7b9fdba3-4487-4a17-a1c9-664bacd0afb4",
+      "aqora_jobs": [
+        "AFByb3ZpZGVySm9iAaEFZ6SOc9G3NnrK2bc2aA",
+        "AFByb3ZpZGVySm9iAaEFaJvveyKcvlheYg6JFw",
+        "AFByb3ZpZGVySm9iAaEFaiHwc0CRTRalkEf7yA",
+        "AFByb3ZpZGVySm9iAaEFa5FMckGrJd94_VZsvw"
+      ]
+    },
+    "G3": {
+      "pass": true,
+      "min_clean_fraction": 0.977
+    },
+    "G4": {
+      "pass": true,
+      "max_cross_tv": 0.021585869764257196,
+      "tvs_by_arm": {
+        "Apo Unbound": 0.010048061257738689,
+        "Pre-Docking": 0.02056968216669515,
+        "Bound Induced-Fit": 0.021585869764257196,
+        "Steric Clash": 0.0034902127821890964
+      }
+    },
+    "G5": {
+      "pass": true,
+      "max_sem_hartree": 0.031296031056627364,
+      "clash_barrier_kcal": {
+        "nexus": 158.3040660740436,
+        "aqora": 179.41740301817921
+      },
+      "induced_fit_benefit_kcal": {
+        "nexus": -62.67314205432871,
+        "aqora": -80.91249305330126
+      },
+      "physiological_delta_g_bind_kcal": {
+        "nexus": -48.816214484931535,
+        "aqora": -75.85713564364589
+      }
+    }
+  },
+  "closed_hazards": [
+    "HAZ-CQ-001 (Quantum Bit-Flip Noise): Closed via ASPS (100% parity pure post-selection)",
+    "HAZ-CQ-002 (Steric Specificity False-Positives): Closed via steep repulsive barrier > +150 kcal/mol",
+    "HAZ-CQ-003 (Induced-Fit Free Energy Bias): Closed via 2D Givens orbital relaxation",
+    "HAZ-CQ-004 (Solvation Neglect): Closed via physiological PB SASA desolvation cycle",
+    "HAZ-CQ-005 (Under-Sampling Precision Bounds): Closed via high-power shot scaling (SEM <= 0.0350 Ha)",
+    "HAZ-CQ-006 (Cross-Platform Compiler Drift): Closed via TV(Helios, Aqora) <= 0.0350"
+  ]
+}
