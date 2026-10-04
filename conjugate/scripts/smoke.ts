@@ -1,15 +1,25 @@
 import assert from 'node:assert/strict';
-import { ApiErrorSchema, CatalogSchema, RunRequestSchema, RunResultSchema, ResearchCatalogSchema, ResearchRequestSchema, ResearchResultSchema, ResearchEventSchema, researchExecutionIsConsistent, ChatResultSchema, ChatEventSchema, chatExecutionIsConsistent } from '@her2/shared';
+import { ApiErrorSchema, CatalogSchema, RunRequestSchema, RunResultSchema, ResearchCatalogSchema, ResearchRequestSchema, ResearchResultSchema, ResearchEventSchema, researchExecutionIsConsistent, ChatResultSchema, ChatEventSchema, chatExecutionIsConsistent, TeamResultSchema, TeamEventSchema, teamExecutionIsConsistent } from '@her2/shared';
 
 const base = process.env.SMOKE_BASE_URL ?? 'http://127.0.0.1:5173';
+// The API allows 30 requests a minute per client. This script makes more than that, so it
+// waits out the window the server reports instead of weakening the limit or failing on 429.
+let resumeAt = 0;
+async function paced(input: URL, init: RequestInit) {
+  for (let attempt = 0; ; attempt += 1) {
+    if (Date.now() < resumeAt) await new Promise(resolve => setTimeout(resolve, resumeAt - Date.now()));
+    const response = await fetch(input, { ...init, signal: AbortSignal.timeout(10_000) });
+    const reset = Number(response.headers.get('x-ratelimit-reset') ?? 60);
+    if (response.status === 429 || response.headers.get('x-ratelimit-remaining') === '0') resumeAt = Date.now() + (reset + 1) * 1000;
+    if (response.status === 429 && attempt === 0) continue;
+    return response;
+  }
+}
 async function get(path: string) {
-  return fetch(new URL(path, base), { signal: AbortSignal.timeout(10_000) });
+  return paced(new URL(path, base), {});
 }
 async function post(body: unknown) {
-  return fetch(new URL('/api/runs', base), {
-    method: 'POST', headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(body), signal: AbortSignal.timeout(10_000)
-  });
+  return paced(new URL('/api/runs', base), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
 }
 
 const page = await get('/');
@@ -76,8 +86,7 @@ const researchInput = ResearchRequestSchema.parse({
   evidence_policy: 'all', integrity_drill: 'none', synthetic_confirmed: true
 });
 async function researchPost(body: unknown, path = '/api/research/runs') {
-  return fetch(new URL(path, base), { method: 'POST', headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(body), signal: AbortSignal.timeout(10_000) });
+  return paced(new URL(path, base), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
 }
 for (const product_id of ['DRG0CYMEB', 'DRG0ERKBH'] as const) {
   for (const question of researchCatalog.questions) {
@@ -148,4 +157,9 @@ const chatResult = ChatResultSchema.parse(await chatResponse.json()); assert.ok(
 const chatStream = await researchPost({ ...chat, message: 'What changes with only workbook evidence?', context: chatResult.scopes }, '/api/chat/turns/stream');
 const chatEvents = (await chatStream.text()).trim().split('\n').map(line => ChatEventSchema.parse(JSON.parse(line))); const chatFinal = chatEvents.at(-1)!; assert.equal(chatFinal.type, 'result');
 if (chatFinal.type === 'result') { assert.ok(chatExecutionIsConsistent(chatFinal.result)); assert.equal(chatFinal.result.audits[0]?.result.claims[0]?.verdict, 'insufficient'); assert.equal(chatFinal.result.harness.evidence_reads, 1); assert.deepEqual(chatEvents.slice(0, -1).map(event => event.type === 'trace' ? event.step : null), chatFinal.result.trace); }
-console.info('PASS: HTTP page/proxy, context API, research questions, source withholding, citation faults, chat and follow-up NDJSON, provenance and safe errors. No model or browser called.');
+const teamResponse = await researchPost({ message: 'Compare Kadcyla and Enhertu composition.', engine: 'evidence', synthetic_confirmed: true }, '/api/team/turns'); assert.equal(teamResponse.status, 200);
+const teamResult = TeamResultSchema.parse(await teamResponse.json()); assert.ok(teamExecutionIsConsistent(teamResult)); assert.equal(teamResult.harness.lead_calls, 0); assert.equal(teamResult.audits.length, 2); assert.equal(teamResult.trace.filter(step => step.node === 'evidence_worker').length, 2);
+const teamStream = await researchPost({ ...chat, engine: 'evidence' }, '/api/team/turns/stream');
+const teamEvents = (await teamStream.text()).trim().split('\n').map(line => TeamEventSchema.parse(JSON.parse(line))); const teamFinal = teamEvents.at(-1)!; assert.equal(teamFinal.type, 'result');
+if (teamFinal.type === 'result') { assert.ok(teamExecutionIsConsistent(teamFinal.result)); assert.equal(teamFinal.result.audits[0]?.result.claims[0]?.verdict, 'contradicted'); assert.deepEqual(teamEvents.slice(0, -1).map(event => event.type === 'trace' ? event.step.node : event.type), teamFinal.result.trace.map(step => step.node)); }
+console.info('PASS: HTTP page/proxy, context API, research questions, source withholding, citation faults, chat and follow-up NDJSON, agent-team graph turns, provenance and safe errors. No model or browser called.');

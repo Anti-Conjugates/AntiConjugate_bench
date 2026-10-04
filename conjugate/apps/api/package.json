@@ -9,5 +9,14 @@
     "build": "tsc --noEmit",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {"@her2/shared": "*", "fastify": "5.12.5", "@fastify/rate-limit": "10.3.0", "@fastify/static": "10.1.5", "zod": "3.25.76"}
+  "dependencies": {
+    "@fastify/rate-limit": "10.3.0",
+    "@fastify/static": "10.1.5",
+    "@her2/shared": "*",
+    "@langchain/core": "1.2.14",
+    "@langchain/langgraph": "1.4.19",
+    "@modelcontextprotocol/sdk": "1.30.1",
+    "fastify": "5.12.5",
+    "zod": "3.25.76"
+  }
 }

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-04T02:24:14.264Z",
+  "generated_at": "2026-10-04T09:02:42.805Z",
   "kind": "offline_chat_audits_and_replay_not_clinical_benchmark",
-  "code_sha256": "a250acee0e4b8fb4f61d3bb817d149d48551b7b42a124a8d46ae79d13158185d",
+  "code_sha256": "d024370b1b2e49a383be4a6e833f9ca8415b6a45a0dd336ae77dd48ee6b19bc2",
   "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
   "provider_requests": 0,
   "request_cap": 0,
@@ -29,7 +29,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 10,
+      "wall_ms": 11,
       "clinical_release": "blocked"
     },
     {
@@ -53,7 +53,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 3,
+      "wall_ms": 2,
       "clinical_release": "blocked"
     },
     {
@@ -233,7 +233,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 2,
       "clinical_release": "blocked"
     },
     {
@@ -282,7 +282,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 2,
       "clinical_release": "blocked"
     },
     {
@@ -306,7 +306,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 1,
       "clinical_release": "blocked"
     },
     {
@@ -350,7 +350,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 4,
+      "wall_ms": 1,
       "clinical_release": "blocked"
     },
     {

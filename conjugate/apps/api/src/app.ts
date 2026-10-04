@@ -10,9 +10,13 @@ import { ApiFailure } from './errors.js';
 import { runReview, type RunOptions } from './run.js';
 import { registerResearchRoutes } from './research-routes.js';
 import { registerChatRoutes } from './chat-routes.js';
+import { registerTeamRoutes } from './team-routes.js';
+import { registerModelRoutes } from './models-routes.js';
 import type { ChatOptions } from './chat.js';
+import type { McpInferenceOptions } from './model-mcp.js';
 
 export interface AppOptions extends RunOptions, ChatOptions {
+  inference?: McpInferenceOptions;
   staticRoot?: string;
   rateLimitMax?: number;
   rateLimitWindowMs?: number;
@@ -62,6 +66,8 @@ export async function createApp(options: AppOptions = {}): Promise<FastifyInstan
 
   registerResearchRoutes(app, options);
   registerChatRoutes(app, options);
+  registerTeamRoutes(app, options);
+  registerModelRoutes(app, options.inference);
 
   if (options.staticRoot) {
     const root = resolve(options.staticRoot);
