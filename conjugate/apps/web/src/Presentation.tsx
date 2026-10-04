@@ -204,33 +204,33 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
       <p>Counts come straight from <code>evals/benchmark.json</code>. If that file is missing or does not match the shared schema, this section says so instead of showing numbers.</p>
     </Section>
 
-    <Section id="p-failures" index={7} kicker="What went wrong" title="Failures we hit while building this, kept in the record."
+    <Section id="p-failures" index={7} kicker="What went wrong" title="Seven ways this broke. We kept the evidence."
       figure={<ul className="pres-cards">
-        <FailureCard title="Claude refused, and we kept the row" artifact="evals/team-live.json, evals/chat-live.json" bar={{ label: 'live team runs refused', value: f.refusals.team, tone: 'bad' }} onNavigate={onNavigate} view="evals">
-          Anthropic’s API sometimes stops with a refusal and no text. Those runs are recorded as failed ({f.refusals.chat} live chat turns, {f.refusals.team} live team runs) with {f.refusals.retries} retries and no fallback answer.
+        <FailureCard title="The model refused. We did not paper over it." artifact="evals/team-live.json, evals/chat-live.json" bar={{ label: 'live team runs refused', value: f.refusals.team, tone: 'bad' }} onNavigate={onNavigate} view="evals">
+          Claude’s API sometimes returns a refusal with no text. A system that quietly retried or filled in an answer would hide that. We record the row as failed instead: {f.refusals.chat} live chat turns, {f.refusals.team} live team runs, {f.refusals.retries} retries, no substitute answer.
         </FailureCard>
-        <FailureCard title="Our own verifier was wrong" artifact="evals/verifier-before-fix.json" bar={{ label: 'valid controls accepted before the fix', value: f.keyOrder.before, tone: 'bad' }} onNavigate={onNavigate} view="evals">
-          The first run rejected good answers because comparing sources depended on JSON key order. After the fix it accepted {f.keyOrder.after}. The broken run stays in the repo.
+        <FailureCard title="Our verifier rejected correct answers" artifact="evals/verifier-before-fix.json" bar={{ label: 'valid controls accepted before the fix', value: f.keyOrder.before, tone: 'bad' }} onNavigate={onNavigate} view="evals">
+          The first version compared sources by JSON key order, so it threw out good answers for a formatting reason. Before the fix it accepted {f.keyOrder.before} valid controls; after, {f.keyOrder.after}. The broken run stays in the repo so the fix can be checked.
         </FailureCard>
-        <FailureCard title="A shortcut matched the contract" artifact="evals/selection-study.json" bar={{ label: 'scopes passed by an eligibility-flag baseline', value: f.shortcut.eligibleOnly, tone: 'bad' }} onNavigate={onNavigate} view="evals">
-          Picking records by their eligibility flag alone passes every scope, as does picking by record kind ({f.shortcut.kindOnly}). Claude drafts were accepted {f.shortcut.mapped} with the citation mapping supplied and {f.shortcut.unmapped} without it.
+        <FailureCard title="A one-line rule passed every test" artifact="evals/selection-study.json" bar={{ label: 'scopes passed by an eligibility-flag baseline', value: f.shortcut.eligibleOnly, tone: 'bad' }} onNavigate={onNavigate} view="evals">
+          Choosing records by their eligibility flag alone passes every scope, and so does choosing by record kind ({f.shortcut.kindOnly}). A test a one-line rule can pass is not testing judgement. Claude drafts were accepted {f.shortcut.mapped} when given the citation mapping and {f.shortcut.unmapped} without it.
         </FailureCard>
-        <FailureCard title="Some broken verifiers survived" artifact="evals/verifier-study.json" bar={{ label: 'deliberately broken verifiers caught', value: f.mutants.caught, tone: 'ok' }} onNavigate={onNavigate} view="evals">
-          We switched checks off one at a time. Survivors: {f.mutants.survivors.map(name => name.replaceAll('_', ' ')).join(', ')}. Another check covers each, so {f.mutants.escaped} faults got through, but the overlap means those checks are untested on their own.
+        <FailureCard title="Three of our checks are never tested alone" artifact="evals/verifier-study.json" bar={{ label: 'deliberately broken verifiers caught', value: f.mutants.caught, tone: 'ok' }} onNavigate={onNavigate} view="evals">
+          We disabled checks one at a time to see which faults would get through. {f.mutants.caught} were caught. The survivors: {f.mutants.survivors.map(name => name.replaceAll('_', ' ')).join(', ')}. Another check caught each fault they missed, so {f.mutants.escaped} got through, but we cannot show those three work on their own.
         </FailureCard>
-        <FailureCard title="A proxy score of 1.00 for a useless molecule" artifact="data/model_observations.json, evals/models.json" onNavigate={onNavigate} view="models">
-          A LinkerGPT-style clipped proxy reward gives the “{f.proxy.name}” a score of {f.proxy.reward?.toFixed(2)} with {f.proxy.handles} attachment points, the same as {f.proxy.sameScoreTwoHandle} two-handle fragments. A separate graph check catches it.
+        <FailureCard title="A perfect score for a molecule that cannot attach" artifact="data/model_observations.json, evals/models.json" onNavigate={onNavigate} view="models">
+          A LinkerGPT-style proxy reward gives the “{f.proxy.name}” {f.proxy.reward?.toFixed(2)} with {f.proxy.handles} attachment points, the same score as {f.proxy.sameScoreTwoHandle} fragments that have two. Optimise for that score and you get useless molecules with top marks. A separate graph check catches it.
         </FailureCard>
-        <FailureCard title="Withholding a source flips the verdict" artifact="evals/results.json" bar={{ label: 'verdicts changed when labels were withheld', value: f.withholding.changed, tone: 'bad' }} onNavigate={onNavigate} view="audit">
-          With the Enhertu label paraphrase the linker claim is {verdictLabels[asVerdict(f.withholding.withLabel)]}. With the workbook only it becomes {verdictLabels[asVerdict(f.withholding.workbookOnly)]}. An agent that hides a source can change the answer without lying.
+        <FailureCard title="Hide one source and the verdict changes" artifact="evals/results.json" bar={{ label: 'verdicts changed when labels were withheld', value: f.withholding.changed, tone: 'bad' }} onNavigate={onNavigate} view="audit">
+          With the Enhertu label paraphrase, the linker claim is {verdictLabels[asVerdict(f.withholding.withLabel)]}. Remove it, keep the workbook, and the verdict becomes {verdictLabels[asVerdict(f.withholding.workbookOnly)]}. Nothing false was said. That is why every answer here lists the sources it was allowed to read.
         </FailureCard>
-        <FailureCard title="Live sources drift and go missing" artifact="evals/live-retrieval.json" bar={{ label: 'live lookups returned ok', value: `${f.live.ok}/${f.live.total}`, tone: 'ok' }} onNavigate={onNavigate} view="evals">
-          One recorded run: {f.live.ok} ok, {f.live.not_found} not found (the planted fake ids), {f.live.drift} drift, {f.live.error} errors. Drift and errors are reported as receipts, never patched from the snapshot.
+        <FailureCard title="Live sources change and disappear" artifact="evals/live-retrieval.json" bar={{ label: 'live lookups returned ok', value: `${f.live.ok}/${f.live.total}`, tone: 'ok' }} onNavigate={onNavigate} view="evals">
+          One recorded run against the real sources: {f.live.ok} ok, {f.live.not_found} not found (the planted fake ids), {f.live.drift} drifted from our snapshot, {f.live.error} errors. When a source drifts or fails, the answer shows the receipt. It is never patched over from the snapshot.
         </FailureCard>
       </ul>}>
-      <p>A demo that only shows wins is hiding something. These are the real problems we found, each with the file it came from.</p>
-      <p>Some are model behaviour, some are bugs in our own checks, and some are holes in the design that a shortcut could use.</p>
-      <ViewLink view="evals" onNavigate={onNavigate}>All evals, including the ones that got through <ArrowRight size={16} aria-hidden="true" /></ViewLink>
+      <p>Every system that checks AI answers will itself fail somewhere. These are the failures we found while building Conjugate. Each has the recorded run behind it, and each would have mattered to a pharmacist reading the answer.</p>
+      <p>Some are the model’s fault. Some are ours. The rest are gaps in the design that a lazy agent could walk through.</p>
+      <ViewLink view="evals" onNavigate={onNavigate}>See every eval, including the ones that failed <ArrowRight size={16} aria-hidden="true" /></ViewLink>
     </Section>
 
     <Section id="p-limits" index={8} kicker="Limits" title="What this is not."

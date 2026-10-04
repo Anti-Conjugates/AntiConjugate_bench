@@ -40,7 +40,7 @@ Same questions to plain Claude and the harness, counted by outcome (the panel is
 
 ## 2:20 08 What went wrong (25 s)
 
-Pick two or three cards. Good ones: our own verifier rejected good answers because of JSON key order; some deliberately broken verifiers survived; a LinkerGPT-style proxy score gave 1.00 to a molecule with no attachment points; withholding the Enhertu label paraphrase changes the verdict. Each card names the file it came from.
+Seven ways this broke; we kept the evidence. Pick two or three cards and say why each would matter to a pharmacist reading the answer: our own verifier threw out correct answers over JSON key order; a one-line eligibility-flag rule passed every selection test; a LinkerGPT-style proxy score gave top marks to a molecule with no attachment points; hiding the Enhertu label paraphrase changes the verdict without anyone saying anything false. Each card names the file it came from.
 
 ## 2:45 09 Limits (15 s)
 
