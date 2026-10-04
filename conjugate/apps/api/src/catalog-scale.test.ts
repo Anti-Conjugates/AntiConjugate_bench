@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { chatIntent, liveProductSources, liveSourceUrl, productLabel, ResearchResultSchema, WORKBOOK_PRODUCT_IDS, type ChatRequest } from '@her2/shared';
+import { chatIntent, liveProductSources, liveSourceUrl, productLabel, ResearchResultSchema, WORKBOOK_PRODUCT_IDS, type ChatRequest, researchExecutionIsConsistent } from '@her2/shared';
 import { allowedTools } from './research-evidence.js';
 import { runResearch } from './research.js';
 import { runChat } from './chat.js';
@@ -47,4 +47,15 @@ test('research chat answers a workbook-only product composition question through
   assert.ok(result.audits.length >= 1 && result.audits.every(audit => audit.scope.product_id === 'DRG0EKTUN' && audit.result.harness.tool_calls === 2));
   assert.match(JSON.stringify(result.audits[0]!.result.claims), /SN-38/);
   assert.equal(result.guardrail.status, 'blocked'); assert.equal(result.needs_human, true);
+});
+
+test('consistency check rejects a label receipt forged onto a product without a local label', async () => {
+  const result = await runChat({ message: 'What payload is attached to Trodelvy?', context: [], engine: 'evidence', synthetic_confirmed: true } as never);
+  const forged = structuredClone(result.audits[0]!.result);
+  assert.equal(researchExecutionIsConsistent(forged), true);
+  const derived = forged.receipts.find(receipt => receipt.kind === 'derived')!;
+  const oldId = derived.id;
+  Object.assign(derived, { kind: 'label', id: 'UK-KADCYLA-SMPC' });
+  for (const step of forged.trace) if (step.tool === 'read_derived') Object.assign(step, { tool: 'read_label', source_ids: step.source_ids.map(id => id === oldId ? 'UK-KADCYLA-SMPC' : id) });
+  assert.equal(researchExecutionIsConsistent(forged), false);
 });

@@ -105,6 +105,6 @@ export function BenchmarkBreakdown({ artifact }: { artifact: BenchmarkArtifact }
         </tr>)}</tbody>
       </table>
     </div>
-    <p className="bench-audit">Read the scorer caveats before quoting these: plain-Claude "wrong fact" rows can be wording the alias list missed, "bluffed" on clinical questions means it answered when it should have declined, and harness "over-refused" composition rows are a real gap (its claim template covers payload and DAR only). See <a href={HAND_AUDIT_URL} target="_blank" rel="noreferrer">docs/BENCHMARK.md, "Hand audit of the first live run"</a>.</p>
+    {artifact.mode === 'live' && artifact.generated_at.startsWith('2026-10-04') && <p className="bench-audit">Read the scorer caveats before quoting these: plain-Claude "wrong fact" rows can be wording the alias list missed, "bluffed" on clinical questions means it answered when it should have declined, and harness "over-refused" composition rows are a real gap (its claim template covers payload and DAR only). See <a href={HAND_AUDIT_URL} target="_blank" rel="noreferrer">docs/BENCHMARK.md, "Hand audit of the first live run"</a>.</p>}
   </div>;
 }

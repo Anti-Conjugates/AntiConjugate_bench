@@ -1,7 +1,7 @@
-import { productLabel, type LiveReceipt, type TurnGuard } from '@her2/shared';
+import { isLabelProduct, productLabel, type LiveReceipt, type TurnGuard } from '@her2/shared';
 import { PremiseGateAnim } from './PremiseGateAnim';
 
-const liveStatus: Record<LiveReceipt['status'], string> = { ok: 'Matches', not_found: 'Not found', drift: 'Differs from snapshot', error: 'Fetch failed' };
+const liveStatus: Record<LiveReceipt['status'], string> = { ok: 'Matches', not_found: 'Not found', drift: 'Differs from expected record', error: 'Fetch failed' };
 const liveSources: Record<LiveReceipt['source'], string> = { clinicaltrials_gov: 'ClinicalTrials.gov', pubmed: 'PubMed', openfda: 'openFDA', dailymed: 'DailyMed', adcdb: 'ADCdb' };
 const subjectLabel = (subject: string) => productLabel(subject);
 
@@ -12,7 +12,7 @@ function receiptDetail(receipt: LiveReceipt) {
   if (differs.length) return `Differs on ${differs.map(row => row.field).join(', ')}.`;
   const title = receipt.parsed.official_title ?? receipt.parsed.brief_title ?? receipt.parsed.title;
   if (title) return title;
-  return receipt.comparison.length ? `${receipt.comparison.length} fields match the frozen snapshot.` : 'Record found.';
+  return receipt.comparison.length ? `${receipt.comparison.length} fields match the ${isLabelProduct(receipt.subject) ? 'frozen label snapshot' : 'workbook catalog identity'}.` : 'Record found.';
 }
 
 /** Premise findings and live receipts for one turn. Receipts never change a verdict. */

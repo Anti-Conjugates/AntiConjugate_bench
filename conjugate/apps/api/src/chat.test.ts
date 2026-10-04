@@ -144,7 +144,9 @@ test('scope controls preserve negation, comparisons, requested topics and ambigu
   for (const message of ['Withhold labels but restore all sources.', "Don't withhold labels.", 'Never ever restore all sources.', "Don't ever restore sources.", "I wouldn't restore all sources.", 'Please restore none of the sources.', 'Please keep labels withheld; restore nothing.', 'Restore the labels.']) assert.equal(chatIntent(request(message, context)).status, 'clarification');
   assert.equal(chatIntent(request('Restore all sources.', context)).scopes[0]?.evidence_policy, 'all');
   const comparison = chatIntent(request('Compare with Kadcyla.', context)); assert.deepEqual(comparison.scopes.map(scope => scope.product_id), ['DRG0CYMEB', 'DRG0ERKBH']); assert.ok(comparison.scopes.every(scope => scope.question_id === 'linker_release' && scope.evidence_policy === 'workbook_only'));
-  assert.equal(chatIntent(request('Compare both products composition.', context)).scopes.length, 2);
+  assert.equal(chatIntent(request('Compare both products composition.', context)).status, 'clarification');
+  assert.equal(chatIntent(request('Compare both products composition.', [...context, { ...context[0]!, product_id: 'DRG0CYMEB' }])).scopes.length, 2);
+  assert.equal(chatIntent(request('Compare the two vedotin ADCs.')).status, 'clarification');
   assert.deepEqual(chatIntent(request('Enhertu composition and toxicity.')).scopes.map(scope => scope.question_id), ['composition', 'payload_risk_transfer']);
   assert.deepEqual(chatIntent(request('Enhertu composition and US identity.')).scopes.map(scope => scope.question_id), ['composition', 'label_identity']);
   assert.equal(chatIntent(request('Compare with Kadcyla.', [...context, { ...context[0]!, question_id: 'composition' }])).status, 'clarification');

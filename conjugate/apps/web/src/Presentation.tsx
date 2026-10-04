@@ -132,7 +132,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
 
   return <div className="landing pres">
     <header className="pres-hero">
-      <p className="landing-kicker">HER2 antibody-drug conjugates · research prototype</p>
+      <p className="landing-kicker">Antibody-drug conjugates · research prototype</p>
       <h1>Trust less.<br /><em>Check more.</em></h1>
       <p className="hero-lede">Research agents fail in ways that read well. Conjugate is a small harness around Claude where code, not the model, decides what counts as evidence. This page walks through it in eight sections, using only recorded runs.</p>
       <p className="pres-keys">Presenting? <kbd>PageDown</kbd> or <kbd>↓</kbd> jumps to the next section, <kbd>PageUp</kbd> or <kbd>↑</kbd> goes back.</p>

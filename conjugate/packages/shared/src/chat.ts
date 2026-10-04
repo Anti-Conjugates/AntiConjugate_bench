@@ -51,7 +51,7 @@ export type ChatEvent = z.infer<typeof ChatEventSchema>;
 
 export function renderChatReply(status: ChatResult['status'], audits: ChatAudit[], selected: string[], missing: number) {
   if (status === 'outside_scope') return 'This chat checks research evidence about the 31 ADCs in the workbook. For questions about care, ask a clinician. Try a question about composition or linker release.';
-  if (status === 'premise_blocked') return 'This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.';
+  if (status === 'premise_blocked') return 'This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about an ADC in the workbook.';
   if (status === 'clarification') return 'What should I check? Name an ADC from the workbook (for example Kadcyla, Enhertu, Trodelvy or Padcev) and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.';
   const chosen = audits.filter(audit => selected.includes(audit.id));
   const labels = { supported: 'Supported', contradicted: 'Contradicted', insufficient: 'Not enough evidence' };

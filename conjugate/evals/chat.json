@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-04T12:09:49.044Z",
+  "generated_at": "2026-10-04T12:43:14.019Z",
   "kind": "offline_chat_audits_and_replay_not_clinical_benchmark",
-  "code_sha256": "7876d214848dd3f2054c350143a72d701cc45508d7a1d359f6ad890514bf7daa",
+  "code_sha256": "fa0bf63f20f3f0e09b04efae130eb50b19a074c488613af08240bae7a727de67",
   "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
   "provider_requests": 0,
   "request_cap": 0,
@@ -29,7 +29,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 25,
+      "wall_ms": 27,
       "clinical_release": "blocked"
     },
     {
@@ -53,7 +53,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 8,
+      "wall_ms": 10,
       "clinical_release": "blocked"
     },
     {
@@ -77,7 +77,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 7,
+      "wall_ms": 10,
       "clinical_release": "blocked"
     },
     {
@@ -121,7 +121,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 6,
+      "wall_ms": 4,
       "clinical_release": "blocked"
     },
     {
@@ -143,7 +143,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 5,
+      "wall_ms": 3,
       "clinical_release": "blocked"
     },
     {
@@ -165,7 +165,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 4,
+      "wall_ms": 3,
       "clinical_release": "blocked"
     },
     {
@@ -282,7 +282,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 4,
+      "wall_ms": 3,
       "clinical_release": "blocked"
     },
     {
@@ -306,7 +306,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 3,
+      "wall_ms": 4,
       "clinical_release": "blocked"
     },
     {
@@ -328,7 +328,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 8,
+      "wall_ms": 3,
       "clinical_release": "blocked"
     },
     {
@@ -394,7 +394,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 4,
+      "wall_ms": 3,
       "clinical_release": "blocked"
     },
     {

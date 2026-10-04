@@ -34,7 +34,11 @@ export function chatIntent(request: ChatRequest): ChatIntent {
   const has = (...terms: string[]) => recognized_terms.some(term => terms.includes(term));
   const comparing = has('compare', 'comparison', 'same', 'different', 'both', 'two');
   const products = [...new Set(recognized_terms.filter((term): term is ChatScope['product_id'] => isWorkbookProductId(term)))];
-  if (comparing && has('both', 'two') && products.length < 2) products.push('DRG0CYMEB', 'DRG0ERKBH');
+  if (comparing && has('both', 'two') && products.length < 2) {
+    const named = [...new Set([...products, ...request.context.map(scope => scope.product_id)])];
+    if (named.length < 2) { result.status = 'clarification'; return result; }
+    products.splice(0, products.length, ...named);
+  }
   if (comparing && products.length === 1 && request.context.length) {
     if (new Set(request.context.map(scope => scope.question_id)).size > 1 && /\bcompare\s+(?:(?:it|this|that)\s+)?with\b/.test(text)) { result.status = 'clarification'; return result; }
     products.push(...new Set(request.context.map(scope => scope.product_id)));

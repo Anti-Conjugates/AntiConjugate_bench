@@ -108,7 +108,7 @@ export function ResearchChat({ catalog }: { catalog: ResearchCatalog }) {
   const lastStep = active?.steps.at(-1);
   const status = active ? (lastStep ? ('detail' in lastStep ? lastStep.detail : `${NODE_LABELS[lastStep.node]}: ${NODE_DETAILS[lastStep.node]}`) : 'Waiting for the server.') : turns.at(-1)?.state === 'complete' ? 'Question checked. Sources and limits are available.' : turns.at(-1)?.state === 'cancelled' ? 'Cancelled here. No answer accepted.' : '';
   return <section className="research-chat" aria-labelledby="chat-heading">
-    <header className="chat-header"><div><p className="eyebrow">Evidence, not reassurance</p><h1 id="chat-heading">Ask about the evidence</h1><p>Compare Kadcyla and Enhertu. Check a claim. See where the sources stop.</p></div>
+    <header className="chat-header"><div><p className="eyebrow">Evidence, not reassurance</p><h1 id="chat-heading">Ask about the evidence</h1><p>Ask about any of the 31 workbook ADCs. Check a claim. See where the sources stop.</p></div>
       <button className="button button-secondary" type="button" onClick={() => { epochs.current.invalidate(); busy.current = false; setTurns([]); setDraft(''); setExportError(null); composer.current?.focus(); }} disabled={!turns.length && !draft}><RotateCcw size={14} aria-hidden="true" />New chat</button>
     </header>
     <div className="chat-mode"><fieldset disabled={Boolean(active)}><legend>Run with</legend><label><input type="radio" name="chat-engine" checked={engine === 'claude'} disabled={!catalog.claude_configured} onChange={() => setEngine('claude')} />Claude</label><label><input type="radio" name="chat-engine" checked={engine === 'evidence'} onChange={() => setEngine('evidence')} />Rules only</label></fieldset>

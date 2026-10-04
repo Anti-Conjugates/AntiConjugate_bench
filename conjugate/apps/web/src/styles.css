@@ -1184,7 +1184,8 @@ html { scroll-padding-top: var(--sp-6); }
 
 
 /* Benchmark section */
-.bench-section { display: flex; flex-direction: column; gap: 14px; }
+.bench-section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.bench-panel { grid-template-columns: minmax(0, 1fr); }
 .bench-section .eyebrow { font-family: var(--mono); text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--lime); }
 .bench-lede, .bench-budget, .bench-count { color: var(--muted); font-size: 14px; }
 .bench-budget { font-family: var(--mono); font-size: 12px; }

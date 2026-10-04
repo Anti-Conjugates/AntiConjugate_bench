@@ -103,7 +103,9 @@ describe('Presentation', () => {
     const body = text(renderToStaticMarkup(<BenchmarkPanel load={load} />));
     for (const arm of load.artifact.arms) for (const cell of Object.values(load.artifact.summary[arm] ?? {})) expect(body).toContain(`${cell.correct}/${cell.n} correct`);
     expect(body).toContain('over-refused');
-    expect(body).toContain('Hand audit of the first live run');
+    expect(body).not.toContain('Hand audit of the first live run');
+    const live = text(renderToStaticMarkup(<BenchmarkPanel load={{ ...load, artifact: { ...load.artifact, mode: 'live', generated_at: '2026-10-04T12:23:02.512Z' } }} />));
+    expect(live).toContain('Hand audit of the first live run');
   });
 
   it('parses the committed benchmark artifact when there is one', () => {

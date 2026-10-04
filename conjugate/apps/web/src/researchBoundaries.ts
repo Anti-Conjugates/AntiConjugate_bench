@@ -1,6 +1,6 @@
 import { LABEL_PRODUCT_IDS, ApiErrorSchema, ResearchCatalogSchema, ResearchEventSchema, ResearchRequestSchema, ResearchResultSchema,
   ResearchQuestionSchema, researchExecutionIsConsistent,
-  type ResearchCatalog, type ResearchEvent, type ResearchRequest, type ResearchResult, type ResearchTrace, } from '@her2/shared';
+  type ResearchCatalog, type ResearchEvent, type ResearchRequest, type ResearchResult, type ResearchTrace, isLabelProduct } from '@her2/shared';
 import { BoundaryError } from './boundaries';
 
 export type ResearchInputs = Omit<ResearchRequest, 'synthetic_confirmed'> & { synthetic_confirmed: boolean };
@@ -64,8 +64,9 @@ export function validateResearchResult(data: unknown, request: ResearchRequest, 
   const receipts = new Map(result.receipts.map((receipt) => [receipt.id, receipt]));
   const expectedReceiptId = (kind: ResearchResult['receipts'][number]['kind']) => kind === 'workbook'
     ? `WORKBOOK-${request.product_id}-COMPOSITION`
-    : kind === 'openfda' ? `US-OPENFDA-${request.product_id}-IDENTITY`
-      : kind === 'derived' ? `DERIVED-${request.product_id}-NOT-ADCDB`
+    : kind === 'derived' ? `DERIVED-${request.product_id}-NOT-ADCDB`
+      : !isLabelProduct(request.product_id) ? null
+      : kind === 'openfda' ? `US-OPENFDA-${request.product_id}-IDENTITY`
       : request.product_id === 'DRG0ERKBH' ? 'UK-ENHERTU-SMPC' : 'UK-KADCYLA-SMPC';
   const acceptedDraftMatchesClaims = result.draft_integrity === 'accepted'
     && result.draft.claims.length === result.claims.length

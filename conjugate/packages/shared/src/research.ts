@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { HarnessManifestSchema } from './harness.js';
-import { WorkbookProductIdSchema } from './products.js';
+import { WorkbookProductIdSchema, isLabelProduct } from './products.js';
 
 export const ResearchQuestionSchema = z.enum(['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety', 'label_identity']);
 export const ResearchToolSchema = z.enum(['read_workbook', 'read_label', 'read_derived', 'read_openfda']);
@@ -100,6 +100,7 @@ export function researchExecutionIsConsistent(result: ResearchResult) {
   const readIds: string[] = [];
   for (const step of executed) {
     if (step.tool === null || step.actor !== 'local_tool' || (result.evidence_policy === 'workbook_only' && step.tool !== 'read_workbook')) return false;
+    if ((step.tool === 'read_label' || step.tool === 'read_openfda') && !isLabelProduct(result.product_id)) return false;
     for (const id of step.source_ids) {
       if (!result.receipts.some(receipt => receipt.id === id && receipt.kind === kinds[step.tool!] && receipt.product_id === result.product_id)) return false;
       readIds.push(id);

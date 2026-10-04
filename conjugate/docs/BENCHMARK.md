@@ -54,7 +54,7 @@ npm run bench -- --live --arms plain_claude,harness_rules
 - `--max-calls N` (default 220) is a hard cap on provider requests across both Claude arms. When it runs out, the in-flight item and every later Claude-arm row is recorded as `provider_error`; the rules arm still runs. Live source lookups are not counted.
 - There are no retries anywhere. Refusals and errors are rows.
 - Rows store `response_sha256` and an excerpt of at most 400 characters. Keys and upstream error bodies are never stored.
-- Output: `evals/benchmark.json`, validated by `BenchmarkArtifactSchema` (`packages/shared/src/benchmark.ts`). The committed file is an offline run; its Claude-arm rows come from the mock and say nothing about Claude.
+- Output: `evals/benchmark.json`, validated by `BenchmarkArtifactSchema` (`packages/shared/src/benchmark.ts`). The committed file is a live run (`mode: "live"`, `claude-opus-5-5`); an `--offline` run replaces the Claude arms with a mock and says nothing about Claude. The UI shows the mode of whichever artifact is committed.
 
 ## Weaknesses
 
@@ -77,3 +77,4 @@ The committed live artifact was audited row by row. The automatic scorer is stri
 - **Harness `over_refused` composition rows are a real harness gap, not a scorer artefact.** The composition claim template only covers payload and DAR, so antibody, target and linker questions get a payload/DAR answer, and "Which linker does X use?" routes to the linker-release claim. The harness never stated a wrong value, but it did not answer what was asked.
 - **Harness real-reference controls** ("What did NCT00829166 study for Kadcyla?") return a clarification because the harness has no claim template for trial or paper content.
 - The plain-arm excerpt now starts with the parsed `VERDICT`/`ANSWER` lines so future rows can be audited from the artifact alone.
+- **Harness composition answers on the 29 non-label products are correct by construction.** For those products the harness reads the same workbook cells the scorer uses as its answer key, and its "supported" verdict means "transcribed from the workbook", not "checked against a label". Only Kadcyla and Enhertu are compared with an independent label paraphrase.
