@@ -50,6 +50,12 @@ The adapter uses Anthropic structured JSON output, adaptive thinking and id-only
 
 For the separate Modal remote-worker example, see `docs/MODAL_SETUP.md`. It does not deploy this app or connect a scientific model.
 
+
+## Premise gate and live source checks
+
+Every chat and agent-team turn runs a deterministic premise gate (`packages/shared/src/premise.ts`; approach adapted from [adc-guardrail](https://github.com/Anti-Conjugates/adc-guardrail) @5ac1c1a, no code, data or thresholds imported) before Claude or any evidence read. Invented ADCs, unallowlisted products, unsupported constructs and unresolved NCT/PMID references block the turn (`premise_blocked`, zero model calls). Contradicted payload, target, linker, DAR or absolute "no risk" premises are flagged and the evidence checks still run.
+
+Set `LIVE_RETRIEVAL=on` (server only) to let the gate and `/api/live/check` query ClinicalTrials.gov, PubMed, openFDA, DailyMed and ADCdb through fixed URL templates and an exact host allowlist (no redirects, 8 s per request, 25 s per turn, byte caps, no retries). Each fetch returns a receipt with URL, HTTP status, raw SHA-256 and an explicit `ok`, `not_found`, `drift` or `error` status. Receipts check reference existence and identity against the frozen snapshot only; they are not clinical evidence. It is off by default, so tests and local runs never reach the network. `npm run eval:live` exercises the real sources; `npm run eval:premise` writes `evals/premise-study.json`.
 ## Research chat
 
 The default view is a conversation. Ask about the two ADCs, inspect checked
