@@ -97,6 +97,15 @@ describe('Presentation', () => {
     expect(text(renderToStaticMarkup(<BenchmarkPanel load={{ state: 'missing' }} />))).toContain('Benchmark pending');
   });
 
+  it('breaks benchmark results down per arm and question type from the artifact', () => {
+    const load = parseBenchmark(fixture);
+    if (load.state !== 'ready') throw new Error('fixture should parse');
+    const body = text(renderToStaticMarkup(<BenchmarkPanel load={load} />));
+    for (const arm of load.artifact.arms) for (const cell of Object.values(load.artifact.summary[arm] ?? {})) expect(body).toContain(`${cell.correct}/${cell.n} correct`);
+    expect(body).toContain('over-refused');
+    expect(body).toContain('Hand audit of the first live run');
+  });
+
   it('parses the committed benchmark artifact when there is one', () => {
     const load = loadBenchmark();
     expect(load.state === 'invalid' ? load.issue : load.state).toMatch(/^(ready|missing)$/);

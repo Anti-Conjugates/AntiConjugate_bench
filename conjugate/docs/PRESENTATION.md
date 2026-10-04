@@ -32,7 +32,7 @@ Read the question: "Kadcyla has a cleavable linker, so how fast is DM1 released 
 
 ## 2:05 06 Benchmark (15 s)
 
-Same questions to plain Claude and the harness, counted by outcome (the panel is `BenchmarkSection`, also on the Evals page). Read the mode banner first. "Offline mock run" means no model was called and the Claude arms are a fixed mock, so the counts test the pipeline, not Claude; say exactly that. Only a "Live run" banner says anything about Claude. Only describe what the table shows. If it says pending, say the run isn't committed yet and move on.
+Same questions to plain Claude and the harness, counted by outcome (the panel is `BenchmarkSection`, also on the Evals page). Read the mode banner first. "Offline mock run" means no model was called and the Claude arms are a fixed mock, so the counts test the pipeline, not Claude; say exactly that. Only a "Live run" banner says anything about Claude. Then read the "what went wrong, per arm" breakdown, not just the correct column. The honest shape of the first live run: plain Claude got more composition questions right but answered some clinical questions it should have declined, and some of its "wrong fact" rows are wording the scorer's alias list missed; the harness never stated a wrong value and declined every clinical question, but over-refused antibody, target and linker questions because its claim template only covers payload and DAR. Point at the hand-audit link (`docs/BENCHMARK.md`, "Hand audit of the first live run") for the scorer caveats. Only describe what the table shows. If it says pending, say the run isn't committed yet and move on.
 
 ## 2:20 07 What went wrong (25 s)
 
