@@ -12713,6 +12713,36 @@
       "source": "cand-d199-polyhymnia",
       "target": "cand-d198-terpsichore",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d200-urania",
+      "target": "lane-d200-urania",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d200-urania",
+      "target": "receipt-d200-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d200-urania",
+      "target": "receipt-d200-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d200-urania",
+      "target": "scorecard-d200-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "scorecard-d200-benchmark",
+      "target": "review-d200-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d200-urania",
+      "target": "cand-d199-polyhymnia",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -30299,12 +30329,80 @@
         "total_score": 77.84,
         "top_action": "one_story_lead_artifact"
       }
+    },
+    {
+      "id": "cand-d200-urania",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D200 (URANIA)",
+      "properties": {
+        "target": "SFRP2 CRD Pharmacophore",
+        "theme": "Centennial Breakthrough: Deep Infiltrating Fibrosis Dissolution & Complete Non-Hormonal Ovary Preservation",
+        "net_delta_g_bind_kcal": -137.7871077904212,
+        "clash_barrier_kcal": 206.5532183784215,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T19:52:50.793677+00:00"
+      }
+    },
+    {
+      "id": "lane-d200-urania",
+      "type": "execution_lane",
+      "label": "Lane D200: URANIA Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 8000,
+        "nexus_job_id": "514c3591-091c-45af-9bd9-174d2531cb53",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.9862525458248472,
+        "asps_clean_fraction_aqora": 0.98,
+        "cross_platform_tv": 0.013489975367391927,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "receipt-d200-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D200)",
+      "properties": {
+        "job_id": "514c3591-091c-45af-9bd9-174d2531cb53",
+        "shots": 8000,
+        "clean_fraction": 0.9862525458248472
+      }
+    },
+    {
+      "id": "receipt-d200-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D200)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.98,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d200-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D200 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.013489975367391927
+      }
+    },
+    {
+      "id": "review-d200-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D200)",
+      "properties": {
+        "total_score": 79.41999999999999,
+        "top_action": "one_story_lead_artifact"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.171",
-  "updated_at": "2026-10-04T19:45:53.484392+00:00"
+  "version": "11.6.172",
+  "updated_at": "2026-10-04T19:52:50.794528+00:00"
 }
