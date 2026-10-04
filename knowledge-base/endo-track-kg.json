@@ -12533,6 +12533,36 @@
       "source": "cand-d194-harmonia",
       "target": "cand-d193-artemis",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d195-calliope",
+      "target": "lane-d195-calliope",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d195-calliope",
+      "target": "receipt-d195-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d195-calliope",
+      "target": "receipt-d195-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d195-calliope",
+      "target": "scorecard-d195-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "scorecard-d195-benchmark",
+      "target": "review-d195-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d195-calliope",
+      "target": "cand-d194-harmonia",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -29779,12 +29809,80 @@
         "total_score": 80.6,
         "top_action": "one_story_lead_artifact"
       }
+    },
+    {
+      "id": "cand-d195-calliope",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D195 (CALLIOPE)",
+      "properties": {
+        "target": "SFRP2 CRD Pharmacophore",
+        "theme": "Selective Peritoneal Macrophage Phenotype Polarization: M1 Pro-Inflammatory Switch Reversal & IL-10 Upregulation in DIE Stroma",
+        "net_delta_g_bind_kcal": -114.54753150880796,
+        "clash_barrier_kcal": 191.90705585748896,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T19:10:16.673192+00:00"
+      }
+    },
+    {
+      "id": "lane-d195-calliope",
+      "type": "execution_lane",
+      "label": "Lane D195: CALLIOPE Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 4000,
+        "nexus_job_id": "5152f3c8-fd86-4bc8-94d8-8b68e6423fe3",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.9884453781512605,
+        "asps_clean_fraction_aqora": 0.981,
+        "cross_platform_tv": 0.021004957278190666,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "receipt-d195-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D195)",
+      "properties": {
+        "job_id": "5152f3c8-fd86-4bc8-94d8-8b68e6423fe3",
+        "shots": 4000,
+        "clean_fraction": 0.9884453781512605
+      }
+    },
+    {
+      "id": "receipt-d195-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D195)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.981,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d195-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D195 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.021004957278190666
+      }
+    },
+    {
+      "id": "review-d195-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D195)",
+      "properties": {
+        "total_score": 79.1,
+        "top_action": "one_story_lead_artifact"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.166",
-  "updated_at": "2026-10-04T19:03:43.320297+00:00"
+  "version": "11.6.167",
+  "updated_at": "2026-10-04T19:10:16.673507+00:00"
 }
