@@ -10,7 +10,7 @@ import { StageStepper } from './StageStepper';
 import { CompareRuns, type CompareChange } from './CompareRuns';
 
 const sourceKinds = { workbook: 'Workbook row', label: 'UK label summary', derived: 'Derived note (not from ADCdb)', openfda: 'US openFDA identity' } as const;
-const receiptAnchor = (id: string) => `source-${encodeURIComponent(id)}`;
+export const receiptAnchor = (id: string, prefix = '') => `source-${prefix}${encodeURIComponent(id)}`;
 const cellsSchema = z.array(WorkbookCellSchema);
 
 export function ReceiptRefs({ ids, receipts }: { ids: string[]; receipts: ResearchReceipt[] }) {
@@ -49,10 +49,10 @@ function Excerpt({ receipt }: { receipt: ResearchReceipt }) {
   return <p className="receipt-excerpt">{receipt.excerpt}</p>;
 }
 
-function Receipt({ receipt, catalog }: { receipt: ResearchReceipt; catalog: ResearchCatalog }) {
+export function Receipt({ receipt, catalog, anchorPrefix = '' }: { receipt: ResearchReceipt; catalog: ResearchCatalog; anchorPrefix?: string }) {
   const product = catalog.dataset.records.find((record) => record.id === receipt.product_id);
   const href = receipt.url ? safeSourceUrl(receipt.url) : undefined;
-  return <article className={`source-card kind-${receipt.kind}`} id={receiptAnchor(receipt.id)} tabIndex={-1}>
+  return <article className={`source-card kind-${receipt.kind}`} id={receiptAnchor(receipt.id, anchorPrefix)} tabIndex={-1}>
     <div className="source-card-top"><span className="source-kind">{sourceKinds[receipt.kind]}</span><code>{receipt.id}</code></div>
     <h4>{receipt.title}</h4>
     <dl className="source-meta">

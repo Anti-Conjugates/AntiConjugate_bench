@@ -8,6 +8,11 @@ The best fit is the epistemological-agent description supplied by the organiser.
 
 ## Demo sequence
 
+Start in **Research chat** for the conversational demo. Ask about composition,
+then Enhertu linker release, then use the workbook-only follow-up. Each turn has
+its own trace and source cards. See [Research chat](CHAT.md) for the tool loop,
+limits and replay commands. Check a claim remains available for citation faults.
+
 For judges, open Evals after the claim comparison. Start with "Would the eval
 catch a broken checker?" Show the original key-order failure, its fix and the
 three surviving single-check variants. The suite catches deliberately weakened

@@ -1,3 +1,10 @@
+# Conversational entry point
+
+Research chat uses a separate `conjugate-chat-1` contract around deterministic
+research audits. Claude may call the native `check_evidence` tool for authorized
+scopes and finish with audit IDs only. The controller renders trusted claims;
+the existing verifier remains authoritative. See [Research chat](CHAT.md).
+
 # Conjugate: HER2 evidence agent
 
 ## Purpose

@@ -1,3 +1,5 @@
+export * from './chat.js';
+export * from './chat-intent.js';
 import { z } from 'zod';
 export * from './research.js';
 export * from './harness.js';

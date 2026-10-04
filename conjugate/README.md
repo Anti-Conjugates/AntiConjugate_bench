@@ -50,6 +50,20 @@ The adapter uses Anthropic structured JSON output, adaptive thinking and id-only
 
 For the separate Modal remote-worker example, see `docs/MODAL_SETUP.md`. It does not deploy this app or connect a scientific model.
 
+## Research chat
+
+The default view is a conversation. Ask about the two ADCs, inspect checked
+claims and source receipts, then ask a follow-up or withhold the label. Claude
+uses a native `check_evidence` loop; it selects returned audit IDs, not scientific
+prose or citations. Rules only runs the same fixed audits without a model.
+Raw chat text and prior answers are not sent to Claude; the controller sends
+recognized terms and scopes. This finite scope guard is not a PHI detector.
+
+See [Research chat](docs/CHAT.md) for the three-minute demo, design, limits,
+software checks and replay. The public Space still has Claude disabled.
+The separate Patient context path has different inputs and is not covered by
+the chat projection/privacy guarantee.
+
 ## Check a claim
 
 Start with Enhertu, the linker release question, rules only. Run it with sources set to All, then set sources to Workbook only and run again. Compare the verdict, the sources each result rests on and the trace. The two results differ because the evidence changed, not because a confidence score was simulated.

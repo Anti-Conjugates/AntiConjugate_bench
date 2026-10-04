@@ -1,0 +1,57 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { once } from 'node:events';
+import { ChatResultSchema, ChatEventSchema } from '@her2/shared';
+import { createApp } from './app.js';
+const input = { message: 'Does Enhertu’s cleavable linker establish release in blood?', engine: 'evidence', synthetic_confirmed: true };
+const post = (payload: unknown = input, stream = false) => ({ method: 'POST' as const, url: `/api/chat/turns${stream ? '/stream' : ''}`, payload: JSON.stringify(payload), headers: { 'content-type': 'application/json' } });
+test('chat JSON and NDJSON routes agree and failures never change engines', async t => {
+  const app = await createApp(); t.after(() => app.close());
+  const json = await app.inject(post()); assert.equal(json.statusCode, 200);
+  const result = ChatResultSchema.parse(json.json()); assert.equal(result.audits[0]?.result.claims[0]?.verdict, 'contradicted');
+  const streamed = await app.inject(post(input, true)); assert.equal(streamed.statusCode, 200);
+  assert.match(String(streamed.headers['content-type']), /application\/x-ndjson/); assert.equal(streamed.headers['cache-control'], 'no-store');
+  const events = streamed.body.trim().split('\n').map(line => ChatEventSchema.parse(JSON.parse(line)));
+  const final = events.at(-1)!; assert.equal(final.type, 'result');
+  if (final.type === 'result') assert.deepEqual(events.slice(0, -1).map(event => event.type === 'trace' ? event.step : null), final.result.trace);
+  for (const payload of [{ ...input, synthetic_confirmed: false }, { ...input, message: 'x'.repeat(1001) }, { ...input, history: [] }]) assert.equal((await app.inject(post(payload))).statusCode, 400);
+  assert.equal((await app.inject(post({ ...input, message: 'x'.repeat(20000) }))).statusCode, 413);
+  const missing = await app.inject(post({ ...input, engine: 'claude' })); assert.equal(missing.statusCode, 503); assert.equal(missing.json().error.code, 'CLAUDE_NOT_CONFIGURED');
+  const failure = await app.inject(post({ ...input, engine: 'claude' }, true));
+  assert.equal(failure.body.trim().split('\n').length, 1); assert.equal(JSON.parse(failure.body).type, 'error');
+});
+test('chat caps simultaneous questions across both endpoints and releases slots after timeouts', async t => {
+  let admitted = 0;
+  let ready!: () => void;
+  const twoStarted = new Promise<void>(resolve => { ready = resolve; });
+  const app = await createApp({ claude: { apiKey: 'test-key', timeoutMs: 60, fetch: async () => { if (++admitted === 2) ready(); return new Promise<Response>(() => undefined); } } });
+  t.after(() => app.close());
+  const a = app.inject(post({ ...input, engine: 'claude' })); const b = app.inject(post({ ...input, engine: 'claude' }, true));
+  await twoStarted;
+  const third = await app.inject(post()); assert.equal(third.statusCode, 429); assert.equal(third.json().error.code, 'CHAT_BUSY');
+  await Promise.all([a, b]); assert.equal((await app.inject(post())).statusCode, 200); assert.equal(admitted, 2);
+});
+test('closing a real chat HTTP connection aborts the provider and makes no follow-up calls', async t => {
+  let started!: () => void; let calls = 0; let signal: AbortSignal | undefined;
+  const pending = new Promise<void>(resolve => { started = resolve; });
+  const app = await createApp({ claude: { apiKey: 'test-key', fetch: async (_url, init) => { calls++; signal = init?.signal ?? undefined; started(); return new Promise<Response>(() => undefined); } } });
+  const origin = await app.listen({ host: '127.0.0.1', port: 0 }); t.after(() => app.close());
+  const controller = new AbortController();
+  const response = fetch(`${origin}/api/chat/turns/stream`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...input, engine: 'claude' }), signal: controller.signal });
+  const consume = response.then(value => value.text()).catch(() => undefined);
+  await pending; const aborted = once(signal!, 'abort'); controller.abort(); await aborted; await consume;
+  assert.equal(signal?.aborted, true); assert.equal(calls, 1);
+});
+test('stalled skill loading releases shared slots on timeout and HTTP disconnect', async t => {
+  let reads = 0; let started!: () => void;
+  let entered = new Promise<void>(resolve => { started = resolve; });
+  const app = await createApp({ claude: { apiKey: 'test-key', timeoutMs: 40, fetch: async () => { assert.fail('No provider request'); } }, skillReader: async () => { reads++; started(); return new Promise<Uint8Array>(() => undefined); } });
+  t.after(() => app.close());
+  const a = app.inject(post({ ...input, engine: 'claude' })); const b = app.inject(post({ ...input, engine: 'claude' }, true));
+  await entered; const results = await Promise.all([a, b]); assert.equal(results[0]?.statusCode, 504); assert.match(results[1]!.body, /CLAUDE_TIMEOUT/); assert.equal((await app.inject(post())).statusCode, 200); assert.equal(reads, 2);
+  const origin = await app.listen({ host: '127.0.0.1', port: 0 });
+  entered = new Promise<void>(resolve => { started = resolve; }); const controller = new AbortController();
+  const consume = fetch(`${origin}/api/chat/turns/stream`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...input, engine: 'claude' }), signal: controller.signal }).then(response => response.text()).catch(() => undefined);
+  await entered; controller.abort(); await consume;
+  assert.equal((await app.inject(post())).statusCode, 200);
+});

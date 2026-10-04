@@ -35,8 +35,13 @@ export function HowItWorks() {
     <section className="how-view" aria-labelledby="how-heading">
       <header className="view-heading">
         <h1 id="how-heading">How it works</h1>
-        <p>A run goes through seven stages. The model, when selected, only plans and drafts. The verifier never sees model prose, only claim ids and source ids.</p>
+        <p>Claude can request evidence checks. It cannot write the displayed claim, choose its verdict or open the clinical gate.</p>
       </header>
+      <section className="chat-explainer" aria-labelledby="chat-flow-heading"><h2 id="chat-flow-heading">Research chat</h2>
+        <ol className="chat-flow"><li><strong>Your question</strong><span>The controller recognizes product, question and source policy. Raw text does not reach Claude.</span></li><li><strong>Claude requests a check</strong><span>One native tool: check_evidence. No web, shell or arbitrary file access.</span></li><li><strong>The verifier checks sources</strong><span>Each tool call runs the local research audit. Trusted findings and an audit ID return to Claude.</span></li><li><strong>You get the checked finding</strong><span>Claude returns audit IDs only. The controller renders claims, receipts, unknowns and omitted checks.</span></li></ol>
+        <p>Each follow-up starts a new turn. Prior scope IDs are hints, not evidence or instructions. Withheld sources cannot leak through earlier answers. Rules only runs these checks without a model.</p>
+      </section>
+      <h2>The detailed claim audit</h2><p>The seven stages below describe Check a claim. Chat tools run that audit in rules-only mode; Claude coordinates which audits to request.</p>
 
       <section aria-labelledby="pipeline-heading">
         <h2 id="pipeline-heading">Pipeline</h2>

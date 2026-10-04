@@ -1,3 +1,11 @@
+# Chat turns
+
+The conversational API adds a separate native-tool coordinator; it does not
+change the two-call research draft contract below. A chat turn permits four
+model calls, four audited scopes, sixteen local reads and one 60-second deadline.
+It sends no raw text/history to Claude, accepts no model prose, and has zero
+retries. See [Research chat](CHAT.md) for exact semantics and replay limits.
+
 # Run limits and reproducibility
 
 Conjugate uses a small controller around fixed local tools. The model selects
