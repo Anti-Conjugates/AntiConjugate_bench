@@ -12413,6 +12413,36 @@
       "source": "cand-d190-hygieia",
       "target": "cand-d189-soteria",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d191-panacea",
+      "target": "lane-d191-panacea",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d191-panacea",
+      "target": "receipt-d191-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d191-panacea",
+      "target": "receipt-d191-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d191-panacea",
+      "target": "scorecard-d191-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "scorecard-d191-benchmark",
+      "target": "review-d191-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d191-panacea",
+      "target": "cand-d190-hygieia",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -29387,12 +29417,80 @@
         "total_score": 81.06,
         "lead_artifact": "docs/grand_challenge_lead_submission_dossier_20261004.md"
       }
+    },
+    {
+      "id": "cand-d191-panacea",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D191 (PANACEA)",
+      "properties": {
+        "target": "SFRP2 CRD Pharmacophore",
+        "theme": "Universal Multi-Organoid Non-Hormonal Lock: Peritoneal Shear Stress + Acidic Invariance + Endometrial Stromal Selectivity",
+        "net_delta_g_bind_kcal": -142.68347118162075,
+        "clash_barrier_kcal": 218.12708468923591,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T18:28:01.934315+00:00"
+      }
+    },
+    {
+      "id": "lane-d191-panacea",
+      "type": "execution_lane",
+      "label": "Lane D191: PANACEA Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 4000,
+        "nexus_job_id": "db9a2393-c11f-466f-90d5-a74abbfb87c9",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.9861932938856016,
+        "asps_clean_fraction_aqora": 0.9805,
+        "cross_platform_tv": 0.01624747910895632,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "receipt-d191-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D191)",
+      "properties": {
+        "job_id": "db9a2393-c11f-466f-90d5-a74abbfb87c9",
+        "shots": 4000,
+        "clean_fraction": 0.9861932938856016
+      }
+    },
+    {
+      "id": "receipt-d191-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D191)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.9805,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d191-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D191 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.01624747910895632
+      }
+    },
+    {
+      "id": "review-d191-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D191)",
+      "properties": {
+        "total_score": 83.02000000000001,
+        "top_action": "one_story_lead_artifact"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.162",
-  "updated_at": "2026-10-04T07:08:08.038886+00:00"
+  "version": "11.6.163",
+  "updated_at": "2026-10-04T18:28:01.934647+00:00"
 }
