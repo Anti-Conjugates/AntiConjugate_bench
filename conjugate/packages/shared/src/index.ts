@@ -120,3 +120,4 @@ export type ReviewFlag = z.infer<typeof FlagSchema>;
 export type TraceStep = z.infer<typeof TraceStepSchema>;
 export type RunResult = z.infer<typeof RunResultSchema>;
 export type Catalog = z.infer<typeof CatalogSchema>;
+export * from './benchmark.js';
