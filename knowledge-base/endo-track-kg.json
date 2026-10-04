@@ -12563,6 +12563,36 @@
       "source": "cand-d195-calliope",
       "target": "cand-d194-harmonia",
       "type": "EVOLVED_FROM"
+    },
+    {
+      "source": "cand-d196-thalia",
+      "target": "lane-d196-thalia",
+      "type": "EVALUATED_IN"
+    },
+    {
+      "source": "lane-d196-thalia",
+      "target": "receipt-d196-nexus",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d196-thalia",
+      "target": "receipt-d196-aqora",
+      "type": "PRODUCED_RECEIPT"
+    },
+    {
+      "source": "lane-d196-thalia",
+      "target": "scorecard-d196-benchmark",
+      "type": "YIELDED_SCORECARD"
+    },
+    {
+      "source": "scorecard-d196-benchmark",
+      "target": "review-d196-jev-rubric",
+      "type": "EVALUATED_BY"
+    },
+    {
+      "source": "cand-d196-thalia",
+      "target": "cand-d195-calliope",
+      "type": "EVOLVED_FROM"
     }
   ],
   "governance": {
@@ -29877,12 +29907,80 @@
         "total_score": 79.1,
         "top_action": "one_story_lead_artifact"
       }
+    },
+    {
+      "id": "cand-d196-thalia",
+      "type": "therapeutic_candidate",
+      "label": "Candidate D196 (THALIA)",
+      "properties": {
+        "target": "SFRP2 CRD Pharmacophore",
+        "theme": "Matrix Metalloproteinase-9 (MMP-9) Cleavage Resistance in Peritoneal Basement Membrane Invasion",
+        "net_delta_g_bind_kcal": -157.30223938187328,
+        "clash_barrier_kcal": 194.7053193166375,
+        "cqrl_level": 5,
+        "dcb0129_status": "APPROVED",
+        "timestamp": "2026-10-04T19:16:46.605269+00:00"
+      }
+    },
+    {
+      "id": "lane-d196-thalia",
+      "type": "execution_lane",
+      "label": "Lane D196: THALIA Dual Cloud Trapped-Ion Execution",
+      "properties": {
+        "nexus_device": "Helios-1E-lite",
+        "nexus_shots": 4000,
+        "nexus_job_id": "6d963430-72cf-4cd2-9871-c1bb87656b07",
+        "aqora_device": "nexus:H2-Emulator",
+        "aqora_shots": 8000,
+        "asps_clean_fraction_nexus": 0.987279843444227,
+        "asps_clean_fraction_aqora": 0.9775,
+        "cross_platform_tv": 0.04593086771486289,
+        "overall_status": "PASS (6/6 GATES)"
+      }
+    },
+    {
+      "id": "receipt-d196-nexus",
+      "type": "hardware_receipt",
+      "label": "Quantinuum Nexus Helios-1E-lite Receipt (D196)",
+      "properties": {
+        "job_id": "6d963430-72cf-4cd2-9871-c1bb87656b07",
+        "shots": 4000,
+        "clean_fraction": 0.987279843444227
+      }
+    },
+    {
+      "id": "receipt-d196-aqora",
+      "type": "hardware_receipt",
+      "label": "Aqora QPU nexus:H2-Emulator Receipt (D196)",
+      "properties": {
+        "shots": 8000,
+        "clean_fraction": 0.9775,
+        "native_gateset": "{PhasedX, Rz, ZZPhase, Measure}"
+      }
+    },
+    {
+      "id": "scorecard-d196-benchmark",
+      "type": "benchmark_scorecard",
+      "label": "Lane D196 Multi-Gate Benchmark Scorecard",
+      "properties": {
+        "gates_passed": "G0, G1, G2, G3, G4, G5 (6/6)",
+        "cross_platform_tv": 0.04593086771486289
+      }
+    },
+    {
+      "id": "review-d196-jev-rubric",
+      "type": "evaluation_benchmark",
+      "label": "TypeSafe AI Jev Hackathon Review (D196)",
+      "properties": {
+        "total_score": 55.82,
+        "top_action": "benchmarks_first"
+      }
     }
   ],
   "nodes_summary": {},
   "stamp": "SPIVAK-QEM-CQM",
   "updated": "2026-10-03",
   "updated_utc": "2026-10-04T00:05:00Z",
-  "version": "11.6.167",
-  "updated_at": "2026-10-04T19:10:16.673507+00:00"
+  "version": "11.6.168",
+  "updated_at": "2026-10-04T19:16:46.605932+00:00"
 }
