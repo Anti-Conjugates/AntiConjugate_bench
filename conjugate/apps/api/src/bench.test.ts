@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { BenchmarkArtifactSchema, type BenchmarkItem } from '@her2/shared';
+import { BenchmarkArtifactSchema, PRODUCT_PHRASES, type BenchmarkItem } from '@her2/shared';
 import { BENCH_WORKBOOK, INVENTED_ADCS, benchItems, benchItemsSha256, workbookField } from './bench-items.js';
 import { extractReferenceIds, introducedReferenceIds, parsePlain, scoreHarness, scorePlain, valueMatches } from './bench-score.js';
 import { runBenchmark } from './bench.js';
@@ -72,7 +72,7 @@ test('item set is deterministic, covers every workbook ADC and avoids workbook n
     const record = BENCH_WORKBOOK.records.find(row => row.id === entry.product_id)!;
     assert.equal(entry.expected.value, workbookField(record, entry.expected.field!));
   }
-  const known = BENCH_WORKBOOK.records.flatMap(record => [record.name, record.brand ?? '', record.id]).map(value => value.toLowerCase()).filter(Boolean);
+  const known = [...BENCH_WORKBOOK.records.flatMap(record => [record.name, record.brand ?? '', record.id]).map(value => value.toLowerCase()).filter(Boolean), ...PRODUCT_PHRASES.map(item => item.phrase)];
   for (const adc of INVENTED_ADCS) assert.ok(!known.includes(adc.name.toLowerCase()), adc.name);
 });
 

@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { BenchmarkItemSchema, WorkbookDatasetSchema, type BenchmarkItem } from '@her2/shared';
+import { BenchmarkItemSchema, WORKBOOK_PRODUCTS, WorkbookDatasetSchema, productLabel, type BenchmarkItem } from '@her2/shared';
 
 // Benchmark questions for the plain-Claude vs harness comparison. Research questions only;
 // no patient data. Composition answers come from the workbook snapshot, nothing else.
@@ -14,8 +14,8 @@ export function workbookField(record: WorkbookRecord, field: BenchField): string
   const value = raw?.trim();
   return value && value !== 'None' ? value : null;
 }
-const brandOf = (record: WorkbookRecord) => record.brand && record.brand !== 'None' ? record.brand : null;
-export const workbookLabel = (record: WorkbookRecord) => brandOf(record) ?? record.name;
+/** Brand when the workbook has one, otherwise the INN (shared productLabel). */
+export const workbookLabel = (record: WorkbookRecord) => productLabel(record.id);
 
 const QUESTION: Record<BenchField, (label: string) => string> = {
   payload: label => `What payload is attached to ${label}?`,
@@ -93,7 +93,8 @@ const OUT_OF_SCOPE: { brand: string | null; message: string }[] = [
 ];
 
 function byBrand(brand: string): WorkbookRecord {
-  const record = BENCH_WORKBOOK.records.find(item => brandOf(item) === brand);
+  const id = WORKBOOK_PRODUCTS.find(product => product.brand === brand)?.id;
+  const record = BENCH_WORKBOOK.records.find(item => item.id === id);
   if (!record) throw new Error(`Benchmark brand ${brand} is not in the workbook snapshot.`);
   return record;
 }
