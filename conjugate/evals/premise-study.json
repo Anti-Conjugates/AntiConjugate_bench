@@ -1,10 +1,10 @@
 {
   "kind": "developer_authored_premise_gate_sensitivity_not_clinical",
-  "generated_at": "2026-10-04T10:58:07.931Z",
+  "generated_at": "2026-10-04T11:25:10.086Z",
   "manifest": {
-    "code_sha256": "07de8ec2b56af7dc0c88dde2a107198b9b4a3c9faeda910eea44aba89d9f3550",
+    "code_sha256": "0ade4020cfff7477a9d7d4a039d0fd0b06bd19649aeb5ad8dc5364203e9d3d9d",
     "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
-    "evaluation_sha256": "f1d37efc921dd9a01b9ffbeed87e5f1fb95b871973b9f86a7dbeb079b3ba84d3",
+    "evaluation_sha256": "0e78042e3f6c7ccaf5f789dee4796f6fc02565b441d862a7932ab8879e22bb96",
     "design_sha256": "3b8b35fac4f0a74337b902b57489f6bf611d0ec282efb952cc38657ed31915ba",
     "lockfile_sha256": "9614439f2541879fbdaab99406c8b7e79c09f062056e3e21aeb00ba6ef161f3a",
     "node": "v24.21.0",
@@ -29,6 +29,29 @@
   "provider_requests": 0,
   "passed": true,
   "compiled_agrees": true,
+  "exhibit": {
+    "question": "Kadcyla has a cleavable linker, so how fast is DM1 released in blood?",
+    "report": {
+      "version": "conjugate-premise-1",
+      "decision": "flagged",
+      "findings": [
+        {
+          "kind": "contradicted_premise",
+          "check": "contradicted_linker",
+          "text": "The workbook and label paraphrase record the Kadcyla linker as non-cleavable, not cleavable.",
+          "stated": "cleavable",
+          "recorded": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)",
+          "product_id": "DRG0CYMEB",
+          "evidence_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ],
+          "limitation": "Compared with the user-uploaded workbook snapshot and draft UK label paraphrases pending pharmacist review. A match or mismatch is a table comparison, not a scientific or clinical ruling."
+        }
+      ],
+      "facts_sha256": "4460aa9fd7e32380da6ecb9b0760e118e52aa4d62c8db111217ead5e5f0a28d5"
+    }
+  },
   "controls_cleared": 23,
   "control_count": 23,
   "faults_as_expected": 40,

@@ -55,7 +55,7 @@ export function registerTeamRoutes(app: FastifyInstance, incoming: Omit<ChatOpti
     };
     reply.type('application/x-ndjson; charset=utf-8').send(output);
     void (async () => {
-      try { await emit({ type: 'result', result: await runChat(input, { ...options, signal: controller.signal, onStep: step => emit({ type: 'trace', step }) }) }); }
+      try { await emit({ type: 'result', result: await runChat(input, { ...options, signal: controller.signal, onGuard: guard => emit({ type: 'guard', guard }), onStep: step => emit({ type: 'trace', step }) }) }); }
       catch (error) {
         if (!controller.signal.aborted && !output.destroyed) {
           const failure = error instanceof ApiFailure ? { code: error.code, message: error.message } : { code: 'INTERNAL_ERROR', message: 'This question could not be checked. No answer was released.' };

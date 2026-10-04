@@ -1,3 +1,4 @@
+import { PremiseFactsSchema } from './premise.js';
 import { z } from 'zod';
 import { HarnessManifestSchema } from './harness.js';
 
@@ -29,7 +30,7 @@ export const ResearchQuestionOptionSchema = z.object({
 }).strict();
 export const ResearchCatalogSchema = z.object({
   questions: z.array(ResearchQuestionOptionSchema), dataset: WorkbookDatasetSchema,
-  claude_configured: z.boolean(), model: z.literal('claude-opus-5-5')
+  claude_configured: z.boolean(), model: z.literal('claude-opus-5-5'), premise_facts: PremiseFactsSchema
 }).strict();
 export const ResearchRequestSchema = z.object({
   product_id: z.enum(['DRG0CYMEB', 'DRG0ERKBH']), question_id: ResearchQuestionSchema,

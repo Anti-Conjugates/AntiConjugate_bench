@@ -10,7 +10,7 @@ const request: ChatRequest = { message: 'What is Enhertu made of?', engine: 'evi
 let catalog: ResearchCatalog; let result: ChatResult;
 beforeAll(async () => { const app = await createApp(); catalog = ResearchCatalogSchema.parse((await app.inject({ method: 'GET', url: '/api/research/catalog' })).json()); await app.close(); result = await runChat(request); });
 afterEach(() => vi.restoreAllMocks());
-function encoded(turn: ChatResult = result) { return turn.trace.map(step => JSON.stringify({ type: 'trace', step })).join('\n') + '\n' + JSON.stringify({ type: 'result', result: turn }) + '\n'; }
+function encoded(turn: ChatResult = result) { return JSON.stringify({ type: 'guard', guard: turn.guard }) + '\n' + turn.trace.map(step => JSON.stringify({ type: 'trace', step })).join('\n') + '\n' + JSON.stringify({ type: 'result', result: turn }) + '\n'; }
 function mockStream(value: string, splits = [value.length]) {
   const data = new TextEncoder().encode(value); let cursor = 0; let index = 0;
   vi.stubGlobal('fetch', vi.fn(async () => new Response(new ReadableStream({ pull(controller) { if (cursor >= data.length) { controller.close(); return; } const end = Math.min(data.length, cursor + (splits[index++] ?? 17)); controller.enqueue(data.slice(cursor, end)); cursor = end; } }), { headers: { 'content-type': 'application/x-ndjson' } })));
@@ -20,6 +20,17 @@ describe('chat client boundary', () => {
     expect(validateChatResult(result, request, catalog).status).toBe('complete');
     const mutations: ((copy: ChatResult) => void)[] = [copy => { copy.reply = 'RAW_PROVIDER_SENTINEL'; }, copy => { copy.followups[0] = 'FORGED'; }, copy => { copy.audits[0]!.result.unknowns[0] = 'FORGED'; }, copy => { copy.trace[0]!.detail = 'FORGED'; }, copy => { copy.audits[0]!.result.trace.find(step => step.tool === 'read_workbook')!.detail = 'FORGED'; }, copy => { copy.scopes[0]!.evidence_policy = 'workbook_only'; }, copy => { copy.harness.audit_calls = 0; }, copy => { copy.guardrail = { status: 'open' } as never; }, copy => { copy.selected_audit_ids = ['invented']; }, copy => { copy.audits[0]!.result.receipts[0]!.product_id = 'DRG0CYMEB'; }, copy => { copy.audits[0]!.result.dataset_sha256 = '0'.repeat(64); }];
     for (const mutate of mutations) { const copy = structuredClone(result); mutate(copy); expect(() => validateChatResult(copy, request, catalog)).toThrow(); }
+  });
+  it('recomputes the premise check and rejects missing, tampered or reordered guards', async () => {
+    for (const mutate of [(copy: ChatResult) => { delete copy.guard; }, (copy: ChatResult) => { copy.guard!.premise.decision = 'blocked'; }, (copy: ChatResult) => { copy.guard!.live_enabled = false; copy.guard!.premise.findings.push({ ...copy.guard!.premise.findings[0]!, kind: 'unverifiable_entity', check: 'invented_inn', text: 'Forged.', stated: 'x', recorded: null, product_id: null, evidence_ids: [], limitation: copy.guard!.premise.findings[0]?.limitation ?? '' } as never); }]) {
+      const copy = structuredClone(result); mutate(copy); expect(() => validateChatResult(copy, request, catalog)).toThrow();
+    }
+    mockStream(result.trace.map(step => JSON.stringify({ type: 'trace', step })).join('\n') + '\n' + JSON.stringify({ type: 'result', result }) + '\n');
+    await expect(streamChatTurn(request, catalog, new AbortController().signal, () => undefined)).rejects.toThrow();
+    mockStream(JSON.stringify({ type: 'trace', step: result.trace[0] }) + '\n' + encoded());
+    await expect(streamChatTurn(request, catalog, new AbortController().signal, () => undefined)).rejects.toThrow();
+    const guards: unknown[] = []; mockStream(encoded());
+    await streamChatTurn(request, catalog, new AbortController().signal, () => undefined, guard => guards.push(guard)); expect(guards).toEqual([result.guard]);
   });
   it('decodes byte-split UTF-8 streams and requires exact completed-event equality', async () => {
     mockStream(encoded(), [1, 2, 3, 8, 33, 97]); const steps: unknown[] = [];

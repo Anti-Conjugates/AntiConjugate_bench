@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { EvidencePolicySchema, ResearchQuestionSchema, ResearchResultSchema, researchExecutionIsConsistent } from './research.js';
+import { TurnGuardSchema } from './guard.js';
 
 export const ChatScopeSchema = z.object({ product_id: z.enum(['DRG0CYMEB', 'DRG0ERKBH']), question_id: ResearchQuestionSchema, evidence_policy: EvidencePolicySchema }).strict();
 export const ChatRequestSchema = z.object({
@@ -7,12 +8,13 @@ export const ChatRequestSchema = z.object({
   context: z.array(ChatScopeSchema).max(4).default([]), synthetic_confirmed: z.literal(true)
 }).strict();
 export const CHAT_LIMITS = { deadline_ms: 60000, max_model_calls: 4, max_audits: 4, max_evidence_reads: 16, retries: 0, max_request_bytes: 65536, max_response_bytes: 131072 } as const;
+export const PREMISE_STOP = 'The premise gate stopped this question before any model or evidence call.';
 export const ChatStepSchema = z.object({
   id: z.string(), actor: z.enum(['controller', 'claude', 'local_tool', 'deterministic_verifier']),
   stage: z.enum(['scope', 'model', 'audit', 'answer']), detail: z.string(),
   scope: ChatScopeSchema.nullable(), duration_ms: z.number().nonnegative()
 }).strict().superRefine((step, context) => {
-  const valid = step.stage === 'scope' ? step.actor === 'controller' && step.scope === null && (/^[1-4] research checks scoped\. Only recognized research terms reach Claude; raw text stays out of provider requests\.$/.test(step.detail) || step.detail === 'The scope guard stopped this question before any model or evidence call.')
+  const valid = step.stage === 'scope' ? step.actor === 'controller' && step.scope === null && (/^[1-4] research checks scoped\. Only recognized research terms reach Claude; raw text stays out of provider requests\.$/.test(step.detail) || step.detail === 'The scope guard stopped this question before any model or evidence call.' || step.detail === PREMISE_STOP)
     : step.stage === 'model' ? step.actor === 'claude' && step.scope === null && /^Claude call [1-4] completed with (?:tool requests|an identifier selection)\.$/.test(step.detail)
       : step.stage === 'audit' ? step.actor === 'deterministic_verifier' && step.scope !== null && /^audit-[1-4]: [1-4] local source reads; citation checks completed\.$/.test(step.detail)
         : step.actor === 'controller' && step.scope === null && step.detail === 'The controller rendered verified findings. Raw model prose was not displayed.';
@@ -21,7 +23,7 @@ export const ChatStepSchema = z.object({
 export const ChatAuditSchema = z.object({ id: z.string().regex(/^audit-[1-4]$/), scope: ChatScopeSchema, result: ResearchResultSchema }).strict();
 export const ChatResultSchema = z.object({
   id: z.string(), created_at: z.string().datetime(), engine: z.enum(['evidence', 'claude']), model: z.literal('claude-opus-5-5').nullable(),
-  status: z.enum(['complete', 'incomplete', 'clarification', 'outside_scope']), reply: z.string().max(3000),
+  status: z.enum(['complete', 'incomplete', 'clarification', 'outside_scope', 'premise_blocked']), reply: z.string().max(3000),
   scopes: z.array(ChatScopeSchema).max(4), audits: z.array(ChatAuditSchema).max(4), selected_audit_ids: z.array(z.string()).max(4),
   missing_scopes: z.array(ChatScopeSchema).max(4), followups: z.array(z.string().max(180)).max(3), trace: z.array(ChatStepSchema).max(12),
   harness: z.object({ version: z.literal('conjugate-chat-1'), model_calls: z.number().int().min(0).max(4), audit_calls: z.number().int().min(0).max(4), evidence_reads: z.number().int().min(0).max(16),
@@ -29,10 +31,12 @@ export const ChatResultSchema = z.object({
     skills: z.array(z.object({ name: z.string(), version: z.string(), sha256: z.string().regex(/^[a-f0-9]{64}$/) }).strict()).max(3),
     limits: z.object({ deadline_ms: z.literal(60000), max_model_calls: z.literal(4), max_audits: z.literal(4), max_evidence_reads: z.literal(16), retries: z.literal(0), max_request_bytes: z.literal(65536), max_response_bytes: z.literal(131072) }).strict()
   }).strict(),
+  guard: TurnGuardSchema.optional(),
   clinical_status: z.literal('draft_pending_pharmacist'), eligibility: z.literal('not_assessed'), needs_human: z.literal(true),
   guardrail: z.object({ status: z.literal('blocked') }).strict(), answer_correctness_probability: z.null(), omission_probability: z.null()
 }).strict();
 export const ChatEventSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('guard'), guard: TurnGuardSchema }).strict(),
   z.object({ type: z.literal('trace'), step: ChatStepSchema }).strict(),
   z.object({ type: z.literal('result'), result: ChatResultSchema }).strict(),
   z.object({ type: z.literal('error'), error: z.object({ code: z.string(), message: z.string() }).strict() }).strict()
@@ -46,6 +50,7 @@ export type ChatEvent = z.infer<typeof ChatEventSchema>;
 
 export function renderChatReply(status: ChatResult['status'], audits: ChatAudit[], selected: string[], missing: number) {
   if (status === 'outside_scope') return 'This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.';
+  if (status === 'premise_blocked') return 'This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.';
   if (status === 'clarification') return 'What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.';
   const chosen = audits.filter(audit => selected.includes(audit.id));
   const labels = { supported: 'Supported', contradicted: 'Contradicted', insufficient: 'Not enough evidence' };
@@ -86,7 +91,7 @@ export function chatExecutionIsConsistent(result: ChatResult) {
   let modelIndex = 0;
   let auditIndex = 0;
   if (result.trace.some(step => {
-    const detail = step.stage === 'scope' ? ['complete', 'incomplete'].includes(result.status) ? `${keys.length} research checks scoped. Only recognized research terms reach Claude; raw text stays out of provider requests.` : 'The scope guard stopped this question before any model or evidence call.'
+    const detail = step.stage === 'scope' ? ['complete', 'incomplete'].includes(result.status) ? `${keys.length} research checks scoped. Only recognized research terms reach Claude; raw text stays out of provider requests.` : result.status === 'premise_blocked' ? PREMISE_STOP : 'The scope guard stopped this question before any model or evidence call.'
       : step.stage === 'answer' ? 'The controller rendered verified findings. Raw model prose was not displayed.'
         : step.stage === 'model' ? `Claude call ${++modelIndex} completed with ${modelIndex === result.harness.model_calls ? 'an identifier selection' : 'tool requests'}.`
           : `${audits[auditIndex]?.id}: ${audits[auditIndex++]?.result.harness.tool_calls} local source reads; citation checks completed.`;
@@ -95,7 +100,8 @@ export function chatExecutionIsConsistent(result: ChatResult) {
   if (new Set(keys).size !== keys.length || new Set(audits.map(audit => audit.id)).size !== audits.length || new Set(audits.map(audit => chatScopeKey(audit.scope))).size !== audits.length || selected.size !== result.selected_audit_ids.length || result.selected_audit_ids.some(id => !audits.some(audit => audit.id === id))) return false;
   if (JSON.stringify(missing) !== JSON.stringify(result.missing_scopes.map(chatScopeKey))) return false;
   if ((result.status === 'complete' && (!keys.length || missing.length)) || (result.status === 'incomplete' && (!keys.length || !missing.length))) return false;
-  if (['clarification', 'outside_scope'].includes(result.status) && (keys.length || audits.length || selected.size || result.harness.model_calls)) return false;
+  if (!guardStatusIsConsistent(result.status, result.guard)) return false;
+  if (['clarification', 'outside_scope', 'premise_blocked'].includes(result.status) && (keys.length || audits.length || selected.size || result.harness.model_calls)) return false;
   if (result.harness.audit_calls !== audits.length || result.harness.evidence_reads !== audits.reduce((total, audit) => total + audit.result.harness.tool_calls, 0)) return false;
   if (result.trace.filter(step => step.stage === 'model').length !== result.harness.model_calls || result.trace.filter(step => step.stage === 'audit').length !== audits.length) return false;
   if (result.trace.length !== 2 + result.harness.model_calls + audits.length || result.trace.some((step, index) => step.id !== `step-${index + 1}` || (step.stage === 'model' && (step.actor !== 'claude' || step.scope !== null)) || (step.stage === 'audit' && (step.actor !== 'deterministic_verifier' || step.scope === null))) || result.trace[0]?.stage !== 'scope' || result.trace[0]?.actor !== 'controller' || result.trace.at(-1)?.stage !== 'answer' || result.trace.at(-1)?.actor !== 'controller') return false;
@@ -104,4 +110,11 @@ export function chatExecutionIsConsistent(result: ChatResult) {
   if (result.engine === 'evidence' && result.harness.skills.length) return false;
   if ((result.engine === 'evidence' && (result.model !== null || result.harness.model_calls !== 0)) || (result.harness.model_calls > 0 && result.model !== 'claude-opus-5-5')) return false;
   return audits.every(audit => keys.includes(chatScopeKey(audit.scope)) && audit.result.product_id === audit.scope.product_id && audit.result.question_id === audit.scope.question_id && audit.result.evidence_policy === audit.scope.evidence_policy && audit.result.engine === 'evidence' && audit.result.model === null && audit.result.integrity_drill === 'none' && audit.result.draft_integrity === 'accepted' && audit.result.claims.length === 1 && audit.result.claims[0]?.id === audit.scope.question_id && audit.result.harness.tool_calls === (audit.scope.evidence_policy === 'all' ? 4 : 1) && audit.result.harness.code_sha256 === result.harness.code_sha256 && chatAuditProseIsConsistent(audit.result) && researchExecutionIsConsistent(audit.result));
+}
+
+/** premise_blocked needs a blocked premise report; a blocked report only allows premise_blocked or outside_scope. */
+export function guardStatusIsConsistent(status: string, guard: { premise: { decision: string } } | undefined) {
+  if (!guard) return status !== 'premise_blocked';
+  if (status === 'premise_blocked') return guard.premise.decision === 'blocked';
+  return guard.premise.decision !== 'blocked' || status === 'outside_scope';
 }

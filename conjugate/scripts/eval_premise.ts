@@ -9,6 +9,7 @@ import { studyManifest } from './eval_verifier.js';
 import { PREMISE_CASES, PREMISE_FAMILIES, variantsOf, type PremiseCase } from './premise_fixtures.js';
 
 const require = createRequire(import.meta.url);
+export const PREMISE_EXHIBIT = 'Kadcyla has a cleavable linker, so how fast is DM1 released in blood?';
 const dataset = WorkbookDatasetSchema.parse(JSON.parse(readFileSync(new URL('../apps/api/src/workbook.snapshot.json', import.meta.url), 'utf8')));
 export const PREMISE_FACTS = premiseFacts(dataset);
 export const PREMISE_CHECKS = PremiseCheckSchema.options.filter(check => check !== 'resolved_reference' && check !== 'internal_error');
@@ -97,7 +98,7 @@ export function runPremiseStudy() {
     && allVariants.every(row => row.agrees) && mutants.every(row => row.controls_cleared === row.controls) && mutants.every(row => row.detected);
   return { kind: 'developer_authored_premise_gate_sensitivity_not_clinical', generated_at: new Date().toISOString(), manifest: studyManifest('./eval_premise.ts'),
     gate_function_sha256: fingerprint(source), facts_sha256: premiseGate('', PREMISE_FACTS).facts_sha256, attribution: PREMISE_ATTRIBUTION, provider_requests: 0,
-    passed, compiled_agrees: compiledAgrees,
+    passed, compiled_agrees: compiledAgrees, exhibit: { question: PREMISE_EXHIBIT, report: premiseGate(PREMISE_EXHIBIT, PREMISE_FACTS) },
     controls_cleared: controls.filter(row => row.decision === 'clear').length, control_count: controls.length,
     faults_as_expected: faults.filter(row => row.as_expected).length, fault_count: faults.length,
     variants_agree: allVariants.filter(row => row.agrees).length, variant_count: allVariants.length,

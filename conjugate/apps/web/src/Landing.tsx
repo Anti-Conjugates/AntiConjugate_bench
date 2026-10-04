@@ -14,7 +14,9 @@ import { AdcHero } from './AdcHero';
 import { Beat } from './Beat';
 import { VerdictSwap } from './VerdictSwap';
 import { TeamGraph, stepsFromTrace } from './TeamGraph';
-import { PremiseGateAnim, type PremiseReportLike } from './PremiseGateAnim';
+import { PremiseGateAnim } from './PremiseGateAnim';
+import premiseStudy from '../../../evals/premise-study.json';
+import type { PremiseReport } from '@her2/shared';
 import { useRevealOnScroll } from './motion';
 
 /** Real links keep the destinations shareable and keyboard-native; the click handler keeps in-app navigation. */
@@ -92,17 +94,8 @@ export const BEATS = [
   { id: 'beat-07', short: 'Limits' },
 ] as const;
 
-/**
- * Hand-written recorded example of the AntiConjugate guardrail (Python) premise check. It is not run by this app.
- * Replace with evals/premise-study.json once that artifact exists.
- */
-export const PREMISE_EXAMPLE: { question: string; report: PremiseReportLike } = {
-  question: 'Kadcyla has a cleavable linker, so how fast is DM1 released in blood?',
-  report: {
-    decision: 'flagged',
-    findings: [{ kind: 'contradicted_premise', text: 'The question says the Kadcyla linker is cleavable. The recorded composition lists a non-cleavable MCC linker.', stated: 'cleavable linker', recorded: 'non-cleavable MCC linker' }],
-  },
-};
+/** Real premise-gate output, written by npm run eval:premise and checked against the gate in tests. */
+export const PREMISE_EXAMPLE = premiseStudy.exhibit as unknown as { question: string; report: PremiseReport };
 
 function StoryRail() {
   const [active, setActive] = useState<string>(BEATS[0].id);
@@ -212,7 +205,7 @@ export function Landing({ onNavigate }: { onNavigate: (view: ViewId) => void }) 
       lede={<>Kadcyla’s linker is not cleavable. A premise check reads the question against the recorded composition and flags the mistake before Claude sees it. Questions about doses or who should get a drug stop at the scope gate: the recorded live run made {stats.boundaryModelCalls} model calls.</>}
       exhibit={<>
         <p className="recorded-tag">Recorded example</p>
-        <PremiseGateAnim question={PREMISE_EXAMPLE.question} report={PREMISE_EXAMPLE.report} source={<>AntiConjugate guardrail (Python), recorded output. Written up by hand; not yet a live check in this app. Its product list is marked unverified.</>} />
+        <PremiseGateAnim question={PREMISE_EXAMPLE.question} report={PREMISE_EXAMPLE.report} source={<>Premise gate output for this exact question, from evals/premise-study.json. Adapted from adc-guardrail (premise checks only; no data or thresholds imported). In chat, the same gate runs before every turn.</>} />
         {boundaryRow && 'trace' in boundaryRow && boundaryRow.trace && <TeamGraph steps={stepsFromTrace(boundaryRow.trace)} sequence caption="Live agent team, clinical question: stopped at the scope gate. From evals/team-live.json." />}
       </>} />
 

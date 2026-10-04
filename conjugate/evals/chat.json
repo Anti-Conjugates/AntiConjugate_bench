@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-04T09:02:42.805Z",
+  "generated_at": "2026-10-04T11:24:43.424Z",
   "kind": "offline_chat_audits_and_replay_not_clinical_benchmark",
-  "code_sha256": "d024370b1b2e49a383be4a6e833f9ca8415b6a45a0dd336ae77dd48ee6b19bc2",
+  "code_sha256": "0ade4020cfff7477a9d7d4a039d0fd0b06bd19649aeb5ad8dc5364203e9d3d9d",
   "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
   "provider_requests": 0,
   "request_cap": 0,
@@ -29,7 +29,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 11,
+      "wall_ms": 40,
       "clinical_release": "blocked"
     },
     {
@@ -53,7 +53,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 15,
       "clinical_release": "blocked"
     },
     {
@@ -77,7 +77,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 3,
+      "wall_ms": 11,
       "clinical_release": "blocked"
     },
     {
@@ -99,7 +99,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 7,
       "clinical_release": "blocked"
     },
     {
@@ -121,7 +121,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -143,7 +143,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -165,7 +165,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -187,7 +187,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 5,
       "clinical_release": "blocked"
     },
     {
@@ -211,7 +211,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 10,
       "clinical_release": "blocked"
     },
     {
@@ -233,7 +233,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -258,7 +258,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 12,
       "clinical_release": "blocked"
     },
     {
@@ -282,7 +282,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -306,7 +306,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 7,
       "clinical_release": "blocked"
     },
     {
@@ -328,7 +328,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 5,
       "clinical_release": "blocked"
     },
     {
@@ -350,7 +350,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -372,7 +372,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 5,
       "clinical_release": "blocked"
     },
     {
@@ -394,7 +394,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -416,7 +416,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 5,
       "clinical_release": "blocked"
     },
     {
@@ -440,7 +440,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 2,
+      "wall_ms": 7,
       "clinical_release": "blocked"
     },
     {
@@ -462,7 +462,7 @@
         }
       ],
       "omitted_checks": 0,
-      "wall_ms": 1,
+      "wall_ms": 4,
       "clinical_release": "blocked"
     }
   ],

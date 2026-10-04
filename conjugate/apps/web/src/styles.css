@@ -1166,3 +1166,20 @@ html { scroll-padding-top: var(--sp-6); }
   .table-scroll { scroll-behavior: auto; }
 }
 /* === end design-fixes === */
+
+/* === guard-panel */
+.guard-panel { display: grid; gap: var(--space-3, 12px); margin: 12px 0; }
+.guard-clear { margin: 0; color: var(--muted, #a8b0a0); font-size: 0.9rem; }
+.guard-live { border: 1px solid var(--line, rgba(255,255,255,0.12)); border-radius: 10px; padding: 10px 14px; }
+.guard-live summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 8px; }
+.guard-receipts { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 8px; }
+.guard-receipts li { border-left: 3px solid var(--line, rgba(255,255,255,0.2)); padding: 6px 10px; }
+.guard-receipts li[data-status="ok"] { border-left-color: var(--supported, #7bc47f); }
+.guard-receipts li[data-status="not_found"], .guard-receipts li[data-status="error"] { border-left-color: var(--contradicted, #e0645c); }
+.guard-receipts li[data-status="drift"] { border-left-color: var(--insufficient, #d29a5c); }
+.guard-receipts li > div { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; }
+.guard-receipts p { margin: 4px 0 0; overflow-wrap: anywhere; }
+.live-status { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.guard-meta, .guard-note { font-size: 0.8rem; color: var(--muted, #a8b0a0); }
+/* === end guard-panel */
+

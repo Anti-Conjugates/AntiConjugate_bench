@@ -5,6 +5,7 @@ export * from './team.js';
 export * from './models.js';
 export * from './inference.js';
 export * from './live.js';
+export * from './guard.js';
 import { z } from 'zod';
 export * from './research.js';
 export * from './harness.js';

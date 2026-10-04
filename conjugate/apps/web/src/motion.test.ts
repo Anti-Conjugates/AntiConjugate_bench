@@ -26,17 +26,19 @@ describe('graphStates', () => {
 
 describe('edgeFor and walkedEdges', () => {
   it('finds only edges that exist in TEAM_GRAPH', () => {
-    expect(edgeFor(edges, 'scope_gate', 'lead_plan')).toMatchObject({ from: 'scope_gate', to: 'lead_plan' });
+    expect(edgeFor(edges, 'scope_gate', 'premise_gate')).toMatchObject({ from: 'scope_gate', to: 'premise_gate' });
+    expect(edgeFor(edges, 'premise_gate', 'lead_plan')).toMatchObject({ from: 'premise_gate', to: 'lead_plan' });
+    expect(edgeFor(edges, 'scope_gate', 'lead_plan')).toBeNull();
     expect(edgeFor(edges, 'scope_gate', 'verifier')).toBeNull();
     expect(edgeFor(edges, undefined, 'scope_gate')).toBeNull();
     expect(edgeFor(edges, 'evidence_worker', 'evidence_worker')).toBeNull();
   });
   it('walks a recorded trace once per edge and treats repeated nodes as a burst', () => {
-    const steps = stepsFromTrace(['scope_gate:controller', 'lead_plan:lead_agent', 'evidence_worker:worker_agent', 'evidence_worker:worker_agent:CLAUDE_REFUSED', 'verifier:deterministic_verifier']);
-    expect(steps[3]).toMatchObject({ status: 'failed', code: 'CLAUDE_REFUSED' });
-    expect(walkedEdges(edges, steps).map(item => item.key)).toEqual(['scope_gate->lead_plan', 'lead_plan->evidence_worker', 'evidence_worker->verifier']);
-    expect(burstIndex(steps, 2)).toBe(0);
-    expect(burstIndex(steps, 3)).toBe(1);
+    const steps = stepsFromTrace(['scope_gate:controller', 'premise_gate:controller', 'lead_plan:lead_agent', 'evidence_worker:worker_agent', 'evidence_worker:worker_agent:CLAUDE_REFUSED', 'verifier:deterministic_verifier']);
+    expect(steps[4]).toMatchObject({ status: 'failed', code: 'CLAUDE_REFUSED' });
+    expect(walkedEdges(edges, steps).map(item => item.key)).toEqual(['scope_gate->premise_gate', 'premise_gate->lead_plan', 'lead_plan->evidence_worker', 'evidence_worker->verifier']);
+    expect(burstIndex(steps, 3)).toBe(0);
+    expect(burstIndex(steps, 4)).toBe(1);
   });
   it('supports a premise_gate controller node between scope_gate and lead_plan', () => {
     const withPremise = ['scope_gate', 'premise_gate', ...nodes.filter(node => node !== 'scope_gate')];

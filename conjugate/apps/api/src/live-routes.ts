@@ -3,14 +3,17 @@ import { ApiErrorSchema, LiveCheckRequestSchema } from '@her2/shared';
 import { ApiFailure } from './errors.js';
 import { createLiveRetriever, type LiveRetriever } from './live-retrieval.js';
 
-export interface LiveRouteOptions { env?: Record<string, string | undefined>; retriever?: LiveRetriever }
+export interface LiveRouteOptions { env?: Record<string, string | undefined>; retriever?: LiveRetriever; enabled?: boolean }
 const MAX_ACTIVE = 2;
 let shared: LiveRetriever | undefined;
+/** Off unless LIVE_RETRIEVAL=on, so tests and local runs never reach the network by accident. */
+export const liveRetrievalEnabled = (env: Record<string, string | undefined> = process.env) => env.LIVE_RETRIEVAL?.trim().toLowerCase() === 'on';
+export const sharedLiveRetriever = () => (shared ??= createLiveRetriever());
 const errorBody = (code: string, message: string) => ApiErrorSchema.parse({ error: { code, message } });
 
 export function registerLiveRoutes(app: FastifyInstance, options: LiveRouteOptions = {}) {
-  const enabled = (options.env ?? process.env).LIVE_RETRIEVAL?.trim().toLowerCase() !== 'off';
-  const retriever = options.retriever ?? (shared ??= createLiveRetriever());
+  const enabled = options.enabled ?? liveRetrievalEnabled(options.env);
+  const retriever = options.retriever ?? sharedLiveRetriever();
   let active = 0;
   app.get('/api/live/sources', async () => retriever.catalog(enabled));
   app.post('/api/live/check', async (request, reply) => {

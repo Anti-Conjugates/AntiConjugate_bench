@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { ChatAuditSchema, ChatScopeSchema, chatAuditProseIsConsistent, chatFollowups, chatScopeKey, renderChatReply } from './chat.js';
+import { ChatAuditSchema, ChatScopeSchema, chatAuditProseIsConsistent, chatFollowups, chatScopeKey, guardStatusIsConsistent, renderChatReply } from './chat.js';
+import { TurnGuardSchema } from './guard.js';
 import { researchExecutionIsConsistent } from './research.js';
 
 /**
@@ -9,14 +10,15 @@ import { researchExecutionIsConsistent } from './research.js';
  */
 export const TEAM_LIMITS = { deadline_ms: 60000, max_lead_calls: 4, max_worker_calls: 8, max_audits: 4, max_revisions: 1, retries: 0, max_request_bytes: 65536, max_response_bytes: 131072 } as const;
 export const TEAM_FRAMEWORK = '@langchain/langgraph@1.4.19' as const;
-export const TeamNodeSchema = z.enum(['scope_gate', 'lead_plan', 'evidence_worker', 'verifier', 'lead_select', 'omission_gate', 'answer']);
+export const TeamNodeSchema = z.enum(['scope_gate', 'premise_gate', 'lead_plan', 'evidence_worker', 'verifier', 'lead_select', 'omission_gate', 'answer']);
 export type TeamNode = z.infer<typeof TeamNodeSchema>;
 export const TEAM_GRAPH = {
   nodes: TeamNodeSchema.options,
   edges: [
     { from: '__start__', to: 'scope_gate', conditional: false },
-    { from: 'scope_gate', to: 'lead_plan', conditional: true },
-    { from: 'scope_gate', to: 'answer', conditional: true },
+    { from: 'scope_gate', to: 'premise_gate', conditional: false },
+    { from: 'premise_gate', to: 'lead_plan', conditional: true },
+    { from: 'premise_gate', to: 'answer', conditional: true },
     { from: 'lead_plan', to: 'evidence_worker', conditional: true },
     { from: 'lead_plan', to: 'lead_select', conditional: true },
     { from: 'lead_plan', to: 'omission_gate', conditional: true },
@@ -30,7 +32,7 @@ export const TEAM_GRAPH = {
   ]
 } as const;
 const nodeActors: Record<TeamNode, readonly string[]> = {
-  scope_gate: ['controller'], lead_plan: ['lead_agent', 'controller'], evidence_worker: ['worker_agent', 'controller'],
+  scope_gate: ['controller'], premise_gate: ['controller'], lead_plan: ['lead_agent', 'controller'], evidence_worker: ['worker_agent', 'controller'],
   verifier: ['deterministic_verifier'], lead_select: ['lead_agent', 'controller'], omission_gate: ['controller'], answer: ['controller']
 };
 const CodeSchema = z.string().regex(/^[A-Z_]{3,40}$/);
@@ -51,7 +53,7 @@ export const TeamRequestSchema = z.object({
 }).strict();
 export const TeamResultSchema = z.object({
   id: z.string(), created_at: z.string().datetime(), engine: z.enum(['evidence', 'claude']), model: z.literal('claude-opus-5-5').nullable(),
-  status: z.enum(['complete', 'incomplete', 'clarification', 'outside_scope']), reply: z.string().max(3000),
+  status: z.enum(['complete', 'incomplete', 'clarification', 'outside_scope', 'premise_blocked']), reply: z.string().max(3000),
   scopes: z.array(ChatScopeSchema).max(4), audits: z.array(ChatAuditSchema).max(4), workers: z.array(TeamWorkerSchema).max(4),
   selected_audit_ids: z.array(z.string().regex(/^audit-[1-4]$/)).max(4), missing_scopes: z.array(ChatScopeSchema).max(4), revisions: z.number().int().min(0).max(1),
   followups: z.array(z.string().max(180)).max(3), trace: z.array(TeamStepSchema).max(24),
@@ -59,10 +61,12 @@ export const TeamResultSchema = z.object({
     audit_calls: z.number().int().min(0).max(4), evidence_reads: z.number().int().min(0).max(16), code_sha256: z.string().regex(/^[a-f0-9]{64}$/), intent_sha256: z.string().regex(/^[a-f0-9]{64}$/),
     limits: z.object({ deadline_ms: z.literal(60000), max_lead_calls: z.literal(4), max_worker_calls: z.literal(8), max_audits: z.literal(4), max_revisions: z.literal(1), retries: z.literal(0), max_request_bytes: z.literal(65536), max_response_bytes: z.literal(131072) }).strict()
   }).strict(),
+  guard: TurnGuardSchema.optional(),
   clinical_status: z.literal('draft_pending_pharmacist'), eligibility: z.literal('not_assessed'), needs_human: z.literal(true),
   guardrail: z.object({ status: z.literal('blocked') }).strict(), answer_correctness_probability: z.null(), omission_probability: z.null()
 }).strict();
 export const TeamEventSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('guard'), guard: TurnGuardSchema }).strict(),
   z.object({ type: z.literal('trace'), step: TeamStepSchema }).strict(),
   z.object({ type: z.literal('result'), result: TeamResultSchema }).strict(),
   z.object({ type: z.literal('error'), error: z.object({ code: z.string(), message: z.string() }).strict() }).strict()
@@ -87,6 +91,10 @@ export function teamExecutionIsConsistent(result: TeamResult) {
   if (JSON.stringify(result.missing_scopes.map(chatScopeKey)) !== JSON.stringify(keys.filter(key => !selectedKeys.includes(key)))) return false;
   const ready = result.status === 'complete' || result.status === 'incomplete';
   if ((result.status === 'complete' && (!keys.length || result.missing_scopes.length)) || (result.status === 'incomplete' && (!keys.length || !result.missing_scopes.length))) return false;
+  if (!guardStatusIsConsistent(result.status, result.guard)) return false;
+  const premiseSteps = result.trace.filter(step => step.node === 'premise_gate');
+  if (premiseSteps.length !== (result.guard ? 1 : 0) || premiseSteps.some(step => (step.status === 'failed') !== (result.status === 'premise_blocked') || (step.code !== null && step.code !== 'PREMISE_BLOCKED'))) return false;
+  if (result.guard && result.trace[1]?.node !== 'premise_gate') return false;
   if (!ready && (keys.length || result.workers.length || result.harness.lead_calls || result.harness.worker_calls)) return false;
   if (result.reply !== renderChatReply(result.status, result.audits, result.selected_audit_ids, result.missing_scopes.length)) return false;
   if (JSON.stringify(result.followups) !== JSON.stringify(chatFollowups(result.status, result.scopes[0]?.evidence_policy))) return false;
@@ -105,7 +113,7 @@ export function teamExecutionIsConsistent(result: TeamResult) {
   if (result.harness.audit_calls !== audited.length || result.harness.evidence_reads !== result.audits.reduce((sum, audit) => sum + audit.result.harness.tool_calls, 0)) return false;
   const verifierSteps = trace.filter(step => step.node === 'verifier');
   const plans = result.trace.filter(step => step.node === 'lead_plan');
-  if (result.status === 'clarification' || result.status === 'outside_scope' ? plans.length !== 0 || result.revisions !== 0 : plans.length !== result.revisions + 1) return false;
+  if (result.status === 'clarification' || result.status === 'outside_scope' || result.status === 'premise_blocked' ? plans.length !== 0 || result.revisions !== 0 : plans.length !== result.revisions + 1) return false;
   const verified = result.workers.filter(worker => worker.status === 'accepted' || worker.code === 'VERIFIER_REJECTED');
   if (JSON.stringify(verifierSteps.map(step => [step.audit_id, step.status])) !== JSON.stringify(verified.map(worker => [worker.audit_id, worker.status === 'accepted' ? 'completed' : 'failed']))) return false;
   return result.audits.every(audit => audit.result.product_id === audit.scope.product_id && audit.result.question_id === audit.scope.question_id && audit.result.evidence_policy === audit.scope.evidence_policy

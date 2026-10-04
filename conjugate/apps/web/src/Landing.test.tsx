@@ -37,9 +37,9 @@ it('tells the seven-beat story with every number read from the artifacts', () =>
     expect(visible.replace(/\s+/g, ' ')).toContain(heading);
   }
   expect(markup).toContain('Recorded example');
-  expect(markup).toContain('AntiConjugate guardrail (Python), recorded output');
-  expect(markup).toContain('not yet a live check in this app');
-  expect(markup).toContain('<mark class="pg-match">cleavable linker</mark>');
+  expect(markup).toContain('Premise gate output for this exact question');
+  expect(markup).toContain('the same gate runs before every turn');
+  expect(markup).toContain('<mark class="pg-match">cleavable</mark>');
   expect(markup).toContain('openFDA, DailyMed, ClinicalTrials.gov, PubMed and ADCdb');
   const stats = landingStats();
   expect(stats.shiftsChanged).toBe('3/10');

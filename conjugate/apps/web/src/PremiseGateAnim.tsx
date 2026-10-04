@@ -1,19 +1,17 @@
 import type { CSSProperties, ReactNode } from 'react';
+import type { PremiseFinding, PremiseKind, PremiseReport } from '@her2/shared';
 
-/** Local stand-in for the shared premise report contract; swap for the zod-derived type once it lands in packages/shared. */
-export type PremiseFindingKind = 'unverifiable_entity' | 'unverifiable_construct' | 'unverifiable_reference' | 'contradicted_premise';
-export interface PremiseFindingLike { kind: PremiseFindingKind; text: string; stated?: string; recorded?: string }
-export interface PremiseReportLike { decision: 'clear' | 'flagged' | 'blocked'; findings: PremiseFindingLike[] }
-
-export const findingLabels: Record<PremiseFindingKind, string> = {
-  contradicted_premise: 'Premise contradicted', unverifiable_entity: 'Product not recognised', unverifiable_construct: 'Construct not recognised', unverifiable_reference: 'Reference not found',
+type ShownReport = Pick<PremiseReport, 'decision' | 'findings'>;
+export const findingLabels: Record<PremiseKind, string> = {
+  contradicted_premise: 'Premise contradicted', unverifiable_entity: 'Product not recognised', unsupported_product: 'Product outside this demo', unverifiable_construct: 'Construct not recognised',
+  unverifiable_reference: 'Reference not verified', resolved_reference: 'Reference exists (existence only)', internal_error: 'Premise check failed'
 };
-export const decisionLabels: Record<PremiseReportLike['decision'], string> = {
+export const decisionLabels: Record<PremiseReport['decision'], string> = {
   clear: 'No premise finding', flagged: 'Premise flagged before any model call', blocked: 'Stopped before any model call',
 };
 
 /** Marks the first occurrence of each stated phrase in the question. */
-export function markStated(question: string, findings: readonly PremiseFindingLike[]): ReactNode[] {
+export function markStated(question: string, findings: readonly Pick<PremiseFinding, 'stated'>[]): ReactNode[] {
   const phrases = findings.map(finding => finding.stated).filter((phrase): phrase is string => Boolean(phrase));
   const parts: ReactNode[] = [];
   let rest = question;
@@ -30,7 +28,7 @@ export function markStated(question: string, findings: readonly PremiseFindingLi
 }
 
 /** A premise check closing in front of the model. Shows findings only; it never writes a verdict. */
-export function PremiseGateAnim({ report, question, source }: { report: PremiseReportLike; question: string; source: ReactNode }) {
+export function PremiseGateAnim({ report, question, source }: { report: ShownReport; question: string; source: ReactNode }) {
   const closed = report.decision !== 'clear';
   return <figure className="pg" data-decision={report.decision}>
     <p className="pg-question"><span className="pg-tag">Question</span>{markStated(question, report.findings)}</p>

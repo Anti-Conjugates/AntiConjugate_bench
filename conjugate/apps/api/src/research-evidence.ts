@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { isDeepStrictEqual } from 'node:util';
 import {
-  WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema,
+  WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema, premiseFacts,
   type ResearchCatalog, type ResearchRequest, type ResearchReceipt, type ClaimAudit
 } from '@her2/shared';
 import { CLAUDE_MODEL, getProduct, productSources } from './evidence.js';
@@ -36,7 +36,7 @@ export function researchCatalog(configured: boolean): ResearchCatalog {
     records: snapshot.records.map(record => ({ ...record, cells: record.cells.filter(cell => compositionFields.has(cell.field)) })),
     derived_records: snapshot.derived_records.map(record => ({ ...record, cells: record.cells.filter(cell => derivedFields.has(cell.field)) }))
   };
-  return ResearchCatalogSchema.parse({ questions: QUESTIONS, dataset, claude_configured: configured, model: CLAUDE_MODEL });
+  return ResearchCatalogSchema.parse({ questions: QUESTIONS, dataset, claude_configured: configured, model: CLAUDE_MODEL, premise_facts: premiseFacts(snapshot) });
 }
 const compositionFields = new Set(['ADCdb_ID', 'ADC name', 'Brand', 'Antibody', 'Target', 'Linker', 'Payload', 'DAR']);
 const derivedFields = new Set(['ADCdb_ID', 'ADC name', 'Linker class', 'Release behaviour', 'Payload class', 'Bystander potential']);

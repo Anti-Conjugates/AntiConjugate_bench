@@ -9,6 +9,8 @@ import teamLive from '../../../evals/team-live.json';
 import modelChecks from '../../../evals/models.json';
 import { faultTests, productLabel, questionTitles, verdictLabels } from './labels';
 import verifier from '../../../evals/verifier-study.json';
+import premiseStudy from '../../../evals/premise-study.json';
+import liveStudy from '../../../evals/live-retrieval.json';
 import { useState, type KeyboardEvent } from 'react';
 import { EvaluationStudies, ExactTable, TableScroll } from './EvaluationStudies';
 
@@ -160,6 +162,20 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
     <Scoreboard groups={groups} also={also} />
 
     <EvaluationStudies />
+
+    <section aria-labelledby="premise-checks-heading"><h2 id="premise-checks-heading">Premise checks</h2>
+      <p>The premise gate runs before every chat and agent-team turn, before any model call or evidence read. It flagged or blocked {premiseStudy.faults_as_expected}/{premiseStudy.fault_count} developer-written faulty questions as expected, cleared {premiseStudy.controls_cleared}/{premiseStudy.control_count} valid ones, agreed with itself on {premiseStudy.variants_agree}/{premiseStudy.variant_count} paraphrases, and every one of {premiseStudy.mutant_count} deliberately weakened gates was caught ({premiseStudy.mutants_detected} detected). {premiseStudy.provider_requests} model calls.</p>
+      <ExactTable label="Premise checks by family"><table><thead><tr><th scope="col">Family</th><th scope="col">Cases as expected</th><th scope="col">Paraphrases agree</th></tr></thead>
+        <tbody>{premiseStudy.by_family.map(row => <tr key={row.family}><th scope="row">{row.family.replaceAll('_', ' ')}</th><td>{row.as_expected}/{row.cases}</td><td>{row.variants_agree}/{row.variants}</td></tr>)}</tbody></table></ExactTable>
+      <details className="run-record"><summary>How this was measured</summary><p>{premiseStudy.limits.join(' ')}</p><p>Category names and approach adapted from <a href={premiseStudy.attribution.repository}>adc-guardrail</a> at {premiseStudy.attribution.commit}; {premiseStudy.attribution.scope}.</p><p><code>npm run eval:premise</code>.</p></details>
+    </section>
+
+    <section aria-labelledby="live-checks-heading"><h2 id="live-checks-heading">Live source checks</h2>
+      <p>One recorded run against the real sources: {liveStudy.statuses.ok} receipts matched, {liveStudy.statuses.not_found} known-fake references came back not found, {liveStudy.statuses.drift} drifted from the frozen snapshot and {liveStudy.statuses.error} failed. {liveStudy.checks.filter(check => check.passed).length}/{liveStudy.checks.length} checks passed.</p>
+      <ExactTable label="Live source receipts" wide><table><thead><tr><th scope="col">Source</th><th scope="col">Subject</th><th scope="col">Status</th><th scope="col">HTTP</th><th scope="col">Raw SHA-256</th></tr></thead>
+        <tbody>{liveStudy.rows.map(row => <tr key={row.source + row.subject}><th scope="row">{row.source}</th><td>{row.subject}</td><td>{row.status}</td><td>{row.http_status ?? '—'}</td><td><code>{row.raw_sha256 ? row.raw_sha256.slice(0, 16) : '—'}</code></td></tr>)}</tbody></table></ExactTable>
+      <details className="run-record"><summary>How this was measured</summary><p>{liveStudy.limits.join(' ')}</p><p>Fixed URL templates on allowlisted HTTPS hosts; redirects off-host are rejected; no retries. <code>npm run eval:live</code>.</p></details>
+    </section>
 
     <section aria-labelledby="model-checks-heading"><h2 id="model-checks-heading">Component observations</h2>
       <p>{modelChecks.rows.length} fixed views across two antibody references, twenty molecular records and four observation settings replayed consistently.</p>

@@ -1,6 +1,7 @@
-import { ApiErrorSchema, TeamEventSchema, TeamRequestSchema, TeamResultSchema, chatIntent, chatScopeKey, renderChatReply, teamExecutionIsConsistent, type ResearchCatalog, type TeamRequest, type TeamResult, type TeamStep } from '@her2/shared';
+import { ApiErrorSchema, TeamEventSchema, TeamRequestSchema, TeamResultSchema, chatIntent, chatScopeKey, renderChatReply, teamExecutionIsConsistent, type ResearchCatalog, type TeamRequest, type TeamResult, type TeamStep, type TurnGuard } from '@her2/shared';
 import { BoundaryError } from './boundaries';
 import { validateResearchResult } from './researchBoundaries';
+import { validateTurnGuard } from './guardBoundaries';
 
 function invalid(message = 'The agent-team response failed validation. No answer was accepted.'): never { throw new BoundaryError(message, 'INVALID_TEAM_RESULT'); }
 function failure(code: string): BoundaryError {
@@ -18,11 +19,13 @@ export function validateTeamResult(data: unknown, request: TeamRequest, catalog:
   const result = parsed.data;
   const intent = chatIntent(request);
   if (result.reply !== renderChatReply(result.status, result.audits, result.selected_audit_ids, result.missing_scopes.length) || result.engine !== request.engine || !teamExecutionIsConsistent(result)
-    || JSON.stringify(result.scopes.map(chatScopeKey)) !== JSON.stringify(intent.scopes.map(chatScopeKey)) || (intent.status !== 'ready' && result.status !== intent.status)) return invalid();
+    || JSON.stringify(result.scopes.map(chatScopeKey)) !== JSON.stringify((result.status === 'premise_blocked' ? [] : intent.scopes).map(chatScopeKey))
+    || (result.status === 'premise_blocked' ? intent.status === 'outside_scope' : intent.status !== 'ready' && result.status !== intent.status)) return invalid();
+  try { validateTurnGuard(result.guard, request, catalog); } catch { return invalid(); }
   for (const audit of result.audits) validateResearchResult(audit.result, { ...audit.scope, engine: 'evidence', synthetic_confirmed: true, integrity_drill: 'none' }, catalog);
   return result;
 }
-export async function streamTeamTurn(input: TeamRequest, catalog: ResearchCatalog, signal: AbortSignal, onStep: (step: TeamStep) => void): Promise<TeamResult> {
+export async function streamTeamTurn(input: TeamRequest, catalog: ResearchCatalog, signal: AbortSignal, onStep: (step: TeamStep) => void, onGuard?: (guard: TurnGuard) => void): Promise<TeamResult> {
   if (signal.aborted) throw new DOMException('Cancelled', 'AbortError');
   const request = TeamRequestSchema.parse(input);
   if (request.engine === 'claude' && !catalog.claude_configured) throw new BoundaryError('Claude is off. Choose rules only to make a new request.', 'CLAUDE_NOT_CONFIGURED');
@@ -40,6 +43,7 @@ export async function streamTeamTurn(input: TeamRequest, catalog: ResearchCatalo
   let pending = '';
   let bytes = 0;
   let result: TeamResult | undefined;
+  let guard: TurnGuard | undefined;
   const steps: TeamStep[] = [];
   const authorized = chatIntent(request).scopes.map(chatScopeKey);
   const line = (value: string) => {
@@ -52,7 +56,9 @@ export async function streamTeamTurn(input: TeamRequest, catalog: ResearchCatalo
     if (!parsed.success) return invalid();
     const event = parsed.data;
     if (event.type === 'error') throw failure(event.error.code);
-    if (event.type === 'result') { result = validateTeamResult(event.result, request, catalog); return; }
+    if (event.type === 'result') { result = validateTeamResult(event.result, request, catalog); if (!guard || JSON.stringify(result.guard) !== JSON.stringify(guard)) return invalid('The agent-team result did not match the streamed premise check.'); return; }
+    if (event.type === 'guard') { if (guard || steps.length !== 1 || steps[0]!.node !== 'scope_gate') return invalid(); try { guard = validateTurnGuard(event.guard, request, catalog); } catch { return invalid(); } onGuard?.(guard); return; }
+    if (steps.length >= 1 && !guard) return invalid();
     if (steps.length >= 24 || event.step.id !== `step-${steps.length + 1}` || steps.some(step => step.node === 'answer') || (event.step.scope && !authorized.includes(chatScopeKey(event.step.scope)))) return invalid();
     steps.push(event.step); onStep(event.step);
   };

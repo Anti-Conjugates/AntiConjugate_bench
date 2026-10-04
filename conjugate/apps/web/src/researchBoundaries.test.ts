@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { AuditResult } from './AuditResult';
-import { ResearchCatalogSchema, ResearchResultSchema } from '@her2/shared';
+import { ResearchCatalogSchema, ResearchResultSchema, premiseFacts } from '@her2/shared';
 import { createResearchEventParser, fetchResearchCatalog, initialResearchInputs, RequestEpoch, researchRequest, serializeResearchExport, streamResearchRun, validateResearchResult } from './researchBoundaries';
 
 // Software sentinels only. No scientific answer, clinical case or benchmark score.
@@ -22,7 +22,7 @@ function compositionRecords(count: number) {
 function catalogWith(records: ReturnType<typeof compositionRecords>) {
   return ResearchCatalogSchema.parse({
     questions: ['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety', 'label_identity'].map((id) => ({ id, title: `Contract ${id}`, description: 'Software sentinel only.' })),
-    claude_configured: false, model: 'claude-opus-5-5',
+    claude_configured: false, model: 'claude-opus-5-5', premise_facts: premiseFacts({ sha256: 'a'.repeat(64), records }),
     dataset: { filename: 'adc_table_adcdb.xlsx', sha256: 'a'.repeat(64), imported_at: '2026-01-01T00:00:00Z',
       record_count: records.length, derived_record_count: 4, provenance: 'user_uploaded_unverified', limitations: ['Contract only.'], derived_notice: 'Contract only.', records,
       derived_records: Array.from({ length: 4 }, (_, index) => ({ id: `contract-derived-${index}`, row: index + 2, cells: [] })) },

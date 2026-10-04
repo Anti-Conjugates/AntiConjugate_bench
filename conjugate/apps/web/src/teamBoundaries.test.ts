@@ -10,7 +10,7 @@ const request: TeamRequest = { message: 'Compare Kadcyla and Enhertu composition
 let catalog: ResearchCatalog; let result: TeamResult;
 beforeAll(async () => { const app = await createApp(); catalog = ResearchCatalogSchema.parse((await app.inject({ method: 'GET', url: '/api/research/catalog' })).json()); await app.close(); result = await runTeam(request); });
 afterEach(() => vi.restoreAllMocks());
-function encoded(turn: TeamResult = result) { return turn.trace.map(step => JSON.stringify({ type: 'trace', step })).join('\n') + '\n' + JSON.stringify({ type: 'result', result: turn }) + '\n'; }
+function encoded(turn: TeamResult = result) { return turn.trace.map((step, index) => (index === 1 ? JSON.stringify({ type: 'guard', guard: turn.guard }) + '\n' : '') + JSON.stringify({ type: 'trace', step })).join('\n') + '\n' + JSON.stringify({ type: 'result', result: turn }) + '\n'; }
 function mockStream(value: string) {
   vi.stubGlobal('fetch', vi.fn(async () => new Response(new ReadableStream({ start(controller) { controller.enqueue(new TextEncoder().encode(value)); controller.close(); } }), { headers: { 'content-type': 'application/x-ndjson' } })));
 }

@@ -176,8 +176,8 @@ test('route: strict body, env switch and safety fields', async () => {
   assert.equal(disabled.statusCode, 503); assert.equal(disabled.json().error.code, 'LIVE_RETRIEVAL_OFF');
   assert.equal((await off.inject({ method: 'GET', url: '/api/live/sources' })).json().enabled, false);
   const fake = fakeFetch(happy);
-  const app = await createApp();
-  const on = Fastify(); registerLiveRoutes(on, { env: {}, retriever: createLiveRetriever({ fetch: fake.fetch }) });
+  const app = await createApp({ live: createLiveRetriever({ fetch: fake.fetch }) });
+  const on = Fastify(); registerLiveRoutes(on, { env: { LIVE_RETRIEVAL: 'on' }, retriever: createLiveRetriever({ fetch: fake.fetch }) });
   on.setErrorHandler((error, _request, reply) => reply.code((error as { status?: number }).status ?? 500).send({ error: { code: 'INVALID_REQUEST' } }));
   for (const payload of [{}, { product_id: 'DRG0CYMEB', url: 'https://evil.example/' }, { references: Array(5).fill('NCT03529110') }]) {
     assert.equal((await on.inject({ method: 'POST', url: '/api/live/check', payload })).statusCode, 400);
