@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { WorkbookProductIdSchema, productLabel } from './products.js';
+import { WorkbookProductIdSchema, isLabelProduct, productLabel } from './products.js';
 import { EvidencePolicySchema, ResearchQuestionSchema, ResearchResultSchema, researchExecutionIsConsistent } from './research.js';
 import { TurnGuardSchema } from './guard.js';
 
@@ -110,7 +110,7 @@ export function chatExecutionIsConsistent(result: ChatResult) {
   if (result.engine === 'claude' && ['complete', 'incomplete'].includes(result.status) && (result.harness.model_calls < 2 || !audits.length || result.harness.skills.length !== 3)) return false;
   if (result.engine === 'evidence' && result.harness.skills.length) return false;
   if ((result.engine === 'evidence' && (result.model !== null || result.harness.model_calls !== 0)) || (result.harness.model_calls > 0 && result.model !== 'claude-opus-5-5')) return false;
-  return audits.every(audit => keys.includes(chatScopeKey(audit.scope)) && audit.result.product_id === audit.scope.product_id && audit.result.question_id === audit.scope.question_id && audit.result.evidence_policy === audit.scope.evidence_policy && audit.result.engine === 'evidence' && audit.result.model === null && audit.result.integrity_drill === 'none' && audit.result.draft_integrity === 'accepted' && audit.result.claims.length === 1 && audit.result.claims[0]?.id === audit.scope.question_id && audit.result.harness.tool_calls === (audit.scope.evidence_policy === 'all' ? 4 : 1) && audit.result.harness.code_sha256 === result.harness.code_sha256 && chatAuditProseIsConsistent(audit.result) && researchExecutionIsConsistent(audit.result));
+  return audits.every(audit => keys.includes(chatScopeKey(audit.scope)) && audit.result.product_id === audit.scope.product_id && audit.result.question_id === audit.scope.question_id && audit.result.evidence_policy === audit.scope.evidence_policy && audit.result.engine === 'evidence' && audit.result.model === null && audit.result.integrity_drill === 'none' && audit.result.draft_integrity === 'accepted' && audit.result.claims.length === 1 && audit.result.claims[0]?.id === audit.scope.question_id && audit.result.harness.tool_calls === (audit.scope.evidence_policy === 'all' ? (isLabelProduct(audit.scope.product_id) ? 4 : 2) : 1) && audit.result.harness.code_sha256 === result.harness.code_sha256 && chatAuditProseIsConsistent(audit.result) && researchExecutionIsConsistent(audit.result));
 }
 
 /** premise_blocked needs a blocked premise report; a blocked report only allows premise_blocked or outside_scope. */
