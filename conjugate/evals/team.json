@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-04T11:24:44.683Z",
+  "generated_at": "2026-10-04T11:42:08.153Z",
   "kind": "offline_agent_team_gates_and_replay_not_clinical_benchmark",
   "framework": "@langchain/langgraph@1.4.19",
   "graph": "scope_gate -> lead_plan -> evidence_worker (parallel, one per pair) -> verifier -> lead_select -> omission_gate -> (lead_plan once | answer)",
-  "code_sha256": "0ade4020cfff7477a9d7d4a039d0fd0b06bd19649aeb5ad8dc5364203e9d3d9d",
+  "code_sha256": "6d2b3be145c67eda845c4fed3b7233fc8d60e89b52f7fae32bb7f6c107d7352e",
   "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
   "limits": {
     "deadline_ms": 60000,
@@ -60,7 +60,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 67,
+      "wall_ms": 54,
       "clinical_release": "blocked"
     },
     {
@@ -146,7 +146,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 19,
+      "wall_ms": 14,
       "clinical_release": "blocked"
     },
     {
@@ -187,7 +187,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 10,
+      "wall_ms": 11,
       "clinical_release": "blocked"
     },
     {
@@ -228,7 +228,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 18,
+      "wall_ms": 12,
       "clinical_release": "blocked"
     },
     {
@@ -269,7 +269,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 16,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -310,7 +310,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 10,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -394,7 +394,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 11,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -435,7 +435,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 11,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -479,7 +479,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 13,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -522,7 +522,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 9,
+      "wall_ms": 7,
       "clinical_release": "blocked"
     },
     {
@@ -565,7 +565,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 8,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -606,7 +606,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 9,
+      "wall_ms": 7,
       "clinical_release": "blocked"
     },
     {
@@ -647,7 +647,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 9,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -688,7 +688,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 7,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -770,7 +770,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 7,
+      "wall_ms": 8,
       "clinical_release": "blocked"
     },
     {
@@ -813,7 +813,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 8,
+      "wall_ms": 9,
       "clinical_release": "blocked"
     },
     {
@@ -917,7 +917,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 39,
+      "wall_ms": 47,
       "clinical_release": "blocked"
     },
     {
@@ -983,7 +983,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 17,
+      "wall_ms": 21,
       "clinical_release": "blocked"
     },
     {
@@ -1049,7 +1049,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 19,
+      "wall_ms": 18,
       "clinical_release": "blocked"
     },
     {
@@ -1115,7 +1115,7 @@
         "omission_gate:controller",
         "answer:controller"
       ],
-      "wall_ms": 21,
+      "wall_ms": 15,
       "clinical_release": "blocked"
     },
     {

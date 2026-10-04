@@ -14,7 +14,8 @@ export async function turnGuard(message: string, intent: ChatIntent, live: LiveR
   const receipts: LiveReceipt[] = [];
   const references = intent.status === 'outside_scope' ? [] : guardLiveReferences(message);
   if (live && references.length) receipts.push(...(await live.check({ references }, signal)).receipts);
-  const premise = premiseGate(message, PREMISE_FACTS, { references: premiseReferencesFromLive(receipts) });
+  // Outside-scope text is never echoed into findings; the gate is not evaluated for it.
+  const premise = premiseGate(intent.status === 'outside_scope' ? '' : message, PREMISE_FACTS, { references: premiseReferencesFromLive(receipts) });
   if (live && premise.decision !== 'blocked' && intent.status === 'ready') {
     const products = [...new Set(intent.scopes.filter(scope => (LIVE_PRODUCT_QUESTIONS as readonly string[]).includes(scope.question_id)).map(scope => scope.product_id))];
     for (const result of await Promise.all(products.map(product_id => live.check({ product_id }, signal)))) receipts.push(...result.receipts);

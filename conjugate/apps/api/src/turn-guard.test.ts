@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { chatExecutionIsConsistent, premiseGate, teamExecutionIsConsistent, turnGuardIsConsistent, type ChatRequest } from '@her2/shared';
+import { chatExecutionIsConsistent, premiseFacts, premiseGate, teamExecutionIsConsistent, turnGuardIsConsistent, type ChatRequest } from '@her2/shared';
 import { runChat } from './chat.js';
 import { runTeam } from './team.js';
 import { replayChatResult } from './chat-replay.js';
@@ -68,5 +68,31 @@ test('live reference lookups resolve existence only: a missing NCT blocks, a rea
 test('the landing exhibit is the real gate output for its question', () => {
   const study = JSON.parse(readFileSync(new URL('../../../evals/premise-study.json', import.meta.url), 'utf8'));
   assert.deepEqual(study.exhibit.report, premiseGate(study.exhibit.question, PREMISE_FACTS));
+});
+
+
+test('review regressions: browser facts, receipt URLs, replay coherence and outside-scope text', async () => {
+  const { researchCatalog } = await import('./research-evidence.js');
+  const { liveUrl } = await import('./live-retrieval.js');
+  const { chatIntent, guardReplayIsConsistent, liveSourceUrl } = await import('@her2/shared');
+  assert.deepEqual(premiseFacts(researchCatalog(false).dataset), PREMISE_FACTS);
+  for (const source of ['openfda', 'dailymed', 'adcdb'] as const) for (const id of ['DRG0CYMEB', 'DRG0ERKBH']) assert.equal(liveSourceUrl(source, id), liveUrl(source, id));
+  for (const [source, id] of [['clinicaltrials_gov', 'NCT03529110'], ['pubmed', 'PMID:29420467']] as const) assert.equal(liveSourceUrl(source, id), liveUrl(source, id));
+  const message = 'Does NCT03529110 show Enhertu linker release in blood?';
+  const found = await runChat(request(message, 'evidence'), { live: liveRegistry().live });
+  const sha = premiseGate('', PREMISE_FACTS).facts_sha256;
+  assert.ok(guardReplayIsConsistent(found.guard!, sha, found.status));
+  const phish = structuredClone(found.guard!); phish.live[0]!.url = 'https://evil.example/phish';
+  assert.equal(turnGuardIsConsistent(phish, message, PREMISE_FACTS, []), false); assert.equal(guardReplayIsConsistent(phish, sha, found.status), false);
+  const orphan = structuredClone(found.guard!); orphan.live = []; orphan.live_enabled = false;
+  assert.equal(guardReplayIsConsistent(orphan, sha, found.status), false);
+  const product = structuredClone(found.guard!); product.live.push({ ...found.guard!.live[0]!, source: 'openfda', subject: 'NOT_A_PRODUCT' });
+  assert.equal(guardReplayIsConsistent(product, sha, found.status), false);
+  const outside = await runChat(request('My mother Jane and Smith 1950 asked about trastuzumab foobarine with Kadcyla', 'evidence'), { live: liveRegistry().live });
+  assert.equal(outside.status, 'outside_scope'); assert.deepEqual(outside.guard?.premise.findings, []); assert.equal(outside.guard?.live.length, 0);
+  assert.ok(!JSON.stringify(outside).includes('Jane'));
+  const injected = structuredClone(outside.guard!); injected.live_enabled = true; injected.live = [found.guard!.live[0]!];
+  assert.equal(guardReplayIsConsistent(injected, sha, 'outside_scope'), false);
+  assert.equal(chatIntent({ message: 'Patient and Smith 2020: what is Kadcyla made of?', context: [], engine: 'evidence', synthetic_confirmed: true }).status, 'outside_scope');
 });
 

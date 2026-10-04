@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { isDeepStrictEqual } from 'node:util';
 import {
-  WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema, premiseFacts,
+  WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema,
   type ResearchCatalog, type ResearchRequest, type ResearchReceipt, type ClaimAudit
 } from '@her2/shared';
 import { CLAUDE_MODEL, getProduct, productSources } from './evidence.js';
@@ -33,12 +33,14 @@ export function researchCatalog(configured: boolean): ResearchCatalog {
   // snippets and author-derived prescribing flags never become app assertions.
   const dataset = { ...snapshot,
     limitations: [...snapshot.limitations, 'Catalogue displays only composition and author-derived mechanistic cells; raw pharmacology and prescribing snippets are excluded.'],
-    records: snapshot.records.map(record => ({ ...record, cells: record.cells.filter(cell => compositionFields.has(cell.field)) })),
+    records: snapshot.records.map(record => ({ ...record, cells: record.cells.filter(cell => catalogFields.has(cell.field)) })),
     derived_records: snapshot.derived_records.map(record => ({ ...record, cells: record.cells.filter(cell => derivedFields.has(cell.field)) }))
   };
-  return ResearchCatalogSchema.parse({ questions: QUESTIONS, dataset, claude_configured: configured, model: CLAUDE_MODEL, premise_facts: premiseFacts(snapshot) });
+  return ResearchCatalogSchema.parse({ questions: QUESTIONS, dataset, claude_configured: configured, model: CLAUDE_MODEL });
 }
 const compositionFields = new Set(['ADCdb_ID', 'ADC name', 'Brand', 'Antibody', 'Target', 'Linker', 'Payload', 'DAR']);
+// The premise gate also reads Linker-payload, so the browser can re-derive the exact server facts.
+const catalogFields = new Set([...compositionFields, 'Linker-payload']);
 const derivedFields = new Set(['ADCdb_ID', 'ADC name', 'Linker class', 'Release behaviour', 'Payload class', 'Bystander potential']);
 
 // Each actual invocation reads only the scoped product. Derived notes are never

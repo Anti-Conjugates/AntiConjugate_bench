@@ -9,7 +9,7 @@ import { runResearch } from './research.js';
 export async function replayChatResult(input: unknown) {
   const result = ChatResultSchema.parse(input);
   if (!chatExecutionIsConsistent(result) || result.harness.code_sha256 !== HARNESS_CODE_SHA256 || result.reply !== chatReply(result.status, result.audits, result.selected_audit_ids, result.missing_scopes.length)) throw new Error('Chat replay execution or rendered reply mismatch.');
-  if (result.guard && !guardReplayIsConsistent(result.guard, premiseGate('', PREMISE_FACTS).facts_sha256)) throw new Error('Chat replay premise guard mismatch.');
+  if (result.guard && !guardReplayIsConsistent(result.guard, premiseGate('', PREMISE_FACTS).facts_sha256, result.status)) throw new Error('Chat replay premise guard mismatch.');
   const skills = result.harness.model_calls ? await loadRuntimeSkills('linker_release') : [];
   if (fingerprint(result.harness.skills) !== fingerprint(skills.map(({ name, version, sha256 }) => ({ name, version, sha256 })))) throw new Error('Chat replay skill fingerprint mismatch.');
   for (const audit of result.audits) {

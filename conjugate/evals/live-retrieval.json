@@ -1,7 +1,7 @@
 {
   "kind": "live_source_retrieval_check_not_clinical",
   "manifest": {
-    "generated_at": "2026-10-04T11:25:13.376Z",
+    "generated_at": "2026-10-04T11:42:22.146Z",
     "node": "v24.21.0",
     "user_agent": "Conjugate-HER2-research-prototype/0.1 (+https://github.com/Anti-Conjugates/AntiConjugate-Devin; source identity checks only; not clinical use)",
     "catalog": {
@@ -45,7 +45,7 @@
     },
     "code_sha256": {
       "apps/api/src/live-retrieval.ts": "6a7584b2cd8805fd5cfcab5dc9d0a38d53f77cf8842c7f20606f40fa8efc5506",
-      "packages/shared/src/live.ts": "4d4cc36edb2501801f49e7ff40208ab25c1c4989bd55562c2cecbd9d01d6d9ba"
+      "packages/shared/src/live.ts": "5c20d2d0fb1bed9aabb2dd295cf9888edd3208f4ad1020081f53fca96013c6de"
     },
     "snapshot_sha256": {
       "apps/api/src/openfda.snapshot.json": "75542fb2b789d947257e03611767a15e13962e59650b2b9782570244c2138a4a",
@@ -75,11 +75,11 @@
     "error": 0
   },
   "timings_ms": {
-    "total": 2886,
+    "total": 1955,
     "per_request": [
-      1119,
-      1427,
-      340
+      845,
+      730,
+      380
     ]
   },
   "checks": [
@@ -107,8 +107,8 @@
       "http_status": 200,
       "bytes": 139102,
       "raw_sha256": "73aebd2f93a6b1b2ad1cddc011d15283323f896ba94459606c90486e09a21fcd",
-      "duration_ms": 145.3,
-      "fetched_at": "2026-10-04T11:25:10.489Z",
+      "duration_ms": 131.9,
+      "fetched_at": "2026-10-04T11:42:20.191Z",
       "parsed": {
         "spl_id": "27ab596b-f625-4866-b65a-54508ffce760",
         "set_id": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
@@ -174,8 +174,8 @@
       "http_status": 200,
       "bytes": 580,
       "raw_sha256": "79f9484524959f1735a63e59ba425636658bdb6ba5ba001ca84c7ee5cdafd472",
-      "duration_ms": 254,
-      "fetched_at": "2026-10-04T11:25:10.517Z",
+      "duration_ms": 246.9,
+      "fetched_at": "2026-10-04T11:42:20.212Z",
       "parsed": {
         "set_id": "23f3c1f4-0fc8-4804-a9e3-04cf25dd302e",
         "spl_version": "35",
@@ -207,8 +207,8 @@
       "http_status": 200,
       "bytes": 474253,
       "raw_sha256": "c0cf6444e2ae17893baf91c8571d0a2b64e3f5d4875a472b3aa185cfbb4ef838",
-      "duration_ms": 1082.6,
-      "fetched_at": "2026-10-04T11:25:10.519Z",
+      "duration_ms": 817.5,
+      "fetched_at": "2026-10-04T11:42:20.212Z",
       "parsed": {
         "adc_id": "DRG0CYMEB",
         "adc_name": "Trastuzumab emtansine",
@@ -274,8 +274,8 @@
       "http_status": 200,
       "bytes": 371896,
       "raw_sha256": "61ad277930c58cae40e7f0c346cf9e562ac843670bad08b45064c79bbd6ba3a9",
-      "duration_ms": 152.5,
-      "fetched_at": "2026-10-04T11:25:11.608Z",
+      "duration_ms": 111.4,
+      "fetched_at": "2026-10-04T11:42:21.036Z",
       "parsed": {
         "spl_id": "a4106ba4-f398-4663-980c-2b7195283edd",
         "set_id": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
@@ -341,8 +341,8 @@
       "http_status": 200,
       "bytes": 590,
       "raw_sha256": "11ff58a008e3d668556e02fa6ff3c79d11fd8a647c9238a7b6fce2300a161f70",
-      "duration_ms": 70.7,
-      "fetched_at": "2026-10-04T11:25:11.609Z",
+      "duration_ms": 71.5,
+      "fetched_at": "2026-10-04T11:42:21.036Z",
       "parsed": {
         "set_id": "7e67e73e-ddf4-4e4d-8b50-09d7514910b6",
         "spl_version": "28",
@@ -374,8 +374,8 @@
       "http_status": 200,
       "bytes": 468700,
       "raw_sha256": "50bb251f8925c4e447168642c126dce3edd9b3a63a5fe50bf685cd4111196b00",
-      "duration_ms": 1412.8,
-      "fetched_at": "2026-10-04T11:25:11.609Z",
+      "duration_ms": 724.4,
+      "fetched_at": "2026-10-04T11:42:21.036Z",
       "parsed": {
         "adc_id": "DRG0ERKBH",
         "adc_name": "Trastuzumab deruxtecan",
@@ -441,8 +441,8 @@
       "http_status": 200,
       "bytes": 1098,
       "raw_sha256": "5d493d1382276ffe00691b71e6c9d8536ce5a627ef8f565ec2498a5001ee8d97",
-      "duration_ms": 195,
-      "fetched_at": "2026-10-04T11:25:13.036Z",
+      "duration_ms": 195.6,
+      "fetched_at": "2026-10-04T11:42:21.766Z",
       "parsed": {
         "nct_id": "NCT03529110",
         "official_title": "A Phase 3, Multicenter, Randomized, Open-Label, Active-Controlled Study of DS-8201a (Trastuzumab Deruxtecan), an Anti-HER2 Antibody Drug Conjugate (ADC), Versus Ado Trastuzumab Emtansine (T-DM1) for HER2-Positive, Unresectable and/or Metastatic Breast Cancer Subjects Previously Treated With Trastuzumab and Taxane",
@@ -460,8 +460,8 @@
       "http_status": 404,
       "bytes": 32,
       "raw_sha256": "b5a11b5eeca7a13a17afa0e000206e1eb5130f005bd57e722b098ae5d584e7ae",
-      "duration_ms": 192,
-      "fetched_at": "2026-10-04T11:25:13.037Z",
+      "duration_ms": 196.4,
+      "fetched_at": "2026-10-04T11:42:21.767Z",
       "parsed": {},
       "comparison": []
     },
@@ -475,8 +475,8 @@
       "http_status": 200,
       "bytes": 4703,
       "raw_sha256": "b87a4e115a1b50ef9cf1c5f3719124cd1b2c233addc59b8337089dbd4eb91cae",
-      "duration_ms": 337.5,
-      "fetched_at": "2026-10-04T11:25:13.038Z",
+      "duration_ms": 377.9,
+      "fetched_at": "2026-10-04T11:42:21.767Z",
       "parsed": {
         "pmid": "29420467",
         "title": "HER kinase inhibition in patients with HER2- and HER3-mutant cancers.",
@@ -495,8 +495,8 @@
       "http_status": 200,
       "bytes": 146,
       "raw_sha256": "37b0ed9f7cbf77b4fc8cb44de7b373b225f18eaa7f52f076d19c731ffc48c0a9",
-      "duration_ms": 335.3,
-      "fetched_at": "2026-10-04T11:25:13.039Z",
+      "duration_ms": 233,
+      "fetched_at": "2026-10-04T11:42:21.768Z",
       "parsed": {},
       "comparison": []
     }

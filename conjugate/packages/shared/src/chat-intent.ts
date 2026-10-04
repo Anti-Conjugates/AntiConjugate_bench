@@ -14,6 +14,7 @@ export function chatConversationContext(requests: readonly ChatRequest[]): ChatS
 }
 
 export function chatIntent(request: ChatRequest): ChatIntent {
+  const plain = request.message.toLowerCase().replaceAll('’', "'");
   const text = maskPremiseReferences(request.message).toLowerCase().replaceAll('’', "'").replace(/\bdon'?t\b/g, 'do not');
   const words = text.match(/[a-z0-9-]+/g) ?? [];
   const recognized_terms = words.flatMap(word => {
@@ -22,8 +23,8 @@ export function chatIntent(request: ChatRequest): ChatIntent {
   });
   const result: ChatIntent = { status: 'ready', recognized_terms, scopes: [], action: 'check' };
   // This scope guard is not a PHI detector. Unknown text is never sent to the provider.
-  // References are masked first so NCT/PMID/author-year ids reach the premise gate instead of the digit guard.
-  if (/\b(patient|doses?|dosing|dosage|prescrib\w*|eligible|eligibility|recommend\w*|treat\w*|(?:un)?safe(?:ly|r|st)?|medication|symptoms?|my|mother|father|wife|husband|aged|years? old|ehr|mrn|platelets?|neutrophils?|anc|lvef|ejection fraction|creatinine|bilirubin|mg|mg\/kg|kg)\b/.test(text)
+  // Clinical keywords are matched on the raw text; references are masked only for the digit guard.
+  if (/\b(patient|doses?|dosing|dosage|prescrib\w*|eligible|eligibility|recommend\w*|treat\w*|(?:un)?safe(?:ly|r|st)?|medication|symptoms?|my|mother|father|wife|husband|aged|years? old|ehr|mrn|platelets?|neutrophils?|anc|lvef|ejection fraction|creatinine|bilirubin|mg|mg\/kg|kg)\b/.test(plain)
     || /\beGFR\b/.test(request.message) || /\begfr\s*(?:of|is|was|at|below|under|above|<|>|=|:)?\s*\d/i.test(request.message) || /@|https?:|\b\d{3,}\b|sk-ant-|hf_/.test(text)) { result.status = 'outside_scope'; return result; }
   const has = (...terms: string[]) => recognized_terms.some(term => terms.includes(term));
   const comparing = has('compare', 'comparison', 'same', 'different', 'both', 'two');

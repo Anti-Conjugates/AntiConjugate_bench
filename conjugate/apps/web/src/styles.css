@@ -1011,7 +1011,6 @@ button.quiet:hover { border-color: var(--lime); }
   .adc-orbit { animation: none; }
 }
 /* === end story-motion === */
-||||||| 069b8d7
 
 /* === design-fixes === */
 /* Workbench only. Scoped to .main-content so the landing keeps its own rules. */

@@ -14,7 +14,7 @@ export async function replayTeamResult(input: unknown) {
     const rendering = (value: typeof fresh) => ({ ...value, id: null, created_at: null, trace: value.trace.map(step => ({ ...step, duration_ms: 0 })) });
     if (fingerprint(rendering(fresh)) !== fingerprint(rendering(audit.result))) throw new Error('Team replay audit rendering mismatch.');
   }
-  if (result.guard && !guardReplayIsConsistent(result.guard, premiseGate('', PREMISE_FACTS).facts_sha256)) throw new Error('Team replay premise guard mismatch.');
+  if (result.guard && !guardReplayIsConsistent(result.guard, premiseGate('', PREMISE_FACTS).facts_sha256, result.status)) throw new Error('Team replay premise guard mismatch.');
   return { passed: true, kind: 'team_audits_and_rendering_replay_not_model_rerun', audits: result.audits.length, guard: result.guard ? 'checked_without_raw_question' : 'absent_pre_premise_gate', workers: result.workers.length,
     limitations: 'Checks saved audits, worker bookkeeping and controller reply against this code and snapshot. Does not rerun the lead or worker models, authenticate execution or establish scientific truth.', clinical_release: 'blocked' };
 }
