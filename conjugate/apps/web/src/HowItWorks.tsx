@@ -39,14 +39,16 @@ export function HowItWorks() {
       </header>
       <section className="chat-explainer" aria-labelledby="chat-flow-heading"><h2 id="chat-flow-heading">Research chat</h2>
         <ol className="chat-flow"><li><strong>Your question</strong><span>The controller recognizes product, question and source policy. Raw text does not reach Claude.</span></li><li><strong>Claude requests a check</strong><span>One native tool: check_evidence. No web, shell or arbitrary file access.</span></li><li><strong>The verifier checks sources</strong><span>Each tool call runs the local research audit. Trusted findings and an audit ID return to Claude.</span></li><li><strong>You get the checked finding</strong><span>Claude returns audit IDs only. The controller renders claims, receipts, unknowns and omitted checks.</span></li></ol>
-        <p>Each follow-up starts a new turn. Prior scope IDs are hints, not evidence or instructions. Withheld sources cannot leak through earlier answers. Rules only runs these checks without a model.</p>
+        <p>Each follow-up starts a new turn; earlier scope IDs are hints, not evidence. Rules only runs the same checks without a model.</p>
         <h3>Agent team mode</h3>
-        <p>The same question can run through a LangGraph state graph: a lead agent plans which pairs to check, one worker per pair runs in a fresh context with a tool fixed to that pair, the verifier code checks every audit before the lead sees it, and an omission gate compares what the lead selected with what you asked. If the lead dropped an accepted check, it gets one revision; after that the gap is shown as an unanswered check. Budget: 4 lead calls, 8 worker calls, 4 audits, 1 revision, 60 seconds, no retries. Rules only runs the identical graph with code in the lead and worker seats.</p>
+        <p>A LangGraph lead plans which pairs to check, one worker per pair runs the audit, and the verifier checks each audit before the lead sees it. An omission gate allows one revision, then shows any gap as an unanswered check.</p>
+        <ul className="plain-list"><li>Budget: 4 lead calls, 8 worker calls, 4 audits, 1 revision, 60 seconds, no retries.</li><li>Rules only runs the same graph with code in the lead and worker seats.</li></ul>
       </section>
-      <h2>The detailed claim audit</h2><p>The seven stages below describe Check a claim. Chat tools run that audit in rules-only mode; Claude coordinates which audits to request.</p>
+      <h2>The detailed claim audit</h2><p>The seven stages below are Check a claim. Chat runs this audit in rules-only mode; Claude only picks which audits to request.</p>
 
       <section aria-labelledby="pipeline-heading">
         <h2 id="pipeline-heading">Pipeline</h2>
+        <p className="scroll-hint" aria-hidden="true">Scroll sideways to see all seven stages →</p>
         <div className="pipeline-scroll" tabIndex={0} role="region" aria-label="Pipeline diagram, scrollable">
           <svg className="pipeline-svg" width={diagramWidth} height={196} viewBox={`0 0 ${diagramWidth} 196`} role="img" aria-labelledby="pipeline-title pipeline-desc">
             <title id="pipeline-title">Seven pipeline stages from scope to handoff</title>
@@ -94,7 +96,7 @@ export function HowItWorks() {
 
       <section aria-labelledby="who-sees-heading">
         <h2 id="who-sees-heading">Who sees what</h2>
-        <p>The model and the verifier never share a channel. Claude gets ids and local text and returns ids. The verifier gets ids and the server's own expected mapping, and never reads the model's text. The shapes below are the real ones, trimmed.</p>
+        <p>The model and the verifier never share a channel: Claude returns ids, and the verifier never reads the model's text. The shapes below are the real ones, trimmed.</p>
         <div className="who-sees-grid">
           <article className="party-model">
             <h3>Claude, when selected</h3>

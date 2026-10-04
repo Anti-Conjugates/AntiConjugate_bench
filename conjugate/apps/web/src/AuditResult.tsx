@@ -21,16 +21,20 @@ export function ReceiptRefs({ ids, receipts }: { ids: string[]; receipts: Resear
 
 function duration(ms: number) { return `${ms < 10 ? ms.toFixed(2) : ms.toFixed(0)} ms`; }
 
+function TraceTable({ steps, receipts }: { steps: ResearchTrace[]; receipts: ResearchReceipt[] }) {
+  return <div className="trace-table-wrap table-scroll" role="region" aria-label="Pipeline events, scrollable" tabIndex={0}><table className="trace-table"><caption className="sr-only">Pipeline events returned by the server</caption>
+    <thead><tr><th scope="col">Stage</th><th scope="col">Actor</th><th scope="col">Status</th><th scope="col">Duration</th><th scope="col">Tool</th><th scope="col">Detail</th></tr></thead>
+    <tbody>{steps.map((step) => <tr key={step.id}>
+      <th scope="row">{step.stage}</th><td>{actorLabels[step.actor]}</td><td className={step.status === 'blocked' ? 'uncertainty' : ''}>{step.status}</td><td>{duration(step.duration_ms)}</td><td>{step.tool ?? ''}</td>
+      <td className="trace-detail">{step.detail}{step.source_ids.length > 0 && <ReceiptRefs ids={step.source_ids} receipts={receipts} />}</td>
+    </tr>)}</tbody></table></div>;
+}
+
 export function AuditTrace({ steps, receipts, busy }: { steps: ResearchTrace[]; receipts: ResearchReceipt[]; busy: boolean }) {
   return <details className="trace" open={busy || undefined}>
     <summary><h2>Trace</h2><span className="mono-label">{steps.length} event{steps.length === 1 ? '' : 's'}{busy ? ', running' : ''}</span></summary>
     {!steps.length && <p className="empty-section-note">{busy ? 'Waiting for the first event.' : 'No events. Nothing has run.'}</p>}
-    {steps.length > 0 && <div className="trace-table-wrap"><table className="trace-table"><caption className="sr-only">Pipeline events returned by the server</caption>
-      <thead><tr><th scope="col">Stage</th><th scope="col">Actor</th><th scope="col">Status</th><th scope="col">Duration</th><th scope="col">Tool</th><th scope="col">Detail</th></tr></thead>
-      <tbody>{steps.map((step) => <tr key={step.id}>
-        <th scope="row">{step.stage}</th><td>{actorLabels[step.actor]}</td><td className={step.status === 'blocked' ? 'uncertainty' : ''}>{step.status}</td><td>{duration(step.duration_ms)}</td><td>{step.tool ?? ''}</td>
-        <td className="trace-detail">{step.detail}{step.source_ids.length > 0 && <ReceiptRefs ids={step.source_ids} receipts={receipts} />}</td>
-      </tr>)}</tbody></table></div>}
+    {steps.length > 0 && <TraceTable steps={steps} receipts={receipts} />}
   </details>;
 }
 
@@ -88,7 +92,7 @@ export function AuditResult({ result, request, catalog, trace, busy, compare, co
     <section className={`result verdict-card-${outcome}`} aria-labelledby="audit-output-heading">
       <div className="section-heading"><h2 id="audit-output-heading">Result</h2><button className="button button-secondary export-button" type="button" onClick={() => { if (request) { try { downloadResearchResult(result, request, catalog); } catch (error: unknown) { onExportError(error); } } }} disabled={!request}><ArrowDownToLine size={14} aria-hidden="true" />Export JSON</button></div>
       <p className="result-scope">{product ? productLabel(product) : result.product_id}. {result.engine === 'evidence' ? 'Rules only' : result.model}. Sources: {result.evidence_policy === 'all' ? 'all' : 'workbook only'}.</p>
-      <div className="verdict-row"><span className={'verdict-badge verdict-' + outcome}>{outcomeLabels[outcome]}</span><span className={`gate-badge`}><LockKeyhole size={12} aria-hidden="true" />Clinical release blocked</span><span className={`integrity-badge ${result.draft_integrity === 'rejected' ? 'uncertainty' : ''}`}>Citations {result.draft_integrity}</span></div>
+      <div className="verdict-row"><span className={'verdict-badge verdict-' + outcome}>{outcomeLabels[outcome]}</span><span className={`integrity-badge ${result.draft_integrity === 'rejected' ? 'uncertainty' : ''}`}>Citations {result.draft_integrity}</span></div>
       <p className="result-meaning">{outcomeMeaning[outcome]}</p>
       {faultOn && <p className="fault-note">Fault test <code>{result.integrity_drill}</code>: a bad citation was injected after drafting.</p>}
       {result.claims.map((claim) => <article className="claim" key={claim.id}>
@@ -103,40 +107,36 @@ export function AuditResult({ result, request, catalog, trace, busy, compare, co
 
       {request && <CompareRuns request={request} result={result} compare={compare} busy={compareBusy} onCompare={onCompare} />}
 
-      <section className="result-section" aria-labelledby="sources-heading"><h3 id="sources-heading">Sources used <span className="mono-label">{result.receipts.length}</span></h3>
+      <details className="result-sources" open><summary><h3>Sources used</h3><span className="mono-label">{result.receipts.length}</span></summary>
         {result.receipts.map((receipt) => <Receipt key={receipt.id} receipt={receipt} catalog={catalog} />)}
         {!result.receipts.length && <p className="empty-section-note">No sources returned.</p>}
-      </section>
+      </details>
 
-      <section className="result-section" aria-labelledby="checks-heading"><h3 id="checks-heading">Checks</h3>
-        {result.challenges.length > 0 && <table className="checks-table"><caption className="sr-only">Verifier checks</caption><thead><tr><th scope="col">Check</th><th scope="col">Outcome</th><th scope="col">Detail</th></tr></thead>
-          <tbody>{result.challenges.map((challenge, index) => <tr key={index}><th scope="row"><code>{challenge.code}</code></th><td className={`outcome-${challenge.outcome}`}>{challenge.outcome}</td><td>{challenge.detail}{challenge.source_ids.length > 0 && <ReceiptRefs ids={challenge.source_ids} receipts={result.receipts} />}</td></tr>)}</tbody></table>}
-        {!result.challenges.length && <p className="empty-section-note">No checks returned.</p>}
-      </section>
-
-      <div className="result-two-column">
-        <section className="result-section" aria-labelledby="unknowns-heading"><h3 id="unknowns-heading">Unknowns</h3>{result.unknowns.length ? <ul>{result.unknowns.map((item, index) => <li key={index}>{item}</li>)}</ul> : <p className="empty-section-note">None listed.</p>}</section>
-        <section className="result-section" aria-labelledby="omissions-heading"><h3 id="omissions-heading">Omitted claims</h3>{result.omitted_claim_ids.length ? <ul>{result.omitted_claim_ids.map((id) => <li key={id}><code>{id}</code></li>)}</ul> : <p className="empty-section-note">None.</p>}</section>
-      </div>
-
-      <section className="result-section" aria-labelledby="next-heading"><h3 id="next-heading">Next steps</h3>{result.next_actions.length ? <ol>{result.next_actions.map((item, index) => <li key={index}>{item}</li>)}</ol> : <p className="empty-section-note">None listed.</p>}</section>
-
-      <section className="result-section clinical-gate" aria-labelledby="gate-heading"><h3 id="gate-heading"><LockKeyhole size={14} aria-hidden="true" />Clinical gate</h3>
+      <section className="result-section result-limits clinical-gate" aria-labelledby="limits-heading">
+        <h3 id="limits-heading">Limits <span className="gate-badge"><LockKeyhole size={12} aria-hidden="true" />Clinical release blocked</span></h3>
         <p><code>{result.clinical_status}</code> <code>needs_human: {String(result.needs_human)}</code> <code>eligibility: {result.eligibility}</code></p>
         <ul>{result.guardrail.reasons.map((reason, index) => <li key={index}>{reason}</li>)}</ul>
+        <dl className="limits-list">
+          <div><dt>Unknowns</dt><dd>{result.unknowns.length ? <ul>{result.unknowns.map((item, index) => <li key={index}>{item}</li>)}</ul> : 'None listed.'}</dd></div>
+          <div><dt>Omitted claims</dt><dd>{result.omitted_claim_ids.length ? <ul>{result.omitted_claim_ids.map((id) => <li key={id}><code>{id}</code></li>)}</ul> : 'None.'}</dd></div>
+          <div><dt>Next steps</dt><dd>{result.next_actions.length ? <ol>{result.next_actions.map((item, index) => <li key={index}>{item}</li>)}</ol> : 'None listed.'}</dd></div>
+        </dl>
         <p className="field-hint">{result.answer}</p>
       </section>
 
-      <dl className="result-provenance">
-        <div><dt>Result id</dt><dd><code>{result.id}</code></dd></div>
-        <div><dt>Created</dt><dd>{result.created_at}</dd></div>
-        <div><dt>Dataset SHA-256</dt><dd><code>{result.dataset_sha256}</code></dd></div>
-        <div><dt>Probabilities</dt><dd>correctness {String(result.answer_correctness_probability)}, omission {String(result.omission_probability)}</dd></div>
-      </dl>
       <details className="run-record">
-        <summary>Run record</summary>
+        <summary>Checks, provenance, trace and run record</summary>
+        <h4>Checks</h4>
+        {result.challenges.length > 0 && <div className="table-scroll" role="region" aria-label="Verifier checks, scrollable" tabIndex={0}><table className="checks-table"><caption className="sr-only">Verifier checks</caption><thead><tr><th scope="col">Check</th><th scope="col">Outcome</th><th scope="col">Detail</th></tr></thead>
+          <tbody>{result.challenges.map((challenge, index) => <tr key={index}><th scope="row"><code>{challenge.code}</code></th><td className={`outcome-${challenge.outcome}`}>{challenge.outcome}</td><td>{challenge.detail}{challenge.source_ids.length > 0 && <ReceiptRefs ids={challenge.source_ids} receipts={result.receipts} />}</td></tr>)}</tbody></table></div>}
+        {!result.challenges.length && <p className="empty-section-note">No checks returned.</p>}
+        <h4>Provenance</h4>
         <p>Server-reported fingerprints, not recomputed by this browser. Use replay to check the exported request and sources. Hashes are not signatures, proof of execution or evidence of scientific correctness.</p>
         <dl className="result-provenance">
+          <div><dt>Result id</dt><dd><code>{result.id}</code></dd></div>
+          <div><dt>Created</dt><dd>{result.created_at}</dd></div>
+          <div><dt>Dataset SHA-256</dt><dd><code>{result.dataset_sha256}</code></dd></div>
+          <div><dt>Probabilities</dt><dd>correctness {String(result.answer_correctness_probability)}, omission {String(result.omission_probability)}</dd></div>
           <div><dt>Model calls</dt><dd>{result.harness.model_calls} / {result.harness.limits.max_model_calls}</dd></div>
           <div><dt>Tool calls</dt><dd>{result.harness.tool_calls} / {result.harness.limits.max_tool_calls}</dd></div>
           <div><dt>Time limit</dt><dd>{result.harness.limits.deadline_ms / 1000} seconds total</dd></div>
@@ -149,8 +149,9 @@ export function AuditResult({ result, request, catalog, trace, busy, compare, co
           {result.harness.skills.map(skill => <div key={skill.name}><dt>{skill.name} @{skill.version}</dt><dd><code>{skill.sha256}</code></dd></div>)}
         </dl>
         <p className="field-hint">Included in the JSON export. Replay needs this code and the same source snapshot.</p>
+        <h4>Trace <span className="mono-label">{result.trace.length} event{result.trace.length === 1 ? '' : 's'}</span></h4>
+        {result.trace.length ? <TraceTable steps={result.trace} receipts={result.receipts} /> : <p className="empty-section-note">No events. Nothing has run.</p>}
       </details>
     </section>
-    <AuditTrace steps={result.trace} receipts={result.receipts} busy={false} />
   </div>;
 }
