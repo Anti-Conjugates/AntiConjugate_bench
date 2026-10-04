@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDownToLine, ArrowUp, MessageSquare, Square, RotateCcw } from 'lucide-react';
-import { TEAM_GRAPH, chatConversationContext, type ChatAudit, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog, type TeamNode, type TeamResult, type TeamStep } from '@her2/shared';
+import { chatConversationContext, type ChatAudit, type ChatRequest, type ChatResult, type ChatStep, type ResearchCatalog, type TeamNode, type TeamResult, type TeamStep } from '@her2/shared';
 import { describeFailure } from './boundaries';
 import { RequestEpoch } from './researchBoundaries';
 import { downloadChatResult, streamChatTurn } from './chatBoundaries';
@@ -8,6 +8,7 @@ import { downloadTeamResult, streamTeamTurn } from './teamBoundaries';
 import { Receipt, receiptAnchor } from './AuditResult';
 import { compareResults, outcomeLabels, outcomeOf, policyLabels } from './auditSummary';
 import { productLabel } from './labels';
+import { TeamGraph as TeamGraphSvg } from './TeamGraph';
 
 const STARTERS = [
   { title: 'Compare the two ADCs', question: 'Compare Kadcyla and Enhertu composition.', note: 'Different payloads, different recorded ratios.' },
@@ -26,9 +27,8 @@ const NODE_DETAILS: Record<TeamNode, string> = {
   verifier: 'Audit checked against the scope contract before the lead sees it.', lead_select: 'Selected audit ids from the verified list.', omission_gate: 'Selected audits compared with the authorized pairs.', answer: 'Reply rendered from verified claims only.'
 };
 export function TeamGraph({ steps, pending }: { steps: TeamStep[]; pending: boolean }) {
-  const byNode = (node: TeamNode) => steps.filter(step => step.node === node);
   return <div className="team-graph">
-    <ol className="team-nodes" aria-label="Graph nodes in order">{TEAM_GRAPH.nodes.map(node => { const reached = byNode(node); return <li key={node} data-state={reached.some(step => step.status === 'failed') ? 'failed' : reached.length ? 'done' : pending ? 'waiting' : 'skipped'}><span>{NODE_LABELS[node]}</span><small>{reached.length ? `${reached.length > 1 ? reached.length + ' × ' : ''}${ACTOR_LABELS[reached[0]!.actor]}` : pending ? 'waiting' : 'not reached'}</small></li>; })}</ol>
+    <TeamGraphSvg steps={steps} pending={pending} />
     <details className="chat-steps" open={pending || undefined}><summary>Graph events <span className="mono-label">{steps.length} completed events</span></summary>
       <ol>{steps.map(step => <li key={step.id}><span className="mono-label">{NODE_LABELS[step.node]} · {ACTOR_LABELS[step.actor]}{step.model_calls ? ` · ${step.model_calls} model call${step.model_calls > 1 ? 's' : ''}` : ''}</span><p>{step.scope ? `${step.audit_id}: ${step.scope.product_id} · ${step.scope.question_id} · ${policyLabels[step.scope.evidence_policy]}. ` : ''}{NODE_DETAILS[step.node]}{step.status === 'failed' && <> Failed: <code>{step.code}</code></>}</p></li>)}</ol>
       {pending && <p>Waiting for the next server event.</p>}
