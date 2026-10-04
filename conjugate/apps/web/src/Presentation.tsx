@@ -6,7 +6,7 @@ import { PremiseGateAnim } from './PremiseGateAnim';
 import { verdictLabels } from './labels';
 import { prefersReducedMotion, useRevealOnScroll } from './motion';
 import { BaitFigure, EnvironmentFigure, HarnessFigure, PremiseFigure, RatioBar } from './figures';
-import { BaitSideBySide, BenchmarkTable } from './PresentationBenchmark';
+import { BaitSideBySide, BenchmarkPanel } from './PresentationBenchmark';
 import { PRESENTATION_SECTIONS, labelSourceName, loadPresentationData, type PresentationData } from './presentationData';
 import { loadBenchmark } from './benchmarkArtifact';
 
@@ -193,7 +193,7 @@ export function Presentation({ onNavigate, data: given }: { onNavigate: (view: V
     </Section>
 
     <Section id="p-benchmark" index={5} kicker="Benchmark" title="Plain Claude against the harness, same questions."
-      figure={<BenchmarkTable load={data.benchmark} />}>
+      figure={<BenchmarkPanel load={data.benchmark} />}>
       <p>The benchmark asks plain Claude and the harness the same composition, invented-ADC, fake-reference, false-premise and out-of-scope questions, and records what each one did: answered correctly, declined, flagged the premise, bluffed, or made up a citation.</p>
       <p>Counts come straight from <code>evals/benchmark.json</code>. If that file is missing or does not match the shared schema, this section says so instead of showing numbers.</p>
     </Section>

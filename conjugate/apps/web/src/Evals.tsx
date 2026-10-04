@@ -13,6 +13,8 @@ import premiseStudy from '../../../evals/premise-study.json';
 import liveStudy from '../../../evals/live-retrieval.json';
 import { useState, type KeyboardEvent } from 'react';
 import { EvaluationStudies, ExactTable, TableScroll } from './EvaluationStudies';
+import { loadBenchmark } from './benchmarkArtifact';
+import { BenchmarkPanel } from './PresentationBenchmark';
 
 type Verdict = keyof typeof verdictLabels;
 type QuestionId = keyof typeof questionTitles;
@@ -160,6 +162,8 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       <p>Software checks that the verifier enforces its own rules. Not a clinical benchmark.</p>
     </header>
     <Scoreboard groups={groups} also={also} />
+
+    <BenchmarkPanel load={loadBenchmark()} />
 
     <EvaluationStudies />
 

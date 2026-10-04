@@ -28,11 +28,11 @@ Read the question: "Kadcyla has a cleavable linker, so how fast is DM1 released 
 
 ## 1:40 05 Demo 2: hallucination bait (25 s)
 
-"Zentrovab-7" is made up and NCT09999999 is not a registered trial. Both stop at the premise gate with zero model calls. The live ClinicalTrials.gov receipt shows the 404. If the benchmark file is committed, the side-by-side panel shows what plain Claude said to the same bait next to the harness; if not, it says "Benchmark pending", and so should you.
+"Zentrovab-7" is made up and NCT09999999 is not a registered trial. Both stop at the premise gate with zero model calls. The live ClinicalTrials.gov receipt shows the 404. If the benchmark file is committed, the side-by-side panel shows what plain Claude said to the same bait next to the harness, under the same mode banner (an offline mock run is not Claude speaking); if not, it says "Benchmark pending", and so should you.
 
 ## 2:05 06 Benchmark (15 s)
 
-Same questions to plain Claude and the harness, counted by outcome. Only describe what the table shows. If it says pending, say the run isn't committed yet and move on.
+Same questions to plain Claude and the harness, counted by outcome (the panel is `BenchmarkSection`, also on the Evals page). Read the mode banner first. "Offline mock run" means no model was called and the Claude arms are a fixed mock, so the counts test the pipeline, not Claude; say exactly that. Only a "Live run" banner says anything about Claude. Only describe what the table shows. If it says pending, say the run isn't committed yet and move on.
 
 ## 2:20 07 What went wrong (25 s)
 

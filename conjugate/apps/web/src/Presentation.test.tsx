@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest';
 import type { BenchmarkArtifact } from '@her2/shared';
 import { Presentation, sectionTarget } from './Presentation';
 import { labelSourceName, loadPresentationData, parseBenchmark, PRESENTATION_SECTIONS } from './presentationData';
-import { pickBaitPair } from './PresentationBenchmark';
+import { BenchmarkPanel, pickBaitPair } from './PresentationBenchmark';
+import { loadBenchmark } from './benchmarkArtifact';
 import { urlTemplate, wrap } from './figures';
 
 const fixture: BenchmarkArtifact = {
@@ -81,6 +82,24 @@ describe('Presentation', () => {
     expect(body).toContain('FIXTURE harness excerpt');
     expect(body).toContain('Fixture limitation for the test.');
     expect(body).not.toContain('Benchmark pending');
+  });
+
+  it('shows the benchmark mode up front and embeds BenchmarkSection', () => {
+    const load = parseBenchmark(fixture);
+    if (load.state !== 'ready') throw new Error('fixture should parse');
+    const offline = text(renderToStaticMarkup(<BenchmarkPanel load={load} />));
+    expect(offline).toContain('Offline mock run');
+    expect(offline).toContain('No model was called');
+    expect(offline).toContain('Plain Claude against the Conjugate harness');
+    const live = text(renderToStaticMarkup(<BenchmarkPanel load={{ state: 'ready', artifact: { ...load.artifact, mode: 'live' } }} />));
+    expect(live).toContain('Live run');
+    expect(live).not.toContain('Offline mock run');
+    expect(text(renderToStaticMarkup(<BenchmarkPanel load={{ state: 'missing' }} />))).toContain('Benchmark pending');
+  });
+
+  it('parses the committed benchmark artifact when there is one', () => {
+    const load = loadBenchmark();
+    expect(load.state === 'invalid' ? load.issue : load.state).toMatch(/^(ready|missing)$/);
   });
 
   it('keeps clinical-claim words out of everything except negations in the limits section', () => {

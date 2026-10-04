@@ -1285,3 +1285,17 @@ html { scroll-padding-top: var(--sp-6); }
   .pres-progress { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .pres-progress-bar { transition: none; } }
+
+/* benchmark mode banner (presentation + Evals) */
+.bench-panel { display: grid; gap: 14px; min-width: 0; }
+.bench-mode { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0; padding: 12px 14px; border: 1px solid var(--copper); border-left-width: 4px; border-radius: 6px; background: rgba(240, 169, 116, .08); color: var(--ink); font-size: 14px; line-height: 1.5; }
+.bench-mode[data-mode="live"] { border-color: var(--lime); background: rgba(200, 255, 77, .06); }
+.bench-mode strong { font: 600 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--copper); }
+.bench-mode[data-mode="live"] strong { color: var(--lime); }
+.bench-mode-date { color: var(--fog); font: 12px var(--mono); }
+.pres .bench-section h2 { font-size: 22px; line-height: 1.2; }
+.pres .bench-rows { max-height: 460px; overflow-y: auto; padding-right: 4px; }
+#p-benchmark { grid-template-columns: minmax(0, 1fr); }
+#p-benchmark .pres-copy { position: static; }
+.pres .table-scroll { max-width: 100%; overflow-x: auto; }
+.pres-side { display: grid; gap: 14px; }

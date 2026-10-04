@@ -1,18 +1,12 @@
-import type { BenchmarkArm, BenchmarkArtifact, BenchmarkCategory, BenchmarkOutcome, BenchmarkRow } from '@her2/shared';
+import type { BenchmarkArtifact, BenchmarkOutcome, BenchmarkRow } from '@her2/shared';
 import type { BenchmarkLoad } from './presentationData';
-import { TableScroll } from './EvaluationStudies';
+import { BENCH_ARM_LABELS, BenchmarkSection } from './BenchmarkSection';
 
-export const ARM_LABELS: Record<BenchmarkArm, string> = { plain_claude: 'Plain Claude', harness_claude: 'Harness + Claude', harness_rules: 'Harness, rules only' };
-export const CATEGORY_LABELS: Record<BenchmarkCategory, string> = { composition: 'Composition', invented_adc: 'Invented ADC', fake_reference: 'Fake reference', false_premise: 'False premise', out_of_scope: 'Out of scope' };
 export const OUTCOME_LABELS: Record<BenchmarkOutcome, string> = {
   correct: 'Correct', abstained_correctly: 'Declined, correctly', flagged_premise: 'Flagged the premise', bluffed: 'Bluffed', fabricated_citation: 'Made up a citation',
   accepted_false_premise: 'Accepted the false premise', wrong_fact: 'Wrong fact', over_refused: 'Refused a fair question', refused: 'Model refused', provider_error: 'Provider error',
 };
 const GOOD: ReadonlySet<BenchmarkOutcome> = new Set(['correct', 'abstained_correctly', 'flagged_premise']);
-const COLUMNS = [
-  ['correct', 'Correct'], ['bluffed', 'Bluffed'], ['fabricated_citations', 'Made-up citations'], ['accepted_false_premise', 'Accepted false premise'],
-  ['wrong_fact', 'Wrong fact'], ['over_refused', 'Over-refused'], ['errors', 'Errors'],
-] as const;
 
 export function BenchmarkPending({ load }: { load: BenchmarkLoad }) {
   return <div className="pres-pending" role="note">
@@ -21,6 +15,22 @@ export function BenchmarkPending({ load }: { load: BenchmarkLoad }) {
       ? <p><code>evals/benchmark.json</code> exists but does not match <code>BenchmarkArtifactSchema</code> ({load.issue}), so nothing from it is shown.</p>
       : <p>No <code>evals/benchmark.json</code> has been committed yet. This slot fills in from that file when it lands. Nothing here is made up in the meantime.</p>}
   </div>;
+}
+
+/** Says up front whether the benchmark called Claude. An offline artifact's Claude arms are a fixed mock. */
+export function BenchmarkMode({ artifact }: { artifact: BenchmarkArtifact }) {
+  const live = artifact.mode === 'live';
+  return <p className="bench-mode" data-mode={artifact.mode}>
+    <strong>{live ? 'Live run' : 'Offline mock run'}</strong>
+    <span>{live ? `${artifact.model} answered; ${artifact.budget.calls_used} model calls recorded.` : 'No model was called. The Claude arms used a fixed mock, so these rows test the pipeline, not Claude.'}</span>
+    <span className="bench-mode-date">evals/benchmark.json · {artifact.generated_at.slice(0, 10)}</span>
+  </p>;
+}
+
+/** Mode banner plus BenchmarkSection when the artifact parses; otherwise the pending note. */
+export function BenchmarkPanel({ load }: { load: BenchmarkLoad }) {
+  if (load.state !== 'ready') return <BenchmarkPending load={load} />;
+  return <div className="bench-panel"><BenchmarkMode artifact={load.artifact} /><BenchmarkSection artifact={load.artifact} /></div>;
 }
 
 /** Picks the first bait item that has both a plain-Claude row and a harness row. */
@@ -39,7 +49,7 @@ export function pickBaitPair(artifact: BenchmarkArtifact): { item: BenchmarkArti
 function RowCard({ row }: { row: BenchmarkRow }) {
   const good = GOOD.has(row.outcome);
   return <article className="pres-arm" data-good={good || undefined}>
-    <h4>{ARM_LABELS[row.arm]}</h4>
+    <h4>{BENCH_ARM_LABELS[row.arm]}</h4>
     <p className="pres-outcome">{OUTCOME_LABELS[row.outcome]}</p>
     <blockquote>{row.excerpt || <em>No text returned.</em>}</blockquote>
     <dl className="pres-facts">
@@ -54,29 +64,9 @@ export function BaitSideBySide({ load }: { load: BenchmarkLoad }) {
   const pair = pickBaitPair(load.artifact);
   if (!pair) return <div className="pres-pending" role="note"><strong>No paired bait row yet</strong><p>The benchmark file has no invented-ADC or fake-reference item answered by both plain Claude and the harness.</p></div>;
   return <div className="pres-side">
+    <BenchmarkMode artifact={load.artifact} />
     <p className="pres-side-q"><span>Same question, both arms</span>“{pair.item.message}”</p>
     <div className="pres-arms"><RowCard row={pair.plain} /><RowCard row={pair.harness} /></div>
     <p className="pres-cite">Excerpts from recorded responses in <code>evals/benchmark.json</code> ({load.artifact.mode}, {load.artifact.model}, {load.artifact.generated_at.slice(0, 10)}).</p>
-  </div>;
-}
-
-// TODO: replace this minimal table with BenchmarkSection once BenchmarkSection.tsx lands on the base branch.
-export function BenchmarkTable({ load }: { load: BenchmarkLoad }) {
-  if (load.state !== 'ready') return <BenchmarkPending load={load} />;
-  const { artifact } = load;
-  const categories = [...new Set(artifact.items.map(item => item.category))];
-  return <div className="pres-bench">
-    <p className="pres-cite">{artifact.mode === 'live' ? 'Live run' : 'Offline run'} · {artifact.model} · {artifact.items.length} items · {artifact.budget.calls_used}/{artifact.budget.max_calls} model calls used · {artifact.budget.retries} retries · {artifact.generated_at.slice(0, 10)}</p>
-    <TableScroll label="Benchmark results by arm and category, scrollable">
-      <table className="pres-table">
-        <caption className="sr-only">Benchmark counts per arm and question category, from evals/benchmark.json</caption>
-        <thead><tr><th scope="col">Arm</th><th scope="col">Category</th><th scope="col">n</th>{COLUMNS.map(([key, label]) => <th scope="col" key={key}>{label}</th>)}</tr></thead>
-        <tbody>{artifact.arms.flatMap(arm => categories.map(category => {
-          const cell = artifact.summary[arm]?.[category];
-          return <tr key={`${arm}-${category}`}><th scope="row">{ARM_LABELS[arm]}</th><td>{CATEGORY_LABELS[category]}</td><td>{cell?.n ?? '-'}</td>{COLUMNS.map(([key]) => <td key={key}>{cell ? cell[key] : '-'}</td>)}</tr>;
-        }))}</tbody>
-      </table>
-    </TableScroll>
-    <ul className="pres-small-list">{artifact.limitations.map(limit => <li key={limit}>{limit}</li>)}</ul>
   </div>;
 }
