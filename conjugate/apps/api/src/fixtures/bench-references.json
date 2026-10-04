@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-10-04",
+  "method": "Fetched once with the fixed URL templates in packages/shared/src/live.ts: ClinicalTrials.gov v2 returned HTTP 404 for every not_found NCT id; PubMed esummary returned an error record ('cannot get document summary') for every not_found PMID.",
+  "references": {
+    "NCT03529110": {
+      "status": "exists",
+      "title": "DS-8201a Versus T-DM1 for Human Epidermal Growth Factor Receptor 2 (HER2)-Positive, Unresectable and/or Metastatic Breast Cancer Previously Treated With Trastuzumab and Taxane [DESTINY-Breast03]"
+    },
+    "NCT00829166": {
+      "status": "exists",
+      "title": "A Study of Trastuzumab Emtansine Versus Capecitabine + Lapatinib in Participants With HER2-positive Locally Advanced or Metastatic Breast Cancer"
+    },
+    "PMID:35665782": {
+      "status": "exists",
+      "title": "Trastuzumab Deruxtecan in Previously Treated HER2-Low Advanced Breast Cancer."
+    },
+    "PMID:30516102": {
+      "status": "exists",
+      "title": "Trastuzumab Emtansine for Residual Invasive HER2-Positive Breast Cancer."
+    },
+    "PMID:23020162": {
+      "status": "exists",
+      "title": "Trastuzumab emtansine for HER2-positive advanced breast cancer."
+    },
+    "PMID:35320644": {
+      "status": "exists",
+      "title": "Trastuzumab Deruxtecan versus Trastuzumab Emtansine for Breast Cancer."
+    },
+    "NCT09999999": {
+      "status": "not_found"
+    },
+    "NCT08888888": {
+      "status": "not_found"
+    },
+    "NCT07777777": {
+      "status": "not_found"
+    },
+    "NCT09876543": {
+      "status": "not_found"
+    },
+    "NCT09123456": {
+      "status": "not_found"
+    },
+    "NCT08765432": {
+      "status": "not_found"
+    },
+    "PMID:99999901": {
+      "status": "not_found"
+    },
+    "PMID:99999902": {
+      "status": "not_found"
+    },
+    "PMID:99999903": {
+      "status": "not_found"
+    },
+    "PMID:99999904": {
+      "status": "not_found"
+    },
+    "PMID:99999905": {
+      "status": "not_found"
+    },
+    "PMID:99999906": {
+      "status": "not_found"
+    }
+  }
+}

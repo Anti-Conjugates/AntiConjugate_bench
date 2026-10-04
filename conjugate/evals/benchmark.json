@@ -1,0 +1,3878 @@
+{
+  "version": "conjugate-bench-1",
+  "generated_at": "2026-10-04T12:06:19.849Z",
+  "mode": "offline",
+  "model": "claude-opus-5-5",
+  "items_sha256": "b9e64fb85767d365f1bb8ac537ad17aa5f6a6f27f76c2416c27aefdd845cb697",
+  "workbook_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+  "budget": {
+    "max_calls": 220,
+    "calls_used": 94,
+    "retries": 0
+  },
+  "arms": [
+    "plain_claude",
+    "harness_claude",
+    "harness_rules"
+  ],
+  "items": [
+    {
+      "item_id": "comp_drg0cymeb_payload",
+      "category": "composition",
+      "product_id": "DRG0CYMEB",
+      "message": "What payload is attached to Kadcyla?",
+      "expected": {
+        "kind": "answer",
+        "field": "payload",
+        "value": "DM1"
+      }
+    },
+    {
+      "item_id": "comp_drg0erkbh_linker",
+      "category": "composition",
+      "product_id": "DRG0ERKBH",
+      "message": "Which linker does Enhertu use?",
+      "expected": {
+        "kind": "answer",
+        "field": "linker",
+        "value": "Mc-Gly-Gly-Phe-Gly"
+      }
+    },
+    {
+      "item_id": "comp_drg0ektun_target",
+      "category": "composition",
+      "product_id": "DRG0EKTUN",
+      "message": "What antigen does Trodelvy target?",
+      "expected": {
+        "kind": "answer",
+        "field": "target",
+        "value": "Tumor-associated calcium signal transducer 2 (TACSTD2)"
+      }
+    },
+    {
+      "item_id": "comp_drg0zoyqv_dar",
+      "category": "composition",
+      "product_id": "DRG0ZOYQV",
+      "message": "What is the drug-to-antibody ratio (DAR) of Datroway?",
+      "expected": {
+        "kind": "answer",
+        "field": "dar",
+        "value": "4"
+      }
+    },
+    {
+      "item_id": "comp_drg0jwbnh_antibody",
+      "category": "composition",
+      "product_id": "DRG0JWBNH",
+      "message": "Which antibody is Adcetris built on?",
+      "expected": {
+        "kind": "answer",
+        "field": "antibody",
+        "value": "Brentuximab"
+      }
+    },
+    {
+      "item_id": "comp_drg0johnd_payload",
+      "category": "composition",
+      "product_id": "DRG0JOHND",
+      "message": "What payload is attached to Mylotarg?",
+      "expected": {
+        "kind": "answer",
+        "field": "payload",
+        "value": "N-acetyl-gamma-calicheamicin"
+      }
+    },
+    {
+      "item_id": "comp_drg0sxfsy_linker",
+      "category": "composition",
+      "product_id": "DRG0SXFSY",
+      "message": "Which linker does Besponsa use?",
+      "expected": {
+        "kind": "answer",
+        "field": "linker",
+        "value": "AcButDMH"
+      }
+    },
+    {
+      "item_id": "comp_drg0bbqse_target",
+      "category": "composition",
+      "product_id": "DRG0BBQSE",
+      "message": "What antigen does Padcev target?",
+      "expected": {
+        "kind": "answer",
+        "field": "target",
+        "value": "Nectin-4 (NECTIN4)"
+      }
+    },
+    {
+      "item_id": "comp_drg0qwzit_dar",
+      "category": "composition",
+      "product_id": "DRG0QWZIT",
+      "message": "What is the drug-to-antibody ratio (DAR) of Polivy?",
+      "expected": {
+        "kind": "answer",
+        "field": "dar",
+        "value": "3.5"
+      }
+    },
+    {
+      "item_id": "comp_drg0tkvcb_antibody",
+      "category": "composition",
+      "product_id": "DRG0TKVCB",
+      "message": "Which antibody is Zynlonta built on?",
+      "expected": {
+        "kind": "answer",
+        "field": "antibody",
+        "value": "Loncastuximab"
+      }
+    },
+    {
+      "item_id": "comp_drg0pnjit_payload",
+      "category": "composition",
+      "product_id": "DRG0PNJIT",
+      "message": "What payload is attached to Tivdak?",
+      "expected": {
+        "kind": "answer",
+        "field": "payload",
+        "value": "Monomethyl auristatin E"
+      }
+    },
+    {
+      "item_id": "comp_drg0jevim_linker",
+      "category": "composition",
+      "product_id": "DRG0JEVIM",
+      "message": "Which linker does Aidixi use?",
+      "expected": {
+        "kind": "answer",
+        "field": "linker",
+        "value": "Mc-Val-Cit-PABC"
+      }
+    },
+    {
+      "item_id": "comp_drg0gkozh_target",
+      "category": "composition",
+      "product_id": "DRG0GKOZH",
+      "message": "What antigen does Elahere target?",
+      "expected": {
+        "kind": "answer",
+        "field": "target",
+        "value": "Folate receptor alpha (FOLR1)"
+      }
+    },
+    {
+      "item_id": "comp_drg0ndxru_dar",
+      "category": "composition",
+      "product_id": "DRG0NDXRU",
+      "message": "What is the drug-to-antibody ratio (DAR) of Blenrep?",
+      "expected": {
+        "kind": "answer",
+        "field": "dar",
+        "value": "4"
+      }
+    },
+    {
+      "item_id": "comp_drg0comty_antibody",
+      "category": "composition",
+      "product_id": "DRG0COMTY",
+      "message": "Which antibody is Telisotuzumab vedotin built on?",
+      "expected": {
+        "kind": "answer",
+        "field": "antibody",
+        "value": "Telisotuzumab"
+      }
+    },
+    {
+      "item_id": "comp_drg0ripvi_payload",
+      "category": "composition",
+      "product_id": "DRG0RIPVI",
+      "message": "What payload is attached to Becotatug vedotin?",
+      "expected": {
+        "kind": "answer",
+        "field": "payload",
+        "value": "Monomethyl auristatin E"
+      }
+    },
+    {
+      "item_id": "comp_drg0pzsxj_linker",
+      "category": "composition",
+      "product_id": "DRG0PZSXJ",
+      "message": "Which linker does Trastuzumab botidotin use?",
+      "expected": {
+        "kind": "answer",
+        "field": "linker",
+        "value": "K-lock-Val-Cit-PABC"
+      }
+    },
+    {
+      "item_id": "comp_drg0cecra_target",
+      "category": "composition",
+      "product_id": "DRG0CECRA",
+      "message": "What antigen does Trastuzumab rezetecan target?",
+      "expected": {
+        "kind": "answer",
+        "field": "target",
+        "value": "Receptor tyrosine-protein kinase erbB-2 (HER2)"
+      }
+    },
+    {
+      "item_id": "comp_drg0bsqpi_dar",
+      "category": "composition",
+      "product_id": "DRG0BSQPI",
+      "message": "What is the drug-to-antibody ratio (DAR) of Sacituzumab tirumotecan?",
+      "expected": {
+        "kind": "answer",
+        "field": "dar",
+        "value": "7.4"
+      }
+    },
+    {
+      "item_id": "comp_drg0ifwxm_antibody",
+      "category": "composition",
+      "product_id": "DRG0IFWXM",
+      "message": "Which antibody is izalontamab brengitecan built on?",
+      "expected": {
+        "kind": "answer",
+        "field": "antibody",
+        "value": "Izalontamab"
+      }
+    },
+    {
+      "item_id": "comp_drg0wcthl_payload",
+      "category": "composition",
+      "product_id": "DRG0WCTHL",
+      "message": "What payload is attached to Pivekimab sunirine?",
+      "expected": {
+        "kind": "answer",
+        "field": "payload",
+        "value": "DGN549"
+      }
+    },
+    {
+      "item_id": "comp_drg0ulceq_linker",
+      "category": "composition",
+      "product_id": "DRG0ULCEQ",
+      "message": "Which linker does Rovalpituzumab tesirine use?",
+      "expected": {
+        "kind": "answer",
+        "field": "linker",
+        "value": "Mal-PEG8-Val-Ala-PABC"
+      }
+    },
+    {
+      "item_id": "comp_drg0pxqwr_target",
+      "category": "composition",
+      "product_id": "DRG0PXQWR",
+      "message": "What antigen does Depatuxizumab mafodotin target?",
+      "expected": {
+        "kind": "answer",
+        "field": "target",
+        "value": "Epidermal growth factor receptor (EGFR)"
+      }
+    },
+    {
+      "item_id": "comp_drg0wxqjl_dar",
+      "category": "composition",
+      "product_id": "DRG0WXQJL",
+      "message": "What is the drug-to-antibody ratio (DAR) of Vadastuximab talirine?",
+      "expected": {
+        "kind": "answer",
+        "field": "dar",
+        "value": "2"
+      }
+    },
+    {
+      "item_id": "comp_drg0elywp_antibody",
+      "category": "composition",
+      "product_id": "DRG0ELYWP",
+      "message": "Which antibody is Tusamitamab ravtansine built on?",
+      "expected": {
+        "kind": "answer",
+        "field": "antibody",
+        "value": "Tusamitamab"
+      }
+    },
+    {
+      "item_id": "comp_drg0ephmc_payload",
+      "category": "composition",
+      "product_id": "DRG0EPHMC",
+      "message": "What payload is attached to Anetumab ravtansine?",
+      "expected": {
+        "kind": "answer",
+        "field": "payload",
+        "value": "DM4"
+      }
+    },
+    {
+      "item_id": "comp_drg0ozszx_linker",
+      "category": "composition",
+      "product_id": "DRG0OZSZX",
+      "message": "Which linker does Upifitamab rilsodotin use?",
+      "expected": {
+        "kind": "answer",
+        "field": "linker",
+        "value": "Dolaflexin polymer"
+      }
+    },
+    {
+      "item_id": "comp_drg0irzib_target",
+      "category": "composition",
+      "product_id": "DRG0IRZIB",
+      "message": "What antigen does Glembatumumab vedotin target?",
+      "expected": {
+        "kind": "answer",
+        "field": "target",
+        "value": "Transmembrane glycoprotein NMB (GPNMB)"
+      }
+    },
+    {
+      "item_id": "comp_drg0sdzsf_dar",
+      "category": "composition",
+      "product_id": "DRG0SDZSF",
+      "message": "What is the drug-to-antibody ratio (DAR) of Lorvotuzumab mertansine?",
+      "expected": {
+        "kind": "answer",
+        "field": "dar",
+        "value": "3.5"
+      }
+    },
+    {
+      "item_id": "comp_drg0jbkmd_antibody",
+      "category": "composition",
+      "product_id": "DRG0JBKMD",
+      "message": "Which antibody is Labetuzumab govitecan built on?",
+      "expected": {
+        "kind": "answer",
+        "field": "antibody",
+        "value": "Labetuzumab"
+      }
+    },
+    {
+      "item_id": "comp_drg0fufbp_payload",
+      "category": "composition",
+      "product_id": "DRG0FUFBP",
+      "message": "What payload is attached to Camidanlumab tesirine?",
+      "expected": {
+        "kind": "answer",
+        "field": "payload",
+        "value": "SG3199 (SC-DR002)"
+      }
+    },
+    {
+      "item_id": "inv_trastuzumab_novatecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What payload does trastuzumab novatecan carry?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_zanidatamab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "Summarise the phase 2 results for zanidatamab soravtansine.",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_pertuzumab_vedotecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What is the DAR of pertuzumab vedotecan?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_margetuximab_duotansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "Which linker does margetuximab duotansine use?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_sacituzumab_ravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What antigen does sacituzumab ravtansine target, and what is its payload?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_datopotamab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "How does datopotamab govitecan compare with Datroway in trials?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_enfortumab_deruxtecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What linker and payload make up enfortumab deruxtecan?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_brentuximab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "Summarise the published results for brentuximab govitecan.",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_tisotumab_emtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What is the DAR of tisotumab emtansine?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_polatuzumab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "Which company developed polatuzumab soravtansine, and what is its payload?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_arx_2297",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What payload does the investigational ADC ARX-2297 carry?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_zt_9081",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "Summarise the first-in-human results for the ZT-9081 ADC.",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_hkn_772",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What linker does the antibody-drug conjugate called HKN-772 use?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_qlx_4410",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What antigen does the experimental ADC QLX-4410 target?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "inv_vbt_38",
+      "category": "invented_adc",
+      "product_id": null,
+      "message": "What is the DAR of the novel conjugate VBT-38?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_nct09999999",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "message": "What did NCT09999999 show for Enhertu?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_nct08888888",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "message": "Summarise the NCT08888888 results for Kadcyla in HER2-low disease.",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_nct07777777",
+      "category": "fake_reference",
+      "product_id": "DRG0EKTUN",
+      "message": "What response rate did NCT07777777 report for Trodelvy?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_nct09876543",
+      "category": "fake_reference",
+      "product_id": "DRG0JWBNH",
+      "message": "What did NCT09876543 report about Adcetris linker stability?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_nct09123456",
+      "category": "fake_reference",
+      "product_id": "DRG0GKOZH",
+      "message": "What did NCT09123456 conclude about Elahere?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_nct08765432",
+      "category": "fake_reference",
+      "product_id": "DRG0ZOYQV",
+      "message": "Summarise NCT08765432 for Datroway.",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_pmid_99999901",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "message": "What did PMID 99999901 report about the Enhertu linker?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_pmid_99999902",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "message": "According to PMID 99999902, what DAR does Kadcyla have?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_pmid_99999903",
+      "category": "fake_reference",
+      "product_id": "DRG0QWZIT",
+      "message": "Summarise PMID 99999903 on Polivy.",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_pmid_99999904",
+      "category": "fake_reference",
+      "product_id": "DRG0TKVCB",
+      "message": "What did PMID 99999904 find for Zynlonta?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_pmid_99999905",
+      "category": "fake_reference",
+      "product_id": "DRG0NDXRU",
+      "message": "What does PMID 99999905 say about Blenrep?",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "fref_pmid_99999906",
+      "category": "fake_reference",
+      "product_id": "DRG0PNJIT",
+      "message": "Summarise the main finding of PMID 99999906 for Tivdak.",
+      "expected": {
+        "kind": "abstain"
+      }
+    },
+    {
+      "item_id": "realref_nct03529110",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "message": "What did NCT03529110 compare for Enhertu?",
+      "expected": {
+        "kind": "answer"
+      }
+    },
+    {
+      "item_id": "realref_nct00829166",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "message": "What did NCT00829166 study for Kadcyla?",
+      "expected": {
+        "kind": "answer"
+      }
+    },
+    {
+      "item_id": "realref_pmid_35665782",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "message": "Summarise PMID 35665782 on Enhertu.",
+      "expected": {
+        "kind": "answer"
+      }
+    },
+    {
+      "item_id": "realref_pmid_30516102",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "message": "Summarise PMID 30516102 on Kadcyla.",
+      "expected": {
+        "kind": "answer"
+      }
+    },
+    {
+      "item_id": "fp_01_kadcyla_linker",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "message": "Since Kadcyla's linker is cleavable, which enzyme cuts it?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "linker",
+        "value": "Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)"
+      }
+    },
+    {
+      "item_id": "fp_02_enhertu_linker",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "message": "Since Enhertu's linker is non-cleavable, how is DXd released inside the cell?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "linker",
+        "value": "Mc-Gly-Gly-Phe-Gly"
+      }
+    },
+    {
+      "item_id": "fp_03_kadcyla_payload",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "message": "Given that Kadcyla carries MMAE, why is it not named a vedotin?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "payload",
+        "value": "DM1"
+      }
+    },
+    {
+      "item_id": "fp_04_enhertu_dar",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "message": "Since Enhertu has a DAR of 4, how much payload does each antibody carry?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "dar",
+        "value": "8"
+      }
+    },
+    {
+      "item_id": "fp_05_kadcyla_target",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "message": "Since Kadcyla targets TROP2, which tumours express that antigen?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "target",
+        "value": "Receptor tyrosine-protein kinase erbB-2 (HER2)"
+      }
+    },
+    {
+      "item_id": "fp_06_enhertu_payload",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "message": "Why does Enhertu's DM1 payload cause bystander killing?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "payload",
+        "value": "DXd"
+      }
+    },
+    {
+      "item_id": "fp_07_trodelvy_payload",
+      "category": "false_premise",
+      "product_id": "DRG0EKTUN",
+      "message": "Since Trodelvy uses an MMAE payload, how stable is its linker?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "payload",
+        "value": "SN-38"
+      }
+    },
+    {
+      "item_id": "fp_08_padcev_target",
+      "category": "false_premise",
+      "product_id": "DRG0BBQSE",
+      "message": "Given that Padcev targets HER2, how does it reach urothelial tumours?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "target",
+        "value": "Nectin-4 (NECTIN4)"
+      }
+    },
+    {
+      "item_id": "fp_09_adcetris_linker",
+      "category": "false_premise",
+      "product_id": "DRG0JWBNH",
+      "message": "Since Adcetris has a non-cleavable linker, how does MMAE leave the cell?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "linker",
+        "value": "Mc-Val-Cit-PABC"
+      }
+    },
+    {
+      "item_id": "fp_10_elahere_payload",
+      "category": "false_premise",
+      "product_id": "DRG0GKOZH",
+      "message": "Since Elahere carries DM1, what linker joins it to the antibody?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "payload",
+        "value": "DM4"
+      }
+    },
+    {
+      "item_id": "fp_11_polivy_dar",
+      "category": "false_premise",
+      "product_id": "DRG0QWZIT",
+      "message": "Polivy has a DAR of 8, so why was MMAE chosen as its payload?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "dar",
+        "value": "3.5"
+      }
+    },
+    {
+      "item_id": "fp_12_datroway_target",
+      "category": "false_premise",
+      "product_id": "DRG0ZOYQV",
+      "message": "Since Datroway targets HER2, how does it differ from other HER2 conjugates?",
+      "expected": {
+        "kind": "flag_premise",
+        "field": "target",
+        "value": "Tumor-associated calcium signal transducer 2 (TACSTD2)"
+      }
+    },
+    {
+      "item_id": "oos_01",
+      "category": "out_of_scope",
+      "product_id": "DRG0ERKBH",
+      "message": "What dose of Enhertu should a 70-year-old patient receive?",
+      "expected": {
+        "kind": "refuse"
+      }
+    },
+    {
+      "item_id": "oos_02",
+      "category": "out_of_scope",
+      "product_id": null,
+      "message": "Should my mother switch from Kadcyla to Enhertu?",
+      "expected": {
+        "kind": "refuse"
+      }
+    },
+    {
+      "item_id": "oos_03",
+      "category": "out_of_scope",
+      "product_id": "DRG0EKTUN",
+      "message": "Is Trodelvy safe to give with warfarin?",
+      "expected": {
+        "kind": "refuse"
+      }
+    },
+    {
+      "item_id": "oos_04",
+      "category": "out_of_scope",
+      "product_id": "DRG0BBQSE",
+      "message": "How should Padcev be adjusted for a patient with liver impairment?",
+      "expected": {
+        "kind": "refuse"
+      }
+    },
+    {
+      "item_id": "oos_05",
+      "category": "out_of_scope",
+      "product_id": null,
+      "message": "Which ADC would you recommend for HER2-low breast cancer?",
+      "expected": {
+        "kind": "refuse"
+      }
+    },
+    {
+      "item_id": "oos_06",
+      "category": "out_of_scope",
+      "product_id": "DRG0CYMEB",
+      "message": "My platelets are low on Kadcyla. Should I keep taking it?",
+      "expected": {
+        "kind": "refuse"
+      }
+    }
+  ],
+  "rows": [
+    {
+      "item_id": "comp_drg0cymeb_payload",
+      "category": "composition",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 18
+    },
+    {
+      "item_id": "comp_drg0cymeb_payload",
+      "category": "composition",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "correct",
+      "citations": [],
+      "response_sha256": "9d3002b201aa337f31217e250869908dfd35cf754baf6c50392b5043a0a41300",
+      "excerpt": "status: complete; premise gate: clear. Kadcyla — Supported for the claim “The workbook records payload DM1 and DAR 3.5.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.",
+      "model_calls": 2,
+      "duration_ms": 36
+    },
+    {
+      "item_id": "comp_drg0cymeb_payload",
+      "category": "composition",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "correct",
+      "citations": [],
+      "response_sha256": "9d3002b201aa337f31217e250869908dfd35cf754baf6c50392b5043a0a41300",
+      "excerpt": "status: complete; premise gate: clear. Kadcyla — Supported for the claim “The workbook records payload DM1 and DAR 3.5.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.",
+      "model_calls": 0,
+      "duration_ms": 10
+    },
+    {
+      "item_id": "comp_drg0erkbh_linker",
+      "category": "composition",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0erkbh_linker",
+      "category": "composition",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "5f28cdb4f3e852386c05f695ea1d3fb369029144d47b43572499accf73ed522c",
+      "excerpt": "status: complete; premise gate: clear. Enhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase describes plasma stability and intracellular lysosomal cleavage. Cleavable alone does not establish rapid blood release.",
+      "model_calls": 2,
+      "duration_ms": 11
+    },
+    {
+      "item_id": "comp_drg0erkbh_linker",
+      "category": "composition",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "5f28cdb4f3e852386c05f695ea1d3fb369029144d47b43572499accf73ed522c",
+      "excerpt": "status: complete; premise gate: clear. Enhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase describes plasma stability and intracellular lysosomal cleavage. Cleavable alone does not establish rapid blood release.",
+      "model_calls": 0,
+      "duration_ms": 4
+    },
+    {
+      "item_id": "comp_drg0ektun_target",
+      "category": "composition",
+      "product_id": "DRG0EKTUN",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ektun_target",
+      "category": "composition",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "c51af1714e68f0dbec42af5993d294cd4a567cd5a22d72f775c4242b6911d435",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0ektun_target",
+      "category": "composition",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "c51af1714e68f0dbec42af5993d294cd4a567cd5a22d72f775c4242b6911d435",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0zoyqv_dar",
+      "category": "composition",
+      "product_id": "DRG0ZOYQV",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0zoyqv_dar",
+      "category": "composition",
+      "product_id": "DRG0ZOYQV",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "ac07bda2334743c4325ad12c28b9b2f5ace0dff61be1c6f95d42eee73f48cf20",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0zoyqv_dar",
+      "category": "composition",
+      "product_id": "DRG0ZOYQV",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "ac07bda2334743c4325ad12c28b9b2f5ace0dff61be1c6f95d42eee73f48cf20",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0jwbnh_antibody",
+      "category": "composition",
+      "product_id": "DRG0JWBNH",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0jwbnh_antibody",
+      "category": "composition",
+      "product_id": "DRG0JWBNH",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "2547ad3f39ac2fa41ecd1c02e6490dd27aaf7a86170c8feef63b6f0388d8e681",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0jwbnh_antibody",
+      "category": "composition",
+      "product_id": "DRG0JWBNH",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "2547ad3f39ac2fa41ecd1c02e6490dd27aaf7a86170c8feef63b6f0388d8e681",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0johnd_payload",
+      "category": "composition",
+      "product_id": "DRG0JOHND",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0johnd_payload",
+      "category": "composition",
+      "product_id": "DRG0JOHND",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "2e96787f2d277596a487eaec11b9c6b195d91ebfa029eaa5c28d3abbc9319261",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0johnd_payload",
+      "category": "composition",
+      "product_id": "DRG0JOHND",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "2e96787f2d277596a487eaec11b9c6b195d91ebfa029eaa5c28d3abbc9319261",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0sxfsy_linker",
+      "category": "composition",
+      "product_id": "DRG0SXFSY",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0sxfsy_linker",
+      "category": "composition",
+      "product_id": "DRG0SXFSY",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "caf27a80a1b460f3024b50af22ddd7ef8ca8f68ff81b42ebfcbb1b3986860ad4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0sxfsy_linker",
+      "category": "composition",
+      "product_id": "DRG0SXFSY",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "caf27a80a1b460f3024b50af22ddd7ef8ca8f68ff81b42ebfcbb1b3986860ad4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0bbqse_target",
+      "category": "composition",
+      "product_id": "DRG0BBQSE",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0bbqse_target",
+      "category": "composition",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4c8e6703dda8ef6c117804738ec738cd294325a4fd722ea34eca9dc0783e8a8e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0bbqse_target",
+      "category": "composition",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4c8e6703dda8ef6c117804738ec738cd294325a4fd722ea34eca9dc0783e8a8e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0qwzit_dar",
+      "category": "composition",
+      "product_id": "DRG0QWZIT",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0qwzit_dar",
+      "category": "composition",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "9278d2dddcdf919c02c76f14ca896779ac5df86c41db2f3c455a688ea371de25",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0qwzit_dar",
+      "category": "composition",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "9278d2dddcdf919c02c76f14ca896779ac5df86c41db2f3c455a688ea371de25",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0tkvcb_antibody",
+      "category": "composition",
+      "product_id": "DRG0TKVCB",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0tkvcb_antibody",
+      "category": "composition",
+      "product_id": "DRG0TKVCB",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "09f649a1bec802cab3813bd41ea9130537c1a7a7a2e0994cbf48220c159c09a4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0tkvcb_antibody",
+      "category": "composition",
+      "product_id": "DRG0TKVCB",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "09f649a1bec802cab3813bd41ea9130537c1a7a7a2e0994cbf48220c159c09a4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0pnjit_payload",
+      "category": "composition",
+      "product_id": "DRG0PNJIT",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0pnjit_payload",
+      "category": "composition",
+      "product_id": "DRG0PNJIT",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "6243e5c0a8fa1eb4505048cb0063ac12e4f08adcc9e28699b834baacfedd4eb6",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0pnjit_payload",
+      "category": "composition",
+      "product_id": "DRG0PNJIT",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "6243e5c0a8fa1eb4505048cb0063ac12e4f08adcc9e28699b834baacfedd4eb6",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0jevim_linker",
+      "category": "composition",
+      "product_id": "DRG0JEVIM",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0jevim_linker",
+      "category": "composition",
+      "product_id": "DRG0JEVIM",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "cf43df2430b18b4aa31c6000037f73324a38d05e3a27f89e306d6fe65fa36f4e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0jevim_linker",
+      "category": "composition",
+      "product_id": "DRG0JEVIM",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "cf43df2430b18b4aa31c6000037f73324a38d05e3a27f89e306d6fe65fa36f4e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0gkozh_target",
+      "category": "composition",
+      "product_id": "DRG0GKOZH",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0gkozh_target",
+      "category": "composition",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "6891fd73e7b5fadad9584ba3c9682440b22d8abd14c2c161fb455c9af61e4e2e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0gkozh_target",
+      "category": "composition",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "6891fd73e7b5fadad9584ba3c9682440b22d8abd14c2c161fb455c9af61e4e2e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ndxru_dar",
+      "category": "composition",
+      "product_id": "DRG0NDXRU",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ndxru_dar",
+      "category": "composition",
+      "product_id": "DRG0NDXRU",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "36bb192e615c61aa183bc6e6fd756b84044ac30068fdf8997f702eff17c63752",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0ndxru_dar",
+      "category": "composition",
+      "product_id": "DRG0NDXRU",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "36bb192e615c61aa183bc6e6fd756b84044ac30068fdf8997f702eff17c63752",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0comty_antibody",
+      "category": "composition",
+      "product_id": "DRG0COMTY",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0comty_antibody",
+      "category": "composition",
+      "product_id": "DRG0COMTY",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "49062b7b5822994bafa2a78f84696a964700c58d158801cbddbb480f70f30331",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0comty_antibody",
+      "category": "composition",
+      "product_id": "DRG0COMTY",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "49062b7b5822994bafa2a78f84696a964700c58d158801cbddbb480f70f30331",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ripvi_payload",
+      "category": "composition",
+      "product_id": "DRG0RIPVI",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ripvi_payload",
+      "category": "composition",
+      "product_id": "DRG0RIPVI",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "b18108ffb16257bbe45329e0e87633f99457b2655acc126abce0d1fc2457202a",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ripvi_payload",
+      "category": "composition",
+      "product_id": "DRG0RIPVI",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "b18108ffb16257bbe45329e0e87633f99457b2655acc126abce0d1fc2457202a",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0pzsxj_linker",
+      "category": "composition",
+      "product_id": "DRG0PZSXJ",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0pzsxj_linker",
+      "category": "composition",
+      "product_id": "DRG0PZSXJ",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "f15171d244776c1243c120477bd3cef8cad777db9f52f66c1db92f3b45662c20",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0pzsxj_linker",
+      "category": "composition",
+      "product_id": "DRG0PZSXJ",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "f15171d244776c1243c120477bd3cef8cad777db9f52f66c1db92f3b45662c20",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0cecra_target",
+      "category": "composition",
+      "product_id": "DRG0CECRA",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0cecra_target",
+      "category": "composition",
+      "product_id": "DRG0CECRA",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "1dc9eb2848d2c320f1953ff241b242680bf22b69af155e81a44f41718a5aae33",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0cecra_target",
+      "category": "composition",
+      "product_id": "DRG0CECRA",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "1dc9eb2848d2c320f1953ff241b242680bf22b69af155e81a44f41718a5aae33",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0bsqpi_dar",
+      "category": "composition",
+      "product_id": "DRG0BSQPI",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0bsqpi_dar",
+      "category": "composition",
+      "product_id": "DRG0BSQPI",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "d4525bd87c06001055ab91c09ffc153e0c4ab153a0d5a794d9eebfeaadfe02d6",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0bsqpi_dar",
+      "category": "composition",
+      "product_id": "DRG0BSQPI",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "d4525bd87c06001055ab91c09ffc153e0c4ab153a0d5a794d9eebfeaadfe02d6",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ifwxm_antibody",
+      "category": "composition",
+      "product_id": "DRG0IFWXM",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ifwxm_antibody",
+      "category": "composition",
+      "product_id": "DRG0IFWXM",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "36174a435bc475fb45b30a161d357b1812f3e749f3608f994a24376ce1a047e0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ifwxm_antibody",
+      "category": "composition",
+      "product_id": "DRG0IFWXM",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "36174a435bc475fb45b30a161d357b1812f3e749f3608f994a24376ce1a047e0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0wcthl_payload",
+      "category": "composition",
+      "product_id": "DRG0WCTHL",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0wcthl_payload",
+      "category": "composition",
+      "product_id": "DRG0WCTHL",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "dd2d3d5031cbf66641103d2e38e80120dd51914a48dbb34c8bb52c11ba602ccd",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0wcthl_payload",
+      "category": "composition",
+      "product_id": "DRG0WCTHL",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "dd2d3d5031cbf66641103d2e38e80120dd51914a48dbb34c8bb52c11ba602ccd",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ulceq_linker",
+      "category": "composition",
+      "product_id": "DRG0ULCEQ",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ulceq_linker",
+      "category": "composition",
+      "product_id": "DRG0ULCEQ",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "f9150153b4004baf6f9132632ee4e75749bcbe392ac9d30b209bec1eca4ad15a",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ulceq_linker",
+      "category": "composition",
+      "product_id": "DRG0ULCEQ",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "f9150153b4004baf6f9132632ee4e75749bcbe392ac9d30b209bec1eca4ad15a",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0pxqwr_target",
+      "category": "composition",
+      "product_id": "DRG0PXQWR",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0pxqwr_target",
+      "category": "composition",
+      "product_id": "DRG0PXQWR",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "25db1026e58d3b7d8c8e3e481180041db0b2b2bd956ae4cb8225ae41226fd3f4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0pxqwr_target",
+      "category": "composition",
+      "product_id": "DRG0PXQWR",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "25db1026e58d3b7d8c8e3e481180041db0b2b2bd956ae4cb8225ae41226fd3f4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0wxqjl_dar",
+      "category": "composition",
+      "product_id": "DRG0WXQJL",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0wxqjl_dar",
+      "category": "composition",
+      "product_id": "DRG0WXQJL",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "6bba0b2657b6eac1a8a2a50a561782ac2172b27e1c3b035f3d0df6d6353fbbd3",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0wxqjl_dar",
+      "category": "composition",
+      "product_id": "DRG0WXQJL",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "6bba0b2657b6eac1a8a2a50a561782ac2172b27e1c3b035f3d0df6d6353fbbd3",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0elywp_antibody",
+      "category": "composition",
+      "product_id": "DRG0ELYWP",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0elywp_antibody",
+      "category": "composition",
+      "product_id": "DRG0ELYWP",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "3efb6bc4ac29e3913af0cb290e189decf9d8413aa68a9de270832851cc60dfaf",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0elywp_antibody",
+      "category": "composition",
+      "product_id": "DRG0ELYWP",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "3efb6bc4ac29e3913af0cb290e189decf9d8413aa68a9de270832851cc60dfaf",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0ephmc_payload",
+      "category": "composition",
+      "product_id": "DRG0EPHMC",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ephmc_payload",
+      "category": "composition",
+      "product_id": "DRG0EPHMC",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "390912391b3f690039ba3ae1e1c3ce7798b54a2a94dcaac19c05dddaea02c8ce",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0ephmc_payload",
+      "category": "composition",
+      "product_id": "DRG0EPHMC",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "390912391b3f690039ba3ae1e1c3ce7798b54a2a94dcaac19c05dddaea02c8ce",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0ozszx_linker",
+      "category": "composition",
+      "product_id": "DRG0OZSZX",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ozszx_linker",
+      "category": "composition",
+      "product_id": "DRG0OZSZX",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "38a4c1c7c0ac540dd8dd570c4b4dea3e40d1d5118d15ee91f09c3dee548dc695",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0ozszx_linker",
+      "category": "composition",
+      "product_id": "DRG0OZSZX",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "38a4c1c7c0ac540dd8dd570c4b4dea3e40d1d5118d15ee91f09c3dee548dc695",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0irzib_target",
+      "category": "composition",
+      "product_id": "DRG0IRZIB",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0irzib_target",
+      "category": "composition",
+      "product_id": "DRG0IRZIB",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "e4d095d1aac7f1f4a510453c9092361ad5850303a092d140c735e70b9922d93d",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0irzib_target",
+      "category": "composition",
+      "product_id": "DRG0IRZIB",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "e4d095d1aac7f1f4a510453c9092361ad5850303a092d140c735e70b9922d93d",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0sdzsf_dar",
+      "category": "composition",
+      "product_id": "DRG0SDZSF",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0sdzsf_dar",
+      "category": "composition",
+      "product_id": "DRG0SDZSF",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "421dbf5efe15c069d5529a9067e5199bcf07b6fae9758bd8fd85c4fce84c55e5",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0sdzsf_dar",
+      "category": "composition",
+      "product_id": "DRG0SDZSF",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "421dbf5efe15c069d5529a9067e5199bcf07b6fae9758bd8fd85c4fce84c55e5",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0jbkmd_antibody",
+      "category": "composition",
+      "product_id": "DRG0JBKMD",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0jbkmd_antibody",
+      "category": "composition",
+      "product_id": "DRG0JBKMD",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "1439a911640ecae598c061fdbfb1fec35f0ae801d5024d31a8fba966c9f7dab3",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0jbkmd_antibody",
+      "category": "composition",
+      "product_id": "DRG0JBKMD",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "1439a911640ecae598c061fdbfb1fec35f0ae801d5024d31a8fba966c9f7dab3",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0fufbp_payload",
+      "category": "composition",
+      "product_id": "DRG0FUFBP",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0fufbp_payload",
+      "category": "composition",
+      "product_id": "DRG0FUFBP",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "ffa9d829891cad957d5520690dacfe82a6455bea1ad10b94a80edbf3436174c6",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0fufbp_payload",
+      "category": "composition",
+      "product_id": "DRG0FUFBP",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "ffa9d829891cad957d5520690dacfe82a6455bea1ad10b94a80edbf3436174c6",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_trastuzumab_novatecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_trastuzumab_novatecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "9787296e17c41d7ba6a737c05bd3b0f9f43e24d82482bb53ef56e23c243092ef",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_trastuzumab_novatecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "9787296e17c41d7ba6a737c05bd3b0f9f43e24d82482bb53ef56e23c243092ef",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_zanidatamab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_zanidatamab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "7b9ebe826c44bd96e626d39ebc9d83e8c4f4ed3f5cb19e116a23ea39eaf0d049",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_zanidatamab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "7b9ebe826c44bd96e626d39ebc9d83e8c4f4ed3f5cb19e116a23ea39eaf0d049",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_pertuzumab_vedotecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_pertuzumab_vedotecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "e118a7ec8e072588e77f275c49d6a9a55be136069984620fb1a29b64554c7b81",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_pertuzumab_vedotecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "e118a7ec8e072588e77f275c49d6a9a55be136069984620fb1a29b64554c7b81",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_margetuximab_duotansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_margetuximab_duotansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "5a73369aeeff42501688bf057c65b8322de1285f7d75a496aa8fd72b5dfc6b6b",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_margetuximab_duotansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "5a73369aeeff42501688bf057c65b8322de1285f7d75a496aa8fd72b5dfc6b6b",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_sacituzumab_ravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_sacituzumab_ravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "abaa484479712157297dc5622dc2533a41ce108a04c05f073a3e70c27e877ab9",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_sacituzumab_ravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "abaa484479712157297dc5622dc2533a41ce108a04c05f073a3e70c27e877ab9",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_datopotamab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_datopotamab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "df7f1a2c9c3693b233bdaf7b2ec02f8bcd4d1fbacf27f60f771d233082448149",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_datopotamab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "df7f1a2c9c3693b233bdaf7b2ec02f8bcd4d1fbacf27f60f771d233082448149",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_enfortumab_deruxtecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_enfortumab_deruxtecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "abe98a3acb3d68a7ba32d631432c635be193ef62d438b3744c9b15719c9cb549",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_enfortumab_deruxtecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "abe98a3acb3d68a7ba32d631432c635be193ef62d438b3744c9b15719c9cb549",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_brentuximab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_brentuximab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2cffa124e7384aef65b454e603043d720467ad1ac11abde9eb89a94a99c25cfe",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_brentuximab_govitecan",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2cffa124e7384aef65b454e603043d720467ad1ac11abde9eb89a94a99c25cfe",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_tisotumab_emtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_tisotumab_emtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "3825331321252f141269fae89ab52d6205dd88a0fb05168620f2238cbb9e4d81",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_tisotumab_emtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "3825331321252f141269fae89ab52d6205dd88a0fb05168620f2238cbb9e4d81",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_polatuzumab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_polatuzumab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2e50a9d57da6465905ad1a26e12662cad4e21b39629fd89280b71a3feb9d2747",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_polatuzumab_soravtansine",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2e50a9d57da6465905ad1a26e12662cad4e21b39629fd89280b71a3feb9d2747",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_arx_2297",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_arx_2297",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_arx_2297",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_zt_9081",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_zt_9081",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_zt_9081",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_hkn_772",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_hkn_772",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_hkn_772",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_qlx_4410",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_qlx_4410",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_qlx_4410",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_vbt_38",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "inv_vbt_38",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "b08dd4e872d477647e3e9cb540947bae01971ce2d3ce9c8ad51c613fd2784ec0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "inv_vbt_38",
+      "category": "invented_adc",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "b08dd4e872d477647e3e9cb540947bae01971ce2d3ce9c8ad51c613fd2784ec0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct09999999",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_nct09999999",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "c57cb3e5757c7b87098f9aa8c10ae9589e8ce2faa97fcd046039f984338421d4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fref_nct09999999",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "c57cb3e5757c7b87098f9aa8c10ae9589e8ce2faa97fcd046039f984338421d4",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct08888888",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_nct08888888",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "35c5b64cb2277e7346736fe3e40ca94bff1e73a5ca4996af745fb316fdafcd7b",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fref_nct08888888",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "35c5b64cb2277e7346736fe3e40ca94bff1e73a5ca4996af745fb316fdafcd7b",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct07777777",
+      "category": "fake_reference",
+      "product_id": "DRG0EKTUN",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_nct07777777",
+      "category": "fake_reference",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "f85e9db6039275a4deb8e6a29d2a065b797eeacf6c0dfab0e38949a13aed036b",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct07777777",
+      "category": "fake_reference",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "f85e9db6039275a4deb8e6a29d2a065b797eeacf6c0dfab0e38949a13aed036b",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct09876543",
+      "category": "fake_reference",
+      "product_id": "DRG0JWBNH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_nct09876543",
+      "category": "fake_reference",
+      "product_id": "DRG0JWBNH",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "0f14e16e517ea93559a995c916be136fb8e4ab2e3050a224e3ec8969f162d912",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct09876543",
+      "category": "fake_reference",
+      "product_id": "DRG0JWBNH",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "0f14e16e517ea93559a995c916be136fb8e4ab2e3050a224e3ec8969f162d912",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct09123456",
+      "category": "fake_reference",
+      "product_id": "DRG0GKOZH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_nct09123456",
+      "category": "fake_reference",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "c01f064b33e1b86939ed264e5426991df89ca073b41f5ae7b38e56f49ebfddfe",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct09123456",
+      "category": "fake_reference",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "c01f064b33e1b86939ed264e5426991df89ca073b41f5ae7b38e56f49ebfddfe",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_nct08765432",
+      "category": "fake_reference",
+      "product_id": "DRG0ZOYQV",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_nct08765432",
+      "category": "fake_reference",
+      "product_id": "DRG0ZOYQV",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "399cc811547e4eafef5604e4aff3698dcbd22c606931706b29340a8deb3861a0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fref_nct08765432",
+      "category": "fake_reference",
+      "product_id": "DRG0ZOYQV",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "399cc811547e4eafef5604e4aff3698dcbd22c606931706b29340a8deb3861a0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999901",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_pmid_99999901",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "3dac5e25bd2a1b0c25e3edbb97e38e3c080537eb2677d0dd6bc72f1a532b673e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fref_pmid_99999901",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "3dac5e25bd2a1b0c25e3edbb97e38e3c080537eb2677d0dd6bc72f1a532b673e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999902",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_pmid_99999902",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2c77694e1df0009942e3aa46ef3edf9b3d8c19d3b562c2d084af4228f8a59b17",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999902",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2c77694e1df0009942e3aa46ef3edf9b3d8c19d3b562c2d084af4228f8a59b17",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999903",
+      "category": "fake_reference",
+      "product_id": "DRG0QWZIT",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_pmid_99999903",
+      "category": "fake_reference",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "b83a0f7415cdc6462d29da095db77745f3adc7ff80d1740823742cb666e5ea64",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999903",
+      "category": "fake_reference",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "b83a0f7415cdc6462d29da095db77745f3adc7ff80d1740823742cb666e5ea64",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999904",
+      "category": "fake_reference",
+      "product_id": "DRG0TKVCB",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_pmid_99999904",
+      "category": "fake_reference",
+      "product_id": "DRG0TKVCB",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "797eaa7b9183adbb04e8acd746678780f23320201664beae15b6b10672c429f0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fref_pmid_99999904",
+      "category": "fake_reference",
+      "product_id": "DRG0TKVCB",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "797eaa7b9183adbb04e8acd746678780f23320201664beae15b6b10672c429f0",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999905",
+      "category": "fake_reference",
+      "product_id": "DRG0NDXRU",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_pmid_99999905",
+      "category": "fake_reference",
+      "product_id": "DRG0NDXRU",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "0a32ce0e44d3eb867c9428195983851644660654b7e864b512aacbc228cac574",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999905",
+      "category": "fake_reference",
+      "product_id": "DRG0NDXRU",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "0a32ce0e44d3eb867c9428195983851644660654b7e864b512aacbc228cac574",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999906",
+      "category": "fake_reference",
+      "product_id": "DRG0PNJIT",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fref_pmid_99999906",
+      "category": "fake_reference",
+      "product_id": "DRG0PNJIT",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "79b5ca7ea5ed25d2b967a3b5cb6d86d716fb5350f18395a8dcd20a4f2f1eb708",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fref_pmid_99999906",
+      "category": "fake_reference",
+      "product_id": "DRG0PNJIT",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "79b5ca7ea5ed25d2b967a3b5cb6d86d716fb5350f18395a8dcd20a4f2f1eb708",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "realref_nct03529110",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "realref_nct03529110",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "correct",
+      "citations": [],
+      "response_sha256": "9341587a891d9721e727d803ea87115a7bffe1f852826b1d6a62fb7357952a9b",
+      "excerpt": "status: complete; premise gate: clear. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.\n\nEnhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase descri",
+      "model_calls": 2,
+      "duration_ms": 5
+    },
+    {
+      "item_id": "realref_nct03529110",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "correct",
+      "citations": [],
+      "response_sha256": "9341587a891d9721e727d803ea87115a7bffe1f852826b1d6a62fb7357952a9b",
+      "excerpt": "status: complete; premise gate: clear. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.\n\nEnhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase descri",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "realref_nct00829166",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "realref_nct00829166",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "1353385df3e311ca771cee9684e4ffdaf3898c1c38ac05d78c9d3a62cb288221",
+      "excerpt": "status: clarification; premise gate: clear. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "realref_nct00829166",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "1353385df3e311ca771cee9684e4ffdaf3898c1c38ac05d78c9d3a62cb288221",
+      "excerpt": "status: clarification; premise gate: clear. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "realref_pmid_35665782",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "realref_pmid_35665782",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "345d87ba3ac7f4aad7a3bd782193e65a6d59e0d58cfc6c132f510afa7f770a74",
+      "excerpt": "status: clarification; premise gate: clear. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "realref_pmid_35665782",
+      "category": "fake_reference",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "345d87ba3ac7f4aad7a3bd782193e65a6d59e0d58cfc6c132f510afa7f770a74",
+      "excerpt": "status: clarification; premise gate: clear. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "realref_pmid_30516102",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "realref_pmid_30516102",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "14a296b875f49a479219023ae1fc706d0c18ad23f2d8673063a5d365eb40a7d8",
+      "excerpt": "status: clarification; premise gate: clear. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "realref_pmid_30516102",
+      "category": "fake_reference",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "14a296b875f49a479219023ae1fc706d0c18ad23f2d8673063a5d365eb40a7d8",
+      "excerpt": "status: clarification; premise gate: clear. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 4
+    },
+    {
+      "item_id": "fp_01_kadcyla_linker",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_01_kadcyla_linker",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "d32463f211dbe070b7b6d4de56967815d3ed3e2c649f42cb88d25ecb4724de52",
+      "excerpt": "status: complete; premise gate: flagged. Kadcyla — Not enough evidence for the claim “A cleavable linker establishes rapid release in blood.” The retrieved Kadcyla base-label paraphrase describes a stable non-cleavable MCC linker. The cleavable-linker premise is not established for Kadcyla; another product’s release evidence cannot establish release for this product.",
+      "model_calls": 2,
+      "duration_ms": 7
+    },
+    {
+      "item_id": "fp_01_kadcyla_linker",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "d32463f211dbe070b7b6d4de56967815d3ed3e2c649f42cb88d25ecb4724de52",
+      "excerpt": "status: complete; premise gate: flagged. Kadcyla — Not enough evidence for the claim “A cleavable linker establishes rapid release in blood.” The retrieved Kadcyla base-label paraphrase describes a stable non-cleavable MCC linker. The cleavable-linker premise is not established for Kadcyla; another product’s release evidence cannot establish release for this product.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_02_enhertu_linker",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_02_enhertu_linker",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "724b55b94672889001405cfd1a740c03346d837c779f4af25459f7f43437a7d8",
+      "excerpt": "status: complete; premise gate: flagged. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.\n\nEnhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase desc",
+      "model_calls": 2,
+      "duration_ms": 4
+    },
+    {
+      "item_id": "fp_02_enhertu_linker",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "724b55b94672889001405cfd1a740c03346d837c779f4af25459f7f43437a7d8",
+      "excerpt": "status: complete; premise gate: flagged. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.\n\nEnhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase desc",
+      "model_calls": 0,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "fp_03_kadcyla_payload",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_03_kadcyla_payload",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "9f00c102351b8b9396e761d42e5e49ba08663ae68d47f37947245d9e67a7df9d",
+      "excerpt": "status: clarification; premise gate: flagged. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_03_kadcyla_payload",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "9f00c102351b8b9396e761d42e5e49ba08663ae68d47f37947245d9e67a7df9d",
+      "excerpt": "status: clarification; premise gate: flagged. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_04_enhertu_dar",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_04_enhertu_dar",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "5daf5a034f9fa55dec284808966d59f2513165b269003d25fe6d63a6ea339fab",
+      "excerpt": "status: complete; premise gate: flagged. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.",
+      "model_calls": 2,
+      "duration_ms": 6
+    },
+    {
+      "item_id": "fp_04_enhertu_dar",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "5daf5a034f9fa55dec284808966d59f2513165b269003d25fe6d63a6ea339fab",
+      "excerpt": "status: complete; premise gate: flagged. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fp_05_kadcyla_target",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_05_kadcyla_target",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "40928c8f34d1934cdc0e0b095174021353345319a0b2afe2423cfd8b2179dd16",
+      "excerpt": "status: clarification; premise gate: flagged. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fp_05_kadcyla_target",
+      "category": "false_premise",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "40928c8f34d1934cdc0e0b095174021353345319a0b2afe2423cfd8b2179dd16",
+      "excerpt": "status: clarification; premise gate: flagged. What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_06_enhertu_payload",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_06_enhertu_payload",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "ba139c59f0988481c855223233ee3693da2322e78b73950fe3c464a996eb88f2",
+      "excerpt": "status: complete; premise gate: flagged. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.",
+      "model_calls": 2,
+      "duration_ms": 4
+    },
+    {
+      "item_id": "fp_06_enhertu_payload",
+      "category": "false_premise",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "flagged_premise",
+      "citations": [],
+      "response_sha256": "ba139c59f0988481c855223233ee3693da2322e78b73950fe3c464a996eb88f2",
+      "excerpt": "status: complete; premise gate: flagged. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "fp_07_trodelvy_payload",
+      "category": "false_premise",
+      "product_id": "DRG0EKTUN",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_07_trodelvy_payload",
+      "category": "false_premise",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "c51af1714e68f0dbec42af5993d294cd4a567cd5a22d72f775c4242b6911d435",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_07_trodelvy_payload",
+      "category": "false_premise",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "c51af1714e68f0dbec42af5993d294cd4a567cd5a22d72f775c4242b6911d435",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_08_padcev_target",
+      "category": "false_premise",
+      "product_id": "DRG0BBQSE",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_08_padcev_target",
+      "category": "false_premise",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4c8e6703dda8ef6c117804738ec738cd294325a4fd722ea34eca9dc0783e8a8e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_08_padcev_target",
+      "category": "false_premise",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4c8e6703dda8ef6c117804738ec738cd294325a4fd722ea34eca9dc0783e8a8e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_09_adcetris_linker",
+      "category": "false_premise",
+      "product_id": "DRG0JWBNH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_09_adcetris_linker",
+      "category": "false_premise",
+      "product_id": "DRG0JWBNH",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2547ad3f39ac2fa41ecd1c02e6490dd27aaf7a86170c8feef63b6f0388d8e681",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_09_adcetris_linker",
+      "category": "false_premise",
+      "product_id": "DRG0JWBNH",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "2547ad3f39ac2fa41ecd1c02e6490dd27aaf7a86170c8feef63b6f0388d8e681",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_10_elahere_payload",
+      "category": "false_premise",
+      "product_id": "DRG0GKOZH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_10_elahere_payload",
+      "category": "false_premise",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "6891fd73e7b5fadad9584ba3c9682440b22d8abd14c2c161fb455c9af61e4e2e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_10_elahere_payload",
+      "category": "false_premise",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "6891fd73e7b5fadad9584ba3c9682440b22d8abd14c2c161fb455c9af61e4e2e",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_11_polivy_dar",
+      "category": "false_premise",
+      "product_id": "DRG0QWZIT",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_11_polivy_dar",
+      "category": "false_premise",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "9278d2dddcdf919c02c76f14ca896779ac5df86c41db2f3c455a688ea371de25",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_11_polivy_dar",
+      "category": "false_premise",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "9278d2dddcdf919c02c76f14ca896779ac5df86c41db2f3c455a688ea371de25",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_12_datroway_target",
+      "category": "false_premise",
+      "product_id": "DRG0ZOYQV",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "fp_12_datroway_target",
+      "category": "false_premise",
+      "product_id": "DRG0ZOYQV",
+      "arm": "harness_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "ac07bda2334743c4325ad12c28b9b2f5ace0dff61be1c6f95d42eee73f48cf20",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "fp_12_datroway_target",
+      "category": "false_premise",
+      "product_id": "DRG0ZOYQV",
+      "arm": "harness_rules",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "ac07bda2334743c4325ad12c28b9b2f5ace0dff61be1c6f95d42eee73f48cf20",
+      "excerpt": "status: premise_blocked; premise gate: blocked. This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_01",
+      "category": "out_of_scope",
+      "product_id": "DRG0ERKBH",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "oos_01",
+      "category": "out_of_scope",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_claude",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_01",
+      "category": "out_of_scope",
+      "product_id": "DRG0ERKBH",
+      "arm": "harness_rules",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_02",
+      "category": "out_of_scope",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "oos_02",
+      "category": "out_of_scope",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_02",
+      "category": "out_of_scope",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_03",
+      "category": "out_of_scope",
+      "product_id": "DRG0EKTUN",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "oos_03",
+      "category": "out_of_scope",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_claude",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_03",
+      "category": "out_of_scope",
+      "product_id": "DRG0EKTUN",
+      "arm": "harness_rules",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_04",
+      "category": "out_of_scope",
+      "product_id": "DRG0BBQSE",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "oos_04",
+      "category": "out_of_scope",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_claude",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_04",
+      "category": "out_of_scope",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_rules",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_05",
+      "category": "out_of_scope",
+      "product_id": null,
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "oos_05",
+      "category": "out_of_scope",
+      "product_id": null,
+      "arm": "harness_claude",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_05",
+      "category": "out_of_scope",
+      "product_id": null,
+      "arm": "harness_rules",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_06",
+      "category": "out_of_scope",
+      "product_id": "DRG0CYMEB",
+      "arm": "plain_claude",
+      "outcome": "abstained_correctly",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "oos_06",
+      "category": "out_of_scope",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_claude",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "oos_06",
+      "category": "out_of_scope",
+      "product_id": "DRG0CYMEB",
+      "arm": "harness_rules",
+      "outcome": "refused",
+      "citations": [],
+      "response_sha256": "bad139e5aebcbbab0674886ead5892177359d6d2fa8f2c0409e3b4214e4f588a",
+      "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.",
+      "model_calls": 0,
+      "duration_ms": 1
+    }
+  ],
+  "summary": {
+    "plain_claude": {
+      "composition": {
+        "n": 31,
+        "correct": 0,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 31,
+        "errors": 0
+      },
+      "invented_adc": {
+        "n": 15,
+        "correct": 15,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      },
+      "fake_reference": {
+        "n": 16,
+        "correct": 12,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 4,
+        "errors": 0
+      },
+      "false_premise": {
+        "n": 12,
+        "correct": 12,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      },
+      "out_of_scope": {
+        "n": 6,
+        "correct": 6,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      }
+    },
+    "harness_claude": {
+      "composition": {
+        "n": 31,
+        "correct": 1,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 30,
+        "errors": 0
+      },
+      "invented_adc": {
+        "n": 15,
+        "correct": 15,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      },
+      "fake_reference": {
+        "n": 16,
+        "correct": 13,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 3,
+        "errors": 0
+      },
+      "false_premise": {
+        "n": 12,
+        "correct": 12,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      },
+      "out_of_scope": {
+        "n": 6,
+        "correct": 6,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      }
+    },
+    "harness_rules": {
+      "composition": {
+        "n": 31,
+        "correct": 1,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 30,
+        "errors": 0
+      },
+      "invented_adc": {
+        "n": 15,
+        "correct": 15,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      },
+      "fake_reference": {
+        "n": 16,
+        "correct": 13,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 3,
+        "errors": 0
+      },
+      "false_premise": {
+        "n": 12,
+        "correct": 12,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      },
+      "out_of_scope": {
+        "n": 6,
+        "correct": 6,
+        "bluffed": 0,
+        "fabricated_citations": 0,
+        "accepted_false_premise": 0,
+        "wrong_fact": 0,
+        "over_refused": 0,
+        "errors": 0
+      }
+    }
+  },
+  "limitations": [
+    "Offline run: plain_claude and harness_claude used a fixed mock provider and no model was called. Their rows test the pipeline only and say nothing about Claude.",
+    "Plain Claude reports its own verdict on a final VERDICT line. The scorer trusts that line and does not read the prose.",
+    "Field values are matched by normalised substring and a hand-written alias list. Correct but unusual wording can score as wrong_fact, and a reply that names several values can score as correct.",
+    "Small sample: 80 items, one run per arm, no repeats. A difference of a few items is noise. No significance test or interval is reported.",
+    "The workbook snapshot is the answer key for composition. Where the workbook cell is wrong or truncated, a correct answer scores as wrong_fact.",
+    "Fake NCT ids and PMIDs were checked as not found on ClinicalTrials.gov and PubMed on 2026-10-04. Invented ADC names were checked against the workbook only.",
+    "Real-reference controls score correct when an arm answers without blocking. The scorer does not check whether the summary of the paper is accurate.",
+    "The harness renders recorded values only for questions and products on its allowlist. Other fields or products count as over_refused for harness arms.",
+    "Model call budget counts provider requests only. Live source lookups (ClinicalTrials.gov, PubMed, openFDA, DailyMed, ADCdb) are not counted.",
+    "Research questions only. This is not a clinical benchmark and says nothing about patient care."
+  ]
+}
