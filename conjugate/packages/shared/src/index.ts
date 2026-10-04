@@ -1,5 +1,6 @@
 export * from './chat.js';
 export * from './chat-intent.js';
+export * from './premise.js';
 export * from './team.js';
 export * from './models.js';
 export * from './inference.js';

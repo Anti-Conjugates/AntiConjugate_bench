@@ -1,4 +1,5 @@
 import { chatScopeKey, type ChatRequest, type ChatScope } from './chat.js';
+import { maskPremiseReferences } from './premise.js';
 
 const PRODUCT_TERMS = { DRG0CYMEB: ['kadcyla', 'emtansine', 'tdm1', 't-dm1'], DRG0ERKBH: ['enhertu', 'deruxtecan', 'tdxd', 't-dxd'] } as const;
 const TERMS = new Set(('compare comparison same different both two what why how does do is are can cannot not no yes it they them that this and or with without only all sources source label labels workbook data evidence restore remove withhold again explain made composition target payload dar ratio linker cleavable release blood circulation risk transfer toxicity safety identity fda openfda name names works mechanism dm1 dxd her2').split(' '));
@@ -13,7 +14,7 @@ export function chatConversationContext(requests: readonly ChatRequest[]): ChatS
 }
 
 export function chatIntent(request: ChatRequest): ChatIntent {
-  const text = request.message.toLowerCase().replaceAll('’', "'").replace(/\bdon'?t\b/g, 'do not');
+  const text = maskPremiseReferences(request.message).toLowerCase().replaceAll('’', "'").replace(/\bdon'?t\b/g, 'do not');
   const words = text.match(/[a-z0-9-]+/g) ?? [];
   const recognized_terms = words.flatMap(word => {
     for (const [id, aliases] of Object.entries(PRODUCT_TERMS)) if ((aliases as readonly string[]).includes(word) || word === id.toLowerCase()) return [id];
@@ -21,7 +22,9 @@ export function chatIntent(request: ChatRequest): ChatIntent {
   });
   const result: ChatIntent = { status: 'ready', recognized_terms, scopes: [], action: 'check' };
   // This scope guard is not a PHI detector. Unknown text is never sent to the provider.
-  if (/\b(patient|dose|dosing|dosage|prescrib\w*|eligible|eligibility|recommend\w*|treat\w*|safer|safest|medication|symptoms?|my|mother|father|wife|husband|aged|years? old|ehr|mrn)\b/.test(text) || /@|https?:|\b\d{3,}\b|sk-ant-|hf_/.test(text)) { result.status = 'outside_scope'; return result; }
+  // References are masked first so NCT/PMID/author-year ids reach the premise gate instead of the digit guard.
+  if (/\b(patient|doses?|dosing|dosage|prescrib\w*|eligible|eligibility|recommend\w*|treat\w*|(?:un)?safe(?:ly|r|st)?|medication|symptoms?|my|mother|father|wife|husband|aged|years? old|ehr|mrn|platelets?|neutrophils?|anc|lvef|ejection fraction|creatinine|bilirubin|mg|mg\/kg|kg)\b/.test(text)
+    || /\beGFR\b/.test(request.message) || /\begfr\s*(?:of|is|was|at|below|under|above|<|>|=|:)?\s*\d/i.test(request.message) || /@|https?:|\b\d{3,}\b|sk-ant-|hf_/.test(text)) { result.status = 'outside_scope'; return result; }
   const has = (...terms: string[]) => recognized_terms.some(term => terms.includes(term));
   const comparing = has('compare', 'comparison', 'same', 'different', 'both', 'two');
   const products = [...new Set(recognized_terms.filter((term): term is ChatScope['product_id'] => term === 'DRG0CYMEB' || term === 'DRG0ERKBH'))];
