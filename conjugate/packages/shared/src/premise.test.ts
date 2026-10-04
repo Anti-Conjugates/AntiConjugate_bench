@@ -74,9 +74,17 @@ test('an invented ADC code name is unverifiable, but payload and product codes a
   assert.ok(!checks('Is Trodelvy an SN-38 ADC?').includes('invented_code'));
   assert.ok(!checks('Is T-DM1 an ADC?').includes('invented_code'));
 });
-test('a real snapshot ADC outside the allowlist is unsupported, not invented', () => {
-  const report = expectGate('Compare Enhertu with Datroway.', 'blocked', ['unsupported_product']);
-  assert.equal(report.findings[0]!.kind, 'unsupported_product'); assert.match(report.findings[0]!.text, /Datroway/);
+test('every workbook ADC is in scope and contradicted only from its own workbook cells', () => {
+  expectGate('Compare Enhertu with Datroway.', 'clear');
+  const payload = expectGate('Trodelvy carries MMAE.', 'flagged', ['contradicted_payload']);
+  assert.deepEqual(payload.findings[0]!.evidence_ids, ['WORKBOOK-DRG0EKTUN-COMPOSITION']);
+  expectGate('Padcev targets HER2.', 'flagged', ['contradicted_target']);
+  expectGate('Trodelvy has no toxicity risk.', 'clear');
+});
+test('a real snapshot ADC outside a narrower allowlist is unsupported, not invented', () => {
+  const narrow = { ...facts, allowlisted: facts.allowlisted.filter(id => id === 'DRG0CYMEB' || id === 'DRG0ERKBH') };
+  const report = premiseGate('Compare Enhertu with Datroway.', narrow);
+  assert.equal(report.decision, 'blocked'); assert.equal(report.findings[0]!.kind, 'unsupported_product'); assert.match(report.findings[0]!.text, /Datroway/);
 });
 test('an antibody-payload pairing with no row is an unverifiable construct and outranks the contradiction', () => {
   const report = expectGate('Is trastuzumab-MMAE called Enhertu?', 'blocked', ['unverifiable_construct', 'contradicted_payload']);
@@ -120,7 +128,7 @@ test('facts come from the workbook snapshot only', () => {
   const kadcyla = facts.rows.find(row => row.id === 'DRG0CYMEB')!; const enhertu = facts.rows.find(row => row.id === 'DRG0ERKBH')!;
   assert.equal(facts.rows.length, dataset.records.length); assert.equal(facts.dataset_sha256, dataset.sha256);
   assert.match(kadcyla.payload, /DM1/); assert.match(enhertu.payload, /DXd/); assert.match(kadcyla.target, /HER2/); assert.match(enhertu.target, /HER2/);
-  assert.deepEqual([...facts.allowlisted].sort(), ['DRG0CYMEB', 'DRG0ERKBH']);
+  assert.equal(facts.allowlisted.length, dataset.records.length);
 });
 test('patient lab values, doses and confidence wording are outside the gate and its text', () => {
   expectGate('Is Enhertu safe to use at platelets 40?', 'clear');

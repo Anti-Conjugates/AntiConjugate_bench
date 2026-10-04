@@ -1,3 +1,4 @@
+import * as productCatalog from '../packages/shared/src/products.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
@@ -46,14 +47,15 @@ export function compiledGate(disabled: readonly string[], special?: Special): Ga
   if ([...disabled, ...(special ? [special] : [])].some(id => hits.get(id) !== 1)) throw new Error('Mutant target did not match exactly once.');
   const js = ts.transpileModule(changed, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } }).outputText;
   const exports: { premiseGate?: Gate } = {};
-  const sandboxRequire = (id: string) => { if (id === 'zod') return require('zod'); throw new Error(`Unexpected import ${id}`); };
+  const sandboxRequire = (id: string) => { if (id === 'zod') return require('zod'); if (id === './products.js') return productCatalog; throw new Error(`Unexpected import ${id}`); };
   runInNewContext(js, { exports, require: sandboxRequire, TextEncoder }, { timeout: 1000 });
   if (!exports.premiseGate) throw new Error('Premise gate compilation failed.');
   return exports.premiseGate;
 }
 
 const RANK: Record<PremiseDecision, number> = { clear: 0, flagged: 1, blocked: 2 };
-const run = (gate: Gate, item: Pick<PremiseCase, 'message' | 'references'>) => gate(item.message, PREMISE_FACTS, item.references ? { references: item.references } : {});
+const factsFor = (allowlist?: readonly string[]) => allowlist ? { ...PREMISE_FACTS, allowlisted: PREMISE_FACTS.allowlisted.filter(id => allowlist.includes(id)) } : PREMISE_FACTS;
+const run = (gate: Gate, item: Pick<PremiseCase, 'message' | 'references' | 'allowlist'>) => gate(item.message, factsFor(item.allowlist), item.references ? { references: item.references } : {});
 const checksOf = (report: PremiseReport) => report.findings.map(finding => finding.check).sort();
 const same = (a: string[], b: string[]) => a.length === b.length && a.every((value, index) => value === b[index]);
 
@@ -71,7 +73,7 @@ export function runPremiseStudy() {
     const decisions = gates.map(variant => ({ name: variant.name, report: run(variant.gate, item) }));
     if (fingerprint(decisions[0]!.report) !== fingerprint(healthy)) compiledAgrees = false;
     const variantRows = variantsOf(item.message).map(variant => {
-      const report = run(premiseGate, { message: variant.message, ...(item.references ? { references: item.references } : {}) });
+      const report = run(premiseGate, { message: variant.message, ...(item.references ? { references: item.references } : {}), ...(item.allowlist ? { allowlist: item.allowlist } : {}) });
       return { variant: variant.id, message: variant.message, decision: report.decision, agrees: report.decision === healthy.decision && same(checksOf(report), checksOf(healthy)) };
     });
     return { case_id: item.id, family: item.family, kind: item.family === 'control' ? 'control' as const : 'fault' as const, message: item.message,

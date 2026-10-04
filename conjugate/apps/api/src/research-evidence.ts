@@ -1,10 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { isDeepStrictEqual } from 'node:util';
 import {
-  WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema,
+  WorkbookDatasetSchema, ResearchCatalogSchema, ResearchReceiptSchema, isLabelProduct, productLabel,
   type ResearchCatalog, type ResearchRequest, type ResearchReceipt, type ClaimAudit
 } from '@her2/shared';
-import { CLAUDE_MODEL, getProduct, productSources } from './evidence.js';
+import { CLAUDE_MODEL, productSources } from './evidence.js';
 import { openFdaReceipt } from './research-openfda.js';
 
 // Frozen local import, not network retrieval and not a clinical evidence feed.
@@ -21,12 +21,14 @@ export const QUESTIONS: ResearchCatalog['questions'] = [
 export type ToolId = 'read_workbook' | 'read_label' | 'read_derived' | 'read_openfda';
 export const CANONICAL_TOOLS: readonly ToolId[] = ['read_workbook', 'read_label', 'read_derived', 'read_openfda'];
 export function allowedTools(request: ResearchRequest): ToolId[] {
-  return request.evidence_policy === 'workbook_only' ? ['read_workbook'] : [...CANONICAL_TOOLS];
+  // Label and openFDA tools exist only for products with local label paraphrases and frozen openFDA records.
+  if (request.evidence_policy === 'workbook_only') return ['read_workbook'];
+  return isLabelProduct(request.product_id) ? [...CANONICAL_TOOLS] : ['read_workbook', 'read_derived'];
 }
 export function workbookSourceId(id: ResearchRequest['product_id']) { return `WORKBOOK-${id}-COMPOSITION`; }
 export function derivedSourceId(id: ResearchRequest['product_id']) { return `DERIVED-${id}-NOT-ADCDB`; }
 export function labelSourceId(id: ResearchRequest['product_id']) {
-  return id === 'DRG0ERKBH' ? 'UK-ENHERTU-SMPC' : 'UK-KADCYLA-SMPC';
+  return id === 'DRG0ERKBH' ? 'UK-ENHERTU-SMPC' : id === 'DRG0CYMEB' ? 'UK-KADCYLA-SMPC' : `NO-LOCAL-LABEL-${id}`;
 }
 export function researchCatalog(configured: boolean): ResearchCatalog {
   // Catalog raw data is a composition-only projection; uploaded PK/dose/clinical
@@ -50,10 +52,11 @@ export function readResearchTool(tool: ToolId, request: ResearchRequest): Resear
   return trustedReceipts(tool, request);
 }
 function trustedReceipts(tool: ToolId, request: ResearchRequest): ResearchReceipt[] {
-  const product = getProduct(request.product_id)!;
+  const brand = productLabel(request.product_id);
+  if (!isLabelProduct(request.product_id) && (tool === 'read_openfda' || tool === 'read_label')) return [];
   if (tool === 'read_openfda') return [openFdaReceipt(request)];
   if (tool === 'read_label') {
-    const source = productSources(request.product_id).find(item => item.id === labelSourceId(request.product_id));
+    const source = (isLabelProduct(request.product_id) ? productSources(request.product_id) : []).find(item => item.id === labelSourceId(request.product_id));
     if (!source) return [];
     return [ResearchReceiptSchema.parse({
       id: source.id, product_id: request.product_id, kind: 'label', title: source.title,
@@ -69,7 +72,7 @@ function trustedReceipts(tool: ToolId, request: ResearchRequest): ResearchReceip
     const cells = record.cells.filter(cell => derivedFields.has(cell.field));
     return [ResearchReceiptSchema.parse({
       id: derivedSourceId(request.product_id), product_id: request.product_id, kind: 'derived',
-      title: `${product.brand} author-derived workbook notes — NOT ADCdb`, url: null,
+      title: `${brand} author-derived workbook notes — NOT ADCdb`, url: null,
       section: `Derived_NOT_ADCdb; row ${record.row}; cells ${cells.map(cell => cell.cell).join(', ')}; SHA-256 ${snapshot.sha256}`,
       revision_date: null, excerpt: JSON.stringify(cells), provenance: 'derived_not_adcdb', eligible_for_claim: false,
       limitations: [snapshot.derived_notice, 'Ineligible as primary clinical or claim evidence; author-derived material is not an approved label.', 'Import time is not an evidence revision date.']
@@ -81,7 +84,7 @@ function trustedReceipts(tool: ToolId, request: ResearchRequest): ResearchReceip
   const complete = ['ADCdb_ID', 'Payload', 'DAR'].every(field => cells.some(cell => cell.field === field && cell.value !== null));
   return [ResearchReceiptSchema.parse({
     id: workbookSourceId(request.product_id), product_id: request.product_id, kind: 'workbook',
-    title: `${product.brand} raw workbook composition cells (unverified local snapshot)`, url: null,
+    title: `${brand} raw workbook composition cells (unverified local snapshot)`, url: null,
     section: `Raw worksheet (original sheet name not retained in snapshot); row ${record.row}; cells ${cells.map(cell => cell.cell).join(', ')}; SHA-256 ${snapshot.sha256}`,
     revision_date: null, excerpt: JSON.stringify(cells), provenance: 'user_uploaded_unverified',
     eligible_for_claim: request.question_id === 'composition' && complete,
@@ -124,12 +127,15 @@ export function expectedClaim(request: ResearchRequest, receipts: ResearchReceip
     const cells = receipt && receiptIntegrity(receipt, request) ? snapshot.records.find(item => item.id === request.product_id)?.cells : undefined;
     const payload = cells?.find(cell => cell.field === 'Payload')?.value;
     const dar = cells?.find(cell => cell.field === 'DAR')?.value;
-    const expectedPayload = request.product_id === 'DRG0CYMEB' ? 'DM1' : 'DXd';
-    const expectedDar = request.product_id === 'DRG0CYMEB' ? '3.5' : '8';
-    const concordant = workbook && payload === expectedPayload && dar === expectedDar;
+    // Kadcyla and Enhertu are cross-checked against their label paraphrases; other rows are transcribed only when both cells are present.
+    const labelled = request.product_id === 'DRG0CYMEB' ? { payload: 'DM1', dar: '3.5' } : request.product_id === 'DRG0ERKBH' ? { payload: 'DXd', dar: '8' } : null;
+    const present = (value: string | null | undefined): value is string => Boolean(value && value.trim() && value !== 'None');
+    const expectedPayload = labelled?.payload ?? (present(payload) ? payload : '');
+    const expectedDar = labelled?.dar ?? (present(dar) ? dar : '');
+    const concordant = workbook && present(payload) && present(dar) && payload === expectedPayload && dar === expectedDar;
     const sources = [...(concordant ? [workbookSourceId(request.product_id)] : []), ...(label ? [labelSourceId(request.product_id)] : [])];
     return { id: 'composition',
-      statement: concordant ? `The workbook records payload ${expectedPayload} and DAR ${expectedDar}.` : label ? `The local pending-review label summary records payload ${expectedPayload} and ${request.product_id === 'DRG0CYMEB' ? 'mean' : 'approximate'} DAR ${expectedDar}.` : 'Recorded payload and DAR can be established from the available composition evidence.',
+      statement: concordant ? `The workbook records payload ${expectedPayload} and DAR ${expectedDar}.` : label && labelled ? `The local pending-review label summary records payload ${expectedPayload} and ${request.product_id === 'DRG0CYMEB' ? 'mean' : 'approximate'} DAR ${expectedDar}.` : 'Recorded payload and DAR can be established from the available composition evidence.',
       source_ids: sources, verdict: sources.length ? 'supported' : 'insufficient',
       explanation: concordant ? (label ? 'Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.' : 'Supported only as a transcription of the retrieved unverified workbook composition cells; labels were not used.') : label ? 'Only retrieved local label metadata supports this bounded structural record; no workbook concordance is established.' : 'No eligible complete composition record was retrieved. No values are inferred.',
       limitation: `Mean/approximate DAR is not a fixed count on each molecule. Composition records do not verify clinical safety or efficacy. ${common}` };

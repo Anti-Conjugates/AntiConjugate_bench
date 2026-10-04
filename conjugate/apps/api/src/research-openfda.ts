@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { OpenFdaSnapshotSchema, ResearchReceiptSchema, type ResearchRequest, type ResearchReceipt } from '@her2/shared';
+import { OpenFdaSnapshotSchema, ResearchReceiptSchema, isLabelProduct, type ResearchRequest, type ResearchReceipt } from '@her2/shared';
 
 const identities = {
   DRG0CYMEB: { brand: 'KADCYLA', generic: 'ADO-TRASTUZUMAB EMTANSINE', application: 'BLA125427' },
@@ -9,7 +9,8 @@ export function validateOpenFdaSnapshot(value: unknown) {
  const snapshot = OpenFdaSnapshotSchema.parse(value);
  if (new Set(snapshot.records.map(record => record.product_id)).size !== 2) throw new Error('Duplicate openFDA snapshot product.');
  for (const record of snapshot.records) {
-  const expected = identities[record.product_id];
+  const expected = isLabelProduct(record.product_id) ? identities[record.product_id] : undefined;
+  if (!expected) throw new Error('openFDA snapshot product has no frozen identity.');
   if (record.brand_name.length !== 1 || record.brand_name[0] !== expected.brand
     || record.generic_name.length !== 1 || record.generic_name[0] !== expected.generic
     || record.application_number.length !== 1 || record.application_number[0] !== expected.application) throw new Error('openFDA snapshot identity mismatch.');

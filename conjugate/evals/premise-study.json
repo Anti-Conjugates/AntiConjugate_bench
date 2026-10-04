@@ -1,10 +1,10 @@
 {
   "kind": "developer_authored_premise_gate_sensitivity_not_clinical",
-  "generated_at": "2026-10-04T11:42:06.513Z",
+  "generated_at": "2026-10-04T12:08:32.080Z",
   "manifest": {
-    "code_sha256": "6d2b3be145c67eda845c4fed3b7233fc8d60e89b52f7fae32bb7f6c107d7352e",
+    "code_sha256": "7876d214848dd3f2054c350143a72d701cc45508d7a1d359f6ad890514bf7daa",
     "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
-    "evaluation_sha256": "0e78042e3f6c7ccaf5f789dee4796f6fc02565b441d862a7932ab8879e22bb96",
+    "evaluation_sha256": "e2dffe2e83ad47cb292087f6a8d39c44f8333e0334547283e348a8461955035c",
     "design_sha256": "3b8b35fac4f0a74337b902b57489f6bf611d0ec282efb952cc38657ed31915ba",
     "lockfile_sha256": "9614439f2541879fbdaab99406c8b7e79c09f062056e3e21aeb00ba6ef161f3a",
     "node": "v24.21.0",
@@ -15,8 +15,8 @@
     ],
     "scopes": 20
   },
-  "gate_function_sha256": "79d5cad86894cc582f214089d111dc4af5654f40744687191ef1c393bb0b0fd8",
-  "facts_sha256": "4460aa9fd7e32380da6ecb9b0760e118e52aa4d62c8db111217ead5e5f0a28d5",
+  "gate_function_sha256": "004f1f3dd392325bcdd95d3936052e3af9949faa19a663e92af2d46ef5c190e2",
+  "facts_sha256": "fdd07343b959775bdd2a7275e0485f30c308741a75fd7dd2202401bef9bdb2ca",
   "attribution": {
     "repository": "https://github.com/Anti-Conjugates/adc-guardrail",
     "commit": "5ac1c1a",
@@ -49,15 +49,15 @@
           "limitation": "Compared with the user-uploaded workbook snapshot and draft UK label paraphrases pending pharmacist review. A match or mismatch is a table comparison, not a scientific or clinical ruling."
         }
       ],
-      "facts_sha256": "4460aa9fd7e32380da6ecb9b0760e118e52aa4d62c8db111217ead5e5f0a28d5"
+      "facts_sha256": "fdd07343b959775bdd2a7275e0485f30c308741a75fd7dd2202401bef9bdb2ca"
     }
   },
   "controls_cleared": 23,
   "control_count": 23,
-  "faults_as_expected": 40,
-  "fault_count": 40,
-  "variants_agree": 303,
-  "variant_count": 303,
+  "faults_as_expected": 44,
+  "fault_count": 44,
+  "variants_agree": 317,
+  "variant_count": 317,
   "mutants_detected": 16,
   "mutant_count": 16,
   "by_family": [
@@ -118,11 +118,18 @@
       "variants_agree": 8
     },
     {
+      "family": "workbook_product",
+      "cases": 5,
+      "as_expected": 5,
+      "variants": 17,
+      "variants_agree": 17
+    },
+    {
       "family": "unsupported_product",
-      "cases": 2,
-      "as_expected": 2,
-      "variants": 8,
-      "variants_agree": 8
+      "cases": 1,
+      "as_expected": 1,
+      "variants": 5,
+      "variants_agree": 5
     },
     {
       "family": "unverifiable_construct",
@@ -175,7 +182,7 @@
       ],
       "detected": true,
       "escaped_faults": 3,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -191,7 +198,7 @@
       ],
       "detected": true,
       "escaped_faults": 2,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -205,14 +212,12 @@
         "unsupported_product"
       ],
       "detected": true,
-      "escaped_faults": 3,
-      "faults": 39,
+      "escaped_faults": 1,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
-        "unsupported_product.datroway",
-        "unsupported_product.trodelvy",
-        "precedence.unsupported_no_risk"
+        "unsupported_product.narrow_allowlist"
       ]
     },
     {
@@ -222,7 +227,7 @@
       ],
       "detected": true,
       "escaped_faults": 2,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -237,7 +242,7 @@
       ],
       "detected": true,
       "escaped_faults": 5,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -253,7 +258,7 @@
       ],
       "detected": true,
       "escaped_faults": 2,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -268,7 +273,7 @@
       ],
       "detected": true,
       "escaped_faults": 3,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -283,8 +288,8 @@
         "contradicted_payload"
       ],
       "detected": true,
-      "escaped_faults": 5,
-      "faults": 39,
+      "escaped_faults": 6,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -299,8 +304,8 @@
         "contradicted_target"
       ],
       "detected": true,
-      "escaped_faults": 3,
-      "faults": 39,
+      "escaped_faults": 4,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -316,7 +321,7 @@
       ],
       "detected": true,
       "escaped_faults": 3,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -332,7 +337,7 @@
       ],
       "detected": true,
       "escaped_faults": 4,
-      "faults": 39,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -347,8 +352,8 @@
         "contradicted_no_risk"
       ],
       "detected": true,
-      "escaped_faults": 4,
-      "faults": 39,
+      "escaped_faults": 5,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -367,8 +372,8 @@
         "contradicted_no_risk"
       ],
       "detected": true,
-      "escaped_faults": 19,
-      "faults": 39,
+      "escaped_faults": 22,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -389,8 +394,8 @@
         "author_year_reference"
       ],
       "detected": true,
-      "escaped_faults": 20,
-      "faults": 39,
+      "escaped_faults": 18,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -403,8 +408,8 @@
       "name": "precedence_inverted",
       "disabled_checks": [],
       "detected": true,
-      "escaped_faults": 5,
-      "faults": 39,
+      "escaped_faults": 4,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -417,8 +422,8 @@
       "name": "always_clear",
       "disabled_checks": [],
       "detected": true,
-      "escaped_faults": 39,
-      "faults": 39,
+      "escaped_faults": 40,
+      "faults": 40,
       "controls_cleared": 23,
       "controls": 23,
       "examples": [
@@ -2540,7 +2545,195 @@
       ]
     },
     {
-      "case_id": "unsupported_product.datroway",
+      "case_id": "workbook_product.datroway",
+      "family": "workbook_product",
+      "kind": "fault",
+      "message": "Compare Enhertu with Datroway.",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "alias",
+          "message": "Compare T-DXd with Datroway.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "brand_upper",
+          "message": "Compare ENHERTU with Datroway.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "prefix",
+          "message": "Please check this: Compare Enhertu with Datroway.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Compare  Enhertu  with  Datroway.",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Compare Enhertu with Datroway?",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "workbook_product.trodelvy",
+      "family": "workbook_product",
+      "kind": "fault",
+      "message": "What is Trodelvy made of?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: What is Trodelvy made of?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "What  is  Trodelvy  made  of?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "What is Trodelvy made of.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "workbook_product.datopotamab_inn",
+      "family": "workbook_product",
+      "kind": "fault",
+      "message": "What payload does datopotamab deruxtecan carry?",
+      "expected_decision": "clear",
+      "decision": "clear",
+      "expected_checks": [],
+      "checks": [],
+      "as_expected": true,
+      "weakened_by": [],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: What payload does datopotamab deruxtecan carry?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "What  payload  does  datopotamab  deruxtecan  carry?",
+          "decision": "clear",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "What payload does datopotamab deruxtecan carry.",
+          "decision": "clear",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "workbook_product.trodelvy_payload",
+      "family": "workbook_product",
+      "kind": "fault",
+      "message": "Trodelvy carries MMAE.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_payload"
+      ],
+      "checks": [
+        "contradicted_payload"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_payload",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: Trodelvy carries MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Trodelvy  carries  MMAE.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Trodelvy carries MMAE?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "workbook_product.padcev_target",
+      "family": "workbook_product",
+      "kind": "fault",
+      "message": "Padcev targets HER2.",
+      "expected_decision": "flagged",
+      "decision": "flagged",
+      "expected_checks": [
+        "contradicted_target"
+      ],
+      "checks": [
+        "contradicted_target"
+      ],
+      "as_expected": true,
+      "weakened_by": [
+        "contradicted_target",
+        "contradiction_checks_removed",
+        "always_clear"
+      ],
+      "variants": [
+        {
+          "variant": "prefix",
+          "message": "Please check this: Padcev targets HER2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "whitespace",
+          "message": "Padcev  targets  HER2.",
+          "decision": "flagged",
+          "agrees": true
+        },
+        {
+          "variant": "terminal",
+          "message": "Padcev targets HER2?",
+          "decision": "flagged",
+          "agrees": true
+        }
+      ]
+    },
+    {
+      "case_id": "unsupported_product.narrow_allowlist",
       "family": "unsupported_product",
       "kind": "fault",
       "message": "Compare Enhertu with Datroway.",
@@ -2586,46 +2779,6 @@
         {
           "variant": "terminal",
           "message": "Compare Enhertu with Datroway?",
-          "decision": "blocked",
-          "agrees": true
-        }
-      ]
-    },
-    {
-      "case_id": "unsupported_product.trodelvy",
-      "family": "unsupported_product",
-      "kind": "fault",
-      "message": "What is Trodelvy made of?",
-      "expected_decision": "blocked",
-      "decision": "blocked",
-      "expected_checks": [
-        "unsupported_product"
-      ],
-      "checks": [
-        "unsupported_product"
-      ],
-      "as_expected": true,
-      "weakened_by": [
-        "unsupported_product",
-        "unverifiable_checks_removed",
-        "always_clear"
-      ],
-      "variants": [
-        {
-          "variant": "prefix",
-          "message": "Please check this: What is Trodelvy made of?",
-          "decision": "blocked",
-          "agrees": true
-        },
-        {
-          "variant": "whitespace",
-          "message": "What  is  Trodelvy  made  of?",
-          "decision": "blocked",
-          "agrees": true
-        },
-        {
-          "variant": "terminal",
-          "message": "What is Trodelvy made of.",
           "decision": "blocked",
           "agrees": true
         }
@@ -3410,56 +3563,53 @@
       ]
     },
     {
-      "case_id": "precedence.unsupported_no_risk",
+      "case_id": "precedence.workbook_no_risk",
       "family": "precedence",
       "kind": "fault",
       "message": "Compare Datroway. Enhertu has no ILD risk.",
-      "expected_decision": "blocked",
-      "decision": "blocked",
+      "expected_decision": "flagged",
+      "decision": "flagged",
       "expected_checks": [
-        "contradicted_no_risk",
-        "unsupported_product"
+        "contradicted_no_risk"
       ],
       "checks": [
-        "contradicted_no_risk",
-        "unsupported_product"
+        "contradicted_no_risk"
       ],
       "as_expected": true,
       "weakened_by": [
-        "unsupported_product",
-        "unverifiable_checks_removed",
-        "precedence_inverted",
+        "contradicted_no_risk",
+        "contradiction_checks_removed",
         "always_clear"
       ],
       "variants": [
         {
           "variant": "alias",
           "message": "Compare Datroway. T-DXd has no ILD risk.",
-          "decision": "blocked",
+          "decision": "flagged",
           "agrees": true
         },
         {
           "variant": "brand_upper",
           "message": "Compare Datroway. ENHERTU has no ILD risk.",
-          "decision": "blocked",
+          "decision": "flagged",
           "agrees": true
         },
         {
           "variant": "prefix",
           "message": "Please check this: Compare Datroway. Enhertu has no ILD risk.",
-          "decision": "blocked",
+          "decision": "flagged",
           "agrees": true
         },
         {
           "variant": "whitespace",
           "message": "Compare  Datroway.  Enhertu  has  no  ILD  risk.",
-          "decision": "blocked",
+          "decision": "flagged",
           "agrees": true
         },
         {
           "variant": "terminal",
           "message": "Compare Datroway. Enhertu has no ILD risk?",
-          "decision": "blocked",
+          "decision": "flagged",
           "agrees": true
         }
       ]

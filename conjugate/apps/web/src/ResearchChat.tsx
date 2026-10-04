@@ -14,7 +14,8 @@ import { TeamGraph as TeamGraphSvg } from './TeamGraph';
 const STARTERS = [
   { title: 'Compare the two ADCs', question: 'Compare Kadcyla and Enhertu composition.', note: 'Different payloads, different recorded ratios.' },
   { title: 'Check the linker claim', question: 'Does Enhertu’s cleavable linker establish release in blood?', note: 'Find counter-evidence, then withhold it.' },
-  { title: 'Find the evidence limit', question: 'Can the Enhertu workbook establish safety?', note: 'See what these records cannot establish.' }
+  { title: 'Find the evidence limit', question: 'Can the Enhertu workbook establish safety?', note: 'See what these records cannot establish.' },
+  { title: 'Go beyond HER2', question: 'What payload does Padcev carry?', note: 'Any of the 31 workbook ADCs; no label held locally.' }
 ];
 type Harness = 'single' | 'team';
 type TurnResult = ChatResult | TeamResult;

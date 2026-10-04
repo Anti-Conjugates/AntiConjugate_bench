@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
 import {
-  LiveCatalogSchema, LiveCheckRequestSchema, LiveCheckResultSchema, LiveReceiptSchema,
+  LiveCatalogSchema, LiveCheckRequestSchema, LiveProductIdSchema, liveProductSources, liveSourceUrl, workbookProduct, LiveCheckResultSchema, LiveReceiptSchema,
   type LiveCatalog, type LiveCheckResult, type LiveComparison, type LiveErrorCode, type LiveProductId, type LiveReceipt, type LiveSourceId
 } from '@her2/shared';
 import { validateOpenFdaSnapshot } from './research-openfda.js';
@@ -32,7 +32,7 @@ const COMMON_LIMITATION = 'Live retrieval is not clinical evidence and does not 
 const WorkbookSchema = z.object({ records: z.array(z.object({ id: z.string(), cells: z.array(z.object({ field: z.string(), value: z.string().nullable() })) })) });
 const openFda = validateOpenFdaSnapshot(JSON.parse(readFileSync(new URL('./openfda.snapshot.json', import.meta.url), 'utf8')));
 const workbook = WorkbookSchema.parse(JSON.parse(readFileSync(new URL('./workbook.snapshot.json', import.meta.url), 'utf8')));
-function openFdaRecord(id: LiveProductId) { return openFda.records.find(record => record.product_id === id)!; }
+function openFdaRecord(id: LiveProductId) { return openFda.records.find(record => record.product_id === id); }
 function workbookCell(id: LiveProductId, field: string) {
   const record = workbook.records.find(item => item.id === id);
   if (!record) throw new Error('Workbook product missing.');
@@ -56,10 +56,7 @@ export function liveUrl(source: LiveSourceId, subject: string): string {
     if (!pmid) throw new Error('Invalid PMID.');
     url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?${new URLSearchParams({ db: 'pubmed', id: pmid, retmode: 'json' })}`;
   } else {
-    const product = z.enum(['DRG0CYMEB', 'DRG0ERKBH']).parse(subject);
-    if (source === 'openfda') url = openFdaRecord(product).query_url;
-    else if (source === 'dailymed') url = `https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?${new URLSearchParams({ drug_name: openFdaRecord(product).brand_name[0]!, pagesize: '1' })}`;
-    else url = `https://adcdb.idrblab.net/data/adc/details/${product}`;
+    url = liveSourceUrl(source, LiveProductIdSchema.parse(subject));
   }
   return assertLiveUrl(source, url).toString();
 }
@@ -229,6 +226,7 @@ export function createLiveRetriever(options: LiveOptions = {}) {
     }
     const product = subject as LiveProductId;
     const snapshot = openFdaRecord(product);
+    const identity = workbookProduct(product)!;
     if (source === 'openfda') {
       if (status === 404) return done('not_found');
       if (status !== 200) return done('error', {}, [], 'HTTP_STATUS');
@@ -239,9 +237,11 @@ export function createLiveRetriever(options: LiveOptions = {}) {
       const join = (value: string[] | undefined) => value?.length ? value.join('; ') : null;
       const parsed = { spl_id: live.id, set_id: live.set_id, version: str(live.version), effective_time: str(live.effective_time),
         brand_name: join(live.openfda.brand_name), generic_name: join(live.openfda.generic_name), application_number: join(live.openfda.application_number), manufacturer_name: join(live.openfda.manufacturer_name) };
-      const comparison = [compare('brand_name', snapshot.brand_name.join('; '), parsed.brand_name), compare('generic_name', snapshot.generic_name.join('; '), parsed.generic_name),
+      // Products without a frozen openFDA record are compared on identity only: exact brand and workbook INN.
+      const comparison = snapshot ? [compare('brand_name', snapshot.brand_name.join('; '), parsed.brand_name), compare('generic_name', snapshot.generic_name.join('; '), parsed.generic_name),
         compare('application_number', snapshot.application_number.join('; '), parsed.application_number), compare('set_id', snapshot.set_id, parsed.set_id),
-        compare('version', snapshot.version, parsed.version), compare('effective_time', snapshot.effective_time, parsed.effective_time), compare('spl_id', snapshot.id, parsed.spl_id)];
+        compare('version', snapshot.version, parsed.version), compare('effective_time', snapshot.effective_time, parsed.effective_time), compare('spl_id', snapshot.id, parsed.spl_id)]
+        : [compare('brand_name', identity.us_label?.openfda ?? null, parsed.brand_name), compare('generic_name', identity.name.toUpperCase(), parsed.generic_name?.toUpperCase().replace(/-[A-Z]{4}$/, '') ?? null)];
       return done(comparison.every(row => row.agrees) ? 'ok' : 'drift', parsed, comparison);
     }
     if (source === 'dailymed') {
@@ -250,7 +250,8 @@ export function createLiveRetriever(options: LiveOptions = {}) {
       const live = data[0];
       if (!live) return done('not_found');
       const parsed = { set_id: live.setid, spl_version: str(live.spl_version), published_date: str(live.published_date), title: str(live.title) };
-      const comparison = [compare('set_id', snapshot.set_id, parsed.set_id), compare('version', snapshot.version, parsed.spl_version)];
+      const titleBrand = parsed.title?.toUpperCase().startsWith(`${identity.us_label?.dailymed ?? ''} `) ? identity.us_label?.dailymed ?? null : parsed.title;
+      const comparison = snapshot ? [compare('set_id', snapshot.set_id, parsed.set_id), compare('version', snapshot.version, parsed.spl_version)] : [compare('title_brand', identity.us_label?.dailymed ?? null, titleBrand)];
       return done(comparison.every(row => row.agrees) ? 'ok' : 'drift', parsed, comparison);
     }
     if (status === 404) return done('not_found');
@@ -271,7 +272,7 @@ export function createLiveRetriever(options: LiveOptions = {}) {
     const timer = setTimeout(() => deadline.abort(), deadlineMs);
     try {
       const jobs: Promise<LiveReceipt>[] = [];
-      if (request.product_id) for (const source of ['openfda', 'dailymed', 'adcdb'] as const) jobs.push(receipt(source, request.product_id, deadline.signal, external));
+      if (request.product_id) for (const source of liveProductSources(request.product_id)) jobs.push(receipt(source, request.product_id, deadline.signal, external));
       for (const reference of references) jobs.push(receipt(reference.startsWith('NCT') ? 'clinicaltrials_gov' : 'pubmed', reference, deadline.signal, external));
       const receipts = await Promise.all(jobs);
       const counts = { ok: 0, not_found: 0, drift: 0, error: 0 };

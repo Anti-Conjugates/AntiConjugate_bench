@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { WorkbookProductIdSchema } from './products.js';
 
 const hash = z.string().regex(/^[a-f0-9]{64}$/);
 export const HarnessLimitsSchema = z.object({
@@ -17,7 +18,7 @@ export const HarnessManifestSchema = z.object({
 export type HarnessManifest = z.infer<typeof HarnessManifestSchema>;
 
 export const OpenFdaRecordSchema = z.object({
-  product_id: z.enum(['DRG0CYMEB', 'DRG0ERKBH']), jurisdiction: z.literal('US'),
+  product_id: WorkbookProductIdSchema, jurisdiction: z.literal('US'),
   id: z.string().uuid(), set_id: z.string().uuid(), version: z.string().regex(/^\d+$/),
   effective_time: z.string().regex(/^\d{8}$/), fetched_at: z.string().datetime(),
   query_url: z.string().url(), record_url: z.string().url(), raw_response_sha256: hash,

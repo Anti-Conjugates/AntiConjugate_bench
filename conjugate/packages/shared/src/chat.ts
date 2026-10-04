@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { WorkbookProductIdSchema, productLabel } from './products.js';
 import { EvidencePolicySchema, ResearchQuestionSchema, ResearchResultSchema, researchExecutionIsConsistent } from './research.js';
 import { TurnGuardSchema } from './guard.js';
 
-export const ChatScopeSchema = z.object({ product_id: z.enum(['DRG0CYMEB', 'DRG0ERKBH']), question_id: ResearchQuestionSchema, evidence_policy: EvidencePolicySchema }).strict();
+export const ChatScopeSchema = z.object({ product_id: WorkbookProductIdSchema, question_id: ResearchQuestionSchema, evidence_policy: EvidencePolicySchema }).strict();
 export const ChatRequestSchema = z.object({
   message: z.string().trim().min(1).max(1000), engine: z.enum(['evidence', 'claude']),
   context: z.array(ChatScopeSchema).max(4).default([]), synthetic_confirmed: z.literal(true)
@@ -49,12 +50,12 @@ export type ChatStep = z.infer<typeof ChatStepSchema>;
 export type ChatEvent = z.infer<typeof ChatEventSchema>;
 
 export function renderChatReply(status: ChatResult['status'], audits: ChatAudit[], selected: string[], missing: number) {
-  if (status === 'outside_scope') return 'This chat checks research evidence about Kadcyla and Enhertu. For questions about care, ask a clinician. Try a question about composition or linker release.';
+  if (status === 'outside_scope') return 'This chat checks research evidence about the 31 ADCs in the workbook. For questions about care, ask a clinician. Try a question about composition or linker release.';
   if (status === 'premise_blocked') return 'This question rests on a premise the gate could not verify, so nothing was sent to Claude and no evidence was read. The premise findings are shown below. Rephrase it about Kadcyla or Enhertu.';
-  if (status === 'clarification') return 'What should I check? Name Kadcyla or Enhertu and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.';
+  if (status === 'clarification') return 'What should I check? Name an ADC from the workbook (for example Kadcyla, Enhertu, Trodelvy or Padcev) and ask about composition, linker release, payload-to-risk claims, workbook safety claims or US label identity.';
   const chosen = audits.filter(audit => selected.includes(audit.id));
   const labels = { supported: 'Supported', contradicted: 'Contradicted', insufficient: 'Not enough evidence' };
-  const lines = chosen.map(audit => `${audit.scope.product_id === 'DRG0ERKBH' ? 'Enhertu' : 'Kadcyla'} — ${audit.result.claims.map(claim => `${labels[claim.verdict]} for the claim “${claim.statement}” ${claim.explanation}`).join(' ')}`);
+  const lines = chosen.map(audit => `${productLabel(audit.scope.product_id)} — ${audit.result.claims.map(claim => `${labels[claim.verdict]} for the claim “${claim.statement}” ${claim.explanation}`).join(' ')}`);
   if (missing) lines.push(`${missing} requested check${missing === 1 ? ' was' : 's were'} left unanswered. Those omissions are shown below.`);
   return lines.join('\n\n') || 'No evidence checks were selected. The question is still unanswered.';
 }

@@ -10,7 +10,7 @@ import { PremiseReportSchema, premiseGate, premiseReferences, premiseReportIsCon
 export const LIVE_PRODUCT_QUESTIONS = ['composition', 'label_identity'] as const;
 export const TurnGuardSchema = z.object({
   version: z.literal('conjugate-guard-1'), live_enabled: z.boolean(), premise: PremiseReportSchema,
-  live: z.array(LiveReceiptSchema).max(10)
+  live: z.array(LiveReceiptSchema).max(16)
 }).strict();
 export type TurnGuard = z.infer<typeof TurnGuardSchema>;
 

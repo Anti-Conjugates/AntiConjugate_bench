@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { HarnessManifestSchema } from './harness.js';
+import { WorkbookProductIdSchema } from './products.js';
 
 export const ResearchQuestionSchema = z.enum(['composition', 'linker_release', 'payload_risk_transfer', 'workbook_safety', 'label_identity']);
 export const ResearchToolSchema = z.enum(['read_workbook', 'read_label', 'read_derived', 'read_openfda']);
@@ -32,7 +33,7 @@ export const ResearchCatalogSchema = z.object({
   claude_configured: z.boolean(), model: z.literal('claude-opus-5-5')
 }).strict();
 export const ResearchRequestSchema = z.object({
-  product_id: z.enum(['DRG0CYMEB', 'DRG0ERKBH']), question_id: ResearchQuestionSchema,
+  product_id: WorkbookProductIdSchema, question_id: ResearchQuestionSchema,
   engine: z.enum(['evidence', 'claude']), evidence_policy: EvidencePolicySchema,
   integrity_drill: IntegrityDrillSchema, synthetic_confirmed: z.literal(true)
 }).strict();
@@ -62,7 +63,7 @@ export const ResearchDraftSchema = z.object({
   }).strict()).max(8)
 }).strict();
 export const ResearchResultSchema = z.object({
-  id: z.string(), created_at: z.string().datetime(), product_id: z.enum(['DRG0CYMEB', 'DRG0ERKBH']),
+  id: z.string(), created_at: z.string().datetime(), product_id: WorkbookProductIdSchema,
   question_id: ResearchQuestionSchema, engine: z.enum(['evidence', 'claude']), model: z.string().nullable(),
   evidence_policy: EvidencePolicySchema, integrity_drill: IntegrityDrillSchema,
   draft: ResearchDraftSchema, draft_integrity: z.enum(['accepted', 'rejected']),

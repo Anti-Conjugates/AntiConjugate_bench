@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { WorkbookDataset } from './research.js';
+import { WORKBOOK_PRODUCT_IDS, WorkbookProductIdSchema } from './products.js';
 
 export const PREMISE_ATTRIBUTION = {
   repository: 'https://github.com/Anti-Conjugates/adc-guardrail',
@@ -17,6 +18,8 @@ const PREMISE_LABELS = {
 } as const;
 type PremiseProductId = keyof typeof PREMISE_LABELS;
 const PRODUCT_IDS = Object.keys(PREMISE_LABELS) as PremiseProductId[];
+interface PremiseLabel { brand: string; aliases: readonly string[]; composition: string; toxicities: Readonly<Record<string, string>> }
+const LABELS: Partial<Record<string, PremiseLabel>> = PREMISE_LABELS;
 const TOXICITY_TERMS: Record<string, { label: string; pattern: RegExp }> = {
   ild: { label: 'ILD / pneumonitis', pattern: /\b(?:ILD|interstitial lung disease|pneumonitis|lung toxicity|pulmonary toxicity)\b/i },
   nrh: { label: 'nodular regenerative hyperplasia', pattern: /\b(?:NRH|nodular regenerative hyperplasia)\b/i },
@@ -27,7 +30,7 @@ const TOXICITY_TERMS: Record<string, { label: string; pattern: RegExp }> = {
   neuropathy: { label: 'peripheral neuropathy', pattern: /\b(?:peripheral neuropathy|neuropathy|neurotoxicity)\b/i },
   neutropenia: { label: 'neutropenia', pattern: /\b(?:febrile neutropenia|neutropenia)\b/i }
 };
-export const PREMISE_EVIDENCE_IDS = [...new Set(PRODUCT_IDS.flatMap(id => [`WORKBOOK-${id}-COMPOSITION`, PREMISE_LABELS[id].composition, ...Object.values(PREMISE_LABELS[id].toxicities)]))].sort() as [string, ...string[]];
+export const PREMISE_EVIDENCE_IDS = [...new Set([...WORKBOOK_PRODUCT_IDS.map(id => `WORKBOOK-${id}-COMPOSITION`), ...PRODUCT_IDS.flatMap(id => [PREMISE_LABELS[id].composition, ...Object.values(PREMISE_LABELS[id].toxicities)])])].sort() as [string, ...string[]];
 
 export const PremiseKindSchema = z.enum(['unverifiable_entity', 'unsupported_product', 'unverifiable_construct', 'unverifiable_reference', 'contradicted_premise', 'resolved_reference', 'internal_error']);
 export const PremiseCheckSchema = z.enum(['invented_inn', 'invented_code', 'unsupported_product', 'unverifiable_construct', 'nct_reference', 'pmid_reference', 'author_year_reference',
@@ -36,7 +39,7 @@ export const PremiseDecisionSchema = z.enum(['blocked', 'flagged', 'clear']);
 export const PremiseFindingSchema = z.object({
   kind: PremiseKindSchema, check: PremiseCheckSchema, text: z.string().min(1).max(400),
   stated: z.string().max(300).nullable(), recorded: z.string().max(300).nullable(),
-  product_id: z.enum(PRODUCT_IDS as [PremiseProductId, ...PremiseProductId[]]).nullable(),
+  product_id: WorkbookProductIdSchema.nullable(),
   evidence_ids: z.array(z.enum(PREMISE_EVIDENCE_IDS)).max(4), limitation: z.literal(PREMISE_LIMITATION)
 }).strict();
 export const PremiseReportSchema = z.object({
@@ -49,7 +52,7 @@ export const PremiseFactRowSchema = z.object({
   id: z.string().regex(/^DRG0[A-Z0-9]+$/), name: z.string(), brand: z.string().nullable(), antibody: z.string().nullable(), linker_payload: z.string().nullable(),
   target: z.string(), payload: z.string(), linker: z.string(), dar: z.string()
 }).strict();
-export const PremiseFactsSchema = z.object({ dataset_sha256: z.string().regex(/^[a-f0-9]{64}$/), rows: z.array(PremiseFactRowSchema).min(1), allowlisted: z.array(z.enum(PRODUCT_IDS as [PremiseProductId, ...PremiseProductId[]])) }).strict();
+export const PremiseFactsSchema = z.object({ dataset_sha256: z.string().regex(/^[a-f0-9]{64}$/), rows: z.array(PremiseFactRowSchema).min(1), allowlisted: z.array(WorkbookProductIdSchema) }).strict();
 
 export type PremiseKind = z.infer<typeof PremiseKindSchema>;
 export type PremiseCheck = z.infer<typeof PremiseCheckSchema>;
@@ -69,7 +72,7 @@ export function premiseFacts(dataset: Pick<WorkbookDataset, 'sha256' | 'records'
     dataset_sha256: dataset.sha256,
     rows: dataset.records.map(record => ({ id: record.id, name: record.name, brand: record.brand && record.brand !== 'None' ? record.brand : null, antibody: cell(record, 'Antibody'),
       linker_payload: cell(record, 'Linker-payload'), target: record.target, payload: record.payload ?? '', linker: record.linker ?? '', dar: record.dar ?? '' })),
-    allowlisted: PRODUCT_IDS.filter(id => dataset.records.some(record => record.id === id && record.clinical_enabled))
+    allowlisted: WORKBOOK_PRODUCT_IDS.filter(id => dataset.records.some(record => record.id === id))
   });
 }
 
@@ -149,7 +152,7 @@ function evaluatePremise(message: string, facts: PremiseFacts, references: Premi
   const allowlisted = new Set<string>(facts.allowlisted);
   const alias = new Map<string, Entry>(); const pairs = new Set<string>(); const partners = new Map<string, Set<string>>(); const suffixes = new Set<string>();
   for (const row of facts.rows) {
-    const extra = allowlisted.has(row.id) ? (PREMISE_LABELS[row.id as PremiseProductId]?.aliases ?? []) : [];
+    const extra = allowlisted.has(row.id) ? (LABELS[row.id]?.aliases ?? []) : [];
     const entry: Entry = { row, label: row.brand ?? row.name };
     const names = [row.name, row.brand ?? '', ...(row.antibody && row.linker_payload ? [`${row.antibody} ${row.linker_payload}`] : []), ...extra];
     for (const name of names) {
@@ -228,35 +231,35 @@ function evaluatePremise(message: string, facts: PremiseFacts, references: Premi
     const inClause = mentions.filter(m => m.start >= clause.start && m.end <= clause.end);
     const entries = new Set(inClause.map(m => m.entry));
     if (entries.size !== 1) continue;
-    const entry = [...entries][0]!; const id = entry.row.id as PremiseProductId;
-    if (!allowlisted.has(id) || !PREMISE_LABELS[id]) continue;
+    const entry = [...entries][0]!; const id = WorkbookProductIdSchema.parse(entry.row.id);
+    if (!allowlisted.has(id)) continue;
     const chars = [...text.slice(clause.start, clause.end)];
     for (const m of [...inClause, ...inventedSpans]) for (let i = Math.max(0, m.start - clause.start); i < Math.min(chars.length, m.end - clause.start); i++) chars[i] = ' ';
     const body = chars.join('');
-    const label = PREMISE_LABELS[id]; const evidence = [`WORKBOOK-${id}-COMPOSITION`, label.composition];
+    const label = LABELS[id]; const brand = label?.brand ?? entry.label; const evidence = [`WORKBOOK-${id}-COMPOSITION`, ...(label ? [label.composition] : [])];
     const ownPayload = canonicalSet(`${entry.row.payload} ${entry.row.linker_payload ?? ''}`, PAYLOADS); const askedPayload = canonicalSet(body, PAYLOADS, true);
     add('contradicted_payload', !askedPayload.size || !ownPayload.size || [...askedPayload].some(item => ownPayload.has(item)), () => ({ kind: 'contradicted_premise',
-      text: `The workbook records ${label.brand} with payload ${entry.row.payload}, not ${[...askedPayload].join('/')}.`, stated: [...askedPayload].join('/'), recorded: entry.row.payload, product_id: id, evidence_ids: evidence }));
+      text: `The workbook records ${brand} with payload ${entry.row.payload}, not ${[...askedPayload].join('/')}.`, stated: [...askedPayload].join('/'), recorded: entry.row.payload, product_id: id, evidence_ids: evidence }));
     const ownTarget = canonicalSet(entry.row.target, ANTIGENS); const askedTarget = canonicalSet(body, ANTIGENS, true);
     add('contradicted_target', !askedTarget.size || !ownTarget.size || [...askedTarget].some(item => ownTarget.has(item)), () => ({ kind: 'contradicted_premise',
-      text: `The workbook records ${label.brand} as targeting ${[...ownTarget].join('/')}, not ${[...askedTarget].join('/')}.`, stated: [...askedTarget].join('/'), recorded: entry.row.target, product_id: id, evidence_ids: evidence }));
+      text: `The workbook records ${brand} as targeting ${[...ownTarget].join('/')}, not ${[...askedTarget].join('/')}.`, stated: [...askedTarget].join('/'), recorded: entry.row.target, product_id: id, evidence_ids: evidence }));
     const own = cleavable(entry.row.linker);
     const statedNon = CLEAVABLE_NON.test(body); CLEAVABLE_NON.lastIndex = 0;
     const statedPlain = /\bcleavable\b/i.test(body.replace(CLEAVABLE_NON, ' '));
     const linkerConflict = (own === true && statedNon && !statedPlain) || (own === false && statedPlain && !statedNon);
     add('contradicted_linker', !linkerConflict, () => ({ kind: 'contradicted_premise',
-      text: `The workbook and label paraphrase record the ${label.brand} linker as ${own ? 'cleavable' : 'non-cleavable'}, not ${own ? 'non-cleavable' : 'cleavable'}.`,
+      text: `The workbook${label ? ' and label paraphrase record' : ' records'} the ${brand} linker as ${own ? 'cleavable' : 'non-cleavable'}, not ${own ? 'non-cleavable' : 'cleavable'}.`,
       stated: own ? 'non-cleavable' : 'cleavable', recorded: entry.row.linker, product_id: id, evidence_ids: evidence }));
     const dar = DAR.exec(body); const range = premiseDarRange(entry.row.dar);
     const value = dar && !NEGATION.test(dar[1]!) ? Number(dar[2]) : null;
     add('contradicted_dar', value === null || range === null || (value >= range[0] - 0.6 && value <= range[1] + 0.6), () => ({ kind: 'contradicted_premise',
-      text: `The workbook records ${label.brand} DAR as ${entry.row.dar}; the stated ${value} is more than 0.6 outside it.`, stated: String(value), recorded: entry.row.dar, product_id: id, evidence_ids: [`WORKBOOK-${id}-COMPOSITION`] }));
+      text: `The workbook records ${brand} DAR as ${entry.row.dar}; the stated ${value} is more than 0.6 outside it.`, stated: String(value), recorded: entry.row.dar, product_id: id, evidence_ids: [`WORKBOOK-${id}-COMPOSITION`] }));
     const tail = text.slice(Math.min(...inClause.map(m => m.end)), clause.end);
-    for (const [key, sourceId] of Object.entries(label.toxicities)) {
+    for (const [key, sourceId] of Object.entries(label?.toxicities ?? {})) {
       const hit = TOXICITY_TERMS[key]!.pattern.exec(tail);
       const absolute = hit !== null && (DRUG_NEG.test(tail.slice(0, hit.index)) || NEG_AFTER.test(tail.slice(hit.index + hit[0].length)));
       add('contradicted_no_risk', !absolute, () => ({ kind: 'contradicted_premise',
-        text: `The draft ${label.brand} UK label paraphrase reports ${TOXICITY_TERMS[key]!.label}; an absolute "no ${hit![0]}" premise conflicts with it.`,
+        text: `The draft ${brand} UK label paraphrase reports ${TOXICITY_TERMS[key]!.label}; an absolute "no ${hit![0]}" premise conflicts with it.`,
         stated: hit![0], recorded: TOXICITY_TERMS[key]!.label, product_id: id, evidence_ids: [sourceId] }));
     }
   }

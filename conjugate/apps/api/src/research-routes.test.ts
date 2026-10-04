@@ -47,7 +47,7 @@ test('both research routes retain strict body, synthetic, product, rate and cont
   const app = await createApp(); t.after(() => app.close());
   for (const stream of [false, true]) for (const payload of [
     {}, null, { ...input, patient: {} }, { ...input, synthetic_confirmed: false },
-    { ...input, product_id: 'DRG0ZOYQV' }, { ...input, question_id: 'unknown' },
+    { ...input, product_id: 'DRG0ZZZZZ' }, { ...input, question_id: 'unknown' },
     { ...input, engine: 'other' }, { ...input, evidence_policy: 'hidden_sources' },
     { ...input, integrity_drill: 'malicious_text' }
   ]) {

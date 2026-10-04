@@ -1,8 +1,10 @@
 import { chatScopeKey, type ChatRequest, type ChatScope } from './chat.js';
 import { maskPremiseReferences } from './premise.js';
+import { PRODUCT_PHRASES, isWorkbookProductId } from './products.js';
 
-const PRODUCT_TERMS = { DRG0CYMEB: ['kadcyla', 'emtansine', 'tdm1', 't-dm1'], DRG0ERKBH: ['enhertu', 'deruxtecan', 'tdxd', 't-dxd'] } as const;
-const TERMS = new Set(('compare comparison same different both two what why how does do is are can cannot not no yes it they them that this and or with without only all sources source label labels workbook data evidence restore remove withhold again explain made composition target payload dar ratio linker cleavable release blood circulation risk transfer toxicity safety identity fda openfda name names works mechanism dm1 dxd her2').split(' '));
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const PRODUCT_PATTERNS = PRODUCT_PHRASES.map(({ phrase, id }) => ({ id, pattern: new RegExp(`(?<![a-z0-9-])${escapeRegExp(phrase)}(?![a-z0-9-])`, 'g') }));
+const TERMS = new Set(('targets antibody mmae mmaf dm4 sn-38 compare comparison same different both two what why how does do is are can cannot not no yes it they them that this and or with without only all sources source label labels workbook data evidence restore remove withhold again explain made composition target payload dar ratio linker cleavable release blood circulation risk transfer toxicity safety identity fda openfda name names works mechanism dm1 dxd her2').split(' '));
 export interface ChatIntent { status: 'ready' | 'clarification' | 'outside_scope'; recognized_terms: string[]; scopes: ChatScope[]; action: 'check' | 'compare' | 'withhold' | 'restore' }
 
 export function chatConversationContext(requests: readonly ChatRequest[]): ChatScope[] {
@@ -16,11 +18,14 @@ export function chatConversationContext(requests: readonly ChatRequest[]): ChatS
 export function chatIntent(request: ChatRequest): ChatIntent {
   const plain = request.message.toLowerCase().replaceAll('’', "'");
   const text = maskPremiseReferences(request.message).toLowerCase().replaceAll('’', "'").replace(/\bdon'?t\b/g, 'do not');
-  const words = text.match(/[a-z0-9-]+/g) ?? [];
-  const recognized_terms = words.flatMap(word => {
-    for (const [id, aliases] of Object.entries(PRODUCT_TERMS)) if ((aliases as readonly string[]).includes(word) || word === id.toLowerCase()) return [id];
-    return TERMS.has(word) ? [word] : [];
-  });
+  // Multi-word product names are matched first (longest first) and blanked so their words are not re-read as other terms.
+  const hits: { index: number; term: string }[] = [];
+  let scan = text;
+  for (const { id, pattern } of PRODUCT_PATTERNS) {
+    scan = scan.replace(pattern, (match, index: number) => { hits.push({ index, term: id }); return ' '.repeat(match.length); });
+  }
+  for (const match of scan.matchAll(/[a-z0-9-]+/g)) if (TERMS.has(match[0])) hits.push({ index: match.index, term: match[0] });
+  const recognized_terms = hits.sort((a, b) => a.index - b.index).map(hit => hit.term);
   const result: ChatIntent = { status: 'ready', recognized_terms, scopes: [], action: 'check' };
   // This scope guard is not a PHI detector. Unknown text is never sent to the provider.
   // Clinical keywords are matched on the raw text; references are masked only for the digit guard.
@@ -28,7 +33,7 @@ export function chatIntent(request: ChatRequest): ChatIntent {
     || /\beGFR\b/.test(request.message) || /\begfr\s*(?:of|is|was|at|below|under|above|<|>|=|:)?\s*\d/i.test(request.message) || /@|https?:|\b\d{3,}\b|sk-ant-|hf_/.test(text)) { result.status = 'outside_scope'; return result; }
   const has = (...terms: string[]) => recognized_terms.some(term => terms.includes(term));
   const comparing = has('compare', 'comparison', 'same', 'different', 'both', 'two');
-  const products = [...new Set(recognized_terms.filter((term): term is ChatScope['product_id'] => term === 'DRG0CYMEB' || term === 'DRG0ERKBH'))];
+  const products = [...new Set(recognized_terms.filter((term): term is ChatScope['product_id'] => isWorkbookProductId(term)))];
   if (comparing && has('both', 'two') && products.length < 2) products.push('DRG0CYMEB', 'DRG0ERKBH');
   if (comparing && products.length === 1 && request.context.length) {
     if (new Set(request.context.map(scope => scope.question_id)).size > 1 && /\bcompare\s+(?:(?:it|this|that)\s+)?with\b/.test(text)) { result.status = 'clarification'; return result; }
@@ -49,7 +54,7 @@ export function chatIntent(request: ChatRequest): ChatIntent {
   const policy = withdrawing ? 'workbook_only' : restoring ? 'all' : request.context[0]?.evidence_policy ?? 'all';
   const topics: ChatScope['question_id'][] = [];
   const risk = has('risk', 'transfer', 'toxicity');
-  if (has('composition', 'made', 'target', 'dar', 'ratio', 'dm1', 'dxd') || (has('payload') && !risk)) topics.push('composition');
+  if (has('composition', 'made', 'target', 'targets', 'antibody', 'dar', 'ratio', 'dm1', 'dxd', 'mmae', 'mmaf', 'dm4', 'sn-38') || (has('payload') && !risk)) topics.push('composition');
   if (has('linker', 'cleavable', 'release', 'blood', 'circulation')) topics.push('linker_release');
   if (risk) topics.push('payload_risk_transfer');
   if (has('workbook') && has('safety')) topics.push('workbook_safety');

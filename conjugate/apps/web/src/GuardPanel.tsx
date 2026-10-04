@@ -1,9 +1,9 @@
-import type { LiveReceipt, TurnGuard } from '@her2/shared';
+import { productLabel, type LiveReceipt, type TurnGuard } from '@her2/shared';
 import { PremiseGateAnim } from './PremiseGateAnim';
 
 const liveStatus: Record<LiveReceipt['status'], string> = { ok: 'Matches', not_found: 'Not found', drift: 'Differs from snapshot', error: 'Fetch failed' };
 const liveSources: Record<LiveReceipt['source'], string> = { clinicaltrials_gov: 'ClinicalTrials.gov', pubmed: 'PubMed', openfda: 'openFDA', dailymed: 'DailyMed', adcdb: 'ADCdb' };
-const subjectLabel = (subject: string) => subject === 'DRG0CYMEB' ? 'Kadcyla' : subject === 'DRG0ERKBH' ? 'Enhertu' : subject;
+const subjectLabel = (subject: string) => productLabel(subject);
 
 function receiptDetail(receipt: LiveReceipt) {
   if (receipt.status === 'error') return `No result accepted (${receipt.error_code ?? 'error'}). Nothing replaced it.`;

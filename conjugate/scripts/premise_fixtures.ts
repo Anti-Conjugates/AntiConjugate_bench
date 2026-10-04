@@ -2,9 +2,9 @@ import { readFileSync } from 'node:fs';
 import type { PremiseCheck, PremiseDecision, PremiseReferences } from '@her2/shared';
 
 export const PREMISE_FAMILIES = ['control', 'contradicted_payload', 'contradicted_target', 'contradicted_linker', 'contradicted_dar', 'contradicted_no_risk',
-  'invented_inn', 'invented_code', 'unsupported_product', 'unverifiable_construct', 'nct_reference', 'pmid_reference', 'author_year_reference', 'resolved_reference', 'precedence'] as const;
+  'invented_inn', 'invented_code', 'workbook_product', 'unsupported_product', 'unverifiable_construct', 'nct_reference', 'pmid_reference', 'author_year_reference', 'resolved_reference', 'precedence'] as const;
 export type PremiseFamily = typeof PREMISE_FAMILIES[number];
-export interface PremiseCase { id: string; family: PremiseFamily; message: string; expect: { decision: PremiseDecision; checks: PremiseCheck[] }; references?: PremiseReferences }
+export interface PremiseCase { id: string; family: PremiseFamily; message: string; expect: { decision: PremiseDecision; checks: PremiseCheck[] }; references?: PremiseReferences; allowlist?: readonly string[] }
 
 const c = (family: PremiseFamily, id: string, message: string, decision: PremiseDecision, checks: PremiseCheck[] = [], references?: PremiseReferences): PremiseCase =>
   ({ id: `${family}.${id}`, family, message, expect: { decision, checks }, ...(references ? { references } : {}) });
@@ -55,8 +55,12 @@ export const PREMISE_CASES: PremiseCase[] = [
   c('invented_inn', 'trastuzumab_novatecan', 'Compare trastuzumab novatecan with Enhertu.', 'blocked', ['invented_inn']),
   c('invented_code', 'zentrovab', 'Tell me about the investigational ADC Zentrovab-7.', 'blocked', ['invented_code']),
   c('invented_code', 'xb_2291', 'Is XB-2291 ADC like Enhertu?', 'blocked', ['invented_code']),
-  c('unsupported_product', 'datroway', 'Compare Enhertu with Datroway.', 'blocked', ['unsupported_product']),
-  c('unsupported_product', 'trodelvy', 'What is Trodelvy made of?', 'blocked', ['unsupported_product']),
+  c('workbook_product', 'datroway', 'Compare Enhertu with Datroway.', 'clear'),
+  c('workbook_product', 'trodelvy', 'What is Trodelvy made of?', 'clear'),
+  c('workbook_product', 'datopotamab_inn', 'What payload does datopotamab deruxtecan carry?', 'clear'),
+  c('workbook_product', 'trodelvy_payload', 'Trodelvy carries MMAE.', 'flagged', ['contradicted_payload']),
+  c('workbook_product', 'padcev_target', 'Padcev targets HER2.', 'flagged', ['contradicted_target']),
+  { ...c('unsupported_product', 'narrow_allowlist', 'Compare Enhertu with Datroway.', 'blocked', ['unsupported_product']), allowlist: ['DRG0CYMEB', 'DRG0ERKBH'] },
   c('unverifiable_construct', 'trastuzumab_mmae_called_enhertu', 'Is trastuzumab-MMAE called Enhertu?', 'blocked', ['unverifiable_construct', 'contradicted_payload']),
   c('unverifiable_construct', 'pertuzumab_dxd', 'Explain the pertuzumab-DXd conjugate.', 'blocked', ['unverifiable_construct']),
   c('nct_reference', 'enhertu_linker', 'Does NCT09999999 show Enhertu linker release?', 'blocked', ['nct_reference']),
@@ -72,7 +76,7 @@ export const PREMISE_CASES: PremiseCase[] = [
   c('precedence', 'nct_payload', 'NCT09999999 Enhertu carries MMAE.', 'blocked', ['nct_reference', 'contradicted_payload']),
   c('precedence', 'author_target', 'Smith et al. 2019 showed Kadcyla targets TROP2.', 'blocked', ['author_year_reference', 'contradicted_target']),
   c('precedence', 'inn_dar', 'Trastuzumab vedotin and Kadcyla: Kadcyla has a DAR of 8.', 'blocked', ['invented_inn', 'contradicted_dar']),
-  c('precedence', 'unsupported_no_risk', 'Compare Datroway. Enhertu has no ILD risk.', 'blocked', ['unsupported_product', 'contradicted_no_risk'])
+  c('precedence', 'workbook_no_risk', 'Compare Datroway. Enhertu has no ILD risk.', 'flagged', ['contradicted_no_risk'])
 ];
 
 const SYNTHETIC = ['NCT09999999', 'NCT09999998', '99999901', '99999902', 'Zentrovab', 'XB-2291', 'trastuzumab vedotin', 'trastuzumab novatecan', 'pertuzumab-DXd'];
