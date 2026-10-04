@@ -9,8 +9,10 @@ import { buildCatalog, CLAUDE_MODEL } from './evidence.js';
 import { ApiFailure } from './errors.js';
 import { runReview, type RunOptions } from './run.js';
 import { registerResearchRoutes } from './research-routes.js';
+import { registerChatRoutes } from './chat-routes.js';
+import type { ChatOptions } from './chat.js';
 
-export interface AppOptions extends RunOptions {
+export interface AppOptions extends RunOptions, ChatOptions {
   staticRoot?: string;
   rateLimitMax?: number;
   rateLimitWindowMs?: number;
@@ -59,6 +61,7 @@ export async function createApp(options: AppOptions = {}): Promise<FastifyInstan
   });
 
   registerResearchRoutes(app, options);
+  registerChatRoutes(app, options);
 
   if (options.staticRoot) {
     const root = resolve(options.staticRoot);

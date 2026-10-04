@@ -1,0 +1,474 @@
+{
+  "generated_at": "2026-10-04T02:24:14.264Z",
+  "kind": "offline_chat_audits_and_replay_not_clinical_benchmark",
+  "code_sha256": "a250acee0e4b8fb4f61d3bb817d149d48551b7b42a124a8d46ae79d13158185d",
+  "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+  "provider_requests": 0,
+  "request_cap": 0,
+  "retries": 0,
+  "rows": [
+    {
+      "id": "Kadcyla_composition_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 10,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_composition_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "workbook_only",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 3,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_linker_release_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "linker_release",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": [
+            "UK-KADCYLA-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 3,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_linker_release_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "linker_release",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_payload_risk_transfer_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_payload_risk_transfer_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_workbook_safety_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "workbook_safety",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_workbook_safety_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "workbook_safety",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_label_identity_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "label_identity",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "US-OPENFDA-DRG0CYMEB-IDENTITY"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Kadcyla_label_identity_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "label_identity",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_composition_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_composition_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "workbook_only",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_linker_release_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "linker_release",
+          "evidence_policy": "all",
+          "verdict": "contradicted",
+          "cited_source_ids": [
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_linker_release_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "linker_release",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_payload_risk_transfer_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 4,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_payload_risk_transfer_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "payload_risk_transfer",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_workbook_safety_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "workbook_safety",
+          "evidence_policy": "all",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_workbook_safety_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "workbook_safety",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_label_identity_all",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 4,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "label_identity",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "US-OPENFDA-DRG0ERKBH-IDENTITY"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 2,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "Enhertu_label_identity_workbook_only",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 1,
+      "source_reads": 1,
+      "claims": [
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "label_identity",
+          "evidence_policy": "workbook_only",
+          "verdict": "insufficient",
+          "cited_source_ids": []
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 1,
+      "clinical_release": "blocked"
+    }
+  ],
+  "limitations": [
+    "Fixed local questions, not independent scientific discovery or clinical validation.",
+    "Does not measure general language understanding, calibration, hidden benchmark performance or model superiority.",
+    "Offline mode makes no model calls. Live results include failures and are not automatically retried."
+  ]
+}

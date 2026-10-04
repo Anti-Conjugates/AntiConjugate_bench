@@ -1,5 +1,7 @@
-export type FailureCode = 'CLAUDE_NOT_CONFIGURED' | 'CLAUDE_UNAVAILABLE' | 'CLAUDE_TIMEOUT' | 'CLAUDE_INVALID_OUTPUT' | 'CLAUDE_CONTEXT_LIMIT' | 'CLAUDE_REFUSED' | 'INVALID_REQUEST' | 'UNKNOWN_PRODUCT' | 'RESEARCH_CANCELLED' | 'RESEARCH_SKILL_INVALID';
+export type FailureCode = 'CLAUDE_NOT_CONFIGURED' | 'CLAUDE_UNAVAILABLE' | 'CLAUDE_TIMEOUT' | 'CLAUDE_INVALID_OUTPUT' | 'CLAUDE_CONTEXT_LIMIT' | 'CLAUDE_REFUSED' | 'INVALID_REQUEST' | 'UNKNOWN_PRODUCT' | 'RESEARCH_CANCELLED' | 'RESEARCH_SKILL_INVALID' | 'CHAT_BUDGET_EXCEEDED' | 'CHAT_BUSY';
 const messages: Record<FailureCode, string> = {
+  CHAT_BUDGET_EXCEEDED: 'The chat reached its call limit. No answer was released. Nothing switched to rules only.',
+  CHAT_BUSY: 'Two chat questions are already running on this server. Try again after one finishes.',
   CLAUDE_NOT_CONFIGURED: 'No ANTHROPIC_API_KEY on the server, so Claude is off. Pick rules only. Nothing was run.',
   CLAUDE_UNAVAILABLE: 'The Claude API call failed. The run is blocked and did not switch to rules only.',
   CLAUDE_TIMEOUT: 'The Claude API call timed out. The run is blocked and did not switch to rules only.',

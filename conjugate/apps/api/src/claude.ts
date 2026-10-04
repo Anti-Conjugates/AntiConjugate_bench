@@ -58,7 +58,7 @@ async function boundedResponse(response: Response, signal: AbortSignal): Promise
       if (chunk.done) break;
       size += chunk.value.byteLength;
       if (size > MAX_RESPONSE_BYTES) {
-        await reader.cancel();
+        void reader.cancel().catch(() => {});
         throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);
       }
       chunks.push(chunk.value);
@@ -73,16 +73,12 @@ async function boundedResponse(response: Response, signal: AbortSignal): Promise
 export interface ClaudeJsonCall { schema: object; system: string; data: unknown; }
 
 // Shared safe transport; callers separately validate strict shapes and independent semantics.
-export async function claudeJson(call: ClaudeJsonCall, options: ClaudeOptions = {}, signal?: AbortSignal): Promise<unknown> {
+export async function claudeMessage(parameters: object, options: ClaudeOptions = {}, signal?: AbortSignal): Promise<z.infer<typeof EnvelopeSchema>> {
   if (signal?.aborted) throw new ApiFailure('RESEARCH_CANCELLED', 499);
   const apiKey = options.apiKey;
   if (!apiKey?.trim()) throw new ApiFailure('CLAUDE_NOT_CONFIGURED', 503);
   const fetcher = options.fetch ?? globalThis.fetch;
-  const body = JSON.stringify({
-    model: CLAUDE_MODEL, max_tokens: 4096, thinking: { type: 'adaptive' },
-    output_config: { effort: 'low', format: { type: 'json_schema', schema: call.schema } },
-    system: call.system, messages: [{ role: 'user', content: JSON.stringify(call.data) }]
-  });
+  const body = JSON.stringify({ ...parameters, model: CLAUDE_MODEL, max_tokens: 4096, thinking: { type: 'adaptive' } });
   if (Buffer.byteLength(body, 'utf8') > MAX_REQUEST_BYTES) throw new ApiFailure('CLAUDE_CONTEXT_LIMIT', 502);
   const controller = new AbortController();
   // A hard race also bounds injected fetch implementations that ignore abort.
@@ -110,7 +106,7 @@ export async function claudeJson(call: ClaudeJsonCall, options: ClaudeOptions = 
       }
       if (!response.ok) {
         // Never consume, propagate or log raw upstream errors or headers.
-        await response.body?.cancel();
+        void response.body?.cancel().catch(() => {});
         throw new ApiFailure('CLAUDE_UNAVAILABLE', 502);
       }
       const raw = await boundedResponse(response, controller.signal);
@@ -120,12 +116,7 @@ export async function claudeJson(call: ClaudeJsonCall, options: ClaudeOptions = 
       if (!envelope.success) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);
       // The API's own safety classifier can stop a request with no content. Report that as what it is.
       if (envelope.data.stop_reason === 'refusal') throw new ApiFailure('CLAUDE_REFUSED', 502);
-      if (envelope.data.stop_reason !== 'end_turn' || envelope.data.content.length === 0) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);
-      const textBlocks = envelope.data.content.filter(block => block.type === 'text');
-      if (textBlocks.length !== 1 || !textBlocks[0]?.text || envelope.data.content.some(block => !['text', 'thinking', 'redacted_thinking'].includes(block.type))) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);
-      let selection: unknown;
-      try { selection = JSON.parse(textBlocks[0].text); } catch { throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502); }
-      return selection;
+      return envelope.data;
     })();
     return await Promise.race([operation, timeout, cancelled]);
   } catch (error) {
@@ -137,6 +128,17 @@ export async function claudeJson(call: ClaudeJsonCall, options: ClaudeOptions = 
     if (cancel) signal?.removeEventListener('abort', cancel);
     controller.abort();
   }
+}
+
+export async function claudeJson(call: ClaudeJsonCall, options: ClaudeOptions = {}, signal?: AbortSignal): Promise<unknown> {
+  const envelope = await claudeMessage({
+    output_config: { effort: 'low', format: { type: 'json_schema', schema: call.schema } },
+    system: call.system, messages: [{ role: 'user', content: JSON.stringify(call.data) }]
+  }, options, signal);
+  if (envelope.stop_reason !== 'end_turn' || envelope.content.length === 0) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);
+  const textBlocks = envelope.content.filter(block => block.type === 'text');
+  if (textBlocks.length !== 1 || !textBlocks[0]?.text || envelope.content.some(block => !['text', 'thinking', 'redacted_thinking'].includes(block.type))) throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502);
+  try { return JSON.parse(textBlocks[0].text); } catch { throw new ApiFailure('CLAUDE_INVALID_OUTPUT', 502); }
 }
 
 export async function claudeDraft(input: RunRequest, options: ClaudeOptions = {}): Promise<SelectionDraft> {

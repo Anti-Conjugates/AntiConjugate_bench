@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { ApiErrorSchema, CatalogSchema, RunRequestSchema, RunResultSchema, ResearchCatalogSchema, ResearchRequestSchema, ResearchResultSchema, ResearchEventSchema, researchExecutionIsConsistent } from '@her2/shared';
+import { ApiErrorSchema, CatalogSchema, RunRequestSchema, RunResultSchema, ResearchCatalogSchema, ResearchRequestSchema, ResearchResultSchema, ResearchEventSchema, researchExecutionIsConsistent, ChatResultSchema, ChatEventSchema, chatExecutionIsConsistent } from '@her2/shared';
 
 const base = process.env.SMOKE_BASE_URL ?? 'http://127.0.0.1:5173';
 async function get(path: string) {
@@ -142,4 +142,10 @@ if (!researchCatalog.claude_configured) {
   assert.equal(response.status, 503);
   assert.equal(ApiErrorSchema.parse(await response.json()).error.code, 'CLAUDE_NOT_CONFIGURED');
 }
-console.info('PASS: HTTP page/proxy, original context API, research questions, source withholding, three integrity drills, real NDJSON trace, workbook provenance and safe errors. No model or browser called.');
+const chat = { message: 'Does Enhertu’s cleavable linker establish release in blood?', engine: 'evidence', synthetic_confirmed: true };
+const chatResponse = await researchPost(chat, '/api/chat/turns'); assert.equal(chatResponse.status, 200);
+const chatResult = ChatResultSchema.parse(await chatResponse.json()); assert.ok(chatExecutionIsConsistent(chatResult)); assert.equal(chatResult.harness.model_calls, 0); assert.equal(chatResult.audits[0]?.result.claims[0]?.verdict, 'contradicted');
+const chatStream = await researchPost({ ...chat, message: 'What changes with only workbook evidence?', context: chatResult.scopes }, '/api/chat/turns/stream');
+const chatEvents = (await chatStream.text()).trim().split('\n').map(line => ChatEventSchema.parse(JSON.parse(line))); const chatFinal = chatEvents.at(-1)!; assert.equal(chatFinal.type, 'result');
+if (chatFinal.type === 'result') { assert.ok(chatExecutionIsConsistent(chatFinal.result)); assert.equal(chatFinal.result.audits[0]?.result.claims[0]?.verdict, 'insufficient'); assert.equal(chatFinal.result.harness.evidence_reads, 1); assert.deepEqual(chatEvents.slice(0, -1).map(event => event.type === 'trace' ? event.step : null), chatFinal.result.trace); }
+console.info('PASS: HTTP page/proxy, context API, research questions, source withholding, citation faults, chat and follow-up NDJSON, provenance and safe errors. No model or browser called.');

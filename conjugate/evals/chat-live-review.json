@@ -1,0 +1,140 @@
+{
+  "generated_at": "2026-10-04T02:06:18.302Z",
+  "kind": "live_native_chat_smoke_not_quality_benchmark",
+  "code_sha256": "7ef59fdcd68cd1f0a6beae167269e6fbdec68acb635ff6fa85fd8ca56dfb879f",
+  "dataset_sha256": "e95412ecfbc468f29f85dd9391de63f33fdfd3a14b8d557ea34ebc4d5b94b0cb",
+  "provider_requests": 8,
+  "request_cap": 16,
+  "retries": 0,
+  "rows": [
+    {
+      "id": "compare_composition",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 2,
+      "actual_provider_requests": 2,
+      "audit_calls": 2,
+      "source_reads": 8,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        },
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 5076,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "linker_counter_evidence",
+      "status": "failed",
+      "actual_provider_requests": 2,
+      "error_code": "CLAUDE_REFUSED",
+      "wall_ms": 3613
+    },
+    {
+      "id": "withhold_sources_followup",
+      "status": "incomplete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 2,
+      "actual_provider_requests": 2,
+      "audit_calls": 2,
+      "source_reads": 2,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "workbook_only",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION"
+          ]
+        },
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "workbook_only",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION"
+          ]
+        }
+      ],
+      "omitted_checks": 2,
+      "wall_ms": 6205,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "restore_sources_followup",
+      "status": "complete",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 2,
+      "actual_provider_requests": 2,
+      "audit_calls": 2,
+      "source_reads": 8,
+      "claims": [
+        {
+          "product_id": "DRG0CYMEB",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0CYMEB-COMPOSITION",
+            "UK-KADCYLA-SMPC"
+          ]
+        },
+        {
+          "product_id": "DRG0ERKBH",
+          "question_id": "composition",
+          "evidence_policy": "all",
+          "verdict": "supported",
+          "cited_source_ids": [
+            "WORKBOOK-DRG0ERKBH-COMPOSITION",
+            "UK-ENHERTU-SMPC"
+          ]
+        }
+      ],
+      "omitted_checks": 0,
+      "wall_ms": 4632,
+      "clinical_release": "blocked"
+    },
+    {
+      "id": "clinical_boundary",
+      "status": "outside_scope",
+      "consistent": true,
+      "replay_passed": true,
+      "model_calls": 0,
+      "actual_provider_requests": 0,
+      "audit_calls": 0,
+      "source_reads": 0,
+      "claims": [],
+      "omitted_checks": 0,
+      "wall_ms": 0,
+      "clinical_release": "blocked"
+    }
+  ],
+  "limitations": [
+    "Fixed local questions, not independent scientific discovery or clinical validation.",
+    "Does not measure general language understanding, calibration, hidden benchmark performance or model superiority.",
+    "Offline mode makes no model calls. Live results include failures and are not automatically retried."
+  ]
+}

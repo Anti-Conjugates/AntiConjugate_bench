@@ -1,6 +1,9 @@
 import type { ResearchCatalog } from '@her2/shared';
 import results from '../../../evals/results.json';
 import harnessChecks from '../../../evals/harness.json';
+import chatChecks from '../../../evals/chat.json';
+import chatLive from '../../../evals/chat-live.json';
+import chatLiveReview from '../../../evals/chat-live-review.json';
 import { faultTests, productLabel, questionTitles, verdictLabels } from './labels';
 import { EvaluationStudies } from './EvaluationStudies';
 
@@ -91,6 +94,15 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
     </header>
 
     <EvaluationStudies />
+
+    <section aria-labelledby="chat-checks-heading"><h2 id="chat-checks-heading">Conversation checks</h2>
+      <p>{chatChecks.rows.filter(row => row.status === 'complete' && row.replay_passed).length}/{chatChecks.rows.length} fixed rules-only turns passed the execution checks and replay. No provider calls. These are software controls, not a language-quality or clinical benchmark.</p>
+      <p>The live native-tool smoke completed {chatLive.rows.filter(row => row.status === 'complete').length} research turns and stopped {chatLive.rows.filter(row => row.status === 'outside_scope').length} clinical question before a model call. It used {chatLive.provider_requests} provider requests, with {chatLive.retries} retries. Failures, if present, stay in the artifact.</p>
+      <div className="trace-table-wrap"><table className="checks-table"><caption className="sr-only">Observed live chat calls</caption><thead><tr><th scope="col">Turn</th><th scope="col">Result</th><th scope="col">Provider requests</th><th scope="col">Local source reads</th></tr></thead><tbody>{chatLive.rows.map(row => <tr key={row.id}><th scope="row"><code>{row.id}</code></th><td>{row.status.replaceAll('_', ' ')}{'error_code' in row && <code> {String(row.error_code)}</code>}</td><td>{row.actual_provider_requests}</td><td>{'source_reads' in row ? row.source_reads : '—'}</td></tr>)}</tbody></table></div>
+      <details className="run-record"><summary>Earlier live run: failures and omissions kept</summary><p>The review run recorded {chatLiveReview.rows.filter(row => row.status === 'failed').length} provider failure and {chatLiveReview.rows.filter(row => row.status === 'incomplete').reduce((sum, row) => sum + ('omitted_checks' in row ? Number(row.omitted_checks) : 0), 0)} unanswered checks. No request was retried or silently switched to rules only. A later controller change keeps locally recognized scope hints after a failed question, so a follow-up cannot accidentally refer to an older question.</p><ul>{chatLiveReview.rows.map(row => <li key={row.id}><code>{row.id}</code>: {row.status}{'error_code' in row && <code> {String(row.error_code)}</code>} · {row.actual_provider_requests} requests</li>)}</ul><p>Recorded {chatLiveReview.generated_at}. Code SHA-256 <code>{chatLiveReview.code_sha256}</code>.</p></details>
+      <p>Claude coordinates fixed checks and selects returned audit IDs. The verifier owns citations and verdicts. The same research questions can be answered with rules; this does not demonstrate independent scientific discovery or model superiority.</p>
+      <details className="run-record"><summary>Reproduce the conversation checks</summary><p><code>npm run eval:chat</code> runs offline checks. <code>npm run eval:chat -- --live</code> makes paid calls, capped at 16 with no retries. <code>npm run replay:chat -- turn.json</code> checks saved audits and rendering, not the original model execution.</p><p>Live artifact generated {chatLive.generated_at}. Code SHA-256 <code>{chatLive.code_sha256}</code>. Live compatibility testing first exposed an unhandled direct-caller metadata field; the parser and regression fixture now explicitly support it.</p></details>
+    </section>
 
     <section aria-labelledby="harness-checks-heading">
       <h2 id="harness-checks-heading">Harness checks</h2>
