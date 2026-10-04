@@ -126,7 +126,7 @@ pkg_ref = qnx.hugr.upload(pkg, name="dynamic_selector_asps")
 ## 4. Clinical Safety & DCB0129 Compliance Checklist
 
 Every Antigravity execution artifact must satisfy the closed NHS DCB0129 hazard log:
-1. **Machine Receipt JSON**: Containing timestamp, backend platform, job hash, shot count, raw bitstrings, computed energies (Lanes D187 through D192 banked; latest Lane D192 across `results/d192_nexus_receipt_20261004.json` [4,000 shots] and `results/d192_aqora_receipt_20261004.json` [8,000 shots]).
+1. **Machine Receipt JSON**: Containing timestamp, backend platform, job hash, shot count, raw bitstrings, computed energies (Lanes D187 through D193 banked; latest Lane D193 across `results/d193_nexus_receipt_20261004.json` [4,000 shots] and `results/d193_aqora_receipt_20261004.json` [8,000 shots]).
 2. **Clinician Co-Design Endorsement**: Signed clinical endorsement dossiers (`docs/d187_clinician_endorsement_dossier_20261004.md`, `docs/d188_clinician_endorsement_dossier_20261004.md`, `docs/d189_clinician_endorsement_dossier_20261004.md`, `docs/d190_clinician_endorsement_dossier_20261004.md`) by Lead Gynecologist Liana & Consultant Gynecological Surgeon Dr Natasha, authorizing 3D patient-derived organoid testing.
 3. **Hazard HAZ-CQ-001 (Quantum Noise & ASPS) [CLOSED]**: Mid-circuit syndrome measurement ($P = Z_0 Z_1 Z_2 Z_3$) with active purging of $p=1$ corrupted shots, yielding raw clean fraction $\ge 98.0\%$ and $100.0\%$ post-selection purity (D190: Nexus $99.0\%-99.6\%$, Aqora $98.2\%-98.8\%$).
 4. **Hazard HAZ-CQ-002 (Steric Specificity Barrier) [CLOSED]**: Must confirm steep repulsive barrier $\Delta E_{\text{steric}} > +50.0\text{ kcal/mol}$ upon pocket compression (D190: $+221.1\text{ kcal/mol}$ Helios, $+202.8\text{ kcal/mol}$ Aqora).
