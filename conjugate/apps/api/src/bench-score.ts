@@ -42,7 +42,7 @@ const ALIASES: string[][] = [
   ['DXd', 'deruxtecan'], ['Monomethyl auristatin E', 'MMAE', 'vedotin'], ['Monomethyl auristatin F', 'MMAF', 'mafodotin'],
   ['DM1', 'emtansine', 'mertansine'], ['DM4', 'ravtansine', 'soravtansine'], ['SN-38', 'govitecan'],
   ['N-acetyl-gamma-calicheamicin', 'calicheamicin', 'ozogamicin'], ['SG3199', 'tesirine'], ['SGD-1882', 'talirine'],
-  ['SHR9265', 'rezetecan'], ['KL610023', 'tirumotecan'], ['Ed-04', 'brengitecan'], ['AF-HPA', 'auristatin F hydroxypropylamide'], ['DGN549', 'sunirine'],
+  ['SHR9265', 'rezetecan'], ['KL610023', 'tirumotecan'], ['Ed-04', 'brengitecan'], ['AF-HPA', 'auristatin F hydroxypropylamide'], ['DGN549', 'sunirine', 'indolinobenzodiazepine', 'IGN pseudodimer'],
   ['Mc-Gly-Gly-Phe-Gly', 'GGFG', 'Gly-Gly-Phe-Gly'], ['Mc-Val-Cit-PABC', 'Val-Cit', 'valine-citrulline', 'vc-PABC', 'mc-vc-PAB'],
   ['Succinimidyl-4-(N-maleimidomethyl)cyclohexane-1-carboxylate (SMCC)', 'SMCC', 'MCC'], ['Sulfo-SPDB', 'sulfo SPDB'], ['N-succinimidyl 4-(2-pyridyldithio) butanoate (SPDB)', 'SPDB'],
   ['N-succinimidyl 4-(2-pyridyldithio) pentanoate (SPP)', 'SPP'], ['AcButDMH', 'AcBut'], ['Mal-PEG8-Val-Ala-PABC', 'Val-Ala', 'valine-alanine'], ['Mc-Val-Ala', 'Val-Ala', 'valine-alanine'],

@@ -2,12 +2,19 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { BenchmarkArtifactSchema, BenchmarkCategorySchema, type BenchmarkArm, type BenchmarkArtifact, type BenchmarkItem, type BenchmarkRow, type ChatResult } from '@her2/shared';
 import { BENCH_WORKBOOK, benchItems, benchItemsSha256 } from './bench-items.js';
-import { introducedReferenceIds, scoreHarness, scorePlain, summarize, type BenchCitation, type HarnessObservation, type PlainResponse } from './bench-score.js';
+import { introducedReferenceIds, scoreHarness, scorePlain, summarize, type BenchCitation, type HarnessObservation, type PlainResponse, parsePlain } from './bench-score.js';
 import { runChat } from './chat.js';
 import type { FetchLike } from './claude.js';
 import { ApiFailure } from './errors.js';
 import { CLAUDE_MODEL } from './evidence.js';
 import { createLiveRetriever, type LiveRetriever } from './live-retrieval.js';
+
+/** Keeps the scored ANSWER/VERDICT lines visible in the 400-character excerpt so rows can be audited by hand. */
+function plainExcerpt(text: string) {
+  const parsed = parsePlain(text);
+  const head = [parsed.verdict ? `VERDICT: ${parsed.verdict}` : '', parsed.answer ? `ANSWER: ${parsed.answer}` : ''].filter(Boolean).join(' | ');
+  return (head ? `${head} || ${text}` : text).slice(0, 400);
+}
 
 export const PLAIN_SYSTEM = [
   'You are a careful research assistant answering questions about antibody-drug conjugates (ADCs) for a research team. Answer in at most 150 words.',
@@ -156,7 +163,7 @@ export async function runBenchmark(options: BenchOptions): Promise<BenchmarkArti
       const response = await callPlain(item, model, apiKey!, fetcher);
       if (response.kind === 'text') {
         const citations = await resolveCitations(introducedReferenceIds(response.text, item.message), options.mode, retriever);
-        return finish({ outcome: scorePlain(item, response, citations), citations, response_sha256: sha256(response.text), excerpt: response.text.slice(0, 400), model_calls: counter.calls });
+        return finish({ outcome: scorePlain(item, response, citations), citations, response_sha256: sha256(response.text), excerpt: plainExcerpt(response.text), model_calls: counter.calls });
       }
       const excerpt = response.kind === 'refusal' ? 'The API stopped the request with stop_reason "refusal".' : response.code === 'BUDGET_EXHAUSTED' ? 'Not run: the call budget was used up.' : `Provider error: ${response.code}. Not retried.`;
       return finish({ outcome: scorePlain(item, response, []), citations: [], response_sha256: null, excerpt, model_calls: counter.calls });

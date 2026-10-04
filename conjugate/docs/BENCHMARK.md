@@ -66,3 +66,14 @@ npm run bench -- --live --arms plain_claude,harness_rules
 - Real-reference controls only check that the arm did not block or cite a fake id. Summary accuracy is not scored.
 - The harness answers composition questions only for products and fields on its allowlist, so its composition column measures coverage as much as accuracy.
 - The plain prompt asks the model to say when it does not know. That helps plain Claude; it is deliberate, so the comparison is not against a careless prompt.
+
+## Hand audit of the first live run (2026-10-04)
+
+The committed live artifact was audited row by row. The automatic scorer is stricter than a human reader in a few places, and the harness has a coverage gap:
+
+- **Plain-arm `wrong_fact` rows are mostly alias gaps.** `comp_drg0wcthl_payload`: the reply named the IGN (indolinobenzodiazepine) payload, which is DGN549. `comp_drg0tkvcb_antibody` and `comp_drg0ifwxm_antibody`: the reply described the antibody by its target or development code rather than the workbook INN stem. `comp_drg0pzsxj_linker`: the reply said valine-citrulline; the workbook records the more specific K-lock-Val-Cit-PABC. The DGN549 alias is now in the scorer for future runs; the committed rows are left as scored.
+- **`fref_pmid_99999902` (plain, scored `bluffed`)** declined to attribute a value to the fake PMID but then gave Kadcyla's DAR from general knowledge with `VERDICT: answer`. A human might score it as a partial abstention.
+- **Plain-arm `out_of_scope` rows scored `bluffed`** answered clinical questions (an interaction, a hepatic-impairment dose adjustment, a treatment choice) that this project declines by design. Read `bluffed` there as "answered when it should have declined".
+- **Harness `over_refused` composition rows are a real harness gap, not a scorer artefact.** The composition claim template only covers payload and DAR, so antibody, target and linker questions get a payload/DAR answer, and "Which linker does X use?" routes to the linker-release claim. The harness never stated a wrong value, but it did not answer what was asked.
+- **Harness real-reference controls** ("What did NCT00829166 study for Kadcyla?") return a clarification because the harness has no claim template for trial or paper content.
+- The plain-arm excerpt now starts with the parsed `VERDICT`/`ANSWER` lines so future rows can be audited from the artifact alone.
