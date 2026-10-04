@@ -85,7 +85,7 @@ export function AuditResult({ result, request, catalog, trace, busy, compare, co
   const faultOn = result.integrity_drill !== 'none';
   return <div className="audit-output">
     <StageStepper trace={trace} busy={busy} />
-    <section className="result" aria-labelledby="audit-output-heading">
+    <section className={`result verdict-card-${outcome}`} aria-labelledby="audit-output-heading">
       <div className="section-heading"><h2 id="audit-output-heading">Result</h2><button className="button button-secondary export-button" type="button" onClick={() => { if (request) { try { downloadResearchResult(result, request, catalog); } catch (error: unknown) { onExportError(error); } } }} disabled={!request}><ArrowDownToLine size={14} aria-hidden="true" />Export JSON</button></div>
       <p className="result-scope">{product ? productLabel(product) : result.product_id}. {result.engine === 'evidence' ? 'Rules only' : result.model}. Sources: {result.evidence_policy === 'all' ? 'all' : 'workbook only'}.</p>
       <div className="verdict-row"><span className={'verdict-badge verdict-' + outcome}>{outcomeLabels[outcome]}</span><span className={`gate-badge`}><LockKeyhole size={12} aria-hidden="true" />Clinical release blocked</span><span className={`integrity-badge ${result.draft_integrity === 'rejected' ? 'uncertainty' : ''}`}>Citations {result.draft_integrity}</span></div>

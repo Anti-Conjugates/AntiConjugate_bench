@@ -95,6 +95,13 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       <h1 id="evals-heading">Evals</h1>
       <p>Software checks on the pipeline, run by <code>scripts/eval.ts</code> against the same server code the app uses. They test whether the verifier enforces its rules. They are not a clinical benchmark and say nothing about whether the sources themselves are right.</p>
     </header>
+    <dl className="atlas-totals evals-headline">
+      <div><dt>Injected bad citations rejected</dt><dd>{data.drills.rejected_count}/{data.drills.total}</dd></div>
+      <div><dt>Scripted strategies caught in every scope</dt><dd>{strategiesCaughtEverywhere}/{strategiesTotal}</dd></div>
+      <div><dt>Honest control accepted</dt><dd>{honest ? `${honest.accepted}/${honest.total}` : 'n/a'}</dd></div>
+      <div><dt>Verdicts that changed with workbook only</dt><dd>{data.verdicts.changed_count}/{data.verdicts.total}</dd></div>
+      <div><dt>Prior workflow drafts accepted</dt><dd>{data.claude.skipped ? 'not run' : `${data.claude.accepted}/${data.claude.total}`}</dd></div>
+    </dl>
 
     <EvaluationStudies />
 
@@ -131,13 +138,6 @@ export function Evals({ catalog }: { catalog: ResearchCatalog | null }) {
       </details>
     </section>
 
-    <dl className="atlas-totals">
-      <div><dt>Injected bad citations rejected</dt><dd>{data.drills.rejected_count}/{data.drills.total}</dd></div>
-      <div><dt>Scripted strategies caught in every scope</dt><dd>{strategiesCaughtEverywhere}/{strategiesTotal}</dd></div>
-      <div><dt>Honest control accepted</dt><dd>{honest ? `${honest.accepted}/${honest.total}` : 'n/a'}</dd></div>
-      <div><dt>Verdicts that changed with workbook only</dt><dd>{data.verdicts.changed_count}/{data.verdicts.total}</dd></div>
-      <div><dt>Prior workflow drafts accepted</dt><dd>{data.claude.skipped ? 'not run' : `${data.claude.accepted}/${data.claude.total}`}</dd></div>
-    </dl>
 
     <section aria-labelledby="shifts-heading">
       <h2 id="shifts-heading">Source withholding</h2>

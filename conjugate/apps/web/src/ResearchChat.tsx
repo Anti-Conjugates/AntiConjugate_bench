@@ -46,7 +46,7 @@ export function AuditCard({ audit, turnId, catalog, previous }: { audit: ChatAud
   const prefix = `${turnId}-${audit.id}-`;
   const product = catalog.dataset.records.find(record => record.id === audit.scope.product_id)!;
   const rows = previous && previous.scope.evidence_policy !== audit.scope.evidence_policy && previous.result.dataset_sha256 === result.dataset_sha256 ? compareResults(previous.result, result) : [];
-  return <article className="chat-audit">
+  return <article className={`chat-audit verdict-card-${outcomeOf(result)}`}>
     <div className="chat-audit-heading"><h3>{productLabel(product)}</h3><span className={`verdict-badge verdict-${outcomeOf(result)}`}>{outcomeLabels[outcomeOf(result)]}</span></div>
     <p className="chat-scope">{catalog.questions.find(question => question.id === audit.scope.question_id)?.title} · {policyLabels[audit.scope.evidence_policy]}</p>
     {result.claims.map(claim => <section key={claim.id} className="chat-claim"><h4>{claim.statement}</h4><p>{claim.explanation}</p>
