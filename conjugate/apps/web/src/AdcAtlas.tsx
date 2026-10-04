@@ -14,7 +14,7 @@ function RecordDetail({ record, onClose }: { record: WorkbookRecord; onClose: ()
   return <section className="atlas-detail" aria-labelledby="atlas-detail-heading">
     <div className="section-heading"><h2 id="atlas-detail-heading">{record.brand ?? record.name}</h2><button className="icon-button" type="button" onClick={onClose} aria-label="Close record detail"><X size={16} aria-hidden="true" /></button></div>
     <p className="result-scope">{record.name}. <code>{record.id}</code>. Row {record.row}.</p>
-    <p className="field-hint">{record.clinical_enabled ? 'Has a local UK label summary, so it can be used in Check a claim and Patient context.' : 'Structure only. No label summary, so it cannot be used in Patient context.'}</p>
+    <p className="field-hint">{record.clinical_enabled ? 'Has a local UK label summary, so it can be used in Check a claim and Patient context.' : 'No local label summary. Research chat can check its workbook composition and ADCdb record; label and clinical questions return not enough evidence.'}</p>
     <CellTable cells={record.cells.filter((cell) => !unverifiedFields.has(cell.field))} layer="records" />
     {sensitive.length > 0 && <details className="unverified-disclosure"><summary>Toxicity and pharmacokinetic text ({sensitive.length} cells)</summary><p className="field-hint">Imported text as written in the workbook. It does not feed the clinical gate.</p><CellTable cells={sensitive} layer="records" /></details>}
     <p className="field-hint">{record.cells.length} cells. Blank: {record.missing_fields.join(', ') || 'none'}.</p>

@@ -1,8 +1,6 @@
-import {
-  ApiErrorSchema, ResearchCatalogSchema, ResearchEventSchema, ResearchRequestSchema, ResearchResultSchema,
+import { LABEL_PRODUCT_IDS, ApiErrorSchema, ResearchCatalogSchema, ResearchEventSchema, ResearchRequestSchema, ResearchResultSchema,
   ResearchQuestionSchema, researchExecutionIsConsistent,
-  type ResearchCatalog, type ResearchEvent, type ResearchRequest, type ResearchResult, type ResearchTrace,
-} from '@her2/shared';
+  type ResearchCatalog, type ResearchEvent, type ResearchRequest, type ResearchResult, type ResearchTrace, } from '@her2/shared';
 import { BoundaryError } from './boundaries';
 
 export type ResearchInputs = Omit<ResearchRequest, 'synthetic_confirmed'> & { synthetic_confirmed: boolean };
@@ -36,7 +34,7 @@ export async function fetchResearchCatalog(signal: AbortSignal): Promise<Researc
     || new Set(dataset.records.map((record) => record.id)).size !== dataset.records.length
     || dataset.records.some((record) => record.cells.length === 0 || !record.cells.some((cell) => cell.field === 'ADCdb_ID' && cell.value === record.id))
     || questionIds.size !== ResearchQuestionSchema.options.length || ResearchQuestionSchema.options.some((id) => !questionIds.has(id))
-    || clinicalIds.join(',') !== 'DRG0CYMEB,DRG0ERKBH'
+    || clinicalIds.join(',') !== [...LABEL_PRODUCT_IDS].sort().join(',')
     || dataset.records.some((record) => new Set(record.cells.map((cell) => cell.field)).size !== record.cells.length)) {
     return invalid('The workbook catalog has inconsistent record identities or counts.', 'INVALID_RESEARCH_CATALOG');
   }

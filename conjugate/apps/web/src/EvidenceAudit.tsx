@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { EvidencePolicySchema, IntegrityDrillSchema, ResearchQuestionSchema, ResearchRequestSchema, type Engine, type ResearchCatalog, type ResearchRequest, type ResearchResult, type ResearchTrace } from '@her2/shared';
+import { isLabelProduct, EvidencePolicySchema, IntegrityDrillSchema, ResearchQuestionSchema, ResearchRequestSchema, type Engine, type ResearchCatalog, type ResearchRequest, type ResearchResult, type ResearchTrace } from '@her2/shared';
 import { Play, RotateCcw, Square } from 'lucide-react';
 import { describeFailure } from './boundaries';
 import { AuditResult } from './AuditResult';
@@ -85,7 +85,7 @@ export function EvidenceAudit({ catalog }: { catalog: ResearchCatalog }) {
       if (epoch.current.current(ticket)) { setError(describeFailure(cause)); setStatus('Second run failed. The first result is unchanged.'); }
     } finally { if (epoch.current.current(ticket)) setCompareBusy(false); }
   }
-  const products = catalog.dataset.records.filter((record) => record.clinical_enabled && (record.id === 'DRG0CYMEB' || record.id === 'DRG0ERKBH'));
+  const products = catalog.dataset.records.filter((record) => record.clinical_enabled && isLabelProduct(record.id));
   const question = catalog.questions.find((option) => option.id === inputs.question_id);
   const starters = presets.filter((preset) => products.some((product) => product.id === preset.request.product_id));
   const showStarters = !result && !busy && !trace.length && !error;
