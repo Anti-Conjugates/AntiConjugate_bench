@@ -21,7 +21,7 @@ it('renders the headline table, budget line, every row and the limitations from 
 
 it('marks an offline artifact as not measuring Claude', () => {
   const markup = renderToStaticMarkup(createElement(BenchmarkSection, { artifact: { ...artifact, mode: 'offline' } }));
-  expect(markup).toContain('No model was called');
+  expect(markup).toContain('class="bench-offline"');
   const live = renderToStaticMarkup(createElement(BenchmarkSection, { artifact: { ...artifact, mode: 'live' } }));
-  expect(live).not.toContain('No model was called');
+  expect(live).not.toContain('class="bench-offline"');
 });

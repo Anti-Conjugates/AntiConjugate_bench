@@ -42,6 +42,8 @@ test('plain scorer: bluff, abstain, fabricated citation, false premise, refusal 
 test('reference extraction ignores ids the user supplied and reads bare PMIDs on the CITATIONS line', () => {
   const text = '**ANSWER:** DM1\n**VERDICT:** answer\nCITATIONS: NCT00829166, 30516102';
   assert.deepEqual(parsePlain(text), { verdict: 'answer', answer: 'DM1', citations: 'NCT00829166, 30516102' });
+  assert.equal(parsePlain('VERDICT: **false_premise**').verdict, 'false_premise');
+  assert.equal(parsePlain('VERDICT: False premise').verdict, 'false_premise');
   assert.deepEqual(extractReferenceIds(text), ['NCT00829166', 'PMID:30516102']);
   assert.deepEqual(introducedReferenceIds(`NCT09999999 showed benefit. ${text}`, 'What did NCT09999999 show?'), ['NCT00829166', 'PMID:30516102']);
 });
@@ -98,7 +100,7 @@ test('call budget aborts cleanly and records the remaining model rows as provide
   const plain = artifact.rows.filter(row => row.arm === 'plain_claude');
   assert.equal(plain.filter(row => row.model_calls === 1).length, 5);
   assert.ok(plain.slice(5).every(row => row.outcome === 'provider_error' && row.model_calls === 0));
-  assert.ok(artifact.rows.filter(row => row.arm === 'harness_rules').every(row => row.outcome !== 'provider_error'), 'the rules arm needs no model calls');
+  assert.ok(artifact.rows.filter(row => row.arm === 'harness_rules').every(row => row.model_calls === 0 && !/budget/.test(row.excerpt)), 'the rules arm needs no model calls and is not cut by the budget');
   assert.ok(artifact.limitations.some(line => line.includes('call budget of 5 ran out')));
 });
 

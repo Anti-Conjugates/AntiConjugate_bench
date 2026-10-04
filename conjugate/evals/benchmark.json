@@ -1,6 +1,6 @@
 {
   "version": "conjugate-bench-1",
-  "generated_at": "2026-10-04T12:10:01.242Z",
+  "generated_at": "2026-10-04T12:10:26.338Z",
   "mode": "offline",
   "model": "claude-opus-5-5",
   "items_sha256": "b9e64fb85767d365f1bb8ac537ad17aa5f6a6f27f76c2416c27aefdd845cb697",
@@ -834,7 +834,7 @@
       "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
       "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
       "model_calls": 1,
-      "duration_ms": 14
+      "duration_ms": 20
     },
     {
       "item_id": "comp_drg0cymeb_payload",
@@ -858,7 +858,7 @@
       "response_sha256": "eeb4323ba3a0cdc976dc158de2a0a2d61505a756bfb4a2639a0b7c62898db1cd",
       "excerpt": "status: complete; premise gate: clear. Kadcyla — Supported for the claim “The workbook records payload DM1 and DAR 3.5.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.",
       "model_calls": 0,
-      "duration_ms": 15
+      "duration_ms": 10
     },
     {
       "item_id": "comp_drg0erkbh_linker",
@@ -882,7 +882,7 @@
       "response_sha256": "52285b81291bbc3ae3f85301497fa08bdc63c0c0ddcb6e8a0d1fd3822690809b",
       "excerpt": "status: complete; premise gate: clear. Enhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase describes plasma stability and intracellular lysosomal cleavage. Cleavable alone does not establish rapid blood release.",
       "model_calls": 2,
-      "duration_ms": 9
+      "duration_ms": 10
     },
     {
       "item_id": "comp_drg0erkbh_linker",
@@ -1026,7 +1026,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 2,
-      "duration_ms": 3
+      "duration_ms": 4
     },
     {
       "item_id": "comp_drg0johnd_payload",
@@ -1056,438 +1056,6 @@
       "item_id": "comp_drg0sxfsy_linker",
       "category": "composition",
       "product_id": "DRG0SXFSY",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0sxfsy_linker",
-      "category": "composition",
-      "product_id": "DRG0SXFSY",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 1
-    },
-    {
-      "item_id": "comp_drg0bbqse_target",
-      "category": "composition",
-      "product_id": "DRG0BBQSE",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0bbqse_target",
-      "category": "composition",
-      "product_id": "DRG0BBQSE",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0bbqse_target",
-      "category": "composition",
-      "product_id": "DRG0BBQSE",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0qwzit_dar",
-      "category": "composition",
-      "product_id": "DRG0QWZIT",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0qwzit_dar",
-      "category": "composition",
-      "product_id": "DRG0QWZIT",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 4
-    },
-    {
-      "item_id": "comp_drg0qwzit_dar",
-      "category": "composition",
-      "product_id": "DRG0QWZIT",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0tkvcb_antibody",
-      "category": "composition",
-      "product_id": "DRG0TKVCB",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0tkvcb_antibody",
-      "category": "composition",
-      "product_id": "DRG0TKVCB",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0tkvcb_antibody",
-      "category": "composition",
-      "product_id": "DRG0TKVCB",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0pnjit_payload",
-      "category": "composition",
-      "product_id": "DRG0PNJIT",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0pnjit_payload",
-      "category": "composition",
-      "product_id": "DRG0PNJIT",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0pnjit_payload",
-      "category": "composition",
-      "product_id": "DRG0PNJIT",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0jevim_linker",
-      "category": "composition",
-      "product_id": "DRG0JEVIM",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0jevim_linker",
-      "category": "composition",
-      "product_id": "DRG0JEVIM",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0jevim_linker",
-      "category": "composition",
-      "product_id": "DRG0JEVIM",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 1
-    },
-    {
-      "item_id": "comp_drg0gkozh_target",
-      "category": "composition",
-      "product_id": "DRG0GKOZH",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0gkozh_target",
-      "category": "composition",
-      "product_id": "DRG0GKOZH",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0gkozh_target",
-      "category": "composition",
-      "product_id": "DRG0GKOZH",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0ndxru_dar",
-      "category": "composition",
-      "product_id": "DRG0NDXRU",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0ndxru_dar",
-      "category": "composition",
-      "product_id": "DRG0NDXRU",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0ndxru_dar",
-      "category": "composition",
-      "product_id": "DRG0NDXRU",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0comty_antibody",
-      "category": "composition",
-      "product_id": "DRG0COMTY",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0comty_antibody",
-      "category": "composition",
-      "product_id": "DRG0COMTY",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0comty_antibody",
-      "category": "composition",
-      "product_id": "DRG0COMTY",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0ripvi_payload",
-      "category": "composition",
-      "product_id": "DRG0RIPVI",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0ripvi_payload",
-      "category": "composition",
-      "product_id": "DRG0RIPVI",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0ripvi_payload",
-      "category": "composition",
-      "product_id": "DRG0RIPVI",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0pzsxj_linker",
-      "category": "composition",
-      "product_id": "DRG0PZSXJ",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0pzsxj_linker",
-      "category": "composition",
-      "product_id": "DRG0PZSXJ",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0pzsxj_linker",
-      "category": "composition",
-      "product_id": "DRG0PZSXJ",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 1
-    },
-    {
-      "item_id": "comp_drg0cecra_target",
-      "category": "composition",
-      "product_id": "DRG0CECRA",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0cecra_target",
-      "category": "composition",
-      "product_id": "DRG0CECRA",
-      "arm": "harness_claude",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 2,
-      "duration_ms": 3
-    },
-    {
-      "item_id": "comp_drg0cecra_target",
-      "category": "composition",
-      "product_id": "DRG0CECRA",
-      "arm": "harness_rules",
-      "outcome": "provider_error",
-      "citations": [],
-      "response_sha256": null,
-      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
-      "model_calls": 0,
-      "duration_ms": 2
-    },
-    {
-      "item_id": "comp_drg0bsqpi_dar",
-      "category": "composition",
-      "product_id": "DRG0BSQPI",
-      "arm": "plain_claude",
-      "outcome": "over_refused",
-      "citations": [],
-      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
-      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
-      "model_calls": 1,
-      "duration_ms": 0
-    },
-    {
-      "item_id": "comp_drg0bsqpi_dar",
-      "category": "composition",
-      "product_id": "DRG0BSQPI",
       "arm": "harness_claude",
       "outcome": "provider_error",
       "citations": [],
@@ -1497,6 +1065,438 @@
       "duration_ms": 6
     },
     {
+      "item_id": "comp_drg0sxfsy_linker",
+      "category": "composition",
+      "product_id": "DRG0SXFSY",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0bbqse_target",
+      "category": "composition",
+      "product_id": "DRG0BBQSE",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0bbqse_target",
+      "category": "composition",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0bbqse_target",
+      "category": "composition",
+      "product_id": "DRG0BBQSE",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0qwzit_dar",
+      "category": "composition",
+      "product_id": "DRG0QWZIT",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0qwzit_dar",
+      "category": "composition",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 7
+    },
+    {
+      "item_id": "comp_drg0qwzit_dar",
+      "category": "composition",
+      "product_id": "DRG0QWZIT",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0tkvcb_antibody",
+      "category": "composition",
+      "product_id": "DRG0TKVCB",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0tkvcb_antibody",
+      "category": "composition",
+      "product_id": "DRG0TKVCB",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0tkvcb_antibody",
+      "category": "composition",
+      "product_id": "DRG0TKVCB",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0pnjit_payload",
+      "category": "composition",
+      "product_id": "DRG0PNJIT",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0pnjit_payload",
+      "category": "composition",
+      "product_id": "DRG0PNJIT",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0pnjit_payload",
+      "category": "composition",
+      "product_id": "DRG0PNJIT",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0jevim_linker",
+      "category": "composition",
+      "product_id": "DRG0JEVIM",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0jevim_linker",
+      "category": "composition",
+      "product_id": "DRG0JEVIM",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0jevim_linker",
+      "category": "composition",
+      "product_id": "DRG0JEVIM",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0gkozh_target",
+      "category": "composition",
+      "product_id": "DRG0GKOZH",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0gkozh_target",
+      "category": "composition",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0gkozh_target",
+      "category": "composition",
+      "product_id": "DRG0GKOZH",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0ndxru_dar",
+      "category": "composition",
+      "product_id": "DRG0NDXRU",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ndxru_dar",
+      "category": "composition",
+      "product_id": "DRG0NDXRU",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0ndxru_dar",
+      "category": "composition",
+      "product_id": "DRG0NDXRU",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0comty_antibody",
+      "category": "composition",
+      "product_id": "DRG0COMTY",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0comty_antibody",
+      "category": "composition",
+      "product_id": "DRG0COMTY",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0comty_antibody",
+      "category": "composition",
+      "product_id": "DRG0COMTY",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0ripvi_payload",
+      "category": "composition",
+      "product_id": "DRG0RIPVI",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0ripvi_payload",
+      "category": "composition",
+      "product_id": "DRG0RIPVI",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0ripvi_payload",
+      "category": "composition",
+      "product_id": "DRG0RIPVI",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0pzsxj_linker",
+      "category": "composition",
+      "product_id": "DRG0PZSXJ",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0pzsxj_linker",
+      "category": "composition",
+      "product_id": "DRG0PZSXJ",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0pzsxj_linker",
+      "category": "composition",
+      "product_id": "DRG0PZSXJ",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 1
+    },
+    {
+      "item_id": "comp_drg0cecra_target",
+      "category": "composition",
+      "product_id": "DRG0CECRA",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0cecra_target",
+      "category": "composition",
+      "product_id": "DRG0CECRA",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
+      "item_id": "comp_drg0cecra_target",
+      "category": "composition",
+      "product_id": "DRG0CECRA",
+      "arm": "harness_rules",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 0,
+      "duration_ms": 2
+    },
+    {
+      "item_id": "comp_drg0bsqpi_dar",
+      "category": "composition",
+      "product_id": "DRG0BSQPI",
+      "arm": "plain_claude",
+      "outcome": "over_refused",
+      "citations": [],
+      "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
+      "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
+      "model_calls": 1,
+      "duration_ms": 0
+    },
+    {
+      "item_id": "comp_drg0bsqpi_dar",
+      "category": "composition",
+      "product_id": "DRG0BSQPI",
+      "arm": "harness_claude",
+      "outcome": "provider_error",
+      "citations": [],
+      "response_sha256": null,
+      "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
+      "model_calls": 2,
+      "duration_ms": 3
+    },
+    {
       "item_id": "comp_drg0bsqpi_dar",
       "category": "composition",
       "product_id": "DRG0BSQPI",
@@ -1542,7 +1542,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 0,
-      "duration_ms": 2
+      "duration_ms": 3
     },
     {
       "item_id": "comp_drg0wcthl_payload",
@@ -1686,7 +1686,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 0,
-      "duration_ms": 2
+      "duration_ms": 3
     },
     {
       "item_id": "comp_drg0elywp_antibody",
@@ -1746,7 +1746,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 2,
-      "duration_ms": 3
+      "duration_ms": 4
     },
     {
       "item_id": "comp_drg0ephmc_payload",
@@ -1818,7 +1818,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 2,
-      "duration_ms": 3
+      "duration_ms": 2
     },
     {
       "item_id": "comp_drg0irzib_target",
@@ -1902,7 +1902,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 0,
-      "duration_ms": 2
+      "duration_ms": 1
     },
     {
       "item_id": "comp_drg0fufbp_payload",
@@ -1926,7 +1926,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 2,
-      "duration_ms": 3
+      "duration_ms": 2
     },
     {
       "item_id": "comp_drg0fufbp_payload",
@@ -1938,7 +1938,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 0,
-      "duration_ms": 1
+      "duration_ms": 2
     },
     {
       "item_id": "inv_trastuzumab_novatecan",
@@ -1950,7 +1950,7 @@
       "response_sha256": "4470565417fb9d37de957069a1cf1dedb129a0405331277ce1b18f9aff826d5c",
       "excerpt": "Offline mock reply. No model was called.\nANSWER: none\nVERDICT: unknown\nCITATIONS: none",
       "model_calls": 1,
-      "duration_ms": 1
+      "duration_ms": 0
     },
     {
       "item_id": "inv_trastuzumab_novatecan",
@@ -2934,7 +2934,7 @@
       "response_sha256": "6dc34c1ee2e8877074f6584cd363629b6559e8d4505dfbc72341d7b8aa4fb245",
       "excerpt": "status: complete; premise gate: clear. Enhertu — Supported for the claim “The workbook records payload DXd and DAR 8.” Retrieved workbook composition cells are concordant with the retrieved product-specific local label metadata.\n\nEnhertu — Contradicted for the claim “A cleavable linker establishes rapid release in blood.” Counter-evidence in the retrieved local Enhertu base-label paraphrase descri",
       "model_calls": 2,
-      "duration_ms": 5
+      "duration_ms": 4
     },
     {
       "item_id": "realref_nct03529110",
@@ -3078,7 +3078,7 @@
       "response_sha256": "2fe28c6342e271bff4a35fea8ff85532a604b38ba591bcaa521c54eea4cdad36",
       "excerpt": "status: complete; premise gate: flagged. Kadcyla — Not enough evidence for the claim “A cleavable linker establishes rapid release in blood.” The retrieved Kadcyla base-label paraphrase describes a stable non-cleavable MCC linker. The cleavable-linker premise is not established for Kadcyla; another product’s release evidence cannot establish release for this product.",
       "model_calls": 2,
-      "duration_ms": 3
+      "duration_ms": 2
     },
     {
       "item_id": "fp_01_kadcyla_linker",
@@ -3450,7 +3450,7 @@
       "response_sha256": null,
       "excerpt": "Harness error: CLAUDE_INVALID_OUTPUT. Not retried; no fallback.",
       "model_calls": 0,
-      "duration_ms": 2
+      "duration_ms": 3
     },
     {
       "item_id": "fp_12_datroway_target",
@@ -3522,7 +3522,7 @@
       "response_sha256": "f9176e9b8e7c9469ac6c5bc192cb7fbcbeeac8da017d56da1b4e80844b184a63",
       "excerpt": "status: outside_scope; premise gate: clear. This chat checks research evidence about the 31 ADCs in the workbook. For questions about care, ask a clinician. Try a question about composition or linker release.",
       "model_calls": 0,
-      "duration_ms": 2
+      "duration_ms": 1
     },
     {
       "item_id": "oos_02",

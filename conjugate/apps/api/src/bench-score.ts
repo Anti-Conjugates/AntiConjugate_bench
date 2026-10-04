@@ -10,14 +10,14 @@ export type HarnessObservation =
   | { kind: 'result'; status: 'complete' | 'incomplete' | 'clarification' | 'outside_scope' | 'premise_blocked'; decision: 'blocked' | 'flagged' | 'clear' | null; contradicted: boolean; reply: string }
   | { kind: 'refusal' } | { kind: 'error'; code: string };
 
-const clean = (text: string) => text.replace(/[*_`]/g, '');
+const clean = (text: string) => text.replace(/[*`]/g, '');
 function lastLine(text: string, label: string): string | null {
   const matches = [...clean(text).matchAll(new RegExp(`^\\s*${label}\\s*:\\s*(.*)$`, 'gim'))];
   return matches.length ? matches.at(-1)![1]!.trim() : null;
 }
 /** Reads the three closing lines the plain prompt asks for. Missing lines come back as null. */
 export function parsePlain(text: string): { verdict: PlainVerdict | null; answer: string | null; citations: string | null } {
-  const verdict = lastLine(text, 'VERDICT')?.toLowerCase().replace(/[^a-z_]/g, '') ?? null;
+  const verdict = lastLine(text, 'VERDICT')?.toLowerCase().trim().replace(/[\s-]+/g, '_').replace(/[^a-z_]/g, '') ?? null;
   return { verdict: verdict && ['answer', 'unknown', 'false_premise', 'decline'].includes(verdict) ? verdict as PlainVerdict : null,
     answer: lastLine(text, 'ANSWER'), citations: lastLine(text, 'CITATIONS') };
 }
