@@ -33,9 +33,12 @@ test('controller scopes aliases, comparisons and explicit product switches', () 
   assert.equal(chatIntent(request('Why?', context)).scopes[0]?.question_id, 'linker_release');
   assert.equal(chatIntent(request('No labels, check again.', context)).scopes[0]?.evidence_policy, 'workbook_only');
   assert.equal(chatIntent(request('What is the weather?', context)).status, 'clarification');
+  assert.equal(chatIntent(request('Does NCT09999999 show Enhertu linker release?')).status, 'ready');
+  assert.equal(chatIntent(request('PMID: 99999901 says Kadcyla payload is DM1.')).status, 'ready');
 });
 test('clinical questions stop locally; raw unknown words never enter provider input', async () => {
-  for (const text of ['My mother takes Enhertu, which dose?', 'Is Kadcyla safer for a patient?', 'Recommend treatment using Enhertu.', 'Enhertu record for person@example.com', 'Enhertu dosing 125mg']) {
+  for (const text of ['My mother takes Enhertu, which dose?', 'Is Kadcyla safer for a patient?', 'Recommend treatment using Enhertu.', 'Enhertu record for person@example.com', 'Enhertu dosing 125mg',
+    'Is Enhertu safe to use at platelets 40?', 'Enhertu linker with ANC low', 'Kadcyla composition when LVEF falls', 'Enhertu eGFR 25 linker', 'Kadcyla 3.6 mg/kg composition']) {
     const result = await runChat(request(text, [], 'claude'), { claude: { apiKey: 'test-key', fetch: async () => { assert.fail('Must not call provider'); } } });
     assert.equal(result.status, 'outside_scope'); assert.equal(result.harness.model_calls, 0); assert.equal(result.audits.length, 0);
   }
