@@ -42,6 +42,7 @@ export const SOURCE_NAMES: Record<string, string> = {
 };
 
 export const PRESENTATION_SECTIONS = [
+  { id: 'p-why', short: 'Why' },
   { id: 'p-problem', short: 'Problem' },
   { id: 'p-environment', short: 'Environment' },
   { id: 'p-harness', short: 'Harness' },
